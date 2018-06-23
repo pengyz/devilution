@@ -648,7 +648,7 @@ void __cdecl pfile_read_player_from_save()
 	if ( !pfile_read_hero(v1, &pkplr) )
 		TermMsg("Unable to load character");
 	UnPackPlayer(&pkplr, myplr, 0);
-	*(_DWORD *)&gbValidSaveFile = pfile_archive_contains_game(v1);
+	gbValidSaveFile = pfile_archive_contains_game(v1);
 	pfile_SFileCloseArchive(v1);
 }
 

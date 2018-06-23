@@ -104,7 +104,7 @@ bool __fastcall CapturePix(HANDLE hFile, short width, short height, short stride
 			mem_free_dbg(v6);
 			return 1;
 		}
-		*(_DWORD *)&height = height + 0xFFFF;
+		height = height + 0xFFFF;
 		v7 = CaptureEnc(pixels, v6, v5);
 		pixels += (unsigned short)stride;
 		v8 = v7 - v6;

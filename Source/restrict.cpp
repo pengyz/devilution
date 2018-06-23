@@ -4,70 +4,67 @@
 
 bool __cdecl SystemSupported()
 {
-	bool v0; // di
+	bool bSupported = false; // di
 	struct _OSVERSIONINFOA VersionInformation; // [esp+4h] [ebp-94h]
 
-	v0 = 0;
-	memset(&VersionInformation, 0, 0x94u);
-	VersionInformation.dwOSVersionInfoSize = 148;
+	memset(&VersionInformation, 0, sizeof(VersionInformation));
+	VersionInformation.dwOSVersionInfoSize = sizeof(VersionInformation);
 	if ( GetVersionExA(&VersionInformation)
 	  && VersionInformation.dwPlatformId == 2
 	  && VersionInformation.dwMajorVersion >= 5 )
 	{
-		v0 = 1;
+		bSupported = true;
 	}
-	return v0;
+	return bSupported;
 }
 
 bool __cdecl RestrictedTest()
 {
-	bool v0; // si
-	FILE *v2; // eax
+	bool bSuccess = false; // si
+	FILE *pFile; // eax
 	char Buffer[260]; // [esp+4h] [ebp-104h]
 
-	v0 = 0;
-	if ( SystemSupported() && GetWindowsDirectoryA(Buffer, 0x104u) )
+	if ( SystemSupported() && GetWindowsDirectoryA(Buffer, sizeof(Buffer)) )
 	{
 		strcat(Buffer, "\\Diablo1RestrictedTest.foo");
-		v2 = fopen(Buffer, "wt");
-		if ( v2 )
+		pFile = fopen(Buffer, "wt");
+		if ( pFile )
 		{
-			fclose(v2);
+			fclose(pFile);
 			remove(Buffer);
 		}
 		else
 		{
-			v0 = 1;
+			bSuccess = true;
 		}
 	}
-	return v0;
+	return bSuccess;
 }
 
 bool __cdecl ReadOnlyTest()
 {
-	bool v0; // si
-	char *v1; // eax
-	FILE *v2; // eax
+	bool bReadOnly = false; // si
+	char *pos; // eax
+	FILE *pFile; // eax
 	char Filename[260]; // [esp+4h] [ebp-104h]
 
-	v0 = 0;
-	if ( GetModuleFileNameA(ghInst, Filename, 0x104u) )
+	if ( GetModuleFileNameA(ghInst, Filename, sizeof(Filename)) )
 	{
-		v1 = strrchr(Filename, '\\');
-		if ( v1 )
+		pos = strrchr(Filename, '\\');
+		if ( pos )
 		{
-			strcpy(v1 + 1, "Diablo1ReadOnlyTest.foo");
-			v2 = fopen(Filename, "wt");
-			if ( v2 )
+			strcpy(pos + 1, "Diablo1ReadOnlyTest.foo");
+			pFile = fopen(Filename, "wt");
+			if ( pFile )
 			{
-				fclose(v2);
+				fclose(pFile);
 				remove(Filename);
 			}
 			else
 			{
-				v0 = 1;
+				bReadOnly = true;
 			}
 		}
 	}
-	return v0;
+	return bReadOnly;
 }
