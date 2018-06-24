@@ -21,9 +21,9 @@ TMenuItem sgMultiMenu[5] =
 };
 TMenuItem sgOptionMenu[6] =
 {
-  { 0xC0000000, NULL, (void (__cdecl *)(void))&gamemenu_music_volume },
-  { 0xC0000000, NULL, (void (__cdecl *)(void))&gamemenu_sound_volume },
-  { 0xC0000000, "Gamma", (void (__cdecl *)(void))&gamemenu_gamma },
+  { 0xC0000000, NULL, (void (*)(void))&gamemenu_music_volume },
+  { 0xC0000000, NULL, (void (*)(void))&gamemenu_sound_volume },
+  { 0xC0000000, "Gamma", (void (*)(void))&gamemenu_gamma },
   { 0x80000000, NULL, &gamemenu_color_cycling },
   { 0x80000000, "Previous Menu", &gamemenu_previous },
   { 0x80000000, NULL, NULL }
@@ -32,9 +32,9 @@ char *music_toggle_names[] = { "Music", "Music Disabled" };
 char *sound_toggle_names[] = { "Sound", "Sound Disabled" };
 char *color_cycling_toggle_names[] = { "Color Cycling Off", "Color Cycling On" };
 
-void __cdecl gamemenu_previous()
+void gamemenu_previous()
 {
-	void (__cdecl *v0)(); // edx
+	void (*v0)(); // edx
 	TMenuItem *v1; // ecx
 
 	if ( gbMaxPlayers == 1 )
@@ -52,7 +52,7 @@ void __cdecl gamemenu_previous()
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void __cdecl gamemenu_enable_single()
+void gamemenu_enable_single()
 {
 	bool v0; // dl
 
@@ -63,17 +63,17 @@ void __cdecl gamemenu_enable_single()
 	gmenu_enable(sgSingleMenu, v0);
 }
 
-void __cdecl gamemenu_enable_multi()
+void gamemenu_enable_multi()
 {
 	gmenu_enable(&sgMultiMenu[2], deathflag);
 }
 
-void __cdecl gamemenu_off()
+void gamemenu_off()
 {
 	gmenu_call_proc(0, 0);
 }
 
-void __cdecl gamemenu_handle_previous()
+void gamemenu_handle_previous()
 {
 	if ( gmenu_exception() )
 		gamemenu_off();
@@ -81,7 +81,7 @@ void __cdecl gamemenu_handle_previous()
 		gamemenu_previous();
 }
 
-void __cdecl gamemenu_new_game()
+void gamemenu_new_game()
 {
 	int i; // eax
 
@@ -100,14 +100,14 @@ void __cdecl gamemenu_new_game()
 // 525650: using guessed type int gbRunGame;
 // 52571C: using guessed type int drawpanflag;
 
-void __cdecl gamemenu_quit_game()
+void gamemenu_quit_game()
 {
 	gamemenu_new_game();
 	gbRunGameResult = 0;
 }
 // 525698: using guessed type int gbRunGameResult;
 
-void __cdecl gamemenu_load_game()
+void gamemenu_load_game()
 {
 	LRESULT (__stdcall *saveProc)(HWND, UINT, WPARAM, LPARAM); // edi
 
@@ -130,7 +130,7 @@ void __cdecl gamemenu_load_game()
 }
 // 52571C: using guessed type int drawpanflag;
 
-void __cdecl gamemenu_save_game()
+void gamemenu_save_game()
 {
 	LRESULT (__stdcall *saveProc)(HWND, UINT, WPARAM, LPARAM); // edi
 
@@ -159,12 +159,12 @@ void __cdecl gamemenu_save_game()
 }
 // 52571C: using guessed type int drawpanflag;
 
-void __cdecl gamemenu_restart_town()
+void gamemenu_restart_town()
 {
 	NetSendCmd(1u, CMD_RETOWN);
 }
 
-void __cdecl gamemenu_options()
+void gamemenu_options()
 {
 	gamemenu_get_music();
 	gamemenu_get_sound();
@@ -173,12 +173,12 @@ void __cdecl gamemenu_options()
 	gmenu_call_proc(sgOptionMenu, 0);
 }
 
-void __cdecl gamemenu_get_music()
+void gamemenu_get_music()
 {
 	gamemenu_sound_music_toggle(music_toggle_names, sgOptionMenu, sound_get_or_set_music_volume(1));
 }
 
-void __fastcall gamemenu_sound_music_toggle(char **names, TMenuItem *menu_item, int gamma)
+void gamemenu_sound_music_toggle(char **names, TMenuItem *menu_item, int gamma)
 {
 	if ( gbSndInited )
 	{
@@ -194,23 +194,23 @@ void __fastcall gamemenu_sound_music_toggle(char **names, TMenuItem *menu_item, 
 	}
 }
 
-void __cdecl gamemenu_get_sound()
+void gamemenu_get_sound()
 {
 	gamemenu_sound_music_toggle(sound_toggle_names, &sgOptionMenu[1], sound_get_or_set_sound_volume(1));
 }
 
-void __cdecl gamemenu_get_color_cycling()
+void gamemenu_get_color_cycling()
 {
 	sgOptionMenu[3].pszStr = color_cycling_toggle_names[palette_get_colour_cycling()];
 }
 
-void __cdecl gamemenu_get_gamma()
+void gamemenu_get_gamma()
 {
 	gmenu_slider_3(&sgOptionMenu[2], 15);
 	gmenu_slider_1(&sgOptionMenu[2], 30, 100, palette_update_gamma(0));
 }
 
-void __fastcall gamemenu_music_volume(int a1)
+void gamemenu_music_volume(int a1)
 {
 	int v1; // esi
 
@@ -249,12 +249,12 @@ LABEL_11:
 // 4A22D4: using guessed type char gbMusicOn;
 // 5BB1ED: using guessed type char leveltype;
 
-int __fastcall gamemenu_slider_music_sound(TMenuItem *menu_item)
+int gamemenu_slider_music_sound(TMenuItem *menu_item)
 {
 	return gmenu_slider_get(menu_item, -1600, 0);
 }
 
-void __fastcall gamemenu_sound_volume(int a1)
+void gamemenu_sound_volume(int a1)
 {
 	int v1; // ecx
 	int v2; // esi
@@ -296,7 +296,7 @@ void __fastcall gamemenu_sound_volume(int a1)
 }
 // 4A22D5: using guessed type char gbSoundOn;
 
-void __fastcall gamemenu_gamma(int a1)
+void gamemenu_gamma(int a1)
 {
 	int v1; // eax
 	int v2; // eax
@@ -315,12 +315,12 @@ void __fastcall gamemenu_gamma(int a1)
 	gamemenu_get_gamma();
 }
 
-int __cdecl gamemenu_slider_gamma()
+int gamemenu_slider_gamma()
 {
 	return gmenu_slider_get(&sgOptionMenu[2], 30, 100);
 }
 
-void __cdecl gamemenu_color_cycling()
+void gamemenu_color_cycling()
 {
 	palette_set_color_cycling(palette_get_colour_cycling() == 0);
 	sgOptionMenu[3].pszStr = color_cycling_toggle_names[palette_get_colour_cycling() & 1];

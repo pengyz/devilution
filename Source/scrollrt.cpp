@@ -18,7 +18,7 @@ DDSURFACEDESC DDS_desc;
 int cel_transparency_active; // weak
 int level_piece_id; // weak
 int sgdwCursWdt;
-int (__fastcall *DrawPlrProc)(int player_num, int x, int y, int screen_x, int screen_y, void *cl2_buf, int frame, int frame_width, int a9, int a10);
+int (*DrawPlrProc)(int player_num, int x, int y, int screen_x, int screen_y, void *cl2_buf, int frame, int frame_width, int a9, int a10);
 char cursor_draw_back_buffer[8192];
 int draw_monster_num; // weak
 int sgdwCursHgtOld; // idb
@@ -76,13 +76,13 @@ struct scrollrt_cpp_init
 // 47F238: using guessed type int scrollrt_inf;
 // 69CEFC: using guessed type int scrollrt_cpp_init_value;
 
-void __cdecl ClearCursor() // CODE_FIX: this was supposed to be in cursor.cpp
+void ClearCursor() // CODE_FIX: this was supposed to be in cursor.cpp
 {
 	sgdwCursWdt = 0;
 	sgdwCursWdtOld = 0;
 }
 
-void __fastcall DrawMissile(int x, int y, int sx, int sy, int a5, int a6, int del_flag)
+void DrawMissile(int x, int y, int sx, int sy, int a5, int a6, int del_flag)
 {
 	int v7; // ebx
 	char v8; // al
@@ -181,7 +181,7 @@ void __fastcall DrawMissile(int x, int y, int sx, int sy, int a5, int a6, int de
 	}
 }
 
-void __fastcall DrawClippedMissile(int x, int y, int sx, int sy, int a5, int a6, int a7)
+void DrawClippedMissile(int x, int y, int sx, int sy, int a5, int a6, int a7)
 {
 	int v7; // ebx
 	char v8; // al
@@ -280,7 +280,7 @@ void __fastcall DrawClippedMissile(int x, int y, int sx, int sy, int a5, int a6,
 	}
 }
 
-void __fastcall DrawDeadPlayer(int x, int y, int sx, int sy, int a5, int a6, bool clipped)
+void DrawDeadPlayer(int x, int y, int sx, int sy, int a5, int a6, bool clipped)
 {
 	int v7; // ebx
 	int *v8; // esi
@@ -292,9 +292,9 @@ void __fastcall DrawDeadPlayer(int x, int y, int sx, int sy, int a5, int a6, boo
 
 	v7 = y;
 	xa = x;
-	DrawPlrProc = (int (__fastcall *)(int, int, int, int, int, void *, int, int, int, int))DrawClippedPlayer;
+	DrawPlrProc = (int (*)(int, int, int, int, int, void *, int, int, int, int))DrawClippedPlayer;
 	if ( !clipped )
-		DrawPlrProc = (int (__fastcall *)(int, int, int, int, int, void *, int, int, int, int))DrawPlayer;
+		DrawPlrProc = (int (*)(int, int, int, int, int, void *, int, int, int, int))DrawPlayer;
 	v8 = &plr[0]._pHitPoints;
 	v9 = &dFlags[x][y];
 	*v9 &= 0xFBu;
@@ -318,7 +318,7 @@ LABEL_14:
 	while ( (signed int)v8 < (signed int)&plr[4]._pHitPoints );
 }
 
-void __fastcall DrawPlayer(int pnum, int x, int y, int px, int py, int animdata, int animframe, int animwidth, int a9, int a10)
+void DrawPlayer(int pnum, int x, int y, int px, int py, int animdata, int animframe, int animwidth, int a9, int a10)
 {
 	char *v10; // edx
 	int v11; // eax
@@ -399,7 +399,7 @@ void __fastcall DrawPlayer(int pnum, int x, int y, int px, int py, int animdata,
 // 5CF31D: using guessed type char setlevel;
 // 69BEF8: using guessed type int light_table_index;
 
-void __fastcall DrawClippedPlayer(int pnum, int x, int y, int px, int py, int animdata, int animframe, int animwidth, int a9, int a10)
+void DrawClippedPlayer(int pnum, int x, int y, int px, int py, int animdata, int animframe, int animwidth, int a9, int a10)
 {
 	char *v10; // edx
 	int v11; // eax
@@ -479,7 +479,7 @@ void __fastcall DrawClippedPlayer(int pnum, int x, int y, int px, int py, int an
 // 4B8CC2: using guessed type char pcursplr;
 // 69BEF8: using guessed type int light_table_index;
 
-void __fastcall DrawView(int StartX, int StartY)
+void DrawView(int StartX, int StartY)
 {
 	if ( zoomflag )
 		DrawGame(StartX, StartY);
@@ -537,7 +537,7 @@ void __fastcall DrawView(int StartX, int StartY)
 // 646D00: using guessed type char qtextflag;
 // 69BD04: using guessed type int questlog;
 
-void __fastcall DrawGame(int x, int y)
+void DrawGame(int x, int y)
 {
 	int v2; // esi
 	int v3; // ebx
@@ -669,7 +669,7 @@ LABEL_15:
 // 69CF0C: using guessed type int screen_buf_end;
 // 69CF20: using guessed type char arch_draw_type;
 
-void __fastcall scrollrt_draw_lower(int x, int y, int sx, int sy, int a5, int some_flag)
+void scrollrt_draw_lower(int x, int y, int sx, int sy, int a5, int some_flag)
 {
 	unsigned int v6; // edi
 	unsigned int v7; // ebx
@@ -905,7 +905,7 @@ LABEL_23:
 // 69CF94: using guessed type int cel_transparency_active;
 // 69CF98: using guessed type int level_piece_id;
 
-void __fastcall scrollrt_draw_clipped_dungeon(char *a1, int sx, int sy, int a4, int a5, int a6)
+void scrollrt_draw_clipped_dungeon(char *a1, int sx, int sy, int a4, int a5, int a6)
 {
 	int v6; // eax
 	char v7; // bl
@@ -1174,7 +1174,7 @@ void __fastcall scrollrt_draw_clipped_dungeon(char *a1, int sx, int sy, int a4, 
 // 69CF94: using guessed type int cel_transparency_active;
 // 69EFA4: using guessed type int draw_monster_num;
 
-void __fastcall DrawClippedMonster(int x, int y, int a3, int a4, int mon_id, int a6, int a7)
+void DrawClippedMonster(int x, int y, int a3, int a4, int mon_id, int a6, int a7)
 {
 	int v7; // eax
 	char *v8; // esi
@@ -1227,7 +1227,7 @@ void __fastcall DrawClippedMonster(int x, int y, int a3, int a4, int mon_id, int
 }
 // 69BEF8: using guessed type int light_table_index;
 
-void __fastcall DrawClippedObject(int x, int y, int a3, int a4, int pre_flag, int a6, int dir)
+void DrawClippedObject(int x, int y, int a3, int a4, int pre_flag, int a6, int dir)
 {
 	int v7; // edi
 	char v8; // al
@@ -1293,7 +1293,7 @@ void __fastcall DrawClippedObject(int x, int y, int a3, int a4, int pre_flag, in
 }
 // 4B8CC1: using guessed type char pcursobj;
 
-void __fastcall scrollrt_draw_clipped_e_flag(char *buffer, int x, int y, int a4, int a5)
+void scrollrt_draw_clipped_e_flag(char *buffer, int x, int y, int a4, int a5)
 {
 	int v5; // eax
 	int v6; // ebx
@@ -1365,7 +1365,7 @@ void __fastcall scrollrt_draw_clipped_e_flag(char *buffer, int x, int y, int a4,
 // 69CF94: using guessed type int cel_transparency_active;
 // 69CF98: using guessed type int level_piece_id;
 
-void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int a6, int some_flag)
+void scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int a6, int some_flag)
 {
 	signed int v7; // ebx
 	int v8; // edi
@@ -1570,7 +1570,7 @@ void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int 
 // 69CF94: using guessed type int cel_transparency_active;
 // 69CF98: using guessed type int level_piece_id;
 
-void __fastcall scrollrt_draw_clipped_dungeon_2(char *buffer, int x, int y, int a4, int a5, int sx, int sy, int me_flag)
+void scrollrt_draw_clipped_dungeon_2(char *buffer, int x, int y, int a4, int a5, int sx, int sy, int me_flag)
 {
 	int v8; // eax
 	char v9; // bl
@@ -1849,7 +1849,7 @@ void __fastcall scrollrt_draw_clipped_dungeon_2(char *buffer, int x, int y, int 
 // 69CF94: using guessed type int cel_transparency_active;
 // 69EFA4: using guessed type int draw_monster_num;
 
-void __fastcall scrollrt_draw_clipped_e_flag_2(char *buffer, int x, int y, int a4, signed int a5, int sx, int sy)
+void scrollrt_draw_clipped_e_flag_2(char *buffer, int x, int y, int a4, signed int a5, int sx, int sy)
 {
 	int v7; // eax
 	int v8; // ecx
@@ -1946,7 +1946,7 @@ LABEL_22:
 // 69CF94: using guessed type int cel_transparency_active;
 // 69CF98: using guessed type int level_piece_id;
 
-void __fastcall scrollrt_draw_upper(int x, int y, int sx, int sy, int a5, int a6, int some_flag)
+void scrollrt_draw_upper(int x, int y, int sx, int sy, int a5, int a6, int some_flag)
 {
 	int v7; // edi
 	int v8; // esi
@@ -2180,7 +2180,7 @@ void __fastcall scrollrt_draw_upper(int x, int y, int sx, int sy, int a5, int a6
 // 69CF94: using guessed type int cel_transparency_active;
 // 69CF98: using guessed type int level_piece_id;
 
-void __fastcall scrollrt_draw_dungeon(char *buffer, int x, int y, int a4, int a5, int sx, int sy, int me_flag)
+void scrollrt_draw_dungeon(char *buffer, int x, int y, int a4, int a5, int sx, int sy, int me_flag)
 {
 	int v8; // eax
 	char v9; // bl
@@ -2449,7 +2449,7 @@ void __fastcall scrollrt_draw_dungeon(char *buffer, int x, int y, int a4, int a5
 // 69CF94: using guessed type int cel_transparency_active;
 // 69EFA4: using guessed type int draw_monster_num;
 
-void __fastcall DrawMonster(int x, int y, int a3, int a4, int mon_id, int a6, int a7)
+void DrawMonster(int x, int y, int a3, int a4, int mon_id, int a6, int a7)
 {
 	int v7; // eax
 	char *v8; // esi
@@ -2502,7 +2502,7 @@ void __fastcall DrawMonster(int x, int y, int a3, int a4, int mon_id, int a6, in
 }
 // 69BEF8: using guessed type int light_table_index;
 
-void __fastcall DrawObject(int x, int y, int a3, int a4, int pre_flag, int a6, int dir)
+void DrawObject(int x, int y, int a3, int a4, int pre_flag, int a6, int dir)
 {
 	int v7; // edi
 	char v8; // al
@@ -2576,7 +2576,7 @@ void __fastcall DrawObject(int x, int y, int a3, int a4, int pre_flag, int a6, i
 }
 // 4B8CC1: using guessed type char pcursobj;
 
-void __fastcall scrollrt_draw_e_flag(char *buffer, int x, int y, int a4, int a5, int sx, int sy)
+void scrollrt_draw_e_flag(char *buffer, int x, int y, int a4, int a5, int sx, int sy)
 {
 	int v7; // eax
 	char *v8; // esi
@@ -2654,7 +2654,7 @@ void __fastcall scrollrt_draw_e_flag(char *buffer, int x, int y, int a4, int a5,
 // 69CF94: using guessed type int cel_transparency_active;
 // 69CF98: using guessed type int level_piece_id;
 
-void __fastcall DrawZoom(int x, int y)
+void DrawZoom(int x, int y)
 {
 	int v2; // edi
 	int v3; // ebx
@@ -2824,7 +2824,7 @@ LABEL_24:
 // 69CF0C: using guessed type int screen_buf_end;
 // 69CF20: using guessed type char arch_draw_type;
 
-void __cdecl ClearScreenBuffer()
+void ClearScreenBuffer()
 {
 	int i; // edx
 
@@ -2837,7 +2837,7 @@ void __cdecl ClearScreenBuffer()
 }
 
 #ifdef _DEBUG
-void __cdecl ScrollView()
+void ScrollView()
 {
 	signed int v0; // esi
 	int v1; // edi
@@ -2951,14 +2951,14 @@ LABEL_37:
 	}
 }
 
-void __cdecl EnableFrameCount()
+void EnableFrameCount()
 {
 	frameflag = frameflag == 0;
 	framestart = GetTickCount();
 }
 #endif
 
-void __fastcall scrollrt_draw_game_screen(bool draw_cursor)
+void scrollrt_draw_game_screen(bool draw_cursor)
 {
 	int dwHgt; // edi
 
@@ -2987,7 +2987,7 @@ void __fastcall scrollrt_draw_game_screen(bool draw_cursor)
 }
 // 52571C: using guessed type int drawpanflag;
 
-void __cdecl scrollrt_draw_cursor_back_buffer()
+void scrollrt_draw_cursor_back_buffer()
 {
 	int v0; // edx
 	int v1; // eax
@@ -3026,7 +3026,7 @@ void __cdecl scrollrt_draw_cursor_back_buffer()
 	}
 }
 
-void __cdecl scrollrt_draw_cursor_item()
+void scrollrt_draw_cursor_item()
 {
 	int v0; // ebp
 	int v1; // edx
@@ -3129,7 +3129,7 @@ void __cdecl scrollrt_draw_cursor_item()
 // 4B8C9C: using guessed type int cursH;
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall DrawMain(int dwHgt, int draw_desc, int draw_hp, int draw_mana, int draw_sbar, int draw_btn)
+void DrawMain(int dwHgt, int draw_desc, int draw_hp, int draw_mana, int draw_sbar, int draw_btn)
 {
 	signed int v6; // ebp
 	DWORD v7; // ebx
@@ -3230,7 +3230,7 @@ LABEL_17:
 // 679660: using guessed type char gbMaxPlayers;
 
 #ifdef _DEBUG
-void __cdecl DrawFPS()
+void DrawFPS()
 {
 	DWORD v0; // eax
 	int v1; // esi
@@ -3260,7 +3260,7 @@ void __cdecl DrawFPS()
 }
 #endif
 
-void __fastcall DoBlitScreen(int dwX, int dwY, int dwWdt, int dwHgt)
+void DoBlitScreen(int dwX, int dwY, int dwWdt, int dwHgt)
 {
 	int v4; // esi
 	int v5; // edi
@@ -3328,7 +3328,7 @@ void __fastcall DoBlitScreen(int dwX, int dwY, int dwWdt, int dwHgt)
 	}
 }
 
-void __cdecl DrawAndBlit()
+void DrawAndBlit()
 {
 	bool ddsdesc; // ebp
 	bool ctrlPan; // esi

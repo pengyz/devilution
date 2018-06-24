@@ -6,7 +6,7 @@ int spurtndx; // weak
 DeadStruct dead[31];
 int stonendx;
 
-void __cdecl InitDead()
+void InitDead()
 {
 	int v0; // ebx
 	int *v1; // edx
@@ -107,12 +107,12 @@ void __cdecl InitDead()
 }
 // 4B8CD8: using guessed type int spurtndx;
 
-void __fastcall AddDead(int dx, int dy, char dv, int ddir)
+void AddDead(int dx, int dy, char dv, int ddir)
 {
 	dDead[dx][dy] = (dv & 0x1F) + 32 * ddir;
 }
 
-void __cdecl SetDead()
+void SetDead()
 {
 	int v0; // eax
 	int v1; // esi

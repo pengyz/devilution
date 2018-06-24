@@ -17,21 +17,21 @@ extern int AutoMapYPos; // weak
 extern int AMPlayerX; // weak
 extern int AMPlayerY; // weak
 
-void __cdecl InitAutomapOnce();
-void __cdecl InitAutomap();
-void __cdecl StartAutomap();
-void __cdecl AutomapUp();
-void __cdecl AutomapDown();
-void __cdecl AutomapLeft();
-void __cdecl AutomapRight();
-void __cdecl AutomapZoomIn();
-void __cdecl AutomapZoomOut();
-void __cdecl DrawAutomap();
-void __fastcall DrawAutomapType(int screen_x, int screen_y, short automap_type);
-void __cdecl DrawAutomapPlr();
-short __fastcall GetAutomapType(int tx, int ty, bool view);
-void __cdecl DrawAutomapGame();
-void __fastcall SetAutomapView(int x, int y);
-void __cdecl AutomapZoomReset();
+void InitAutomapOnce();
+void InitAutomap();
+void StartAutomap();
+void AutomapUp();
+void AutomapDown();
+void AutomapLeft();
+void AutomapRight();
+void AutomapZoomIn();
+void AutomapZoomOut();
+void DrawAutomap();
+void DrawAutomapType(int screen_x, int screen_y, short automap_type);
+void DrawAutomapPlr();
+short GetAutomapType(int tx, int ty, bool view);
+void DrawAutomapGame();
+void SetAutomapView(int x, int y);
+void AutomapZoomReset();
 
 #endif /* __AUTOMAP_H__ */

@@ -44,22 +44,22 @@ struct nthread_cpp_init_2
 	}
 } _nthread_cpp_init_2;
 
-void __cdecl nthread_init_mutex()
+void nthread_init_mutex()
 {
 	InitializeCriticalSection(&sgMemCrit);
 }
 
-void __cdecl nthread_cleanup_mutex_atexit()
+void nthread_cleanup_mutex_atexit()
 {
 	atexit(nthread_cleanup_mutex);
 }
 
-void __cdecl nthread_cleanup_mutex()
+void nthread_cleanup_mutex()
 {
 	DeleteCriticalSection(&sgMemCrit);
 }
 
-void __fastcall nthread_terminate_game(char *pszFcn)
+void nthread_terminate_game(char *pszFcn)
 {
 	char *v1; // esi
 	int v2; // eax
@@ -82,7 +82,7 @@ void __fastcall nthread_terminate_game(char *pszFcn)
 }
 // 67862D: using guessed type char gbGameDestroyed;
 
-int __fastcall nthread_send_and_recv_turn(int cur_turn, int turn_delta)
+int nthread_send_and_recv_turn(int cur_turn, int turn_delta)
 {
 	int v2; // ebx
 	unsigned int v3; // edi
@@ -123,7 +123,7 @@ int __fastcall nthread_send_and_recv_turn(int cur_turn, int turn_delta)
 // 679738: using guessed type int gdwTurnsInTransit;
 // 679754: using guessed type int dword_679754;
 
-int __fastcall nthread_recv_turns(int *pfSendAsync)
+int nthread_recv_turns(int *pfSendAsync)
 {
 	int *v1; // esi
 	bool v2; // zf
@@ -166,13 +166,13 @@ LABEL_11:
 // 679759: using guessed type char sgbPacketCountdown;
 // 679764: using guessed type int dword_679764;
 
-void __cdecl nthread_set_turn_upper_bit()
+void nthread_set_turn_upper_bit()
 {
 	dword_679754 = 0x80000000;
 }
 // 679754: using guessed type int dword_679754;
 
-void __fastcall nthread_start(bool set_turn_upper_bit)
+void nthread_start(bool set_turn_upper_bit)
 {
 	BOOL v1; // esi
 	char *v3; // eax
@@ -282,7 +282,7 @@ unsigned int __stdcall nthread_handler(void *a1)
 // 679734: using guessed type char byte_679734;
 // 679764: using guessed type int dword_679764;
 
-void __cdecl nthread_cleanup()
+void nthread_cleanup()
 {
 	char *v0; // eax
 
@@ -309,7 +309,7 @@ void __cdecl nthread_cleanup()
 // 67975C: using guessed type int gdwLargestMsgSize;
 // 679760: using guessed type int gdwNormalMsgSize;
 
-void __fastcall nthread_ignore_mutex(bool bStart)
+void nthread_ignore_mutex(bool bStart)
 {
 	bool v1; // bl
 
@@ -325,7 +325,7 @@ void __fastcall nthread_ignore_mutex(bool bStart)
 }
 // 67975A: using guessed type char sgbThreadIsRunning;
 
-bool __cdecl nthread_has_500ms_passed()
+bool nthread_has_500ms_passed()
 {
 	DWORD v0; // eax
 	int v1; // ecx

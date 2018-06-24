@@ -8,7 +8,7 @@ void *pDoomCel;
 int doomflag; // weak
 int DoomQuestState; // idb
 
-int __cdecl doom_get_frame_from_time()
+int doom_get_frame_from_time()
 {
 	int result; // eax
 
@@ -19,12 +19,12 @@ int __cdecl doom_get_frame_from_time()
 	return result;
 }
 
-void __cdecl doom_alloc_cel()
+void doom_alloc_cel()
 {
 	pDoomCel = DiabloAllocPtr(229376);
 }
 
-void __cdecl doom_cleanup()
+void doom_cleanup()
 {
 	void *v0; // ecx
 
@@ -33,7 +33,7 @@ void __cdecl doom_cleanup()
 	mem_free_dbg(v0);
 }
 
-void __cdecl doom_load_graphics()
+void doom_load_graphics()
 {
 	if ( doom_quest_time == 31 )
 	{
@@ -51,7 +51,7 @@ void __cdecl doom_load_graphics()
 }
 // 525750: using guessed type int doom_quest_time;
 
-void __cdecl doom_init()
+void doom_init()
 {
 	int v0; // eax
 
@@ -65,7 +65,7 @@ void __cdecl doom_init()
 // 525750: using guessed type int doom_quest_time;
 // 52575C: using guessed type int doomflag;
 
-void __cdecl doom_close()
+void doom_close()
 {
 	if ( doomflag )
 	{
@@ -75,7 +75,7 @@ void __cdecl doom_close()
 }
 // 52575C: using guessed type int doomflag;
 
-void __cdecl doom_draw()
+void doom_draw()
 {
 	if ( doomflag )
 	{

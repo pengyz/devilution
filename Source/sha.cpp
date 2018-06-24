@@ -4,12 +4,12 @@
 
 SHA1Context sgSHA1[3];
 
-void __cdecl SHA1Clear()
+void SHA1Clear()
 {
 	memset(sgSHA1, 0, 0x114u);
 }
 
-void __fastcall SHA1Result(int n, char Message_Digest[SHA1HashSize])
+void SHA1Result(int n, char Message_Digest[SHA1HashSize])
 {
 	char *v2; // eax
 	SHA1Context *v3; // ecx
@@ -33,7 +33,7 @@ void __fastcall SHA1Result(int n, char Message_Digest[SHA1HashSize])
 	}
 }
 
-void __fastcall SHA1Calculate(int n, const char *data, char Message_Digest[SHA1HashSize])
+void SHA1Calculate(int n, const char *data, char Message_Digest[SHA1HashSize])
 {
 	int v3; // esi
 
@@ -43,7 +43,7 @@ void __fastcall SHA1Calculate(int n, const char *data, char Message_Digest[SHA1H
 		SHA1Result(v3, (char *)Message_Digest);
 }
 
-void __fastcall SHA1Input(SHA1Context *context, const char *message_array, int len)
+void SHA1Input(SHA1Context *context, const char *message_array, int len)
 {
 	SHA1Context *v3; // esi
 	const char *v4; // ebx
@@ -73,7 +73,7 @@ void __fastcall SHA1Input(SHA1Context *context, const char *message_array, int l
 	}
 }
 
-void __fastcall SHA1ProcessMessageBlock(SHA1Context *context)
+void SHA1ProcessMessageBlock(SHA1Context *context)
 {
 	int i; // [esp+158h] [ebp-4h]
 	int temp; // esi
@@ -140,7 +140,7 @@ void __fastcall SHA1ProcessMessageBlock(SHA1Context *context)
 	context->state[4] += E;
 }
 
-void __fastcall SHA1Reset(int n)
+void SHA1Reset(int n)
 {
 	sgSHA1[n].count[0] = 0;
 	sgSHA1[n].count[1] = 0;

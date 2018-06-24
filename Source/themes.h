@@ -19,37 +19,37 @@ extern bool pFountainFlag; // weak
 extern bool bFountainFlag; // weak
 extern bool bCrossFlag; // weak
 
-bool __fastcall TFit_Shrine(int i);
-bool __fastcall TFit_Obj5(int t);
-bool __fastcall TFit_SkelRoom(int t);
-bool __fastcall TFit_GoatShrine(int t);
-bool __fastcall CheckThemeObj3(int xp, int yp, int t, int f);
-bool __fastcall TFit_Obj3(int t);
-bool __fastcall CheckThemeReqs(int t);
-bool __fastcall SpecialThemeFit(int i, int t);
-bool __fastcall CheckThemeRoom(int tv);
-void __cdecl InitThemes();
-void __cdecl HoldThemeRooms();
-void __fastcall PlaceThemeMonsts(int t, int f);
-void __fastcall Theme_Barrel(int t);
-void __fastcall Theme_Shrine(int t);
-void __fastcall Theme_MonstPit(int t);
-void __fastcall Theme_SkelRoom(int t);
-void __fastcall Theme_Treasure(int t);
-void __fastcall Theme_Library(int t);
-void __fastcall Theme_Torture(int t);
-void __fastcall Theme_BloodFountain(int t);
-void __fastcall Theme_Decap(int t);
-void __fastcall Theme_PurifyingFountain(int t);
-void __fastcall Theme_ArmorStand(int t);
-void __fastcall Theme_GoatShrine(int t);
-void __fastcall Theme_Cauldron(int t);
-void __fastcall Theme_MurkyFountain(int t);
-void __fastcall Theme_TearFountain(int t);
-void __fastcall Theme_BrnCross(int t);
-void __fastcall Theme_WeaponRack(int t);
-void __cdecl UpdateL4Trans();
-void __cdecl CreateThemeRooms();
+bool TFit_Shrine(int i);
+bool TFit_Obj5(int t);
+bool TFit_SkelRoom(int t);
+bool TFit_GoatShrine(int t);
+bool CheckThemeObj3(int xp, int yp, int t, int f);
+bool TFit_Obj3(int t);
+bool CheckThemeReqs(int t);
+bool SpecialThemeFit(int i, int t);
+bool CheckThemeRoom(int tv);
+void InitThemes();
+void HoldThemeRooms();
+void PlaceThemeMonsts(int t, int f);
+void Theme_Barrel(int t);
+void Theme_Shrine(int t);
+void Theme_MonstPit(int t);
+void Theme_SkelRoom(int t);
+void Theme_Treasure(int t);
+void Theme_Library(int t);
+void Theme_Torture(int t);
+void Theme_BloodFountain(int t);
+void Theme_Decap(int t);
+void Theme_PurifyingFountain(int t);
+void Theme_ArmorStand(int t);
+void Theme_GoatShrine(int t);
+void Theme_Cauldron(int t);
+void Theme_MurkyFountain(int t);
+void Theme_TearFountain(int t);
+void Theme_BrnCross(int t);
+void Theme_WeaponRack(int t);
+void UpdateL4Trans();
+void CreateThemeRooms();
 
 /* rdata */
 

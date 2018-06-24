@@ -21,7 +21,7 @@ struct mainmenu_cpp_init
 // 47F074: using guessed type int mainmenu_inf;
 // 646CE0: using guessed type int mainmenu_cpp_init_value;
 
-void __cdecl mainmenu_refresh_music()
+void mainmenu_refresh_music()
 {
 	int v0; // eax
 
@@ -106,7 +106,7 @@ LABEL_6:
 // 5256E8: using guessed type int dword_5256E8;
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall mainmenu_action(int option)
+void mainmenu_action(int option)
 {
 	int v1; // eax
 	int a2; // [esp+0h] [ebp-4h]
@@ -151,14 +151,14 @@ LABEL_16:
 }
 // 634980: using guessed type int window_activated;
 
-int __cdecl mainmenu_single_player()
+int mainmenu_single_player()
 {
 	gbMaxPlayers = 1;
 	return mainmenu_init_menu(1);
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-int __fastcall mainmenu_init_menu(int a1)
+int mainmenu_init_menu(int a1)
 {
 	int v1; // esi
 	int v3; // esi
@@ -173,14 +173,14 @@ int __fastcall mainmenu_init_menu(int a1)
 	return v3;
 }
 
-int __cdecl mainmenu_multi_player()
+int mainmenu_multi_player()
 {
 	gbMaxPlayers = 4;
 	return mainmenu_init_menu(3);
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void __cdecl mainmenu_play_intro()
+void mainmenu_play_intro()
 {
 	music_stop();
 	play_movie("gendata\\diablo1.smk", 1);

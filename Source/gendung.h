@@ -69,27 +69,27 @@ extern int dminx; // weak
 extern int dminy; // weak
 extern short dpiece_defs_map_2[16][112][112];
 
-void __cdecl FillSolidBlockTbls();
-void __cdecl gendung_418D91();
-void __fastcall gendung_4191BF(int frames);
-void __fastcall gendung_4191FB(int a1, int a2);
-int __fastcall gendung_get_dpiece_num_from_coord(int x, int y);
-void __cdecl gendung_4192C2();
-void __cdecl SetDungeonMicros();
-void __cdecl DRLG_InitTrans();
-void __fastcall DRLG_MRectTrans(int x1, int y1, int x2, int y2);
-void __fastcall DRLG_RectTrans(int x1, int y1, int x2, int y2);
-void __fastcall DRLG_CopyTrans(int sx, int sy, int dx, int dy);
-void __fastcall DRLG_ListTrans(int num, unsigned char *List);
-void __fastcall DRLG_AreaTrans(int num, unsigned char *List);
-void __cdecl DRLG_InitSetPC();
-void __cdecl DRLG_SetPC();
-void __fastcall Make_SetPC(int x, int y, int w, int h);
-bool __fastcall DRLG_WillThemeRoomFit(int floor, int x, int y, int minSize, int maxSize, int *width, int *height);
-void __fastcall DRLG_CreateThemeRoom(int themeIndex);
-void __fastcall DRLG_PlaceThemeRooms(int minSize, int maxSize, int floor, int freq, int rndSize);
-void __cdecl DRLG_HoldThemeRooms();
-bool __fastcall SkipThemeRoom(int x, int y);
-void __cdecl InitLevels();
+void FillSolidBlockTbls();
+void gendung_418D91();
+void gendung_4191BF(int frames);
+void gendung_4191FB(int a1, int a2);
+int gendung_get_dpiece_num_from_coord(int x, int y);
+void gendung_4192C2();
+void SetDungeonMicros();
+void DRLG_InitTrans();
+void DRLG_MRectTrans(int x1, int y1, int x2, int y2);
+void DRLG_RectTrans(int x1, int y1, int x2, int y2);
+void DRLG_CopyTrans(int sx, int sy, int dx, int dy);
+void DRLG_ListTrans(int num, unsigned char *List);
+void DRLG_AreaTrans(int num, unsigned char *List);
+void DRLG_InitSetPC();
+void DRLG_SetPC();
+void Make_SetPC(int x, int y, int w, int h);
+bool DRLG_WillThemeRoomFit(int floor, int x, int y, int minSize, int maxSize, int *width, int *height);
+void DRLG_CreateThemeRoom(int themeIndex);
+void DRLG_PlaceThemeRooms(int minSize, int maxSize, int floor, int freq, int rndSize);
+void DRLG_HoldThemeRooms();
+bool SkipThemeRoom(int x, int y);
+void InitLevels();
 
 #endif /* __GENDUNG_H__ */

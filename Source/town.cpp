@@ -2,7 +2,7 @@
 
 #include "../types.h"
 
-void __fastcall town_clear_upper_buf(int a1)
+void town_clear_upper_buf(int a1)
 {
 	unsigned int v1; // edi
 	signed int v2; // edx
@@ -42,7 +42,7 @@ void __fastcall town_clear_upper_buf(int a1)
 }
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall town_clear_low_buf(int y_related)
+void town_clear_low_buf(int y_related)
 {
 	unsigned int v1; // edi
 	signed int v2; // edx
@@ -95,7 +95,7 @@ void __fastcall town_clear_low_buf(int y_related)
 }
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall town_draw_clipped_e_flag(void *buffer, int x, int y, int sx, int sy)
+void town_draw_clipped_e_flag(void *buffer, int x, int y, int sx, int sy)
 {
 	int v5; // ebx
 	char *v6; // esi
@@ -128,7 +128,7 @@ void __fastcall town_draw_clipped_e_flag(void *buffer, int x, int y, int sx, int
 }
 // 69CF14: using guessed type int level_cel_block;
 
-void __fastcall town_draw_clipped_town(void *unused, int x, int y, int sx, int sy, int some_flag)
+void town_draw_clipped_town(void *unused, int x, int y, int sx, int sy, int some_flag)
 {
 	unsigned int v6; // edx
 	int v7; // edi
@@ -247,7 +247,7 @@ void __fastcall town_draw_clipped_town(void *unused, int x, int y, int sx, int s
 // 4B8CC0: using guessed type char pcursitem;
 // 4B8CC2: using guessed type char pcursplr;
 
-void __fastcall town_draw_lower(int x, int y, int sx, int sy, int a5, int some_flag)
+void town_draw_lower(int x, int y, int sx, int sy, int a5, int some_flag)
 {
 	int v6; // ebx
 	int *v7; // edi
@@ -385,7 +385,7 @@ void __fastcall town_draw_lower(int x, int y, int sx, int sy, int a5, int some_f
 }
 // 69CF14: using guessed type int level_cel_block;
 
-void __fastcall town_draw_clipped_e_flag_2(void *buffer, int x, int y, int a4, int a5, int sx, int sy)
+void town_draw_clipped_e_flag_2(void *buffer, int x, int y, int a4, int a5, int sx, int sy)
 {
 	int v7; // ebx
 	char *v8; // edi
@@ -428,7 +428,7 @@ void __fastcall town_draw_clipped_e_flag_2(void *buffer, int x, int y, int a4, i
 }
 // 69CF14: using guessed type int level_cel_block;
 
-void __fastcall town_draw_clipped_town_2(int x, int y, int a3, int a4, int a5, int sx, int sy, int some_flag)
+void town_draw_clipped_town_2(int x, int y, int a3, int a4, int a5, int sx, int sy, int some_flag)
 {
 	unsigned int v8; // edx
 	int v9; // ebx
@@ -547,7 +547,7 @@ void __fastcall town_draw_clipped_town_2(int x, int y, int a3, int a4, int a5, i
 // 4B8CC0: using guessed type char pcursitem;
 // 4B8CC2: using guessed type char pcursplr;
 
-void __fastcall town_draw_lower_2(int x, int y, int sx, int sy, int a5, int a6, int some_flag)
+void town_draw_lower_2(int x, int y, int sx, int sy, int a5, int a6, int some_flag)
 {
 	int v7; // esi
 	int v8; // ebx
@@ -711,7 +711,7 @@ LABEL_18:
 }
 // 69CF14: using guessed type int level_cel_block;
 
-void __fastcall town_draw_e_flag(void *buffer, int x, int y, int a4, int dir, int sx, int sy)
+void town_draw_e_flag(void *buffer, int x, int y, int a4, int dir, int sx, int sy)
 {
 	int v7; // ebx
 	char *v8; // esi
@@ -747,7 +747,7 @@ void __fastcall town_draw_e_flag(void *buffer, int x, int y, int a4, int dir, in
 }
 // 69CF14: using guessed type int level_cel_block;
 
-void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, int sx, int sy, int some_flag)
+void town_draw_town_all(void *buffer, int x, int y, int a4, int dir, int sx, int sy, int some_flag)
 {
 	//int v9; // ebx
 	int id; // esi
@@ -809,7 +809,7 @@ void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, 
 // 4B8CC0: using guessed type char pcursitem;
 // 4B8CC2: using guessed type char pcursplr;
 
-void __fastcall town_draw_upper(int x, int y, int sx, int sy, int a5, int a6, int some_flag)
+void town_draw_upper(int x, int y, int sx, int sy, int a5, int a6, int some_flag)
 {
 	signed int v7; // ebx
 	int v8; // esi
@@ -991,7 +991,7 @@ LABEL_36:
 }
 // 69CF14: using guessed type int level_cel_block;
 
-void __fastcall T_DrawGame(int x, int y)
+void T_DrawGame(int x, int y)
 {
 	int v2; // esi
 	int v3; // edi
@@ -1123,7 +1123,7 @@ LABEL_15:
 // 69BD04: using guessed type int questlog;
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall T_DrawZoom(int x, int y)
+void T_DrawZoom(int x, int y)
 {
 	int v2; // edi
 	int v3; // ebx
@@ -1293,7 +1293,7 @@ LABEL_24:
 // 69BD04: using guessed type int questlog;
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall T_DrawView(int StartX, int StartY)
+void T_DrawView(int StartX, int StartY)
 {
 	light_table_index = 0;
 	cel_transparency_active = 0;
@@ -1359,7 +1359,7 @@ void __fastcall T_DrawView(int StartX, int StartY)
 // 69CF94: using guessed type int cel_transparency_active;
 // 6AA705: using guessed type char stextflag;
 
-void __cdecl town_init_dpiece_defs_map()
+void town_init_dpiece_defs_map()
 {
 	int (*v0)[112]; // ebx
 	int v1; // ebp
@@ -1424,7 +1424,7 @@ void __cdecl town_init_dpiece_defs_map()
 // 5C3000: using guessed type int scr_pix_width;
 // 5C3004: using guessed type int scr_pix_height;
 
-void __fastcall T_FillSector(unsigned char *P3Tiles, unsigned char *pSector, int xi, int yi, int w, int h) /* check 7 params: int AddSec */
+void T_FillSector(unsigned char *P3Tiles, unsigned char *pSector, int xi, int yi, int w, int h) /* check 7 params: int AddSec */
 {
 	int v7; // ebx
 	int v8; // edx
@@ -1497,7 +1497,7 @@ void __fastcall T_FillSector(unsigned char *P3Tiles, unsigned char *pSector, int
 	}
 }
 
-void __fastcall T_FillTile(unsigned char *P3Tiles, int xx, int yy, int t)
+void T_FillTile(unsigned char *P3Tiles, int xx, int yy, int t)
 {
 	unsigned char *v4; // esi
 	unsigned short v5; // ax
@@ -1523,7 +1523,7 @@ void __fastcall T_FillTile(unsigned char *P3Tiles, int xx, int yy, int t)
 	dPiece[xx + 1][yy + 1] = v6 + 1;
 }
 
-void __cdecl T_Pass3()
+void T_Pass3()
 {
 	int *v1; // esi
 	int *v2; // eax
@@ -1593,7 +1593,7 @@ void __cdecl T_Pass3()
 // 45FDE6: could not find valid save-restore pair for edi
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall CreateTown(int entry)
+void CreateTown(int entry)
 {
 	int v1; // edi
 	int (*v2)[112]; // esi

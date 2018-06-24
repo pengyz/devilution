@@ -36,22 +36,22 @@ struct dx_cpp_init_2
 	}
 } _dx_cpp_init_2;
 
-void __cdecl dx_init_mutex()
+void dx_init_mutex()
 {
 	InitializeCriticalSection(&sgMemCrit);
 }
 
-void __cdecl dx_cleanup_mutex_atexit()
+void dx_cleanup_mutex_atexit()
 {
 	atexit(dx_cleanup_mutex);
 }
 
-void __cdecl dx_cleanup_mutex()
+void dx_cleanup_mutex()
 {
 	DeleteCriticalSection(&sgMemCrit);
 }
 
-void __fastcall dx_init(HWND hWnd)
+void dx_init(HWND hWnd)
 {
 	HWND v1; // esi
 	GUID *v2; // ecx
@@ -100,7 +100,7 @@ void __fastcall dx_init(HWND hWnd)
 // 484364: using guessed type int fullscreen;
 // 52A549: using guessed type char gbEmulate;
 
-void __cdecl dx_create_back_buffer()
+void dx_create_back_buffer()
 {
 	int v0; // eax
 	int v1; // eax
@@ -142,7 +142,7 @@ void __cdecl dx_create_back_buffer()
 }
 // 52A548: using guessed type char gbBackBuf;
 
-void __cdecl dx_create_primary_surface()
+void dx_create_primary_surface()
 {
 	int v0; // eax
 	DDSURFACEDESC v1; // [esp+0h] [ebp-6Ch]
@@ -156,7 +156,7 @@ void __cdecl dx_create_primary_surface()
 		TermDlg(104, v0, "C:\\Src\\Diablo\\Source\\dx.cpp", 109);
 }
 
-HRESULT __fastcall dx_DirectDrawCreate(GUID *guid, IDirectDraw **DD, void *unknown)
+HRESULT dx_DirectDrawCreate(GUID *guid, IDirectDraw **DD, void *unknown)
 {
 	IDirectDraw **v3; // ebp
 	int v4; // eax
@@ -184,7 +184,7 @@ HRESULT __fastcall dx_DirectDrawCreate(GUID *guid, IDirectDraw **DD, void *unkno
 	return ((int (__stdcall *)(GUID *, IDirectDraw **, void *))v5)(v8, v3, unknown);
 }
 
-void __cdecl dx_lock_mutex()
+void dx_lock_mutex()
 {
 	Screen *v0; // eax
 	int v1; // eax
@@ -215,7 +215,7 @@ LABEL_9:
 }
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __cdecl dx_unlock_mutex()
+void dx_unlock_mutex()
 {
 	Screen *v0; // eax
 	int v1; // eax
@@ -240,7 +240,7 @@ void __cdecl dx_unlock_mutex()
 }
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __cdecl dx_cleanup()
+void dx_cleanup()
 {
 	void *v0; // ecx
 
@@ -279,7 +279,7 @@ void __cdecl dx_cleanup()
 	}
 }
 
-void __cdecl dx_reinit()
+void dx_reinit()
 {
 	int v0; // esi
 

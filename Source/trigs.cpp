@@ -88,13 +88,13 @@ int L4PentaList[33] =
   -1
 };
 
-void __cdecl InitNoTriggers()
+void InitNoTriggers()
 {
 	trigflag[4] = 0;
 	trigflag[3] = 0;
 }
 
-void __cdecl InitTownTriggers()
+void InitTownTriggers()
 {
 	char v0; // bl
 	int v1; // eax
@@ -161,7 +161,7 @@ void __cdecl InitTownTriggers()
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void __cdecl InitL1Triggers()
+void InitL1Triggers()
 {
 	int v0; // edi
 	signed int v1; // esi
@@ -214,7 +214,7 @@ void __cdecl InitL1Triggers()
 	trigflag[3] = 0;
 }
 
-void __cdecl InitL2Triggers()
+void InitL2Triggers()
 {
 	signed int v0; // edi
 	int *v1; // esi
@@ -285,7 +285,7 @@ void __cdecl InitL2Triggers()
 	trigflag[3] = 0;
 }
 
-void __cdecl InitL3Triggers()
+void InitL3Triggers()
 {
 	int v0; // edi
 	signed int v1; // esi
@@ -348,7 +348,7 @@ void __cdecl InitL3Triggers()
 	trigflag[3] = 0;
 }
 
-void __cdecl InitL4Triggers()
+void InitL4Triggers()
 {
 	signed int v0; // edi
 	int *v1; // esi
@@ -447,7 +447,7 @@ void __cdecl InitL4Triggers()
 	trigflag[3] = 0;
 }
 
-void __cdecl InitSKingTriggers()
+void InitSKingTriggers()
 {
 	trigflag[3] = 0;
 	trigflag[4] = 1;
@@ -456,7 +456,7 @@ void __cdecl InitSKingTriggers()
 	trigs[0]._tmsg = 1028;
 }
 
-void __cdecl InitSChambTriggers()
+void InitSChambTriggers()
 {
 	trigflag[3] = 0;
 	trigflag[4] = 1;
@@ -465,7 +465,7 @@ void __cdecl InitSChambTriggers()
 	trigs[0]._tmsg = 1028;
 }
 
-void __cdecl InitPWaterTriggers()
+void InitPWaterTriggers()
 {
 	trigflag[3] = 0;
 	trigflag[4] = 1;
@@ -474,7 +474,7 @@ void __cdecl InitPWaterTriggers()
 	trigs[0]._tmsg = 1028;
 }
 
-void __cdecl InitVPTriggers()
+void InitVPTriggers()
 {
 	trigflag[3] = 0;
 	trigflag[4] = 1;
@@ -483,7 +483,7 @@ void __cdecl InitVPTriggers()
 	trigs[0]._tmsg = 1028;
 }
 
-unsigned char __cdecl ForceTownTrig()
+unsigned char ForceTownTrig()
 {
 	int v0; // edx
 	int *v1; // esi
@@ -559,7 +559,7 @@ LABEL_17:
 	return 0;
 }
 
-unsigned char __cdecl ForceL1Trig()
+unsigned char ForceL1Trig()
 {
 	int *v0; // eax
 	int *v1; // esi
@@ -640,7 +640,7 @@ LABEL_11:
 	return 1;
 }
 
-unsigned char __cdecl ForceL2Trig()
+unsigned char ForceL2Trig()
 {
 	int *v0; // eax
 	int *v1; // ebp
@@ -777,7 +777,7 @@ LABEL_37:
 	return 1;
 }
 
-unsigned char __cdecl ForceL3Trig()
+unsigned char ForceL3Trig()
 {
 	int *v0; // eax
 	int *v1; // esi
@@ -910,7 +910,7 @@ LABEL_29:
 	return 0;
 }
 
-unsigned char __cdecl ForceL4Trig()
+unsigned char ForceL4Trig()
 {
 	int *v0; // eax
 	int *v1; // esi
@@ -1078,7 +1078,7 @@ LABEL_40:
 	return 0;
 }
 
-void __cdecl Freeupstairs()
+void Freeupstairs()
 {
 	int *v0; // ecx
 	int v1; // ebx
@@ -1117,7 +1117,7 @@ void __cdecl Freeupstairs()
 	}
 }
 
-unsigned char __cdecl ForceSKingTrig()
+unsigned char ForceSKingTrig()
 {
 	int v0; // eax
 	int *v1; // ecx
@@ -1139,7 +1139,7 @@ unsigned char __cdecl ForceSKingTrig()
 	return 1;
 }
 
-unsigned char __cdecl ForceSChambTrig()
+unsigned char ForceSChambTrig()
 {
 	int v0; // eax
 	int *v1; // ecx
@@ -1161,7 +1161,7 @@ unsigned char __cdecl ForceSChambTrig()
 	return 1;
 }
 
-unsigned char __cdecl ForcePWaterTrig()
+unsigned char ForcePWaterTrig()
 {
 	int v0; // eax
 	int *v1; // ecx
@@ -1183,7 +1183,7 @@ unsigned char __cdecl ForcePWaterTrig()
 	return 1;
 }
 
-void __cdecl CheckTrigForce()
+void CheckTrigForce()
 {
 	int v0; // eax
 	int v1; // eax
@@ -1256,7 +1256,7 @@ LABEL_24:
 // 5CCB10: using guessed type char setlvlnum;
 // 5CF31D: using guessed type char setlevel;
 
-void __cdecl CheckTriggers()
+void CheckTriggers()
 {
 	int *v0; // edi
 	int v1; // esi

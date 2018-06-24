@@ -13,17 +13,17 @@ struct exception_cpp_init
 	}
 } _exception_cpp_init;
 
-void __cdecl exception_install_filter()
+void exception_install_filter()
 {
 	exception_set_filter();
 }
 
-void __cdecl j_exception_init_filter()
+void j_exception_init_filter()
 {
 	atexit(exception_init_filter);
 }
 
-void __cdecl exception_init_filter()
+void exception_init_filter()
 {
 	exception_set_filter_ptr();
 }
@@ -73,7 +73,7 @@ LONG __stdcall TopLevelExceptionFilter(struct _EXCEPTION_POINTERS *ExceptionInfo
 	return result;
 }
 
-void __fastcall exception_hex_format(char *a1, char a2)
+void exception_hex_format(char *a1, char a2)
 {
 	unsigned int v2; // ebp
 	char *v3; // edi
@@ -132,7 +132,7 @@ void __fastcall exception_hex_format(char *a1, char a2)
 	log_printf("\r\n");
 }
 
-void __fastcall exception_unknown_module(LPCVOID lpAddress, LPSTR lpString1, int iMaxLength, int a4, int a5)
+void exception_unknown_module(LPCVOID lpAddress, LPSTR lpString1, int iMaxLength, int a4, int a5)
 {
 	int v6; // eax
 	char *v7; // eax
@@ -201,7 +201,7 @@ void __fastcall exception_unknown_module(LPCVOID lpAddress, LPSTR lpString1, int
 	}
 }
 
-void __fastcall exception_call_stack(void *a1, LPVOID lp)
+void exception_call_stack(void *a1, LPVOID lp)
 {
 	_DWORD *v2; // ebx
 	void *v3; // edi
@@ -229,7 +229,7 @@ void __fastcall exception_call_stack(void *a1, LPVOID lp)
 	log_printf("\r\n");
 }
 
-char *__fastcall exception_get_error_type(DWORD dwMessageId, LPSTR lpString1, DWORD nSize)
+char *exception_get_error_type(DWORD dwMessageId, LPSTR lpString1, DWORD nSize)
 {
 	CHAR *v3; // esi
 	const CHAR *v4; // eax
@@ -347,17 +347,17 @@ LABEL_42:
 	return v3;
 }
 
-void __fastcall exception_set_filter()
+void exception_set_filter()
 {
 	lpTopLevelExceptionFilter = SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)TopLevelExceptionFilter);
 }
 
-LPTOP_LEVEL_EXCEPTION_FILTER __cdecl exception_set_filter_ptr()
+LPTOP_LEVEL_EXCEPTION_FILTER exception_set_filter_ptr()
 {
 	return SetUnhandledExceptionFilter(lpTopLevelExceptionFilter);
 }
 
-LPTOP_LEVEL_EXCEPTION_FILTER __cdecl exception_get_filter()
+LPTOP_LEVEL_EXCEPTION_FILTER exception_get_filter()
 {
 	return lpTopLevelExceptionFilter;
 }

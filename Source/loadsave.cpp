@@ -4,7 +4,7 @@
 
 void *tbuff;
 
-void __fastcall LoadGame(bool firstflag)
+void LoadGame(bool firstflag)
 {
 	int v1; // esi
 	int v2; // edi
@@ -389,7 +389,7 @@ void __fastcall LoadGame(bool firstflag)
 // 5CCB10: using guessed type char setlvlnum;
 // 5CF31D: using guessed type char setlevel;
 
-char __cdecl BLoad()
+char BLoad()
 {
 	char result; // al
 
@@ -398,7 +398,7 @@ char __cdecl BLoad()
 	return result;
 }
 
-int __cdecl ILoad()
+int ILoad()
 {
 	int v0; // eax
 	int v1; // eax
@@ -417,7 +417,7 @@ int __cdecl ILoad()
 	return result;
 }
 
-int __cdecl ILoad_2()
+int ILoad_2()
 {
 	int v0; // eax
 	int v1; // eax
@@ -436,7 +436,7 @@ int __cdecl ILoad_2()
 	return result;
 }
 
-bool __cdecl OLoad()
+bool OLoad()
 {
 	char v0; // cl
 	bool result; // al
@@ -449,13 +449,13 @@ bool __cdecl OLoad()
 	return result;
 }
 
-void __fastcall LoadPlayer(int i)
+void LoadPlayer(int i)
 {
 	memcpy(&plr[i], tbuff, 0x54B0u);
 	tbuff = (char *)tbuff + 21680;
 }
 
-void __fastcall LoadMonster(int i)
+void LoadMonster(int i)
 {
 	int v1; // edi
 
@@ -465,19 +465,19 @@ void __fastcall LoadMonster(int i)
 	SyncMonsterAnim(v1);
 }
 
-void __fastcall LoadMissile(int i)
+void LoadMissile(int i)
 {
 	memcpy(&missile[i], tbuff, 0xB0u);
 	tbuff = (char *)tbuff + 176;
 }
 
-void __fastcall LoadObject(int i)
+void LoadObject(int i)
 {
 	memcpy(&object[i], tbuff, 0x78u);
 	tbuff = (char *)tbuff + 120;
 }
 
-void __fastcall LoadItem(int i)
+void LoadItem(int i)
 {
 	int v1; // edi
 
@@ -487,13 +487,13 @@ void __fastcall LoadItem(int i)
 	GetItemFrm(v1);
 }
 
-void __fastcall LoadPremium(int i)
+void LoadPremium(int i)
 {
 	memcpy(&premiumitem[i], tbuff, 0x170u);
 	tbuff = (char *)tbuff + 368;
 }
 
-void __fastcall LoadQuest(int i)
+void LoadQuest(int i)
 {
 	memcpy(&quests[i], tbuff, 0x18u);
 	tbuff = (char *)tbuff + 24;
@@ -504,25 +504,25 @@ void __fastcall LoadQuest(int i)
 	DoomQuestState = ILoad();
 }
 
-void __fastcall LoadLighting(int i)
+void LoadLighting(int i)
 {
 	memcpy(&LightList[i], tbuff, 0x34u);
 	tbuff = (char *)tbuff + 52;
 }
 
-void __fastcall LoadVision(int i)
+void LoadVision(int i)
 {
 	memcpy(&VisionList[i], tbuff, 0x34u);
 	tbuff = (char *)tbuff + 52;
 }
 
-void __fastcall LoadPortal(int i)
+void LoadPortal(int i)
 {
 	memcpy(&portal[i], tbuff, 0x18u);
 	tbuff = (char *)tbuff + 24;
 }
 
-void __cdecl SaveGame()
+void SaveGame()
 {
 	int v0; // eax
 	signed int v1; // ebx
@@ -880,25 +880,13 @@ void __cdecl SaveGame()
 // 5CCB10: using guessed type char setlvlnum;
 // 5CF31D: using guessed type char setlevel;
 
-void __fastcall BSave(char v)
+void BSave(char v)
 {
 	*(_BYTE *)tbuff = v;
 	tbuff = (char *)tbuff + 1;
 }
 
-void __fastcall ISave(int v)
-{
-	*(_BYTE *)tbuff = _HIBYTE(v);
-	tbuff = (char *)tbuff + 1;
-	*(_BYTE *)tbuff = BYTE2(v);
-	tbuff = (char *)tbuff + 1;
-	*(_BYTE *)tbuff = BYTE1(v);
-	tbuff = (char *)tbuff + 1;
-	*(_BYTE *)tbuff = v;
-	tbuff = (char *)tbuff + 1;
-}
-
-void __fastcall ISave_2(int v)
+void ISave(int v)
 {
 	*(_BYTE *)tbuff = _HIBYTE(v);
 	tbuff = (char *)tbuff + 1;
@@ -910,7 +898,19 @@ void __fastcall ISave_2(int v)
 	tbuff = (char *)tbuff + 1;
 }
 
-void __fastcall OSave(unsigned char v)
+void ISave_2(int v)
+{
+	*(_BYTE *)tbuff = _HIBYTE(v);
+	tbuff = (char *)tbuff + 1;
+	*(_BYTE *)tbuff = BYTE2(v);
+	tbuff = (char *)tbuff + 1;
+	*(_BYTE *)tbuff = BYTE1(v);
+	tbuff = (char *)tbuff + 1;
+	*(_BYTE *)tbuff = v;
+	tbuff = (char *)tbuff + 1;
+}
+
+void OSave(unsigned char v)
 {
 	if ( v )
 		*(_BYTE *)tbuff = 1;
@@ -919,43 +919,43 @@ void __fastcall OSave(unsigned char v)
 	tbuff = (char *)tbuff + 1;
 }
 
-void __fastcall SavePlayer(int i)
+void SavePlayer(int i)
 {
 	memcpy(tbuff, &plr[i], 0x54B0u);
 	tbuff = (char *)tbuff + 21680;
 }
 
-void __fastcall SaveMonster(int i)
+void SaveMonster(int i)
 {
 	memcpy(tbuff, &monster[i], 0xD8u);
 	tbuff = (char *)tbuff + 216;
 }
 
-void __fastcall SaveMissile(int i)
+void SaveMissile(int i)
 {
 	memcpy(tbuff, &missile[i], 0xB0u);
 	tbuff = (char *)tbuff + 176;
 }
 
-void __fastcall SaveObject(int i)
+void SaveObject(int i)
 {
 	memcpy(tbuff, &object[i], 0x78u);
 	tbuff = (char *)tbuff + 120;
 }
 
-void __fastcall SaveItem(int i)
+void SaveItem(int i)
 {
 	memcpy(tbuff, &item[i], 0x170u);
 	tbuff = (char *)tbuff + 368;
 }
 
-void __fastcall SavePremium(int i)
+void SavePremium(int i)
 {
 	memcpy(tbuff, &premiumitem[i], 0x170u);
 	tbuff = (char *)tbuff + 368;
 }
 
-void __fastcall SaveQuest(int i)
+void SaveQuest(int i)
 {
 	memcpy(tbuff, &quests[i], 0x18u);
 	tbuff = (char *)tbuff + 24;
@@ -966,25 +966,25 @@ void __fastcall SaveQuest(int i)
 	ISave(DoomQuestState);
 }
 
-void __fastcall SaveLighting(int i)
+void SaveLighting(int i)
 {
 	memcpy(tbuff, &LightList[i], 0x34u);
 	tbuff = (char *)tbuff + 52;
 }
 
-void __fastcall SaveVision(int i)
+void SaveVision(int i)
 {
 	memcpy(tbuff, &VisionList[i], 0x34u);
 	tbuff = (char *)tbuff + 52;
 }
 
-void __fastcall SavePortal(int i)
+void SavePortal(int i)
 {
 	memcpy(tbuff, &portal[i], 0x18u);
 	tbuff = (char *)tbuff + 24;
 }
 
-void __cdecl SaveLevel()
+void SaveLevel()
 {
 	int v0; // eax
 	int i; // esi
@@ -1122,7 +1122,7 @@ void __cdecl SaveLevel()
 // 5CCB10: using guessed type char setlvlnum;
 // 5CF31D: using guessed type char setlevel;
 
-void __cdecl LoadLevel()
+void LoadLevel()
 {
 	int i; // esi
 	int j; // esi

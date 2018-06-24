@@ -8,7 +8,7 @@ int terminating; // weak
 int cleanup_thread_id; // weak
 char empty_string;
 
-void __cdecl appfat_cpp_init()
+void appfat_cpp_init()
 {
 	appfat_terminated = 0x7F800000;
 }
@@ -21,7 +21,7 @@ struct j_appfat_cpp_init
 	}
 } _j_appfat_cpp_init;
 /*
-bool __cdecl appfat_cpp_free(void *a1)
+bool appfat_cpp_free(void *a1)
 {
 	bool result; // al
 
@@ -31,7 +31,7 @@ bool __cdecl appfat_cpp_free(void *a1)
 }
 */
 
-char *__fastcall GetErr(int error_code)
+char *GetErr(int error_code)
 {
 	int v1; // edi
 	unsigned int v2; // eax
@@ -63,7 +63,7 @@ char *__fastcall GetErr(int error_code)
 	return sz_error_buf;
 }
 
-void __fastcall GetDDErr(int error_code, char *error_buf, int error_buf_len)
+void GetDDErr(int error_code, char *error_buf, int error_buf_len)
 {
 	const char *v3; // eax
 	char v4[4]; // [esp+0h] [ebp-14h]
@@ -492,7 +492,7 @@ LABEL_182:
 	strncpy(error_buf, v3, error_buf_len);
 }
 
-void __fastcall GetDSErr(int error_code, char *error_buf, int error_buf_len)
+void GetDSErr(int error_code, char *error_buf, int error_buf_len)
 {
 	const char *v3; // eax
 	char v4[4]; // [esp+0h] [ebp-14h]
@@ -555,7 +555,7 @@ LABEL_29:
 	strncpy(error_buf, v3, error_buf_len);
 }
 
-char *__cdecl GetLastErr()
+char *GetLastErr()
 {
 	int v0; // eax
 
@@ -575,7 +575,7 @@ void TermMsg(char *pszFmt, ...)
 	exit(1);
 }
 
-void __fastcall MsgBox(char *pszFmt, va_list va)
+void MsgBox(char *pszFmt, va_list va)
 {
 	char Text[256]; // [esp+0h] [ebp-100h]
 
@@ -585,7 +585,7 @@ void __fastcall MsgBox(char *pszFmt, va_list va)
 	MessageBoxA(ghMainWnd, Text, "ERROR", MB_TASKMODAL|MB_ICONHAND);
 }
 
-void __cdecl FreeDlg()
+void FreeDlg()
 {
 	if ( terminating && cleanup_thread_id != GetCurrentThreadId() )
 		Sleep(20000u);
@@ -614,7 +614,7 @@ void DrawDlg(char *pszFmt, ...)
 	SDrawMessageBox(text, "Diablo", MB_TASKMODAL|MB_ICONEXCLAMATION);
 }
 
-void __fastcall DDErrDlg(int error_code, int log_line_nr, char *log_file_path)
+void DDErrDlg(int error_code, int log_line_nr, char *log_file_path)
 {
 	int v3; // esi
 	char *v4; // eax
@@ -627,7 +627,7 @@ void __fastcall DDErrDlg(int error_code, int log_line_nr, char *log_file_path)
 	}
 }
 
-void __fastcall DSErrDlg(int error_code, int log_line_nr, char *log_file_path)
+void DSErrDlg(int error_code, int log_line_nr, char *log_file_path)
 {
 	int v3; // esi
 	char *v4; // eax
@@ -640,7 +640,7 @@ void __fastcall DSErrDlg(int error_code, int log_line_nr, char *log_file_path)
 	}
 }
 
-void __fastcall CenterDlg(HWND hDlg)
+void CenterDlg(HWND hDlg)
 {
 	LONG v1; // esi
 	LONG v2; // edi
@@ -666,7 +666,7 @@ void __fastcall CenterDlg(HWND hDlg)
 	}
 }
 
-void __fastcall TermDlg(int template_id, int error_code, char *log_file_path, int log_line_nr)
+void TermDlg(int template_id, int error_code, char *log_file_path, int log_line_nr)
 {
 	int v4; // ebx
 	int v5; // edi
@@ -711,7 +711,7 @@ bool __stdcall FuncDlg(HWND hDlg, UINT uMsg, WPARAM wParam, char *text)
 	return 1;
 }
 
-void __fastcall TextDlg(HWND hDlg, char *text)
+void TextDlg(HWND hDlg, char *text)
 {
 	char *v2; // esi
 	HWND v3; // edi
@@ -723,7 +723,7 @@ void __fastcall TextDlg(HWND hDlg, char *text)
 		SetDlgItemTextA(v3, 1000, v2);
 }
 
-void __fastcall ErrDlg(template_id template_id, int error_code, char *log_file_path, int log_line_nr)
+void ErrDlg(template_id template_id, int error_code, char *log_file_path, int log_line_nr)
 {
 	char *v4; // esi
 	int v5; // edi
@@ -743,7 +743,7 @@ void __fastcall ErrDlg(template_id template_id, int error_code, char *log_file_p
 	DialogBoxParamA(ghInst, (LPCSTR)v6, ghMainWnd, (DLGPROC)FuncDlg, (LPARAM)dwInitParam);
 }
 
-void __fastcall FileErrDlg(char *error)
+void FileErrDlg(char *error)
 {
 	char *v1; // esi
 
@@ -756,7 +756,7 @@ void __fastcall FileErrDlg(char *error)
 	TermMsg(0);
 }
 
-void __fastcall DiskFreeDlg(char *error)
+void DiskFreeDlg(char *error)
 {
 	char *v1; // esi
 
@@ -767,7 +767,7 @@ void __fastcall DiskFreeDlg(char *error)
 	TermMsg(0);
 }
 
-bool __cdecl InsertCDDlg()
+bool InsertCDDlg()
 {
 	int v0; // edi
 
@@ -779,7 +779,7 @@ bool __cdecl InsertCDDlg()
 	return v0 == 1;
 }
 
-void __fastcall DirErrDlg(char *error)
+void DirErrDlg(char *error)
 {
 	char *v1; // esi
 

@@ -7,10 +7,10 @@ extern int track_cpp_init_value; // weak
 extern int sgdwLastWalk; // weak
 extern bool sgbIsWalking; // weak
 
-void __cdecl track_cpp_init();
-void __cdecl track_process();
-void __fastcall track_repeat_walk(bool rep);
-bool __cdecl track_isscrolling();
+void track_cpp_init();
+void track_process();
+void track_repeat_walk(bool rep);
+bool track_isscrolling();
 
 /* data */
 

@@ -18,7 +18,7 @@ struct pfile_cpp_init
 } _pfile_cpp_init;
 // 47F1C0: using guessed type int pfile_inf;
 
-void __cdecl pfile_init_save_directory()
+void pfile_init_save_directory()
 {
 	char Buffer[260]; // [esp+4h] [ebp-104h]
 
@@ -33,7 +33,7 @@ void __cdecl pfile_init_save_directory()
 	}
 }
 
-void __fastcall pfile_check_available_space(char *pszDir)
+void pfile_check_available_space(char *pszDir)
 {
 	char *v1; // edi
 	char *v2; // eax
@@ -68,7 +68,7 @@ LABEL_12:
 		DiskFreeDlg(v1);
 }
 
-void __cdecl pfile_write_hero()
+void pfile_write_hero()
 {
 	int v0; // eax
 	int v1; // esi
@@ -87,7 +87,7 @@ void __cdecl pfile_write_hero()
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-int __fastcall pfile_get_save_num_from_name(char *name)
+int pfile_get_save_num_from_name(char *name)
 {
 	char *v1; // ebx
 	unsigned int v2; // esi
@@ -107,7 +107,7 @@ int __fastcall pfile_get_save_num_from_name(char *name)
 	return v2;
 }
 
-void __fastcall pfile_encode_hero(PkPlayerStruct *pPack)
+void pfile_encode_hero(PkPlayerStruct *pPack)
 {
 	int v1; // ebx
 	void *v2; // edi
@@ -130,7 +130,7 @@ void __fastcall pfile_encode_hero(PkPlayerStruct *pPack)
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-bool __fastcall pfile_open_archive(bool a1, int save_num)
+bool pfile_open_archive(bool a1, int save_num)
 {
 	int v2; // esi
 	BOOL v3; // edi
@@ -152,7 +152,7 @@ bool __fastcall pfile_open_archive(bool a1, int save_num)
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall pfile_get_save_path(char *pszBuf, int dwBufSize, int save_num)
+void pfile_get_save_path(char *pszBuf, int dwBufSize, int save_num)
 {
 	char *v3; // esi
 	const char *v4; // ebx
@@ -176,7 +176,7 @@ void __fastcall pfile_get_save_path(char *pszBuf, int dwBufSize, int save_num)
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall pfile_flush(bool is_single_player, int save_num)
+void pfile_flush(bool is_single_player, int save_num)
 {
 	int v2; // esi
 	bool v3; // di
@@ -188,7 +188,7 @@ void __fastcall pfile_flush(bool is_single_player, int save_num)
 	mpqapi_flush_and_close(FileName, v3, v2);
 }
 
-bool __fastcall pfile_create_player_description(char *dst, int len)
+bool pfile_create_player_description(char *dst, int len)
 {
 	int v2; // edi
 	char *v3; // ebx
@@ -214,7 +214,7 @@ LABEL_5:
 	return v4;
 }
 
-int __fastcall pfile_create_save_file(char *name_1, char *name_2)
+int pfile_create_save_file(char *name_1, char *name_2)
 {
 	char *v2; // edi
 	char *v3; // ebp
@@ -249,7 +249,7 @@ int __fastcall pfile_create_save_file(char *name_1, char *name_2)
 	return 1;
 }
 
-void __cdecl pfile_flush_W()
+void pfile_flush_W()
 {
 	int v0; // eax
 
@@ -257,7 +257,7 @@ void __cdecl pfile_flush_W()
 	pfile_flush(1, v0);
 }
 
-void __fastcall game_2_ui_player(PlayerStruct *p, _uiheroinfo *heroinfo, bool bHasSaveFile)
+void game_2_ui_player(PlayerStruct *p, _uiheroinfo *heroinfo, bool bHasSaveFile)
 {
 	_uiheroinfo *v3; // esi
 	PlayerStruct *v4; // edi
@@ -281,7 +281,7 @@ void __fastcall game_2_ui_player(PlayerStruct *p, _uiheroinfo *heroinfo, bool bH
 	v3->herorank = v5;
 }
 
-char __fastcall game_2_ui_class(PlayerStruct *p)
+char game_2_ui_class(PlayerStruct *p)
 {
 	char result; // al
 
@@ -380,7 +380,7 @@ LABEL_13:
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-char *__fastcall GetSaveDirectory(char *dst, int dst_size, int save_num)
+char *GetSaveDirectory(char *dst, int dst_size, int save_num)
 {
 	char *v3; // esi
 	const char *v4; // ebx
@@ -410,7 +410,7 @@ char *__fastcall GetSaveDirectory(char *dst, int dst_size, int save_num)
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-bool __fastcall pfile_read_hero(void *archive, PkPlayerStruct *pPack)
+bool pfile_read_hero(void *archive, PkPlayerStruct *pPack)
 {
 	BOOL v2; // eax
 	int dwSize; // eax
@@ -481,7 +481,7 @@ LABEL_15:
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void *__fastcall pfile_open_save_archive(int *unused, int save_num)
+void *pfile_open_save_archive(int *unused, int save_num)
 {
 	//int v2; // eax
 	char SrcStr[260]; // [esp+0h] [ebp-108h]
@@ -492,12 +492,12 @@ void *__fastcall pfile_open_save_archive(int *unused, int save_num)
 	return SFileOpenArchive(SrcStr, 0x7000, 0, &archive) != 0 ? archive : NULL;
 }
 
-void __fastcall pfile_SFileCloseArchive(void *hsArchive)
+void pfile_SFileCloseArchive(void *hsArchive)
 {
 	SFileCloseArchive(hsArchive);
 }
 
-bool __fastcall pfile_archive_contains_game(void *hsArchive)
+bool pfile_archive_contains_game(void *hsArchive)
 {
 	//int v1; // eax
 	void *file; // [esp+0h] [ebp-4h]
@@ -525,7 +525,7 @@ bool __stdcall pfile_ui_set_class_stats(int player_class_nr, _uidefaultstats *cl
 	return 1;
 }
 
-int __fastcall pfile_get_player_class(int player_class_nr)
+int pfile_get_player_class(int player_class_nr)
 {
 	int result; // eax
 
@@ -633,7 +633,7 @@ bool __stdcall pfile_delete_save(_uiheroinfo *hero_info)
 	return 1;
 }
 
-void __cdecl pfile_read_player_from_save()
+void pfile_read_player_from_save()
 {
 	int dwChar; // edi
 	void *v1; // esi
@@ -652,7 +652,7 @@ void __cdecl pfile_read_player_from_save()
 	pfile_SFileCloseArchive(v1);
 }
 
-void __fastcall GetTempLevelNames(char *szTemp)
+void GetTempLevelNames(char *szTemp)
 {
 	char *v1; // esi
 
@@ -666,7 +666,7 @@ void __fastcall GetTempLevelNames(char *szTemp)
 // 5CCB10: using guessed type char setlvlnum;
 // 5CF31D: using guessed type char setlevel;
 
-void __fastcall GetPermLevelNames(char *szPerm)
+void GetPermLevelNames(char *szPerm)
 {
 	char *v1; // esi
 	int v2; // ebx
@@ -694,7 +694,7 @@ void __fastcall GetPermLevelNames(char *szPerm)
 // 5CCB10: using guessed type char setlvlnum;
 // 5CF31D: using guessed type char setlevel;
 
-void __fastcall pfile_get_game_name(char *dst)
+void pfile_get_game_name(char *dst)
 {
 	char *v1; // esi
 
@@ -703,7 +703,7 @@ void __fastcall pfile_get_game_name(char *dst)
 	strcpy(v1, "game");
 }
 
-void __cdecl pfile_remove_temp_files()
+void pfile_remove_temp_files()
 {
 	int v0; // eax
 	int v1; // esi
@@ -744,7 +744,7 @@ LABEL_5:
 	return 0;
 }
 
-void __cdecl pfile_rename_temp_to_perm()
+void pfile_rename_temp_to_perm()
 {
 	int v0; // eax
 	int v1; // edi
@@ -803,7 +803,7 @@ LABEL_5:
 	return 0;
 }
 
-void __fastcall pfile_write_save_file(char *pszName, void *pbData, int dwLen, int qwLen)
+void pfile_write_save_file(char *pszName, void *pbData, int dwLen, int qwLen)
 {
 	void *v4; // ebx
 	int v5; // eax
@@ -831,12 +831,12 @@ void __fastcall pfile_write_save_file(char *pszName, void *pbData, int dwLen, in
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall pfile_strcpy(char *dst, char *src)
+void pfile_strcpy(char *dst, char *src)
 {
 	strcpy(dst, src);
 }
 
-char *__fastcall pfile_read(char *pszName, int *pdwLen)
+char *pfile_read(char *pszName, int *pdwLen)
 {
 	int *v2; // ebx
 	int v3; // eax
@@ -904,7 +904,7 @@ char *__fastcall pfile_read(char *pszName, int *pdwLen)
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall pfile_update(bool force_save)
+void pfile_update(bool force_save)
 {
 	BOOL v1; // esi
 	DWORD v2; // eax

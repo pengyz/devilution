@@ -6,14 +6,14 @@ extern int plrmsg_ticks; // weak
 extern char plr_msg_slot; // weak
 extern _plrmsg plr_msgs[8];
 
-void __fastcall plrmsg_delay(int a1);
-char *__fastcall ErrorPlrMsg(char *pszMsg);
+void plrmsg_delay(int a1);
+char *ErrorPlrMsg(char *pszMsg);
 size_t EventPlrMsg(char *pszFmt, ...);
-void __fastcall SendPlrMsg(int pnum, const char *pszStr);
-void __cdecl ClearPlrMsg();
-void __cdecl InitPlrMsg();
-void __cdecl DrawPlrMsg();
-void __fastcall PrintPlrMsg(int no, int x, int y, char *str, int just);
+void SendPlrMsg(int pnum, const char *pszStr);
+void ClearPlrMsg();
+void InitPlrMsg();
+void DrawPlrMsg();
+void PrintPlrMsg(int no, int x, int y, char *str, int just);
 
 /* data */
 

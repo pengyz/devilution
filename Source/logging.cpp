@@ -35,22 +35,22 @@ struct log_cpp_init_2
 	}
 } _log_cpp_init_2;
 
-void __cdecl log_init_mutex()
+void log_init_mutex()
 {
 	InitializeCriticalSection(&sgMemCrit);
 }
 
-void __cdecl j_log_cleanup_mutex()
+void j_log_cleanup_mutex()
 {
 	atexit(log_cleanup_mutex);
 }
 
-void __cdecl log_cleanup_mutex()
+void log_cleanup_mutex()
 {
 	DeleteCriticalSection(&sgMemCrit);
 }
 
-void __cdecl log_flush(bool force_close)
+void log_flush(bool force_close)
 {
 	void *v1; // eax
 	DWORD NumberOfBytesWritten; // [esp+8h] [ebp-4h]
@@ -80,7 +80,7 @@ void __cdecl log_flush(bool force_close)
 	LeaveCriticalSection(&sgMemCrit);
 }
 
-void *__cdecl log_create()
+void *log_create()
 {
 	char *v0; // eax
 	void *v1; // ebx
@@ -135,7 +135,7 @@ void *__cdecl log_create()
 }
 // 4947D4: using guessed type int log_not_created;
 
-void __fastcall log_get_version(VS_FIXEDFILEINFO *file_info)
+void log_get_version(VS_FIXEDFILEINFO *file_info)
 {
 	DWORD v1; // eax
 	DWORD v2; // esi
@@ -194,7 +194,7 @@ void log_printf(char *pszFmt, ...)
 	LeaveCriticalSection(&sgMemCrit);
 }
 
-void __cdecl log_dump_computer_info()
+void log_dump_computer_info()
 {
 	char Buffer[64]; // [esp+0h] [ebp-88h]
 	VS_FIXEDFILEINFO file_info; // [esp+40h] [ebp-48h]

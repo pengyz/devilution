@@ -69,7 +69,7 @@ int dminx; // weak
 int dminy; // weak
 short dpiece_defs_map_2[16][112][112];
 
-void __cdecl FillSolidBlockTbls()
+void FillSolidBlockTbls()
 {
 	unsigned char *v0; // eax
 	char *v1; // ecx
@@ -136,7 +136,7 @@ LABEL_13:
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __cdecl gendung_418D91()
+void gendung_418D91()
 {
 	signed int v0; // edx
 	short (*v1)[112][112]; // edi
@@ -494,7 +494,7 @@ LABEL_66:
 // 53CD4C: using guessed type int nlevel_frames;
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall gendung_4191BF(int frames)
+void gendung_4191BF(int frames)
 {
 	int v1; // edi
 	signed int v2; // eax
@@ -517,7 +517,7 @@ void __fastcall gendung_4191BF(int frames)
 	}
 }
 
-void __fastcall gendung_4191FB(int a1, int a2)
+void gendung_4191FB(int a1, int a2)
 {
 	int v2; // esi
 	int *v3; // edi
@@ -550,7 +550,7 @@ void __fastcall gendung_4191FB(int a1, int a2)
 	*(int *)((char *)level_frame_sizes + v2) = v10;
 }
 
-int __fastcall gendung_get_dpiece_num_from_coord(int x, int y)
+int gendung_get_dpiece_num_from_coord(int x, int y)
 {
 	__int64 v3; // rax
 
@@ -560,7 +560,7 @@ int __fastcall gendung_get_dpiece_num_from_coord(int x, int y)
 	return 12543 - (((signed int)v3 - HIDWORD(v3)) >> 1);
 }
 
-void __cdecl gendung_4192C2()
+void gendung_4192C2()
 {
 	short (*v0)[112][112]; // ebx
 	int v1; // ebp
@@ -586,7 +586,7 @@ void __cdecl gendung_4192C2()
 	while ( (signed int)v0 < (signed int)&dpiece_defs_map_2[16][0][0] );
 }
 
-void __cdecl SetDungeonMicros()
+void SetDungeonMicros()
 {
 	signed int v0; // esi
 	short (*v1)[112][112]; // edx
@@ -672,7 +672,7 @@ void __cdecl SetDungeonMicros()
 // 5C3000: using guessed type int scr_pix_width;
 // 5C3004: using guessed type int scr_pix_height;
 
-void __cdecl DRLG_InitTrans()
+void DRLG_InitTrans()
 {
 	memset(dung_map, 0, 0x3100u);
 	memset(TransList, 0, 0x100u);
@@ -680,7 +680,7 @@ void __cdecl DRLG_InitTrans()
 }
 // 5A5590: using guessed type char TransVal;
 
-void __fastcall DRLG_MRectTrans(int x1, int y1, int x2, int y2)
+void DRLG_MRectTrans(int x1, int y1, int x2, int y2)
 {
 	int v4; // esi
 	int v5; // edi
@@ -711,7 +711,7 @@ void __fastcall DRLG_MRectTrans(int x1, int y1, int x2, int y2)
 }
 // 5A5590: using guessed type char TransVal;
 
-void __fastcall DRLG_RectTrans(int x1, int y1, int x2, int y2)
+void DRLG_RectTrans(int x1, int y1, int x2, int y2)
 {
 	int i; // esi
 	char *v5; // edx
@@ -736,12 +736,12 @@ void __fastcall DRLG_RectTrans(int x1, int y1, int x2, int y2)
 }
 // 5A5590: using guessed type char TransVal;
 
-void __fastcall DRLG_CopyTrans(int sx, int sy, int dx, int dy)
+void DRLG_CopyTrans(int sx, int sy, int dx, int dy)
 {
 	dung_map[dx][dy] = dung_map[sx][sy];
 }
 
-void __fastcall DRLG_ListTrans(int num, unsigned char *List)
+void DRLG_ListTrans(int num, unsigned char *List)
 {
 	unsigned char *v2; // esi
 	int v3; // edi
@@ -770,7 +770,7 @@ void __fastcall DRLG_ListTrans(int num, unsigned char *List)
 	}
 }
 
-void __fastcall DRLG_AreaTrans(int num, unsigned char *List)
+void DRLG_AreaTrans(int num, unsigned char *List)
 {
 	unsigned char *v2; // esi
 	int v3; // edi
@@ -802,7 +802,7 @@ void __fastcall DRLG_AreaTrans(int num, unsigned char *List)
 }
 // 5A5590: using guessed type char TransVal;
 
-void __cdecl DRLG_InitSetPC()
+void DRLG_InitSetPC()
 {
 	setpc_x = 0;
 	setpc_y = 0;
@@ -812,7 +812,7 @@ void __cdecl DRLG_InitSetPC()
 // 5CF330: using guessed type int setpc_h;
 // 5CF334: using guessed type int setpc_w;
 
-void __cdecl DRLG_SetPC()
+void DRLG_SetPC()
 {
 	int v0; // ebx
 	int v1; // edx
@@ -845,7 +845,7 @@ void __cdecl DRLG_SetPC()
 // 5CF330: using guessed type int setpc_h;
 // 5CF334: using guessed type int setpc_w;
 
-void __fastcall Make_SetPC(int x, int y, int w, int h)
+void Make_SetPC(int x, int y, int w, int h)
 {
 	int v4; // eax
 	int v5; // esi
@@ -876,7 +876,7 @@ void __fastcall Make_SetPC(int x, int y, int w, int h)
 	}
 }
 
-bool __fastcall DRLG_WillThemeRoomFit(int floor, int x, int y, int minSize, int maxSize, int *width, int *height)
+bool DRLG_WillThemeRoomFit(int floor, int x, int y, int minSize, int maxSize, int *width, int *height)
 {
 	int v7; // esi
 	int v8; // edi
@@ -1021,7 +1021,7 @@ LABEL_32:
 // 41965B: using guessed type int var_6C[20];
 // 41965B: using guessed type int var_BC[20];
 
-void __fastcall DRLG_CreateThemeRoom(int themeIndex)
+void DRLG_CreateThemeRoom(int themeIndex)
 {
 	int v1; // esi
 	int v2; // eax
@@ -1255,7 +1255,7 @@ LABEL_53:
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall DRLG_PlaceThemeRooms(int minSize, int maxSize, int floor, int freq, int rndSize)
+void DRLG_PlaceThemeRooms(int minSize, int maxSize, int floor, int freq, int rndSize)
 {
 	int v5; // ebx
 	int v6; // ecx
@@ -1355,7 +1355,7 @@ void __fastcall DRLG_PlaceThemeRooms(int minSize, int maxSize, int floor, int fr
 // 5A5590: using guessed type char TransVal;
 // 5BB1ED: using guessed type char leveltype;
 
-void __cdecl DRLG_HoldThemeRooms()
+void DRLG_HoldThemeRooms()
 {
 	int *v0; // esi
 	int v1; // edi
@@ -1411,7 +1411,7 @@ void __cdecl DRLG_HoldThemeRooms()
 	}
 }
 
-bool __fastcall SkipThemeRoom(int x, int y)
+bool SkipThemeRoom(int x, int y)
 {
 	int i; // ebx
 	THEME_LOC *v3; // eax
@@ -1437,7 +1437,7 @@ bool __fastcall SkipThemeRoom(int x, int y)
 	return 0;
 }
 
-void __cdecl InitLevels()
+void InitLevels()
 {
 	if ( !leveldebug )
 	{

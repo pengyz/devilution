@@ -18,17 +18,13 @@ struct movie_cpp_init
 // 47F144: using guessed type int movie_inf;
 // 659AF4: using guessed type int movie_cpp_init_value;
 
-void __fastcall play_movie(char *pszMovie, bool user_can_close)
+void play_movie(char *pszMovie, bool user_can_close)
 {
-	char *v2; // esi
 	LRESULT (__stdcall *saveProc)(HWND, UINT, WPARAM, LPARAM); // edi
 	//int v4; // eax
 	MSG Msg; // [esp+8h] [ebp-24h]
-	BOOL v6; // [esp+24h] [ebp-8h]
 	void *video_stream; // [esp+28h] [ebp-4h]
 
-	v6 = user_can_close;
-	v2 = pszMovie;
 	if ( window_activated )
 	{
 		saveProc = SetWindowProc(MovieWndProc);
@@ -38,12 +34,12 @@ void __fastcall play_movie(char *pszMovie, bool user_can_close)
 		sound_disable_music(1);
 		sfx_stop();
 		effects_play_sound("Sfx\\Misc\\blank.wav");
-		SVidPlayBegin(v2, 0, 0, 0, 0, loop_movie != 0 ? 0x100C0808 : 0x10280808, &video_stream);
+		SVidPlayBegin(pszMovie, 0, 0, 0, 0, loop_movie != 0 ? 0x100C0808 : 0x10280808, &video_stream);
 		if ( video_stream )
 		{
 			do
 			{
-				if ( !window_activated || v6 && !movie_playing )
+				if ( !window_activated || user_can_close && !movie_playing )
 					break;
 				while ( PeekMessageA(&Msg, NULL, 0, 0, PM_REMOVE) )
 				{

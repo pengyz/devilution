@@ -35,7 +35,7 @@ BOOL STORMAPI SNetSendTurn(char *data, size_t databytes) rBool;
 
 BOOL STORMAPI SNetSetGameMode(DWORD modeFlags, bool makePublic) rBool;
 
-BOOL STORMAPI SNetEnumGamesEx(int a1, int a2, int (__fastcall *callback)(DWORD, DWORD, DWORD), int *hintnextcall) rBool;
+BOOL STORMAPI SNetEnumGamesEx(int a1, int a2, int (*callback)(DWORD, DWORD, DWORD), int *hintnextcall) rBool;
 BOOL STORMAPI SNetSendServerChatCommand(const char *command) rBool;
 
 BOOL STORMAPI SNetDisconnectAll(DWORD flags) rBool;
@@ -224,11 +224,11 @@ int STORMAPI SBigToBinaryBuffer(void *buffer, int length, int a3, int a4) rInt;
 //
 
 void __stdcall SDrawMessageBox(char *,char *,int) rVoid;
-void __cdecl SDrawDestroy(void) rVoid;
-bool __cdecl StormDestroy(void) rBool;
+void SDrawDestroy(void) rVoid;
+bool StormDestroy(void) rBool;
 bool __stdcall SFileSetBasePath(char *) rBool;
-void __cdecl SDrawRealizePalette(void) rVoid;
-bool __cdecl SVidPlayContinue(void) rBool;
+void SDrawRealizePalette(void) rVoid;
+bool SVidPlayContinue(void) rBool;
 bool __stdcall SNetGetOwnerTurnsWaiting(int *) rBool;
 void * __stdcall SNetUnregisterEventHandler(int,void (__stdcall*)(struct _SNETEVENT *)) rPVoid;
 void * __stdcall SNetRegisterEventHandler(int,void (__stdcall*)(struct _SNETEVENT *)) rPVoid;

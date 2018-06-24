@@ -2,7 +2,7 @@
 
 #include "../types.h"
 
-bool __cdecl SystemSupported()
+bool SystemSupported()
 {
 	bool bSupported = false; // di
 	struct _OSVERSIONINFOA VersionInformation; // [esp+4h] [ebp-94h]
@@ -18,7 +18,7 @@ bool __cdecl SystemSupported()
 	return bSupported;
 }
 
-bool __cdecl RestrictedTest()
+bool RestrictedTest()
 {
 	bool bSuccess = false; // si
 	FILE *pFile; // eax
@@ -41,7 +41,7 @@ bool __cdecl RestrictedTest()
 	return bSuccess;
 }
 
-bool __cdecl ReadOnlyTest()
+bool ReadOnlyTest()
 {
 	bool bReadOnly = false; // si
 	char *pos; // eax

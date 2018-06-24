@@ -4,7 +4,7 @@
 
 TMsg *sgpTimedMsgHead;
 
-int __fastcall tmsg_get(unsigned char *pbMsg, char bLen)
+int tmsg_get(unsigned char *pbMsg, char bLen)
 {
 	unsigned char *v2; // ebx
 	DWORD v3; // eax
@@ -25,7 +25,7 @@ int __fastcall tmsg_get(unsigned char *pbMsg, char bLen)
 	return dwMaxLen;
 }
 
-void __fastcall tmsg_add(unsigned char *pbMsg, char bLen)
+void tmsg_add(unsigned char *pbMsg, char bLen)
 {
 	char v2; // bl
 	unsigned char *v3; // ebp
@@ -54,7 +54,7 @@ void __fastcall tmsg_add(unsigned char *pbMsg, char bLen)
 	*v9 = v6;
 }
 
-void __cdecl tmsg_cleanup()
+void tmsg_cleanup()
 {
 	TMsg *v0; // eax
 	//TMsg *v1; // esi

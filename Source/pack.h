@@ -4,12 +4,12 @@
 
 extern int pack_cpp_init_value; // weak
 
-void __cdecl pack_cpp_init();
-void __fastcall PackPlayer(PkPlayerStruct *pPack, int pnum, bool manashield);
-void __fastcall PackItem(PkItemStruct *id, ItemStruct *is);
-void __fastcall VerifyGoldSeeds(PlayerStruct *pPlayer);
-void __fastcall UnPackPlayer(PkPlayerStruct *pPack, int pnum, bool killok);
-void __fastcall UnPackItem(PkItemStruct *is, ItemStruct *id);
+void pack_cpp_init();
+void PackPlayer(PkPlayerStruct *pPack, int pnum, bool manashield);
+void PackItem(PkItemStruct *id, ItemStruct *is);
+void VerifyGoldSeeds(PlayerStruct *pPlayer);
+void UnPackPlayer(PkPlayerStruct *pPack, int pnum, bool killok);
+void UnPackItem(PkItemStruct *is, ItemStruct *id);
 
 /* data */
 

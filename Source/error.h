@@ -7,9 +7,9 @@ extern char msgdelay; // weak
 extern char msgflag; // weak
 extern char msgcnt; // weak
 
-void __fastcall InitDiabloMsg(char e);
-void __cdecl ClrDiabloMsg();
-void __cdecl DrawDiabloMsg();
+void InitDiabloMsg(char e);
+void ClrDiabloMsg();
+void DrawDiabloMsg();
 
 /* data */
 extern char *MsgStrings[44];

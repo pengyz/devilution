@@ -32,7 +32,7 @@ struct init_cpp_init
 // 47AE20: using guessed type int init_inf;
 // 63497C: using guessed type int init_cpp_init_value;
 
-void __fastcall init_cleanup(bool show_cursor)
+void init_cleanup(bool show_cursor)
 {
 	int v1; // edi
 
@@ -66,7 +66,7 @@ void __fastcall init_cleanup(bool show_cursor)
 		ShowCursor(1);
 }
 
-void __cdecl init_run_office_from_start_menu()
+void init_run_office_from_start_menu()
 {
 	HWND v0; // eax
 	char pszPath[256]; // [esp+0h] [ebp-104h]
@@ -90,7 +90,7 @@ void __cdecl init_run_office_from_start_menu()
 }
 // 634CA0: using guessed type int killed_mom_parent;
 
-void __fastcall init_run_office(char *dir)
+void init_run_office(char *dir)
 {
 	char *v1; // esi
 	HANDLE v2; // ebx
@@ -138,7 +138,7 @@ void __fastcall init_run_office(char *dir)
 	}
 }
 
-void __fastcall init_disable_screensaver(bool disable)
+void init_disable_screensaver(bool disable)
 {
 	bool v1; // al
 	char Data[16]; // [esp+4h] [ebp-20h]
@@ -168,7 +168,7 @@ void __fastcall init_disable_screensaver(bool disable)
 	}
 }
 
-void __cdecl init_create_window()
+void init_create_window()
 {
 	int nHeight; // eax
 	HWND hWnd; // esi
@@ -211,7 +211,7 @@ void __cdecl init_create_window()
 	init_disable_screensaver(1);
 }
 
-void __cdecl init_kill_mom_parent()
+void init_kill_mom_parent()
 {
 	HWND v0; // eax
 
@@ -224,7 +224,7 @@ void __cdecl init_kill_mom_parent()
 }
 // 634CA0: using guessed type int killed_mom_parent;
 
-HWND __cdecl init_find_mom_parent()
+HWND init_find_mom_parent()
 {
 	HWND i; // eax
 	HWND v1; // esi
@@ -242,7 +242,7 @@ HWND __cdecl init_find_mom_parent()
 	return v1;
 }
 
-void __cdecl init_await_mom_parent_exit()
+void init_await_mom_parent_exit()
 {
 	DWORD v0; // edi
 
@@ -256,7 +256,7 @@ void __cdecl init_await_mom_parent_exit()
 	while ( GetTickCount() - v0 <= 4000 );
 }
 
-void __cdecl init_archives()
+void init_archives()
 {
 	void *a1; // [esp+8h] [ebp-8h]
 #ifdef COPYPROT
@@ -288,7 +288,7 @@ void __cdecl init_archives()
 	patch_rt_mpq = init_test_access(patch_rt_mpq_path, "\\patch_rt.mpq", "DiabloInstall", 2000, 0);
 }
 
-void *__fastcall init_test_access(char *mpq_path, char *mpq_name, char *reg_loc, int flags, bool on_cd)
+void *init_test_access(char *mpq_path, char *mpq_name, char *reg_loc, int flags, bool on_cd)
 {
 	char *v5; // esi
 	char *v7; // eax
@@ -354,7 +354,7 @@ void *__fastcall init_test_access(char *mpq_path, char *mpq_name, char *reg_loc,
 	return 0;
 }
 
-char *__fastcall init_strip_trailing_slash(char *path)
+char *init_strip_trailing_slash(char *path)
 {
 	char *result; // eax
 
@@ -367,7 +367,7 @@ char *__fastcall init_strip_trailing_slash(char *path)
 	return result;
 }
 
-int __fastcall init_read_test_file(char *mpq_path, char *mpq_name, int flags, void **archive)
+int init_read_test_file(char *mpq_path, char *mpq_name, int flags, void **archive)
 {
 	char *v4; // edi
 	DWORD v5; // eax
@@ -403,7 +403,7 @@ int __fastcall init_read_test_file(char *mpq_path, char *mpq_name, int flags, vo
 	return 1;
 }
 
-void __cdecl init_get_file_info()
+void init_get_file_info()
 {
 	int v0; // eax
 	DWORD v1; // edi
@@ -479,7 +479,7 @@ LRESULT __stdcall init_palette(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam
 }
 // 52571C: using guessed type int drawpanflag;
 
-void __fastcall init_activate_window(HWND hWnd, bool activated)
+void init_activate_window(HWND hWnd, bool activated)
 {
 	LONG dwNewLong; // eax
 

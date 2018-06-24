@@ -24,7 +24,7 @@ struct engine_cpp_init_1
 // 47A474: using guessed type int engine_inf;
 // 52B968: using guessed type int engine_cpp_init_value;
 
-void __fastcall CelDrawDatOnly(char *pDecodeTo, char *pRLEBytes, int dwRLESize, int dwRLEWdt)
+void CelDrawDatOnly(char *pDecodeTo, char *pRLEBytes, int dwRLESize, int dwRLEWdt)
 {
 	char *v4; // esi
 	char *v5; // edi
@@ -86,7 +86,7 @@ LABEL_14:
 	}
 }
 
-void __fastcall CelDecodeOnly(int screen_x, int screen_y, void *pCelBuff, int frame, int frame_width)
+void CelDecodeOnly(int screen_x, int screen_y, void *pCelBuff, int frame, int frame_width)
 {
 	if ( gpBuffer )
 	{
@@ -99,7 +99,7 @@ void __fastcall CelDecodeOnly(int screen_x, int screen_y, void *pCelBuff, int fr
 	}
 }
 
-void __fastcall CelDecDatOnly(char *pBuff, char *pCelBuff, int frame, int frame_width)
+void CelDecDatOnly(char *pBuff, char *pCelBuff, int frame, int frame_width)
 {
 	if ( pCelBuff )
 	{
@@ -112,7 +112,7 @@ void __fastcall CelDecDatOnly(char *pBuff, char *pCelBuff, int frame, int frame_
 	}
 }
 
-void __fastcall CelDrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int always_0, int direction)
+void CelDrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int always_0, int direction)
 {
 	int v7; // edx
 	char *v8; // eax
@@ -146,7 +146,7 @@ void __fastcall CelDrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int f
 	}
 }
 
-void __fastcall CelDecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int frame_width, int always_0, int direction)
+void CelDecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int frame_width, int always_0, int direction)
 {
 	int v6; // esi
 	char *v7; // eax
@@ -174,7 +174,7 @@ void __fastcall CelDecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int fra
 	}
 }
 
-void __fastcall CelDecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
+void CelDecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
 {
 	char *v4; // esi
 	char *v5; // edi
@@ -218,7 +218,7 @@ LABEL_9:
 }
 // 69BEF8: using guessed type int light_table_index;
 
-void __fastcall CelDecDatLightEntry(int a1, char *a2, char *a3, char *v6)
+void CelDecDatLightEntry(int a1, char *a2, char *a3, char *v6)
 {
 	int v4; // ebx
    // _BYTE *v6; // esi
@@ -270,7 +270,7 @@ void __fastcall CelDecDatLightEntry(int a1, char *a2, char *a3, char *v6)
 	}
 }
 
-void __fastcall CelDecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
+void CelDecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
 {
 	char *v4; // esi
 	int v5; // edi
@@ -415,7 +415,7 @@ LABEL_23:
 }
 // 69BEF8: using guessed type int light_table_index;
 
-void __fastcall CelDecodeLightOnly(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width)
+void CelDecodeLightOnly(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width)
 {
 	int v5; // ebx
 	int v6; // esi
@@ -438,7 +438,7 @@ void __fastcall CelDecodeLightOnly(int screen_x, int screen_y, char *pCelBuff, i
 }
 // 69BEF8: using guessed type int light_table_index;
 
-void __fastcall CelDecodeHdrLightOnly(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int always_0, int direction)
+void CelDecodeHdrLightOnly(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int always_0, int direction)
 {
 	int v7; // esi
 	char *v8; // ecx
@@ -480,7 +480,7 @@ void __fastcall CelDecodeHdrLightOnly(int screen_x, int screen_y, char *pCelBuff
 }
 // 69BEF8: using guessed type int light_table_index;
 
-void __fastcall CelDecodeHdrLightTrans(char *pBuff, char *pCelBuff, int frame, int frame_width, int always_0, int direction)
+void CelDecodeHdrLightTrans(char *pBuff, char *pCelBuff, int frame, int frame_width, int always_0, int direction)
 {
 	char *v6; // eax
 	int v7; // esi
@@ -525,7 +525,7 @@ void __fastcall CelDecodeHdrLightTrans(char *pBuff, char *pCelBuff, int frame, i
 // 69BEF8: using guessed type int light_table_index;
 // 69CF94: using guessed type int cel_transparency_active;
 
-void __fastcall CelDrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int always_0, int direction, char always_1)
+void CelDrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int always_0, int direction, char always_1)
 {
 	char *v8; // esi
 	int v9; // ebx
@@ -620,7 +620,7 @@ LABEL_20:
 }
 // 525728: using guessed type int light4flag;
 
-void __fastcall Cel2DecDatOnly(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
+void Cel2DecDatOnly(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
 {
 	char *v4; // esi
 	char *v5; // edi
@@ -683,7 +683,7 @@ LABEL_17:
 }
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall Cel2DrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int a6, int direction)
+void Cel2DrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int a6, int direction)
 {
 	int v7; // edx
 	char *v8; // eax
@@ -717,7 +717,7 @@ void __fastcall Cel2DrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int 
 	}
 }
 
-void __fastcall Cel2DecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int frame_width, int a5, int direction)
+void Cel2DecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int frame_width, int a5, int direction)
 {
 	int v6; // edi
 	char *v7; // esi
@@ -749,7 +749,7 @@ void __fastcall Cel2DecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int fr
 	}
 }
 
-void __fastcall Cel2DecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
+void Cel2DecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
 {
 	char *v4; // esi
 	char *v5; // edi
@@ -802,7 +802,7 @@ LABEL_13:
 // 69BEF8: using guessed type int light_table_index;
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall Cel2DecDatLightEntry(int a1, int a2)
+void Cel2DecDatLightEntry(int a1, int a2)
 {
 	int v2; // ebx
 	_BYTE *v3; // edi
@@ -855,7 +855,7 @@ void __fastcall Cel2DecDatLightEntry(int a1, int a2)
 	}
 }
 
-void __fastcall Cel2DecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
+void Cel2DecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
 {
 	char *v4; // esi
 	unsigned int v5; // edi
@@ -1009,7 +1009,7 @@ LABEL_26:
 // 69BEF8: using guessed type int light_table_index;
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall Cel2DecodeHdrLight(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int a6, int direction)
+void Cel2DecodeHdrLight(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int a6, int direction)
 {
 	int v7; // esi
 	char *v8; // eax
@@ -1055,7 +1055,7 @@ void __fastcall Cel2DecodeHdrLight(int screen_x, int screen_y, char *pCelBuff, i
 }
 // 69BEF8: using guessed type int light_table_index;
 
-void __fastcall Cel2DecodeLightTrans(char *dst_buf, char *pCelBuff, int frame, int frame_width, int a5, int direction)
+void Cel2DecodeLightTrans(char *dst_buf, char *pCelBuff, int frame, int frame_width, int a5, int direction)
 {
 	char *v6; // eax
 	int v7; // esi
@@ -1101,7 +1101,7 @@ void __fastcall Cel2DecodeLightTrans(char *dst_buf, char *pCelBuff, int frame, i
 // 69BEF8: using guessed type int light_table_index;
 // 69CF94: using guessed type int cel_transparency_active;
 
-void __fastcall Cel2DrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int always_0, int direction, char always_1)
+void Cel2DrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int always_0, int direction, char always_1)
 {
 	char *v8; // esi
 	int v9; // ebx
@@ -1203,7 +1203,7 @@ LABEL_21:
 // 525728: using guessed type int light4flag;
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall CelDecodeRect(char *pBuff, int always_0, int dst_height, int dst_width, char *pCelBuff, int frame, int frame_width)
+void CelDecodeRect(char *pBuff, int always_0, int dst_height, int dst_width, char *pCelBuff, int frame, int frame_width)
 {
 	char *v7; // ebx
 	char *v8; // esi
@@ -1269,7 +1269,7 @@ LABEL_14:
 	}
 }
 
-void __fastcall CelDecodeClr(char colour, int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int a7, int direction)
+void CelDecodeClr(char colour, int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int a7, int direction)
 {
 	char *v8; // ebx
 	int v9; // eax
@@ -1347,7 +1347,7 @@ LABEL_20:
 	}
 }
 
-void __fastcall CelDrawHdrClrHL(char colour, int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int a7, int direction)
+void CelDrawHdrClrHL(char colour, int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int a7, int direction)
 {
 	char *v8; // ebx
 	int v9; // eax
@@ -1456,7 +1456,7 @@ LABEL_28:
 }
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall ENG_set_pixel(int screen_x, int screen_y, char pixel)
+void ENG_set_pixel(int screen_x, int screen_y, char pixel)
 {
 	char *v3; // edi
 
@@ -1469,7 +1469,7 @@ void __fastcall ENG_set_pixel(int screen_x, int screen_y, char pixel)
 }
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall engine_draw_pixel(int x, int y)
+void engine_draw_pixel(int x, int y)
 {
 	_BYTE *v2; // eax
 
@@ -1495,7 +1495,7 @@ LABEL_14:
 // 52B99C: using guessed type int dword_52B99C;
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall engine_draw_automap_pixels(int x1, int y1, int x2, int y2, char a5)
+void engine_draw_automap_pixels(int x1, int y1, int x2, int y2, char a5)
 {
 	int v5; // edi
 	int v6; // edx
@@ -1793,7 +1793,7 @@ LABEL_65:
 // 52B970: using guessed type int dword_52B970;
 // 52B99C: using guessed type int dword_52B99C;
 
-int __fastcall GetDirection(int x1, int y1, int x2, int y2)
+int GetDirection(int x1, int y1, int x2, int y2)
 {
 	int v4; // esi
 	int v5; // ecx
@@ -1846,7 +1846,7 @@ int __fastcall GetDirection(int x1, int y1, int x2, int y2)
 	return result;
 }
 
-void __fastcall SetRndSeed(int s)
+void SetRndSeed(int s)
 {
 	SeedCount = 0;
 	sglGameSeed = s;
@@ -1856,7 +1856,7 @@ void __fastcall SetRndSeed(int s)
 // 52B97C: using guessed type int sglGameSeed;
 // 52B998: using guessed type int SeedCount;
 
-int __cdecl GetRndSeed()
+int GetRndSeed()
 {
 	++SeedCount;
 	sglGameSeed = 0x015A4E35 * sglGameSeed + 1;
@@ -1865,7 +1865,7 @@ int __cdecl GetRndSeed()
 // 52B97C: using guessed type int sglGameSeed;
 // 52B998: using guessed type int SeedCount;
 
-int __fastcall random(int idx, int v)
+int random(int idx, int v)
 {
 	int v2; // esi
 	int v4; // eax
@@ -1888,22 +1888,22 @@ struct engine_cpp_init_2
 	}
 } _engine_cpp_init_2;
 
-void __cdecl mem_init_mutex()
+void mem_init_mutex()
 {
 	InitializeCriticalSection(&sgMemCrit);
 }
 
-void __cdecl mem_atexit_mutex()
+void mem_atexit_mutex()
 {
 	atexit(mem_free_mutex);
 }
 
-void __cdecl mem_free_mutex()
+void mem_free_mutex()
 {
 	DeleteCriticalSection(&sgMemCrit);
 }
 
-void *__fastcall DiabloAllocPtr(int dwBytes)
+void *DiabloAllocPtr(int dwBytes)
 {
 	int v1; // ebx
 	void *v2; // ebx
@@ -1921,7 +1921,7 @@ void *__fastcall DiabloAllocPtr(int dwBytes)
 	return v2;
 }
 
-void __fastcall mem_free_dbg(void *ptr)
+void mem_free_dbg(void *ptr)
 {
 	void *v1; // edi
 
@@ -1934,7 +1934,7 @@ void __fastcall mem_free_dbg(void *ptr)
 	}
 }
 
-unsigned char *__fastcall LoadFileInMem(char *pszName, int *pdwFileLen)
+unsigned char *LoadFileInMem(char *pszName, int *pdwFileLen)
 {
 	int *v2; // edi
 	char *v3; // ebx
@@ -1958,7 +1958,7 @@ unsigned char *__fastcall LoadFileInMem(char *pszName, int *pdwFileLen)
 	return (unsigned char *)v6;
 }
 
-void __fastcall LoadFileWithMem(char *pszName, void *buf)
+void LoadFileWithMem(char *pszName, void *buf)
 {
 	char *v2; // ebx
 	char *v3; // edi
@@ -1977,7 +1977,7 @@ void __fastcall LoadFileWithMem(char *pszName, void *buf)
 	WCloseFile(a1);
 }
 
-void __fastcall Cl2ApplyTrans(char *p, char *ttbl, int last_frame)
+void Cl2ApplyTrans(char *p, char *ttbl, int last_frame)
 {
 	int v3; // eax
 	int v4; // edi
@@ -2028,7 +2028,7 @@ void __fastcall Cl2ApplyTrans(char *p, char *ttbl, int last_frame)
 	}
 }
 
-void __fastcall Cl2DecodeFrm1(int x, int y, char *pCelBuff, int nCel, int width, int dir1, int dir2)
+void Cl2DecodeFrm1(int x, int y, char *pCelBuff, int nCel, int width, int dir1, int dir2)
 {
 	char *v8; // edx
 	char *v9; // ecx
@@ -2061,7 +2061,7 @@ void __fastcall Cl2DecodeFrm1(int x, int y, char *pCelBuff, int nCel, int width,
 	}
 }
 
-void __fastcall Cl2DecDatFrm1(char *buffer, char *frame_content, int a3, int width) /* fix */
+void Cl2DecDatFrm1(char *buffer, char *frame_content, int a3, int width) /* fix */
 {
 	char *v4; // esi
 	char *v5; // edi
@@ -2146,7 +2146,7 @@ void __fastcall Cl2DecDatFrm1(char *buffer, char *frame_content, int a3, int wid
 	while ( v8 );
 }
 
-void __fastcall Cl2DecodeFrm2(char colour, int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a7, int a8)
+void Cl2DecodeFrm2(char colour, int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a7, int a8)
 {
 	int v8; // ebx
 	char *v9; // edx
@@ -2178,7 +2178,7 @@ void __fastcall Cl2DecodeFrm2(char colour, int screen_x, int screen_y, char *pCe
 	}
 }
 
-void __fastcall Cl2DecDatFrm2(char *buffer, char *frame_content, int a3, int frame_width, char colour)
+void Cl2DecDatFrm2(char *buffer, char *frame_content, int a3, int frame_width, char colour)
 {
 	char *v5; // esi
 	char *v6; // edi
@@ -2275,7 +2275,7 @@ LABEL_12:
 	while ( v9 );
 }
 
-void __fastcall Cl2DecodeFrm3(int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a6, int a7, char a8)
+void Cl2DecodeFrm3(int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a6, int a7, char a8)
 {
 	char *v8; // edi
 	int v9; // ebx
@@ -2325,7 +2325,7 @@ void __fastcall Cl2DecodeFrm3(int screen_x, int screen_y, char *pCelBuff, int nC
 }
 // 525728: using guessed type int light4flag;
 
-void __fastcall Cl2DecDatLightTbl1(char *a1, char *a2, int a3, int a4, char *unused_lindex) /* check 5th arg */
+void Cl2DecDatLightTbl1(char *a1, char *a2, int a3, int a4, char *unused_lindex) /* check 5th arg */
 {
 	char *v5; // esi
 	char *v6; // edi
@@ -2413,7 +2413,7 @@ void __fastcall Cl2DecDatLightTbl1(char *a1, char *a2, int a3, int a4, char *unu
 }
 // 52B978: using guessed type int sgnWidth;
 
-void __fastcall Cl2DecodeLightTbl(int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a6, int a7)
+void Cl2DecodeLightTbl(int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a6, int a7)
 {
 	int v7; // esi
 	char *v8; // edi
@@ -2461,7 +2461,7 @@ void __fastcall Cl2DecodeLightTbl(int screen_x, int screen_y, char *pCelBuff, in
 }
 // 69BEF8: using guessed type int light_table_index;
 
-void __fastcall Cl2DecodeFrm4(int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a6, int a7)
+void Cl2DecodeFrm4(int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a6, int a7)
 {
 	int v7; // ebx
 	char *v8; // edx
@@ -2498,7 +2498,7 @@ void __fastcall Cl2DecodeFrm4(int screen_x, int screen_y, char *pCelBuff, int nC
 	}
 }
 
-void __fastcall Cl2DecDatFrm4(char *buffer, char *a2, int a3, int frame_width)
+void Cl2DecDatFrm4(char *buffer, char *a2, int a3, int frame_width)
 {
 	char *v4; // esi
 	char *v5; // edi
@@ -2591,7 +2591,7 @@ LABEL_12:
 }
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall Cl2DecodeClrHL(char colour, int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a7, int a8)
+void Cl2DecodeClrHL(char colour, int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a7, int a8)
 {
 	int v8; // ebx
 	char *v9; // edx
@@ -2630,7 +2630,7 @@ void __fastcall Cl2DecodeClrHL(char colour, int screen_x, int screen_y, char *pC
 }
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall Cl2DecDatClrHL(char *dst_buf, char *frame_content, int a3, int frame_width, char colour)
+void Cl2DecDatClrHL(char *dst_buf, char *frame_content, int a3, int frame_width, char colour)
 {
 	char *v5; // esi
 	char *v6; // edi
@@ -2735,7 +2735,7 @@ LABEL_15:
 }
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall Cl2DecodeFrm5(int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a6, int a7, char a8)
+void Cl2DecodeFrm5(int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a6, int a7, char a8)
 {
 	char *v8; // edi
 	int v9; // ebx
@@ -2785,7 +2785,7 @@ void __fastcall Cl2DecodeFrm5(int screen_x, int screen_y, char *pCelBuff, int nC
 }
 // 525728: using guessed type int light4flag;
 
-void __fastcall Cl2DecDatLightTbl2(char *dst_buf, char *a2, int a3, int frame_width, char *a5) /* check 5th arg */
+void Cl2DecDatLightTbl2(char *dst_buf, char *a2, int a3, int frame_width, char *a5) /* check 5th arg */
 {
 	char *v5; // esi
 	char *v6; // edi
@@ -2881,7 +2881,7 @@ LABEL_12:
 // 52B978: using guessed type int sgnWidth;
 // 69CF0C: using guessed type int screen_buf_end;
 
-void __fastcall Cl2DecodeFrm6(int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a6, int a7)
+void Cl2DecodeFrm6(int screen_x, int screen_y, char *pCelBuff, int nCel, int frame_width, int a6, int a7)
 {
 	int v7; // esi
 	char *v8; // edi
@@ -2924,7 +2924,7 @@ void __fastcall Cl2DecodeFrm6(int screen_x, int screen_y, char *pCelBuff, int nC
 }
 // 69BEF8: using guessed type int light_table_index;
 
-void __fastcall PlayInGameMovie(char *pszMovie)
+void PlayInGameMovie(char *pszMovie)
 {
 	char *v1; // esi
 

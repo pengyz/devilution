@@ -15,7 +15,7 @@ char pathydir[8] = { -1, 1, -1, 1, 0, -1, 0, 1 };
 /* rdata */
 char path_directions[9] = { 5, 1, 6, 2, 0, 3, 8, 4, 7 };
 
-int __fastcall FindPath(bool (__fastcall *PosOk)(int, int, int), int PosOkArg, int sx, int sy, int dx, int dy, char *path)
+int FindPath(bool (*PosOk)(int, int, int), int PosOkArg, int sx, int sy, int dx, int dy, char *path)
 {
 	PATHNODE *v8; // esi
 	char v9; // al
@@ -90,7 +90,7 @@ int __fastcall FindPath(bool (__fastcall *PosOk)(int, int, int), int PosOkArg, i
 	return result;
 }
 
-int __fastcall path_get_h_cost(int sx, int sy, int dx, int dy)
+int path_get_h_cost(int sx, int sy, int dx, int dy)
 {
 	int v4; // esi
 	int v5; // edi
@@ -110,7 +110,7 @@ int __fastcall path_get_h_cost(int sx, int sy, int dx, int dy)
 	return 2 * (v7 + v6);
 }
 
-int __fastcall path_check_equal(PATHNODE *pPath, int dx, int dy)
+int path_check_equal(PATHNODE *pPath, int dx, int dy)
 {
 	int v4; // [esp-4h] [ebp-4h]
 
@@ -121,7 +121,7 @@ int __fastcall path_check_equal(PATHNODE *pPath, int dx, int dy)
 	return v4;
 }
 
-PATHNODE *__cdecl GetNextPath()
+PATHNODE *GetNextPath()
 {
 	PATHNODE *result; // eax
 
@@ -135,7 +135,7 @@ PATHNODE *__cdecl GetNextPath()
 	return result;
 }
 
-bool __fastcall path_solid_pieces(PATHNODE *pPath, int dx, int dy)
+bool path_solid_pieces(PATHNODE *pPath, int dx, int dy)
 {
 	bool result; // eax
 	int dir; // ecx
@@ -184,7 +184,7 @@ LABEL_13:
 	return result;
 }
 
-int __fastcall path_get_path(bool (__fastcall *PosOk)(int, int, int), int PosOkArg, PATHNODE *pPath, int x, int y)
+int path_get_path(bool (*PosOk)(int, int, int), int PosOkArg, PATHNODE *pPath, int x, int y)
 {
 	int v5; // eax
 	int dx; // esi
@@ -212,7 +212,7 @@ LABEL_8:
 	return 0;
 }
 
-int __fastcall path_parent_path(PATHNODE *pPath, int dx, int dy, int sx, int sy)
+int path_parent_path(PATHNODE *pPath, int dx, int dy, int sx, int sy)
 {
 	PATHNODE *v5; // edi
 	int v6; // ebx
@@ -314,7 +314,7 @@ int __fastcall path_parent_path(PATHNODE *pPath, int dx, int dy, int sx, int sy)
 	return 1;
 }
 
-PATHNODE *__fastcall path_get_node1(int dx, int dy)
+PATHNODE *path_get_node1(int dx, int dy)
 {
 	PATHNODE *result; // eax
 
@@ -325,7 +325,7 @@ PATHNODE *__fastcall path_get_node1(int dx, int dy)
 	return result;
 }
 
-PATHNODE *__fastcall path_get_node2(int dx, int dy)
+PATHNODE *path_get_node2(int dx, int dy)
 {
 	PATHNODE *result; // eax
 
@@ -336,7 +336,7 @@ PATHNODE *__fastcall path_get_node2(int dx, int dy)
 	return result;
 }
 
-void __fastcall path_next_node(PATHNODE *pPath)
+void path_next_node(PATHNODE *pPath)
 {
 	PATHNODE *v1; // edx
 	PATHNODE *v2; // eax
@@ -358,7 +358,7 @@ void __fastcall path_next_node(PATHNODE *pPath)
 	v1->NextNode = pPath;
 }
 
-void __fastcall path_set_coords(PATHNODE *pPath)
+void path_set_coords(PATHNODE *pPath)
 {
 	PATHNODE *PathOld; // edi
 	PATHNODE *PathAct; // esi
@@ -393,7 +393,7 @@ void __fastcall path_set_coords(PATHNODE *pPath)
 	}
 }
 
-void __fastcall path_push_active_step(PATHNODE *pPath)
+void path_push_active_step(PATHNODE *pPath)
 {
 	int v1; // eax
 
@@ -401,12 +401,12 @@ void __fastcall path_push_active_step(PATHNODE *pPath)
 	pnode_tblptr[v1] = pPath;
 }
 
-PATHNODE *__cdecl path_pop_active_step()
+PATHNODE *path_pop_active_step()
 {
 	return pnode_tblptr[--gdwCurPathStep];
 }
 
-PATHNODE *__cdecl path_new_step()
+PATHNODE *path_new_step()
 {
 	PATHNODE *v1; // esi
 

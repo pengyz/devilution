@@ -111,8 +111,8 @@ struct ItemDataStruct
 struct MissileData
 {
 	unsigned char mName;
-	void (__fastcall *mAddProc)(int, int, int, int, int, int, int, int, int);
-	void (__fastcall *mProc)(int);
+	void (*mAddProc)(int, int, int, int, int, int, int, int, int);
+	void (*mProc)(int);
 	int mDraw;
 	unsigned char mType;
 	unsigned char mResist;

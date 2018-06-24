@@ -33,22 +33,22 @@ struct dthread_cpp_init_2
 	}
 } _dthread_cpp_init_2;
 
-void __cdecl dthread_init_mutex()
+void dthread_init_mutex()
 {
 	InitializeCriticalSection(&sgMemCrit);
 }
 
-void __cdecl dthread_cleanup_mutex_atexit()
+void dthread_cleanup_mutex_atexit()
 {
 	atexit(dthread_cleanup_mutex);
 }
 
-void __cdecl dthread_cleanup_mutex()
+void dthread_cleanup_mutex()
 {
 	DeleteCriticalSection(&sgMemCrit);
 }
 
-void __fastcall dthread_remove_player(int pnum)
+void dthread_remove_player(int pnum)
 {
 	int v1; // edi
 	TMegaPkt *i; // eax
@@ -63,7 +63,7 @@ void __fastcall dthread_remove_player(int pnum)
 	LeaveCriticalSection(&sgMemCrit);
 }
 
-void __fastcall dthread_send_delta(int pnum, int cmd, void *pbSrc, int dwLen)
+void dthread_send_delta(int pnum, int cmd, void *pbSrc, int dwLen)
 {
 	char v4; // bl
 	TMegaPkt *v5; // eax
@@ -98,7 +98,7 @@ void __fastcall dthread_send_delta(int pnum, int cmd, void *pbSrc, int dwLen)
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void __cdecl dthread_start()
+void dthread_start()
 {
 	char *v0; // eax
 	char *v1; // eax
@@ -162,7 +162,7 @@ unsigned int __stdcall dthread_handler(void *a1)
 // 52A508: using guessed type char byte_52A508;
 // 679730: using guessed type int gdwDeltaBytesSec;
 
-void __cdecl dthread_cleanup()
+void dthread_cleanup()
 {
 	char *v0; // eax
 	TMegaPkt *v1; // eax

@@ -88,7 +88,7 @@ InvXY InvRect[73] =
 
 int AP2x2Tbl[10] = { 8, 28, 6, 26, 4, 24, 2, 22, 0, 20 }; // weak
 
-void __cdecl FreeInvGFX()
+void FreeInvGFX()
 {
 	void *v0; // ecx
 
@@ -97,7 +97,7 @@ void __cdecl FreeInvGFX()
 	mem_free_dbg(v0);
 }
 
-void __cdecl InitInv()
+void InitInv()
 {
 	char v0; // al
 	char *v1; // ecx
@@ -121,7 +121,7 @@ LABEL_7:
 	drawsbarflag = 0;
 }
 
-void __fastcall InvDrawSlotBack(int X, int Y, int W, int H)
+void InvDrawSlotBack(int X, int Y, int W, int H)
 {
 	unsigned char *v4; // edi
 	int v5; // edx
@@ -161,7 +161,7 @@ LABEL_9:
 	while ( v5 );
 }
 
-void __cdecl DrawInv()
+void DrawInv()
 {
 	int v0; // ecx
 	int v1; // eax
@@ -450,7 +450,7 @@ void __cdecl DrawInv()
 // 69CF94: using guessed type int cel_transparency_active;
 // 41B8C4: using guessed type int var_A0[40];
 
-void __cdecl DrawInvBelt()
+void DrawInvBelt()
 {
 	int v0; // ebx
 	signed int v1; // esi
@@ -534,7 +534,7 @@ void __cdecl DrawInvBelt()
 // 4B8960: using guessed type int talkflag;
 // 4B8CB8: using guessed type char pcursinvitem;
 
-int __fastcall AutoPlace(int pnum, int ii, int sx, int sy, int saveflag)
+int AutoPlace(int pnum, int ii, int sx, int sy, int saveflag)
 {
 	__int64 v5; // rax
 	int v6; // ebx
@@ -631,7 +631,7 @@ LABEL_16:
 	return v6;
 }
 
-int __fastcall SpecialAutoPlace(int pnum, int ii, int sx, int sy, int saveflag)
+int SpecialAutoPlace(int pnum, int ii, int sx, int sy, int saveflag)
 {
 	__int64 v5; // rax
 	int v6; // ebx
@@ -743,7 +743,7 @@ LABEL_24:
 	return v6;
 }
 
-int __fastcall GoldAutoPlace(int pnum)
+int GoldAutoPlace(int pnum)
 {
 	int v1; // ebp
 	int v2; // edi
@@ -877,7 +877,7 @@ LABEL_28:
 	return v3;
 }
 
-int __fastcall WeaponAutoPlace(int pnum)
+int WeaponAutoPlace(int pnum)
 {
 	int v1; // edi
 	int v2; // eax
@@ -918,7 +918,7 @@ LABEL_13:
 	return 0;
 }
 
-int __fastcall SwapItem(ItemStruct *a, ItemStruct *b)
+int SwapItem(ItemStruct *a, ItemStruct *b)
 {
 	int v2; // eax
 	ItemStruct h; // [esp+8h] [ebp-170h]
@@ -930,7 +930,7 @@ int __fastcall SwapItem(ItemStruct *a, ItemStruct *b)
 	return v2 + 12;
 }
 
-void __fastcall CheckInvPaste(int pnum, int mx, int my)
+void CheckInvPaste(int pnum, int mx, int my)
 {
 	int v3; // ebx
 	int v4; // edi
@@ -1587,7 +1587,7 @@ LABEL_89:
 // 4B8CBC: using guessed type int icursW;
 // 52571C: using guessed type int drawpanflag;
 
-void __fastcall CheckInvSwap(int pnum, int bLoc, int idx, int wCI, int seed, int bId)
+void CheckInvSwap(int pnum, int bLoc, int idx, int wCI, int seed, int bId)
 {
 	unsigned char v6; // bl
 	PlayerStruct *v7; // eax
@@ -1616,7 +1616,7 @@ void __fastcall CheckInvSwap(int pnum, int bLoc, int idx, int wCI, int seed, int
 	CalcPlrInv(p, 1u);
 }
 
-void __fastcall CheckInvCut(int pnum, int mx, int my)
+void CheckInvCut(int pnum, int mx, int my)
 {
 	int v3; // ebp
 	signed int v4; // ecx
@@ -1792,7 +1792,7 @@ LABEL_60:
 // 4B84DC: using guessed type int dropGoldFlag;
 // 4B8C9C: using guessed type int cursH;
 
-void __fastcall inv_update_rem_item(int pnum, int iv)
+void inv_update_rem_item(int pnum, int iv)
 {
 	unsigned char v2; // dl
 
@@ -1804,7 +1804,7 @@ void __fastcall inv_update_rem_item(int pnum, int iv)
 	CalcPlrInv(pnum, v2);
 }
 
-void __fastcall RemoveInvItem(int pnum, int iv)
+void RemoveInvItem(int pnum, int iv)
 {
 	int v2; // edx
 	signed int v3; // ecx
@@ -1862,7 +1862,7 @@ void __fastcall RemoveInvItem(int pnum, int iv)
 }
 // 52571C: using guessed type int drawpanflag;
 
-void __fastcall RemoveSpdBarItem(int pnum, int iv)
+void RemoveSpdBarItem(int pnum, int iv)
 {
 	int v2; // esi
 	int v3; // eax
@@ -1880,7 +1880,7 @@ void __fastcall RemoveSpdBarItem(int pnum, int iv)
 }
 // 52571C: using guessed type int drawpanflag;
 
-void __cdecl CheckInvItem()
+void CheckInvItem()
 {
 	if ( pcurs < CURSOR_FIRSTITEM )
 		CheckInvCut(myplr, MouseX, MouseY);
@@ -1888,13 +1888,13 @@ void __cdecl CheckInvItem()
 		CheckInvPaste(myplr, MouseX, MouseY);
 }
 
-void __cdecl CheckInvScrn()
+void CheckInvScrn()
 {
 	if ( MouseX > 190 && MouseX < 437 && MouseY > 352 && MouseY < 385 )
 		CheckInvItem();
 }
 
-void __fastcall CheckItemStats(int pnum)
+void CheckItemStats(int pnum)
 {
 	PlayerStruct *v1; // eax
 	int v2; // ecx
@@ -1910,7 +1910,7 @@ void __fastcall CheckItemStats(int pnum)
 	}
 }
 
-void __fastcall CheckBookLevel(int pnum)
+void CheckBookLevel(int pnum)
 {
 	int v1; // ecx
 	int v2; // eax
@@ -1942,7 +1942,7 @@ void __fastcall CheckBookLevel(int pnum)
 	}
 }
 
-void __fastcall CheckQuestItem(int pnum)
+void CheckQuestItem(int pnum)
 {
 	int v1; // ecx
 	int v2; // esi
@@ -2077,7 +2077,7 @@ void __fastcall CheckQuestItem(int pnum)
 }
 // 52A554: using guessed type int sfxdelay;
 
-void __fastcall InvGetItem(int pnum, int ii)
+void InvGetItem(int pnum, int ii)
 {
 	int v2; // ebp
 	int v3; // edx
@@ -2126,7 +2126,7 @@ void __fastcall InvGetItem(int pnum, int ii)
 // 4B84DC: using guessed type int dropGoldFlag;
 // 4B8CC0: using guessed type char pcursitem;
 
-void __fastcall AutoGetItem(int pnum, int ii)
+void AutoGetItem(int pnum, int ii)
 {
 	int v2; // ebx
 	int v3; // ebp
@@ -2414,7 +2414,7 @@ LABEL_84:
 // 48E9A8: using guessed type int AP2x2Tbl[10];
 // 4B84DC: using guessed type int dropGoldFlag;
 
-int __fastcall FindGetItem(int indx, unsigned short ci, int iseed)
+int FindGetItem(int indx, unsigned short ci, int iseed)
 {
 	int i; // ebx
 	int ii; // esi
@@ -2433,7 +2433,7 @@ int __fastcall FindGetItem(int indx, unsigned short ci, int iseed)
 	return ii;
 }
 
-void __fastcall SyncGetItem(int x, int y, int idx, unsigned short ci, int iseed)
+void SyncGetItem(int x, int y, int idx, unsigned short ci, int iseed)
 {
 	char v5; // cl
 	int v6; // esi
@@ -2477,7 +2477,7 @@ void __fastcall SyncGetItem(int x, int y, int idx, unsigned short ci, int iseed)
 	}
 }
 
-int __fastcall CanPut(int i, int j)
+int CanPut(int i, int j)
 {
 	int v2; // ecx
 	int v3; // esi
@@ -2523,7 +2523,7 @@ int __fastcall CanPut(int i, int j)
 	return 1;
 }
 
-int __cdecl TryInvPut()
+int TryInvPut()
 {
 	int result; // eax
 	int v1; // eax
@@ -2551,7 +2551,7 @@ int __cdecl TryInvPut()
 	return result;
 }
 
-void __fastcall DrawInvMsg(char *msg)
+void DrawInvMsg(char *msg)
 {
 	char *v1; // esi
 	int v2; // eax
@@ -2565,7 +2565,7 @@ void __fastcall DrawInvMsg(char *msg)
 	}
 }
 
-int __fastcall InvPutItem(int pnum, int x, int y)
+int InvPutItem(int pnum, int x, int y)
 {
 	int v3; // edi
 	int *v4; // esi
@@ -2684,7 +2684,7 @@ int __fastcall InvPutItem(int pnum, int x, int y)
 	return yc;
 }
 
-int __fastcall SyncPutItem(int pnum, int x, int y, int idx, int icreateinfo, int iseed, int Id, int dur, int mdur, int ch, int mch, int ivalue, unsigned int ibuff)
+int SyncPutItem(int pnum, int x, int y, int idx, int icreateinfo, int iseed, int Id, int dur, int mdur, int ch, int mch, int ivalue, unsigned int ibuff)
 {
 	int v13; // ebx
 	int v14; // edi
@@ -2817,7 +2817,7 @@ int __fastcall SyncPutItem(int pnum, int x, int y, int idx, int icreateinfo, int
 	return ic;
 }
 
-int __cdecl CheckInvHLight()
+int CheckInvHLight()
 {
 	signed int v0; // ebx
 	int result; // eax
@@ -2965,7 +2965,7 @@ LABEL_36:
 }
 // 4B883C: using guessed type int infoclr;
 
-void __fastcall RemoveScroll(int pnum)
+void RemoveScroll(int pnum)
 {
 	int v1; // eax
 	int v2; // esi
@@ -3008,7 +3008,7 @@ LABEL_8:
 	CalcPlrScrolls(p);
 }
 
-bool __cdecl UseScroll()
+bool UseScroll()
 {
 	int v0; // eax
 	int v1; // esi
@@ -3050,7 +3050,7 @@ LABEL_11:
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall UseStaffCharge(int pnum)
+void UseStaffCharge(int pnum)
 {
 	int v1; // eax
 	int *v2; // eax
@@ -3069,7 +3069,7 @@ void __fastcall UseStaffCharge(int pnum)
 	}
 }
 
-bool __cdecl UseStaff()
+bool UseStaff()
 {
 	int v0; // eax
 	bool result; // al
@@ -3089,7 +3089,7 @@ bool __cdecl UseStaff()
 	return result;
 }
 
-void __cdecl StartGoldDrop()
+void StartGoldDrop()
 {
 	int v0; // eax
 
@@ -3108,7 +3108,7 @@ void __cdecl StartGoldDrop()
 // 4B8960: using guessed type int talkflag;
 // 4B8CB8: using guessed type char pcursinvitem;
 
-int __fastcall UseInvItem(int pnum, int cii)
+int UseInvItem(int pnum, int cii)
 {
 	int v2; // esi
 	int result; // eax
@@ -3263,7 +3263,7 @@ LABEL_39:
 // 52A554: using guessed type int sfxdelay;
 // 6AA705: using guessed type char stextflag;
 
-void __cdecl DoTelekinesis()
+void DoTelekinesis()
 {
 	if ( pcursobj != -1 )
 		NetSendCmdParam1(1u, CMD_OPOBJT, pcursobj);
@@ -3276,7 +3276,7 @@ void __cdecl DoTelekinesis()
 // 4B8CC0: using guessed type char pcursitem;
 // 4B8CC1: using guessed type char pcursobj;
 
-int __fastcall CalculateGold(int pnum)
+int CalculateGold(int pnum)
 {
 	int result; // eax
 	int v2; // ecx
@@ -3317,7 +3317,7 @@ int __fastcall CalculateGold(int pnum)
 }
 // 52571C: using guessed type int drawpanflag;
 
-int __cdecl DropItemBeforeTrig()
+int DropItemBeforeTrig()
 {
 	if ( !TryInvPut() )
 		return 0;

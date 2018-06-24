@@ -2,7 +2,7 @@
 
 #include "../types.h"
 
-int __fastcall codec_decode(void *pbSrcDst, int size, char *pszPassword)
+int codec_decode(void *pbSrcDst, int size, char *pszPassword)
 {
 	unsigned int v3; // ebx
 	char *v4; // esi
@@ -64,7 +64,7 @@ LABEL_14:
 }
 // 4034D9: using guessed type char var_98[128];
 
-void __fastcall codec_init_key(int unused, char *pszPassword)
+void codec_init_key(int unused, char *pszPassword)
 {
 	char *v2; // edi
 	char *v3; // esi
@@ -123,14 +123,14 @@ void __fastcall codec_init_key(int unused, char *pszPassword)
 // 4035DB: using guessed type char var_58[64];
 // 4035DB: using guessed type char dst[20];
 
-int __fastcall codec_get_encoded_len(int dwSrcBytes)
+int codec_get_encoded_len(int dwSrcBytes)
 {
 	if ( dwSrcBytes & 0x3F )
 		dwSrcBytes += 64 - (dwSrcBytes & 0x3F);
 	return dwSrcBytes + 8;
 }
 
-void __fastcall codec_encode(void *pbSrcDst, int size, int size_64, char *pszPassword)
+void codec_encode(void *pbSrcDst, int size, int size_64, char *pszPassword)
 {
 	char *v4; // esi
 	char v5; // bl

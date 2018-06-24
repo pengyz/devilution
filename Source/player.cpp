@@ -111,7 +111,7 @@ struct player_cpp_init
 // 47F204: using guessed type int player_inf;
 // 68643C: using guessed type int player_cpp_init_value;
 
-void __fastcall player_init_cl2_hdrs(char *src, char *dst)
+void player_init_cl2_hdrs(char *src, char *dst)
 {
 	char *v2; // eax
 	int v3; // esi
@@ -129,7 +129,7 @@ void __fastcall player_init_cl2_hdrs(char *src, char *dst)
 	while ( v4 );
 }
 
-void __fastcall LoadPlrGFX(int pnum, int gfxflag)
+void LoadPlrGFX(int pnum, int gfxflag)
 {
 	int v2; // esi
 	PlayerStruct *v3; // esi
@@ -288,7 +288,7 @@ LABEL_38:
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall InitPlayerGFX(int pnum)
+void InitPlayerGFX(int pnum)
 {
 	int v1; // esi
 	int v2; // edx
@@ -308,7 +308,7 @@ void __fastcall InitPlayerGFX(int pnum)
 	LoadPlrGFX(v1, v2);
 }
 
-void __fastcall InitPlrGFXMem(int pnum)
+void InitPlrGFXMem(int pnum)
 {
 	int v1; // esi
 	unsigned int v2; // ebp
@@ -419,7 +419,7 @@ void __fastcall InitPlrGFXMem(int pnum)
 // 686438: using guessed type char plr_gfx_flag;
 // 69B7BC: using guessed type char plr_gfx_bflag;
 
-int __fastcall GetPlrGFXSize(char *szCel)
+int GetPlrGFXSize(char *szCel)
 {
 	unsigned int v1; // ebx
 	char *v2; // edi
@@ -466,7 +466,7 @@ int __fastcall GetPlrGFXSize(char *szCel)
 	return v11;
 }
 
-void __fastcall FreePlayerGFX(int pnum)
+void FreePlayerGFX(int pnum)
 {
 	int v1; // esi
 	int v2; // esi
@@ -514,7 +514,7 @@ void __fastcall FreePlayerGFX(int pnum)
 	plr[v2]._pGFXLoad = 0;
 }
 
-void __fastcall NewPlrAnim(int pnum, int Peq, int numFrames, int Delay, int width)
+void NewPlrAnim(int pnum, int Peq, int numFrames, int Delay, int width)
 {
 	int v5; // edi
 	int v6; // esi
@@ -534,7 +534,7 @@ void __fastcall NewPlrAnim(int pnum, int Peq, int numFrames, int Delay, int widt
 	plr[v7]._pAnimWidth2 = (width - 64) >> 1;
 }
 
-void __fastcall ClearPlrPVars(int pnum)
+void ClearPlrPVars(int pnum)
 {
 	int v1; // esi
 	int v2; // eax
@@ -553,7 +553,7 @@ void __fastcall ClearPlrPVars(int pnum)
 	plr[v2]._pVar8 = 0;
 }
 
-void __fastcall SetPlrAnims(int pnum)
+void SetPlrAnims(int pnum)
 {
 	int v1; // esi
 	char v2; // bl
@@ -663,7 +663,7 @@ LABEL_11:
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall ClearPlrRVars(PlayerStruct *pPlayer)
+void ClearPlrRVars(PlayerStruct *pPlayer)
 {
 	pPlayer->bReserved[0] = 0;
 	pPlayer->bReserved[1] = 0;
@@ -685,7 +685,7 @@ void __fastcall ClearPlrRVars(PlayerStruct *pPlayer)
 	pPlayer->dwReserved[6] = 0;
 }
 
-void __fastcall CreatePlayer(int pnum, char c)
+void CreatePlayer(int pnum, char c)
 {
 	unsigned int v2; // edi
 	char v3; // bl
@@ -850,7 +850,7 @@ LABEL_28:
 	SetRndSeed(0);
 }
 
-int __fastcall CalcStatDiff(int pnum)
+int CalcStatDiff(int pnum)
 {
 	int v1; // ecx
 	int v2; // edx
@@ -867,7 +867,7 @@ int __fastcall CalcStatDiff(int pnum)
 		 - plr[v1]._pBaseStr;
 }
 
-void __fastcall NextPlrLevel(int pnum)
+void NextPlrLevel(int pnum)
 {
 	int v1; // edi
 	int v2; // esi
@@ -922,7 +922,7 @@ void __fastcall NextPlrLevel(int pnum)
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall AddPlrExperience(int pnum, int lvl, int exp)
+void AddPlrExperience(int pnum, int lvl, int exp)
 {
 	int v3; // eax
 	int v4; // esi
@@ -1014,7 +1014,7 @@ void __fastcall AddPlrExperience(int pnum, int lvl, int exp)
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall AddPlrMonstExper(int lvl, int exp, char pmask)
+void AddPlrMonstExper(int lvl, int exp, char pmask)
 {
 	int v3; // ebx
 	int v4; // edi
@@ -1037,7 +1037,7 @@ void __fastcall AddPlrMonstExper(int lvl, int exp, char pmask)
 	}
 }
 
-void __fastcall InitPlayer(int pnum, bool FirstTime)
+void InitPlayer(int pnum, bool FirstTime)
 {
 	int v2; // ebx
 	int v3; // esi
@@ -1199,7 +1199,7 @@ LABEL_33:
 // 52572C: using guessed type int leveldebug;
 // 69B7C4: using guessed type int deathdelay;
 
-void __cdecl InitMultiView()
+void InitMultiView()
 {
 	int v0; // eax
 
@@ -1210,7 +1210,7 @@ void __cdecl InitMultiView()
 	ViewY = v0;
 }
 
-void __fastcall InitPlayerLoc(int pnum, bool flag)
+void InitPlayerLoc(int pnum, bool flag)
 {
 	int v2; // esi
 	int v3; // esi
@@ -1274,7 +1274,7 @@ void __fastcall InitPlayerLoc(int pnum, bool flag)
 	}
 }
 
-bool __fastcall SolidLoc(int x, int y)
+bool SolidLoc(int x, int y)
 {
 	bool result; // eax
 
@@ -1285,7 +1285,7 @@ bool __fastcall SolidLoc(int x, int y)
 	return result;
 }
 
-bool __fastcall PlrDirOK(int pnum, int dir)
+bool PlrDirOK(int pnum, int dir)
 {
 	int v2; // esi
 	int v3; // ebx
@@ -1330,7 +1330,7 @@ bool __fastcall PlrDirOK(int pnum, int dir)
 	return 0;
 }
 
-void __fastcall PlrClrTrans(int x, int y)
+void PlrClrTrans(int x, int y)
 {
 	int v2; // esi
 	int v3; // ebx
@@ -1367,7 +1367,7 @@ void __fastcall PlrClrTrans(int x, int y)
 	}
 }
 
-void __fastcall PlrDoTrans(int x, int y)
+void PlrDoTrans(int x, int y)
 {
 	int v2; // edi
 	int v3; // ebx
@@ -1417,7 +1417,7 @@ void __fastcall PlrDoTrans(int x, int y)
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall SetPlayerOld(int pnum)
+void SetPlayerOld(int pnum)
 {
 	int v1; // esi
 	int v2; // eax
@@ -1430,7 +1430,7 @@ void __fastcall SetPlayerOld(int pnum)
 	plr[v2]._poldy = plr[v1].WorldY;
 }
 
-void __fastcall FixPlayerLocation(int pnum, int dir)
+void FixPlayerLocation(int pnum, int dir)
 {
 	int v2; // edi
 	int v3; // ebx
@@ -1469,7 +1469,7 @@ void __fastcall FixPlayerLocation(int pnum, int dir)
 	}
 }
 
-void __fastcall StartStand(int pnum, int dir)
+void StartStand(int pnum, int dir)
 {
 	int v2; // ebx
 	int v3; // edi
@@ -1497,7 +1497,7 @@ void __fastcall StartStand(int pnum, int dir)
 	}
 }
 
-void __fastcall StartWalkStand(int pnum)
+void StartWalkStand(int pnum)
 {
 	int v1; // edi
 	int v2; // esi
@@ -1528,7 +1528,7 @@ void __fastcall StartWalkStand(int pnum)
 	}
 }
 
-void __fastcall PM_ChangeLightOff(int pnum)
+void PM_ChangeLightOff(int pnum)
 {
 	int v1; // esi
 	int v2; // esi
@@ -1579,7 +1579,7 @@ void __fastcall PM_ChangeLightOff(int pnum)
 		ChangeLightOff(plr[v2]._plid, lx, v10);
 }
 
-void __fastcall PM_ChangeOffset(int pnum)
+void PM_ChangeOffset(int pnum)
 {
 	int v1; // esi
 	int v2; // eax
@@ -1629,7 +1629,7 @@ void __fastcall PM_ChangeOffset(int pnum)
 	PM_ChangeLightOff(arglist);
 }
 
-void __fastcall StartWalk(int pnum, int xvel, int yvel, int xadd, int yadd, int EndDir, int sdir)
+void StartWalk(int pnum, int xvel, int yvel, int xadd, int yadd, int EndDir, int sdir)
 {
 	int v7; // edi
 	int v8; // esi
@@ -1725,7 +1725,7 @@ LABEL_20:
 }
 // 52569C: using guessed type int zoomflag;
 
-void __fastcall StartWalk2(int pnum, int xvel, int yvel, int xoff, int yoff, int xadd, int yadd, int EndDir, int sdir)
+void StartWalk2(int pnum, int xvel, int yvel, int xoff, int yoff, int xadd, int yadd, int EndDir, int sdir)
 {
 	int v9; // edi
 	int v10; // esi
@@ -1835,7 +1835,7 @@ LABEL_22:
 }
 // 52569C: using guessed type int zoomflag;
 
-void __fastcall StartWalk3(int pnum, int xvel, int yvel, int xoff, int yoff, int xadd, int yadd, int mapx, int mapy, int EndDir, int sdir)
+void StartWalk3(int pnum, int xvel, int yvel, int xoff, int yoff, int xadd, int yadd, int mapx, int mapy, int EndDir, int sdir)
 {
 	int v11; // edi
 	int v12; // esi
@@ -1951,7 +1951,7 @@ LABEL_22:
 // 52569C: using guessed type int zoomflag;
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall StartAttack(int pnum, int d)
+void StartAttack(int pnum, int d)
 {
 	int v2; // edi
 	int v3; // ebp
@@ -1979,7 +1979,7 @@ void __fastcall StartAttack(int pnum, int d)
 	}
 }
 
-void __fastcall StartRangeAttack(int pnum, int d, int cx, int cy)
+void StartRangeAttack(int pnum, int d, int cx, int cy)
 {
 	int v4; // edi
 	int v5; // esi
@@ -2009,7 +2009,7 @@ void __fastcall StartRangeAttack(int pnum, int d, int cx, int cy)
 	}
 }
 
-void __fastcall StartPlrBlock(int pnum, int dir)
+void StartPlrBlock(int pnum, int dir)
 {
 	int v2; // edi
 	int v3; // ebx
@@ -2038,7 +2038,7 @@ void __fastcall StartPlrBlock(int pnum, int dir)
 	}
 }
 
-void __fastcall StartSpell(int pnum, int d, int cx, int cy)
+void StartSpell(int pnum, int d, int cx, int cy)
 {
 	int v4; // edi
 	int v5; // esi
@@ -2093,7 +2093,7 @@ LABEL_20:
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall FixPlrWalkTags(int pnum)
+void FixPlrWalkTags(int pnum)
 {
 	int v1; // esi
 	int v2; // edx
@@ -2158,7 +2158,7 @@ void __fastcall FixPlrWalkTags(int pnum)
 	}
 }
 
-void __fastcall RemovePlrFromMap(int pnum)
+void RemovePlrFromMap(int pnum)
 {
 	int v1; // esi
 	signed int v2; // edi
@@ -2212,7 +2212,7 @@ void __fastcall RemovePlrFromMap(int pnum)
 	while ( v6 < 112 );
 }
 
-void __fastcall StartPlrHit(int pnum, int dam, unsigned char forcehit)
+void StartPlrHit(int pnum, int dam, unsigned char forcehit)
 {
 	int v3; // ebx
 	int v4; // edi
@@ -2266,7 +2266,7 @@ LABEL_13:
 	}
 }
 
-void __fastcall RespawnDeadItem(ItemStruct *itm, int x, int y)
+void RespawnDeadItem(ItemStruct *itm, int x, int y)
 {
 	ItemStruct *v3; // ebx
 	int v4; // eax
@@ -2297,7 +2297,7 @@ void __fastcall RespawnDeadItem(ItemStruct *itm, int x, int y)
 	}
 }
 
-void __fastcall StartPlayerKill(int pnum, int earflag)
+void StartPlayerKill(int pnum, int earflag)
 {
 	unsigned int v2; // edi
 	unsigned int v3; // esi
@@ -2448,7 +2448,7 @@ LABEL_18:
 // 679660: using guessed type char gbMaxPlayers;
 // 69B7C4: using guessed type int deathdelay;
 
-void __fastcall PlrDeadItem(int pnum, struct ItemStruct *itm, int xx, int yy)
+void PlrDeadItem(int pnum, struct ItemStruct *itm, int xx, int yy)
 {
 	int v4; // edi
 	int v5; // edi
@@ -2531,7 +2531,7 @@ LABEL_14:
 	}
 }
 
-void __fastcall DropHalfPlayersGold(int pnum)
+void DropHalfPlayersGold(int pnum)
 {
 	int v1; // ebx
 	int v2; // esi
@@ -2729,7 +2729,7 @@ LABEL_28:
 }
 // 52571C: using guessed type int drawpanflag;
 
-void __fastcall SyncPlrKill(int pnum, int earflag)
+void SyncPlrKill(int pnum, int earflag)
 {
 	int v2; // esi
 	int v3; // ebx
@@ -2767,7 +2767,7 @@ LABEL_9:
 	}
 }
 
-void __fastcall RemovePlrMissiles(int pnum)
+void RemovePlrMissiles(int pnum)
 {
 	int v1; // ebx
 	int v2; // ebp
@@ -2812,7 +2812,7 @@ void __fastcall RemovePlrMissiles(int pnum)
 	}
 }
 
-void __fastcall InitLevelChange(int pnum)
+void InitLevelChange(int pnum)
 {
 	int v1; // esi
 	int v2; // eax
@@ -2841,7 +2841,7 @@ void __fastcall InitLevelChange(int pnum)
 }
 // 646D00: using guessed type char qtextflag;
 
-void __fastcall StartNewLvl(int pnum, int fom, int lvl)
+void StartNewLvl(int pnum, int fom, int lvl)
 {
 	int v3; // edi
 	unsigned int v4; // esi
@@ -2894,7 +2894,7 @@ LABEL_11:
 // 5CCB10: using guessed type char setlvlnum;
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall RestartTownLvl(int pnum)
+void RestartTownLvl(int pnum)
 {
 	unsigned int v1; // edi
 	unsigned int v2; // esi
@@ -2922,7 +2922,7 @@ void __fastcall RestartTownLvl(int pnum)
 	}
 }
 
-void __fastcall StartWarpLvl(int pnum, int pidx)
+void StartWarpLvl(int pnum, int pidx)
 {
 	int v2; // edi
 	int v3; // esi
@@ -2953,12 +2953,12 @@ void __fastcall StartWarpLvl(int pnum, int pidx)
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-int __fastcall PM_DoStand(int pnum)
+int PM_DoStand(int pnum)
 {
 	return 0;
 }
 
-int __fastcall PM_DoWalk(int pnum)
+int PM_DoWalk(int pnum)
 {
 	int v1; // ebx
 	int v2; // esi
@@ -3030,7 +3030,7 @@ LABEL_9:
 }
 // 5BB1ED: using guessed type char leveltype;
 
-int __fastcall PM_DoWalk2(int pnum)
+int PM_DoWalk2(int pnum)
 {
 	int v1; // ebx
 	int v2; // esi
@@ -3089,7 +3089,7 @@ LABEL_9:
 }
 // 5BB1ED: using guessed type char leveltype;
 
-int __fastcall PM_DoWalk3(int pnum)
+int PM_DoWalk3(int pnum)
 {
 	int v1; // ebx
 	int v2; // esi
@@ -3160,7 +3160,7 @@ LABEL_9:
 }
 // 5BB1ED: using guessed type char leveltype;
 
-bool __fastcall WeaponDur(int pnum, int durrnd)
+bool WeaponDur(int pnum, int durrnd)
 {
 	unsigned int v2; // edi
 	unsigned int v3; // esi
@@ -3240,7 +3240,7 @@ LABEL_23:
 	return 0;
 }
 
-bool __fastcall PlrHitMonst(int pnum, int m)
+bool PlrHitMonst(int pnum, int m)
 {
 	int v2; // ebx
 	unsigned int v3; // esi
@@ -3477,7 +3477,7 @@ LABEL_85:
 	return v42;
 }
 
-bool __fastcall PlrHitPlr(int pnum, char p)
+bool PlrHitPlr(int pnum, char p)
 {
 	char v2; // bl
 	unsigned int v3; // esi
@@ -3604,7 +3604,7 @@ bool __fastcall PlrHitPlr(int pnum, char p)
 	return v30;
 }
 
-bool __fastcall PlrHitObj(int pnum, int mx, int my)
+bool PlrHitObj(int pnum, int mx, int my)
 {
 	int oi; // edx
 
@@ -3620,7 +3620,7 @@ bool __fastcall PlrHitObj(int pnum, int mx, int my)
 	return 1;
 }
 
-int __fastcall PM_DoAttack(int pnum)
+int PM_DoAttack(int pnum)
 {
 	int v1; // esi
 	int v2; // esi
@@ -3735,7 +3735,7 @@ LABEL_48:
 }
 // 484368: using guessed type int FriendlyMode;
 
-int __fastcall PM_DoRangeAttack(int pnum)
+int PM_DoRangeAttack(int pnum)
 {
 	int v1; // edi
 	int v2; // esi
@@ -3775,7 +3775,7 @@ LABEL_21:
 	return 1;
 }
 
-void __fastcall ShieldDur(int pnum)
+void ShieldDur(int pnum)
 {
 	int v1; // edi
 	int v2; // esi
@@ -3822,7 +3822,7 @@ void __fastcall ShieldDur(int pnum)
 	}
 }
 
-int __fastcall PM_DoBlock(int pnum)
+int PM_DoBlock(int pnum)
 {
 	int v1; // esi
 	int v2; // eax
@@ -3844,7 +3844,7 @@ int __fastcall PM_DoBlock(int pnum)
 	return 1;
 }
 
-int __fastcall PM_DoSpell(int pnum)
+int PM_DoSpell(int pnum)
 {
 	int v1; // edi
 	int v2; // esi
@@ -3903,7 +3903,7 @@ LABEL_16:
 // 52571C: using guessed type int drawpanflag;
 // 5BB1ED: using guessed type char leveltype;
 
-int __fastcall PM_DoGotHit(int pnum)
+int PM_DoGotHit(int pnum)
 {
 	int v1; // esi
 	int v2; // eax
@@ -3933,7 +3933,7 @@ int __fastcall PM_DoGotHit(int pnum)
 	return 1;
 }
 
-void __fastcall ArmorDur(int pnum)
+void ArmorDur(int pnum)
 {
 	int v1; // ebp
 	//int v2; // ST04_4
@@ -3993,7 +3993,7 @@ LABEL_23:
 	}
 }
 
-int __fastcall PM_DoDeath(int pnum)
+int PM_DoDeath(int pnum)
 {
 	int v1; // edi
 	int v2; // esi
@@ -4027,7 +4027,7 @@ int __fastcall PM_DoDeath(int pnum)
 // 679660: using guessed type char gbMaxPlayers;
 // 69B7C4: using guessed type int deathdelay;
 
-void __fastcall CheckNewPath(int pnum)
+void CheckNewPath(int pnum)
 {
 	int v1; // edi
 	int v2; // ebx
@@ -4547,7 +4547,7 @@ LABEL_143:
 	}
 }
 
-bool __fastcall PlrDeathModeOK(int pnum)
+bool PlrDeathModeOK(int pnum)
 {
 	int v1; // esi
 	bool result; // al
@@ -4567,7 +4567,7 @@ LABEL_10:
 	return result;
 }
 
-void __cdecl ValidatePlayer()
+void ValidatePlayer()
 {
 	int v0; // edi
 	int v1; // esi
@@ -4646,7 +4646,7 @@ void __cdecl ValidatePlayer()
 	*(_QWORD *)plr[v1]._pMemSpells &= v14;
 }
 
-void __cdecl ProcessPlayers()
+void ProcessPlayers()
 {
 	int v0; // eax
 	int v1; // eax
@@ -4776,7 +4776,7 @@ LABEL_38:
 }
 // 52A554: using guessed type int sfxdelay;
 
-void __fastcall CheckCheatStats(int pnum)
+void CheckCheatStats(int pnum)
 {
 	int v1; // ecx
 	int *v2; // ecx
@@ -4797,7 +4797,7 @@ void __fastcall CheckCheatStats(int pnum)
 		*v2 = 128000;
 }
 
-void __fastcall ClrPlrPath(int pnum)
+void ClrPlrPath(int pnum)
 {
 	int v1; // esi
 
@@ -4807,7 +4807,7 @@ void __fastcall ClrPlrPath(int pnum)
 	memset(plr[v1].walkpath, -1, 0x19u);
 }
 
-bool __fastcall PosOkPlayer(int pnum, int px, int py)
+bool PosOkPlayer(int pnum, int px, int py)
 {
 	char v8; // cl
 	unsigned int v9; // ecx
@@ -4837,7 +4837,7 @@ bool __fastcall PosOkPlayer(int pnum, int px, int py)
 	return result;
 }
 
-void __fastcall MakePlrPath(int pnum, int xx, int yy, unsigned char endspace)
+void MakePlrPath(int pnum, int xx, int yy, unsigned char endspace)
 {
 	int v4; // esi
 	int v5; // ebx
@@ -4905,7 +4905,7 @@ LABEL_15:
 	}
 }
 
-void __fastcall CheckPlrSpell()
+void CheckPlrSpell()
 {
 	int v0; // ecx
 	int v1; // eax
@@ -5055,7 +5055,7 @@ LABEL_53:
 // 4B8CC2: using guessed type char pcursplr;
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall SyncPlrAnim(int pnum)
+void SyncPlrAnim(int pnum)
 {
 	int v1; // esi
 	int v2; // eax
@@ -5115,7 +5115,7 @@ LABEL_19:
 	}
 }
 
-void __fastcall SyncInitPlrPos(int pnum)
+void SyncInitPlrPos(int pnum)
 {
 	int v1; // esi
 	bool v2; // zf
@@ -5198,7 +5198,7 @@ void __fastcall SyncInitPlrPos(int pnum)
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall SyncInitPlr(int pnum)
+void SyncInitPlr(int pnum)
 {
 	int v1; // esi
 
@@ -5209,7 +5209,7 @@ void __fastcall SyncInitPlr(int pnum)
 	SyncInitPlrPos(v1);
 }
 
-void __fastcall CheckStats(int pnum)
+void CheckStats(int pnum)
 {
 	int v1; // esi
 	int v2; // eax
@@ -5317,7 +5317,7 @@ void __fastcall CheckStats(int pnum)
 	while ( v5 < 4 );
 }
 
-void __fastcall ModifyPlrStr(int pnum, int l)
+void ModifyPlrStr(int pnum, int l)
 {
 	int v2; // esi
 	int v3; // edi
@@ -5360,7 +5360,7 @@ void __fastcall ModifyPlrStr(int pnum, int l)
 		NetSendCmdParam1(0, CMD_SETSTR, plr[v4]._pBaseStr);
 }
 
-void __fastcall ModifyPlrMag(int pnum, int l)
+void ModifyPlrMag(int pnum, int l)
 {
 	int v2; // esi
 	int v3; // edi
@@ -5401,7 +5401,7 @@ void __fastcall ModifyPlrMag(int pnum, int l)
 		NetSendCmdParam1(0, CMD_SETMAG, plr[v4]._pBaseMag);
 }
 
-void __fastcall ModifyPlrDex(int pnum, int l)
+void ModifyPlrDex(int pnum, int l)
 {
 	int v2; // ebx
 	int v3; // edi
@@ -5427,7 +5427,7 @@ void __fastcall ModifyPlrDex(int pnum, int l)
 		NetSendCmdParam1(0, CMD_SETDEX, plr[v4]._pBaseDex);
 }
 
-void __fastcall ModifyPlrVit(int pnum, int l)
+void ModifyPlrVit(int pnum, int l)
 {
 	int v2; // esi
 	int v3; // edi
@@ -5465,7 +5465,7 @@ void __fastcall ModifyPlrVit(int pnum, int l)
 		NetSendCmdParam1(0, CMD_SETVIT, plr[v4]._pBaseVit);
 }
 
-void __fastcall SetPlayerHitPoints(int pnum, int newhp)
+void SetPlayerHitPoints(int pnum, int newhp)
 {
 	int v2; // esi
 	int v3; // edi
@@ -5486,7 +5486,7 @@ void __fastcall SetPlayerHitPoints(int pnum, int newhp)
 		drawhpflag = 1;
 }
 
-void __fastcall SetPlrStr(int pnum, int v)
+void SetPlrStr(int pnum, int v)
 {
 	int v2; // edi
 	int v3; // ebx
@@ -5514,7 +5514,7 @@ void __fastcall SetPlrStr(int pnum, int v)
 	plr[v4]._pDamageMod = v5 / v6;
 }
 
-void __fastcall SetPlrMag(int pnum, int v)
+void SetPlrMag(int pnum, int v)
 {
 	int v2; // edi
 	int v3; // esi
@@ -5535,7 +5535,7 @@ void __fastcall SetPlrMag(int pnum, int v)
 	CalcPlrInv(v2, 1u);
 }
 
-void __fastcall SetPlrDex(int pnum, int v)
+void SetPlrDex(int pnum, int v)
 {
 	int v2; // edi
 	int v3; // ebx
@@ -5563,7 +5563,7 @@ void __fastcall SetPlrDex(int pnum, int v)
 	plr[v4]._pDamageMod = v5 / v6;
 }
 
-void __fastcall SetPlrVit(int pnum, int v)
+void SetPlrVit(int pnum, int v)
 {
 	int v2; // edi
 	int v3; // esi
@@ -5584,7 +5584,7 @@ void __fastcall SetPlrVit(int pnum, int v)
 	CalcPlrInv(v2, 1u);
 }
 
-void __fastcall InitDungMsgs(int pnum)
+void InitDungMsgs(int pnum)
 {
 	int v1; // esi
 
@@ -5594,7 +5594,7 @@ void __fastcall InitDungMsgs(int pnum)
 	plr[v1].pDungMsgs = 0;
 }
 
-void __cdecl PlayDungMsgs()
+void PlayDungMsgs()
 {
 	int v0; // eax
 	int v1; // eax

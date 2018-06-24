@@ -40,7 +40,7 @@ struct sound_cpp_init
 } _sound_cpp_init;
 // 47F24C: using guessed type int sound_inf;
 
-void __fastcall snd_update(bool bStopAll)
+void snd_update(bool bStopAll)
 {
 	BOOL v1; // edi
 	unsigned int v2; // esi
@@ -63,7 +63,7 @@ void __fastcall snd_update(bool bStopAll)
 	while ( v2 < 8 );
 }
 
-void __fastcall snd_stop_snd(TSnd *pSnd)
+void snd_stop_snd(TSnd *pSnd)
 {
 	IDirectSoundBuffer *v1; // eax
 
@@ -75,7 +75,7 @@ void __fastcall snd_stop_snd(TSnd *pSnd)
 	}
 }
 
-bool __fastcall snd_playing(TSnd *pSnd)
+bool snd_playing(TSnd *pSnd)
 {
 	IDirectSoundBuffer *v1; // eax
 	bool result; // al
@@ -95,56 +95,52 @@ bool __fastcall snd_playing(TSnd *pSnd)
 	return result;
 }
 
-void __fastcall snd_play_snd(TSnd *pSnd, int lVolume, int lPan)
+void snd_play_snd(TSnd *pSnd, int lVolume, int lPan)
 {
-	TSnd *v3; // edi
-	int v4; // ebp
-	IDirectSoundBuffer *v5; // esi
+	IDirectSoundBuffer *pDSoundBuffer; // esi
 	//int v6; // eax
-	int v7; // ebp
-	int v8; // eax
+	int iSoundVolume; // ebp
+	HRESULT hr; // eax
 	//int v9; // eax
-	DWORD v10; // [esp+30h] [ebp-4h]
+	DWORD dwTickCount; // [esp+30h] [ebp-4h]
 
-	v3 = pSnd;
-	v4 = lVolume;
 	if ( pSnd )
 	{
-		if ( gbSoundOn )
+	if ( gbSoundOn )
 		{
-			v5 = pSnd->DSB;
-			if ( v5 )
+			pDSoundBuffer = pSnd->DSB;
+			if ( pDSoundBuffer )
 			{
-				v10 = GetTickCount();
-				if ( v10 - v3->start_tc >= 0x50 )
+				dwTickCount = GetTickCount();
+				if ( dwTickCount - pSnd->start_tc >= 0x50 )
 				{
 					//_LOBYTE(v6) = snd_playing(v3);
-					if ( !snd_playing(v3) || (v5 = sound_dup_channel(v3->DSB)) != 0 )
+					if ( !snd_playing(pSnd) || (pDSoundBuffer = sound_dup_channel(pSnd->DSB)) != 0 )
 					{
-						v7 = sglSoundVolume + v4;
-						if ( v7 >= -1600 )
+						iSoundVolume = sglSoundVolume + lVolume;
+						if ( iSoundVolume >= -1600 )
 						{
-							if ( v7 > 0 )
-								v7 = 0;
+							if ( iSoundVolume > 0 )
+								iSoundVolume = 0;
 						}
 						else
 						{
-							v7 = -1600;
+							iSoundVolume = -1600;
 						}
-						v5->SetVolume(v7);
-						v5->SetPan(lPan);
-						v8 = v5->Play(0, 0, 0);
-						if ( v8 == DSERR_BUFFERLOST )
+						pDSoundBuffer->SetVolume(iSoundVolume);
+						pDSoundBuffer->SetPan(lPan);
+						hr = pDSoundBuffer->Play(0, 0, 0);
+						if ( hr == DSERR_BUFFERLOST )
 						{
 							//_LOBYTE(v9) = sound_file_reload(v3, v5);
-							if ( sound_file_reload(v3, v5) )
-								v5->Play(0, 0, 0);
+							if ( sound_file_reload(pSnd, pDSoundBuffer) )
+								pDSoundBuffer->Play(0, 0, 0);
 						}
-						else if ( v8 )
+						else if ( hr )
 						{
-							DSErrDlg(v8, 261, "C:\\Src\\Diablo\\Source\\SOUND.CPP");
+							DSErrDlg(hr, 261, "C:\\Src\\Diablo\\Source\\SOUND.CPP");
 						}
-						v3->start_tc = v10;
+						pSnd->start_tc = dwTickCount;
 					}
 				}
 				else
@@ -157,7 +153,7 @@ void __fastcall snd_play_snd(TSnd *pSnd, int lVolume, int lPan)
 }
 // 4A22D5: using guessed type char gbSoundOn;
 
-IDirectSoundBuffer *__fastcall sound_dup_channel(IDirectSoundBuffer *DSB)
+IDirectSoundBuffer *sound_dup_channel(IDirectSoundBuffer *DSB)
 {
 	IDirectSoundBuffer *result; // eax
 	IDirectSoundBuffer **v2; // esi
@@ -182,7 +178,7 @@ IDirectSoundBuffer *__fastcall sound_dup_channel(IDirectSoundBuffer *DSB)
 }
 // 4A22D6: using guessed type char gbDupSounds;
 
-bool __fastcall sound_file_reload(TSnd *sound_file, IDirectSoundBuffer *DSB)
+bool sound_file_reload(TSnd *sound_file, IDirectSoundBuffer *DSB)
 {
 	IDirectSoundBuffer *v2; // edi
 	TSnd *v3; // esi
@@ -212,7 +208,7 @@ bool __fastcall sound_file_reload(TSnd *sound_file, IDirectSoundBuffer *DSB)
 	return v8;
 }
 
-TSnd *__fastcall sound_file_load(char *path)
+TSnd *sound_file_load(char *path)
 {
 //	int v1; // esi
 	char *v2; // edi
@@ -253,7 +249,7 @@ TSnd *__fastcall sound_file_load(char *path)
 }
 // 456F07: could not find valid save-restore pair for esi
 
-void __fastcall sound_CreateSoundBuffer(TSnd *sound_file)
+void sound_CreateSoundBuffer(TSnd *sound_file)
 {
 	TSnd *v1; // esi
 	int v2; // eax
@@ -270,7 +266,7 @@ void __fastcall sound_CreateSoundBuffer(TSnd *sound_file)
 		DSErrDlg(v2, 282, "C:\\Src\\Diablo\\Source\\SOUND.CPP");
 }
 
-void __fastcall sound_file_cleanup(TSnd *sound_file)
+void sound_file_cleanup(TSnd *sound_file)
 {
 	TSnd *v1; // esi
 	IDirectSoundBuffer *v2; // eax
@@ -289,7 +285,7 @@ void __fastcall sound_file_cleanup(TSnd *sound_file)
 	}
 }
 
-void __fastcall snd_init(HWND hWnd)
+void snd_init(HWND hWnd)
 {
 	sound_load_volume("Sound Volume", &sglSoundVolume);
 	gbSoundOn = sglSoundVolume > -1600;
@@ -306,7 +302,7 @@ void __fastcall snd_init(HWND hWnd)
 // 4A22D4: using guessed type char gbMusicOn;
 // 4A22D5: using guessed type char gbSoundOn;
 
-void __fastcall sound_load_volume(char *value_name, int *value)
+void sound_load_volume(char *value_name, int *value)
 {
 	int *v2; // esi
 	//int v3; // eax
@@ -333,7 +329,7 @@ void __fastcall sound_load_volume(char *value_name, int *value)
 	*v2 -= *v2 % 100;
 }
 
-void __fastcall sound_create_primary_buffer(int music_track)
+void sound_create_primary_buffer(int music_track)
 {
 	int v1; // eax
 	int v2; // eax
@@ -374,7 +370,7 @@ void __fastcall sound_create_primary_buffer(int music_track)
 }
 // 69F100: using guessed type int sglpDSB;
 
-int __fastcall sound_DirectSoundCreate(GUID *guid, IDirectSound **DS, int always_null)
+int sound_DirectSoundCreate(GUID *guid, IDirectSound **DS, int always_null)
 {
 	IDirectSound **v3; // ebp
 	int v4; // eax
@@ -402,7 +398,7 @@ int __fastcall sound_DirectSoundCreate(GUID *guid, IDirectSound **DS, int always
 	return ((int (__stdcall *)(GUID *, IDirectSound **, int))v5)(v8, v3, always_null);
 }
 
-void __cdecl sound_cleanup()
+void sound_cleanup()
 {
 	snd_update(1);
 	SVidDestroy();
@@ -420,12 +416,12 @@ void __cdecl sound_cleanup()
 	}
 }
 
-void __fastcall sound_store_volume(char *key, int value)
+void sound_store_volume(char *key, int value)
 {
 	SRegSaveValue("Diablo", key, 0, value);
 }
 
-void __cdecl music_stop()
+void music_stop()
 {
 	if ( sgpMusicTrack )
 	{
@@ -436,7 +432,7 @@ void __cdecl music_stop()
 	}
 }
 
-void __fastcall music_start(int nTrack)
+void music_start(int nTrack)
 {
 	//int v1; // esi
 	//int v2; // eax
@@ -462,7 +458,7 @@ void __fastcall music_start(int nTrack)
 }
 // 4A22D4: using guessed type char gbMusicOn;
 
-void __fastcall sound_disable_music(bool disable)
+void sound_disable_music(bool disable)
 {
 	if ( disable )
 	{
@@ -474,7 +470,7 @@ void __fastcall sound_disable_music(bool disable)
 	}
 }
 
-int __fastcall sound_get_or_set_music_volume(int volume)
+int sound_get_or_set_music_volume(int volume)
 {
 	if ( volume != 1 )
 	{
@@ -485,7 +481,7 @@ int __fastcall sound_get_or_set_music_volume(int volume)
 	return sglMusicVolume;
 }
 
-int __fastcall sound_get_or_set_sound_volume(int volume)
+int sound_get_or_set_sound_volume(int volume)
 {
 	int result; // eax
 

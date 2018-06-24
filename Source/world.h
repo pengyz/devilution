@@ -2,13 +2,13 @@
 #ifndef __WORLD_H__
 #define __WORLD_H__
 
-void __fastcall drawTopArchesUpperScreen(void *a1);
-void __fastcall drawBottomArchesUpperScreen(void *a1, int a2);
-void __fastcall drawUpperScreen(void *a1);
-void __fastcall drawTopArchesLowerScreen(void *a1);
-void __fastcall drawBottomArchesLowerScreen(void *a1, int a2);
-void __fastcall drawLowerScreen(void *a1);
-void __fastcall world_draw_black_tile(char *dst_buf);
+void drawTopArchesUpperScreen(void *a1);
+void drawBottomArchesUpperScreen(void *a1, int a2);
+void drawUpperScreen(void *a1);
+void drawTopArchesLowerScreen(void *a1);
+void drawBottomArchesLowerScreen(void *a1, int a2);
+void drawLowerScreen(void *a1);
+void world_draw_black_tile(char *dst_buf);
 
 /* rdata */
 

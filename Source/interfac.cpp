@@ -20,7 +20,7 @@ struct interfac_cpp_init
 } _interfac_cpp_init;
 // 47AE40: using guessed type int interfac_inf;
 
-void __cdecl interface_msg_pump()
+void interface_msg_pump()
 {
 	MSG Msg; // [esp+8h] [ebp-1Ch]
 
@@ -34,7 +34,7 @@ void __cdecl interface_msg_pump()
 	}
 }
 
-bool __cdecl IncProgress()
+bool IncProgress()
 {
 	interface_msg_pump();
 	sgdwProgress += 15;
@@ -45,7 +45,7 @@ bool __cdecl IncProgress()
 	return (unsigned int)sgdwProgress >= 0x216;
 }
 
-void __cdecl DrawCutscene()
+void DrawCutscene()
 {
 	unsigned int v0; // esi
 
@@ -67,7 +67,7 @@ void __cdecl DrawCutscene()
 }
 // 52571C: using guessed type int drawpanflag;
 
-void __fastcall DrawProgress(int screen_x, int screen_y, int progress_id)
+void DrawProgress(int screen_x, int screen_y, int progress_id)
 {
 	_BYTE *v3; // eax
 	signed int v4; // ecx
@@ -83,7 +83,7 @@ void __fastcall DrawProgress(int screen_x, int screen_y, int progress_id)
 	while ( v4 );
 }
 
-void __fastcall ShowProgress(int uMsg)
+void ShowProgress(int uMsg)
 {
 	LRESULT (__stdcall *saveProc)(HWND, UINT, WPARAM, LPARAM); // edi
 	bool v3; // cl
@@ -239,7 +239,7 @@ LABEL_41:
 // 6761B8: using guessed type char gbSomebodyWonGameKludge;
 // 679660: using guessed type char gbMaxPlayers;
 
-void __cdecl FreeInterface()
+void FreeInterface()
 {
 	void *v0; // ecx
 
@@ -248,7 +248,7 @@ void __cdecl FreeInterface()
 	mem_free_dbg(v0);
 }
 
-void __fastcall InitCutscene(int interface_mode)
+void InitCutscene(int interface_mode)
 {
 	int v1; // eax
 	int v2; // eax

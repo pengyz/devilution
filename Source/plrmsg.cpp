@@ -8,7 +8,7 @@ _plrmsg plr_msgs[8];
 
 text_color text_color_from_player_num[2] = { COL_WHITE, COL_GOLD };
 
-void __fastcall plrmsg_delay(int a1)
+void plrmsg_delay(int a1)
 {
 	_plrmsg *pMsg; // eax
 	signed int v2; // ecx
@@ -33,7 +33,7 @@ void __fastcall plrmsg_delay(int a1)
 }
 // 69B7D0: using guessed type int plrmsg_ticks;
 
-char *__fastcall ErrorPlrMsg(char *pszMsg)
+char *ErrorPlrMsg(char *pszMsg)
 {
 	_plrmsg *pMsg; // esi
 	char *v2; // edi
@@ -66,7 +66,7 @@ size_t EventPlrMsg(char *pszFmt, ...)
 }
 // 69B7D4: using guessed type char plr_msg_slot;
 
-void __fastcall SendPlrMsg(int pnum, const char *pszStr)
+void SendPlrMsg(int pnum, const char *pszStr)
 {
 	_plrmsg *pMsg; // esi
 	int v3; // ebx
@@ -88,7 +88,7 @@ void __fastcall SendPlrMsg(int pnum, const char *pszStr)
 }
 // 69B7D4: using guessed type char plr_msg_slot;
 
-void __cdecl ClearPlrMsg()
+void ClearPlrMsg()
 {
 	_plrmsg *pMsg; // esi
 	DWORD v1; // eax
@@ -107,14 +107,14 @@ void __cdecl ClearPlrMsg()
 	while ( v2 );
 }
 
-void __cdecl InitPlrMsg()
+void InitPlrMsg()
 {
 	memset(plr_msgs, 0, 0x4C0u);
 	plr_msg_slot = 0;
 }
 // 69B7D4: using guessed type char plr_msg_slot;
 
-void __cdecl DrawPlrMsg()
+void DrawPlrMsg()
 {
 	int v0; // ebx
 	int v1; // ebp
@@ -150,7 +150,7 @@ LABEL_9:
 // 4B8968: using guessed type int sbookflag;
 // 69BD04: using guessed type int questlog;
 
-void __fastcall PrintPlrMsg(int no, int x, int y, char *str, int just)
+void PrintPlrMsg(int no, int x, int y, char *str, int just)
 {
 	char *v5; // edi
 	int *v6; // edx

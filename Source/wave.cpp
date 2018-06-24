@@ -16,12 +16,12 @@ struct wave_cpp_init
 // 4802D4: using guessed type int wave_inf;
 // 6ABB34: using guessed type int wave_cpp_init_value;
 
-bool __fastcall WCloseFile(void *file)
+bool WCloseFile(void *file)
 {
 	return SFileCloseFile(file);
 }
 
-int __fastcall WGetFileSize(HANDLE hsFile, unsigned long *a2)
+int WGetFileSize(HANDLE hsFile, unsigned long *a2)
 {
 	unsigned long *v2; // edi
 	HANDLE i; // esi
@@ -39,7 +39,7 @@ int __fastcall WGetFileSize(HANDLE hsFile, unsigned long *a2)
 	return result;
 }
 
-void __fastcall WGetFileArchive(HANDLE hsFile, int *a2, char *dwInitParam)
+void WGetFileArchive(HANDLE hsFile, int *a2, char *dwInitParam)
 {
 	int *v3; // esi
 	HANDLE v4; // edi
@@ -64,7 +64,7 @@ void __fastcall WGetFileArchive(HANDLE hsFile, int *a2, char *dwInitParam)
 	}
 }
 
-int __fastcall WOpenFile(char *dwInitParam, HANDLE *phsFile, int a3)
+int WOpenFile(char *dwInitParam, HANDLE *phsFile, int a3)
 {
 	HANDLE *v3; // edi
 	char *i; // esi
@@ -84,7 +84,7 @@ int __fastcall WOpenFile(char *dwInitParam, HANDLE *phsFile, int a3)
 	return 0;
 }
 
-char __fastcall WReadFile(HANDLE hsFile, char *buf, int a3)
+char WReadFile(HANDLE hsFile, char *buf, int a3)
 {
 	char *v3; // ebx
 	HANDLE v4; // edi
@@ -106,7 +106,7 @@ char __fastcall WReadFile(HANDLE hsFile, char *buf, int a3)
 	return v5;
 }
 
-int __fastcall WSetFilePointer(HANDLE file1, int offset, HANDLE file2, int whence)
+int WSetFilePointer(HANDLE file1, int offset, HANDLE file2, int whence)
 {
 	int v4; // edi
 	HANDLE i; // esi
@@ -124,7 +124,7 @@ int __fastcall WSetFilePointer(HANDLE file1, int offset, HANDLE file2, int whenc
 	return result;
 }
 
-int __fastcall LoadWaveFormat(HANDLE hsFile, WAVEFORMATEX *pwfx)
+int LoadWaveFormat(HANDLE hsFile, WAVEFORMATEX *pwfx)
 {
 	WAVEFORMATEX *v2; // esi
 	int v3; // esi
@@ -137,7 +137,7 @@ int __fastcall LoadWaveFormat(HANDLE hsFile, WAVEFORMATEX *pwfx)
 	return v3;
 }
 
-void *__fastcall AllocateMemFile(HANDLE hsFile, MEMFILE *pMemFile, unsigned int a3)
+void *AllocateMemFile(HANDLE hsFile, MEMFILE *pMemFile, unsigned int a3)
 {
 	MEMFILE *v3; // esi
 	HANDLE v4; // edi
@@ -163,7 +163,7 @@ void *__fastcall AllocateMemFile(HANDLE hsFile, MEMFILE *pMemFile, unsigned int 
 	return result;
 }
 
-void __fastcall FreeMemFile(MEMFILE *pMemFile)
+void FreeMemFile(MEMFILE *pMemFile)
 {
 	MEMFILE *v1; // eax
 	char *v2; // ecx
@@ -174,7 +174,7 @@ void __fastcall FreeMemFile(MEMFILE *pMemFile)
 	mem_free_dbg(v2);
 }
 
-int __fastcall ReadWaveFile(MEMFILE *pMemFile, WAVEFORMATEX *pwfx, int *a3)
+int ReadWaveFile(MEMFILE *pMemFile, WAVEFORMATEX *pwfx, int *a3)
 {
 	WAVEFORMATEX *v3; // esi
 	MEMFILE *v4; // edi
@@ -211,7 +211,7 @@ int __fastcall ReadWaveFile(MEMFILE *pMemFile, WAVEFORMATEX *pwfx, int *a3)
 	return result;
 }
 
-int __fastcall ReadMemFile(MEMFILE *pMemFile, void *lpBuf, size_t a3)
+int ReadMemFile(MEMFILE *pMemFile, void *lpBuf, size_t a3)
 {
 	size_t v3; // ebx
 	void *v4; // ebp
@@ -243,7 +243,7 @@ int __fastcall ReadMemFile(MEMFILE *pMemFile, void *lpBuf, size_t a3)
 	return 0;
 }
 
-void __fastcall FillMemFile(MEMFILE *pMemFile)
+void FillMemFile(MEMFILE *pMemFile)
 {
 	MEMFILE *v1; // esi
 	unsigned int v2; // edi
@@ -259,7 +259,7 @@ void __fastcall FillMemFile(MEMFILE *pMemFile)
 	v1->bytes_to_read = v2;
 }
 
-int __fastcall SeekMemFile(MEMFILE *pMemFile, unsigned int lDist, int dwMethod)
+int SeekMemFile(MEMFILE *pMemFile, unsigned int lDist, int dwMethod)
 {
 	unsigned int v3; // eax
 
@@ -277,7 +277,7 @@ int __fastcall SeekMemFile(MEMFILE *pMemFile, unsigned int lDist, int dwMethod)
 	return pMemFile->offset;
 }
 
-int __fastcall ReadWaveSection(MEMFILE *pMemFile, int a2, int *a3)
+int ReadWaveSection(MEMFILE *pMemFile, int a2, int *a3)
 {
 	int v3; // esi
 	MEMFILE *v4; // edi
@@ -301,7 +301,7 @@ int __fastcall ReadWaveSection(MEMFILE *pMemFile, int a2, int *a3)
 	return v6 != -1;
 }
 
-void *__fastcall LoadWaveFile(HANDLE hsFile, WAVEFORMATEX *pwfx, int *a3)
+void *LoadWaveFile(HANDLE hsFile, WAVEFORMATEX *pwfx, int *a3)
 {
 	WAVEFORMATEX *v3; // esi
 	MEMFILE wave_file; // [esp+4h] [ebp-1Ch]

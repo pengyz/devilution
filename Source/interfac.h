@@ -7,14 +7,14 @@ extern float interfac_cpp_init_value;
 extern int sgdwProgress;
 extern int progress_id; // idb
 
-void __cdecl interfac_cpp_init();
-void __cdecl interface_msg_pump();
-bool __cdecl IncProgress();
-void __cdecl DrawCutscene();
-void __fastcall DrawProgress(int screen_x, int screen_y, int progress_id);
-void __fastcall ShowProgress(int uMsg);
-void __cdecl FreeInterface();
-void __fastcall InitCutscene(int interface_mode);
+void interfac_cpp_init();
+void interface_msg_pump();
+bool IncProgress();
+void DrawCutscene();
+void DrawProgress(int screen_x, int screen_y, int progress_id);
+void ShowProgress(int uMsg);
+void FreeInterface();
+void InitCutscene(int interface_mode);
 
 /* data */
 

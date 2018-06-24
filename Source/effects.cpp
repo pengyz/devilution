@@ -885,7 +885,7 @@ struct effects_cpp_init
 // 47A468: using guessed type int effects_inf;
 // 52A550: using guessed type int effects_cpp_init_value;
 
-bool __fastcall effect_is_playing(int nSFX)
+bool effect_is_playing(int nSFX)
 {
 	TSFX *v1; // eax
 	TSnd *v2; // ecx
@@ -899,7 +899,7 @@ bool __fastcall effect_is_playing(int nSFX)
 	return 0;
 }
 
-void __cdecl sfx_stop()
+void sfx_stop()
 {
 	if ( sfx_stream )
 	{
@@ -910,7 +910,7 @@ void __cdecl sfx_stop()
 	}
 }
 
-void __fastcall InitMonsterSND(int monst)
+void InitMonsterSND(int monst)
 {
 	signed int v1; // ebx
 	int v2; // eax
@@ -960,7 +960,7 @@ void __fastcall InitMonsterSND(int monst)
 	}
 }
 
-void __cdecl FreeEffects()
+void FreeEffects()
 {
 	TSnd **v0; // esi
 	signed int v1; // ebp
@@ -1006,7 +1006,7 @@ void __cdecl FreeEffects()
 	}
 }
 
-void __fastcall PlayEffect(int i, int mode)
+void PlayEffect(int i, int mode)
 {
 	int v2; // edi
 	int v3; // esi
@@ -1050,7 +1050,7 @@ void __fastcall PlayEffect(int i, int mode)
 // 4A22D5: using guessed type char gbSoundOn;
 // 676194: using guessed type char gbBufferMsgs;
 
-int __fastcall calc_snd_position(int x, int y, int *plVolume, int *plPan)
+int calc_snd_position(int x, int y, int *plVolume, int *plPan)
 {
 	int v4; // edi
 	int v5; // esi
@@ -1075,7 +1075,7 @@ int __fastcall calc_snd_position(int x, int y, int *plVolume, int *plPan)
 	return 1;
 }
 
-void __fastcall PlaySFX(int psfx)
+void PlaySFX(int psfx)
 {
 	int v1; // eax
 
@@ -1083,7 +1083,7 @@ void __fastcall PlaySFX(int psfx)
 	PlaySFX_priv(&sgSFX[v1], 0, 0, 0);
 }
 
-void __fastcall PlaySFX_priv(TSFX *pSFX, char loc, int x, int y)
+void PlaySFX_priv(TSFX *pSFX, char loc, int x, int y)
 {
 	int v4; // edi
 	TSFX *v5; // esi
@@ -1132,7 +1132,7 @@ void __fastcall PlaySFX_priv(TSFX *pSFX, char loc, int x, int y)
 // 676194: using guessed type char gbBufferMsgs;
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall stream_play(TSFX *pSFX, int lVolume, int lPan)
+void stream_play(TSFX *pSFX, int lVolume, int lPan)
 {
 	int v3; // esi
 	TSFX *v4; // edi
@@ -1164,7 +1164,7 @@ void __fastcall stream_play(TSFX *pSFX, int lVolume, int lPan)
 	}
 }
 
-int __fastcall RndSFX(int psfx)
+int RndSFX(int psfx)
 {
 	int v1; // esi
 	int v3; // [esp-4h] [ebp-8h]
@@ -1198,7 +1198,7 @@ LABEL_19:
 	return psfx;
 }
 
-void __fastcall PlaySfxLoc(int psfx, int x, int y)
+void PlaySfxLoc(int psfx, int x, int y)
 {
 	int v3; // esi
 	int v4; // eax
@@ -1215,7 +1215,7 @@ void __fastcall PlaySfxLoc(int psfx, int x, int y)
 	PlaySFX_priv(&sgSFX[v4], 1, v3, y);
 }
 
-void __cdecl FreeMonsterSnd()
+void FreeMonsterSnd()
 {
 	TSnd **v0; // esi
 	signed int v1; // ebx
@@ -1254,7 +1254,7 @@ void __cdecl FreeMonsterSnd()
 	}
 }
 
-void __cdecl sound_stop()
+void sound_stop()
 {
 	int i; // edi
 
@@ -1265,7 +1265,7 @@ void __cdecl sound_stop()
 	}
 }
 
-void __cdecl sound_update()
+void sound_update()
 {
 	//int v0; // ebp
 	//unsigned int v1; // ecx
@@ -1293,7 +1293,7 @@ void __cdecl sound_update()
 }
 // 415DBA: could not find valid save-restore pair for ebp
 
-void __cdecl effects_cleanup_sfx()
+void effects_cleanup_sfx()
 {
 	unsigned int v0; // edi
 	TSnd *v1; // ecx
@@ -1313,7 +1313,7 @@ void __cdecl effects_cleanup_sfx()
 	while ( v0 < 858 );
 }
 
-void __cdecl stream_update()
+void stream_update()
 {
 	char v0; // bl
 	char v1; // al
@@ -1350,7 +1350,7 @@ void __cdecl stream_update()
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall priv_sound_init(int bLoadMask)
+void priv_sound_init(int bLoadMask)
 {
 	unsigned char v1; // bl
 	unsigned char v2; // cl
@@ -1383,7 +1383,7 @@ void __fastcall priv_sound_init(int bLoadMask)
 	}
 }
 
-void __cdecl sound_init()
+void sound_init()
 {
 	priv_sound_init(4);
 }

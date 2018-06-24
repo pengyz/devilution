@@ -2,8 +2,8 @@
 #ifndef __RESTRICT_H__
 #define __RESTRICT_H__
 
-bool __cdecl SystemSupported();
-bool __cdecl RestrictedTest();
-bool __cdecl ReadOnlyTest();
+bool SystemSupported();
+bool RestrictedTest();
+bool ReadOnlyTest();
 
 #endif /* __RESTRICT_H__ */

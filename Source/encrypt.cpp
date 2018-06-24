@@ -4,7 +4,7 @@
 
 int encrypt_table[1280];
 
-void __fastcall encrypt_decrypt_block(void *block, int size, int key) // DecryptMPQBlock
+void encrypt_decrypt_block(void *block, int size, int key) // DecryptMPQBlock
 {
 	unsigned int v3; // edx
 	int v4; // eax
@@ -33,7 +33,7 @@ void __fastcall encrypt_decrypt_block(void *block, int size, int key) // Decrypt
 	}
 }
 
-void __fastcall encrypt_encrypt_block(void *block, int size, int key) // EncryptMPQBlock
+void encrypt_encrypt_block(void *block, int size, int key) // EncryptMPQBlock
 {
 	unsigned int v3; // edx
 	int v4; // eax
@@ -62,7 +62,7 @@ void __fastcall encrypt_encrypt_block(void *block, int size, int key) // Encrypt
 	}
 }
 
-int __fastcall encrypt_hash(char *s, int type) // HashStringSlash
+int encrypt_hash(char *s, int type) // HashStringSlash
 {
 	int v2; // ebp
 	char *v3; // ebx
@@ -85,7 +85,7 @@ int __fastcall encrypt_hash(char *s, int type) // HashStringSlash
 	return v4;
 }
 
-void __cdecl encrypt_init_lookup_table() // InitScratchSpace
+void encrypt_init_lookup_table() // InitScratchSpace
 {
 	unsigned int v0; // eax
 	int *v1; // edi
@@ -115,7 +115,7 @@ void __cdecl encrypt_init_lookup_table() // InitScratchSpace
 	while ( (signed int)v5 < (signed int)&encrypt_table[256] );
 }
 
-int __fastcall encrypt_compress(void *buf, int size) // MPQCompress_PKWare
+int encrypt_compress(void *buf, int size) // MPQCompress_PKWare
 {
 	unsigned char *v2; // ebx
 	unsigned char *v3; // esi
@@ -157,7 +157,7 @@ int __fastcall encrypt_compress(void *buf, int size) // MPQCompress_PKWare
 	return (int)v3;
 }
 
-unsigned int __cdecl encrypt_pkware_read(char *buf, unsigned int *size, void *param) // ReadPKWare
+unsigned int encrypt_pkware_read(char *buf, unsigned int *size, void *param) // ReadPKWare
 {
 	TDataInfo * pInfo = (TDataInfo *)param;
 	int v3; // edi
@@ -172,7 +172,7 @@ unsigned int __cdecl encrypt_pkware_read(char *buf, unsigned int *size, void *pa
 	return v3;
 }
 
-void __cdecl encrypt_pkware_write(char *buf, unsigned int *size, void *param) // WritePKWare
+void encrypt_pkware_write(char *buf, unsigned int *size, void *param) // WritePKWare
 {
 	TDataInfo * pInfo = (TDataInfo *)param;
 
@@ -180,7 +180,7 @@ void __cdecl encrypt_pkware_write(char *buf, unsigned int *size, void *param) //
 	pInfo->pbOutBuffEnd += *size;
 }
 
-void __fastcall encrypt_decompress(void *param, int recv_size, int dwMaxBytes) // MPQDecompress_PKWare
+void encrypt_decompress(void *param, int recv_size, int dwMaxBytes) // MPQDecompress_PKWare
 {
 	unsigned char *v3; // edi
 	unsigned char *v4; // ebx

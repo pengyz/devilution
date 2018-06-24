@@ -8,16 +8,16 @@ extern TMegaPkt *sgpInfoHead; /* may not be right struct */
 extern char byte_52A508; // weak
 extern HANDLE sghWorkToDoEvent; // idb
 
-void __cdecl dthread_cpp_init_1();
-void __cdecl dthread_cpp_init_2();
-void __cdecl dthread_init_mutex();
-void __cdecl dthread_cleanup_mutex_atexit();
-void __cdecl dthread_cleanup_mutex();
-void __fastcall dthread_remove_player(int pnum);
-void __fastcall dthread_send_delta(int pnum, int cmd, void *pbSrc, int dwLen);
-void __cdecl dthread_start();
+void dthread_cpp_init_1();
+void dthread_cpp_init_2();
+void dthread_init_mutex();
+void dthread_cleanup_mutex_atexit();
+void dthread_cleanup_mutex();
+void dthread_remove_player(int pnum);
+void dthread_send_delta(int pnum, int cmd, void *pbSrc, int dwLen);
+void dthread_start();
 unsigned int __stdcall dthread_handler(void *a1);
-void __cdecl dthread_cleanup();
+void dthread_cleanup();
 
 /* data */
 extern int dthread_inf; // weak

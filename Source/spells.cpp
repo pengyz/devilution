@@ -43,7 +43,7 @@ SpellData spelldata[37] =
 	{ SPL_BONESPIRIT,  24,  STYPE_MAGIC,	 "Bone Spirit",	 NULL,			 9,  7,  0, 0, 34,  IS_CAST2, { MIS_BONESPIRIT,  0,		  0 }, 1, 12,  20, 60, 11500, 800 }
 };
 
-int __fastcall GetManaAmount(int id, int sn)
+int GetManaAmount(int id, int sn)
 {
 	int v2; // eax
 	int v3; // esi
@@ -89,7 +89,7 @@ int __fastcall GetManaAmount(int id, int sn)
 	return v8 * (100 - plr[v2]._pISplCost) / 100;
 }
 
-void __fastcall UseMana(int id, int sn)
+void UseMana(int id, int sn)
 {
 	int v2; // esi
 	int v3; // eax
@@ -122,7 +122,7 @@ void __fastcall UseMana(int id, int sn)
 	}
 }
 
-bool __fastcall CheckSpell(int id, int sn, char st, bool manaonly)
+bool CheckSpell(int id, int sn, char st, bool manaonly)
 {
 	bool result; // al
 	int v5; // edi
@@ -146,7 +146,7 @@ bool __fastcall CheckSpell(int id, int sn, char st, bool manaonly)
 	return result;
 }
 
-void __fastcall CastSpell(int id, int spl, int sx, int sy, int dx, int dy, int caster, int spllvl)
+void CastSpell(int id, int spl, int sx, int sy, int dx, int dy, int caster, int spllvl)
 {
 	int v8; // eax
 	signed int v9; // edi
@@ -202,7 +202,7 @@ LABEL_7:
 	}
 }
 
-void __fastcall DoResurrect(int pnum, int rid)
+void DoResurrect(int pnum, int rid)
 {
 	int v2; // ebx
 	int v3; // esi
@@ -249,7 +249,7 @@ void __fastcall DoResurrect(int pnum, int rid)
 	}
 }
 
-void __fastcall PlacePlayer(int pnum)
+void PlacePlayer(int pnum)
 {
 	int v1; // ebx
 	unsigned int v2; // eax
@@ -324,7 +324,7 @@ void __fastcall PlacePlayer(int pnum)
 	}
 }
 
-void __fastcall DoHealOther(int pnum, int rid)
+void DoHealOther(int pnum, int rid)
 {
 	int v2; // ebx
 	int v3; // esi

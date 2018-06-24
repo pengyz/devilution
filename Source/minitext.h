@@ -11,12 +11,12 @@ extern int sgLastScroll; // weak
 extern void *pMedTextCels;
 extern void *pTextBoxCels;
 
-void __cdecl FreeQuestText();
-void __cdecl InitQuestText();
-void __fastcall InitQTextMsg(int m);
-void __cdecl DrawQTextBack();
-void __fastcall PrintQTextChr(int screen_x, int screen_y, char *cel_buf, int frame);
-void __cdecl DrawQText();
+void FreeQuestText();
+void InitQuestText();
+void InitQTextMsg(int m);
+void DrawQTextBack();
+void PrintQTextChr(int screen_x, int screen_y, char *cel_buf, int frame);
+void DrawQText();
 
 /* data */
 

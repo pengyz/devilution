@@ -8,7 +8,7 @@ short sync_word_6AA89C[200];
 int dword_6AAA2C[2];
 int sgnSyncPInv; // weak
 
-int __fastcall sync_all_monsters(TSyncHeader *packet, int size)
+int sync_all_monsters(TSyncHeader *packet, int size)
 {
 	int result; // eax
 	TSyncHeader *v3; // esi
@@ -46,7 +46,7 @@ int __fastcall sync_all_monsters(TSyncHeader *packet, int size)
 	return result;
 }
 
-void __cdecl sync_one_monster()
+void sync_one_monster()
 {
 	int i; // ebx
 	int v1; // edi
@@ -79,7 +79,7 @@ void __cdecl sync_one_monster()
 	}
 }
 
-int __fastcall sync_monster_active(TSyncMonster *packet)
+int sync_monster_active(TSyncMonster *packet)
 {
 	unsigned int v1; // ebx
 	int v2; // esi
@@ -108,7 +108,7 @@ int __fastcall sync_monster_active(TSyncMonster *packet)
 	return 1;
 }
 
-int __fastcall sync_monster_pos(TSyncMonster *packet, int mon_id)
+int sync_monster_pos(TSyncMonster *packet, int mon_id)
 {
 	int v2; // ebx
 	TSyncMonster *v3; // esi
@@ -135,7 +135,7 @@ int __fastcall sync_monster_pos(TSyncMonster *packet, int mon_id)
 	return result * 2;
 }
 
-int __fastcall sync_monster_active2(TSyncMonster *packet)
+int sync_monster_active2(TSyncMonster *packet)
 {
 	int v1; // edx
 	unsigned int v2; // ebp
@@ -171,7 +171,7 @@ int __fastcall sync_monster_active2(TSyncMonster *packet)
 }
 // 6AA898: using guessed type int dword_6AA898;
 
-char __fastcall SyncPlrInv(TSyncHeader *pItem)
+char SyncPlrInv(TSyncHeader *pItem)
 {
 	int v1; // edx
 	int v2; // eax
@@ -245,7 +245,7 @@ char __fastcall SyncPlrInv(TSyncHeader *pItem)
 }
 // 6AAA34: using guessed type int sgnSyncPInv;
 
-int __fastcall SyncData(int pnum, TSyncHeader *packet)
+int SyncData(int pnum, TSyncHeader *packet)
 {
 	TSyncHeader *v2; // esi
 	TSyncMonster *v3; // edi
@@ -279,7 +279,7 @@ int __fastcall SyncData(int pnum, TSyncHeader *packet)
 }
 // 676194: using guessed type char gbBufferMsgs;
 
-void __fastcall sync_monster_data(int pnum, TSyncMonster *packet)
+void sync_monster_data(int pnum, TSyncMonster *packet)
 {
 	TSyncMonster *v2; // edi
 	int v3; // ecx
@@ -377,7 +377,7 @@ LABEL_23:
 	}
 }
 
-void __cdecl sync_clear_pkt()
+void sync_clear_pkt()
 {
 	dword_6AA898 = 16 * myplr;
 	memset(sync_word_6AA89C, 255, 0x190u);

@@ -360,7 +360,7 @@ int StoryText[3][3] =
   { QUEST_BOOK31, QUEST_BOOK32, QUEST_BOOK33 }
 };
 
-void __cdecl InitObjectGFX()
+void InitObjectGFX()
 {
 	ObjDataStruct *v0; // eax
 	char *v1; // esi
@@ -424,7 +424,7 @@ void __cdecl InitObjectGFX()
 // 67D7C4: using guessed type int numobjfiles;
 // 44121D: using guessed type char fileload[56];
 
-void __cdecl FreeObjectGFX()
+void FreeObjectGFX()
 {
 	int i; // esi
 	void *v1; // ecx
@@ -439,7 +439,7 @@ void __cdecl FreeObjectGFX()
 }
 // 67D7C4: using guessed type int numobjfiles;
 
-bool __fastcall RndLocOk(int xp, int yp)
+bool RndLocOk(int xp, int yp)
 {
 	int v2; // ecx
 	int v3; // eax
@@ -459,7 +459,7 @@ bool __fastcall RndLocOk(int xp, int yp)
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall InitRndLocObj(int min, int max, int objtype)
+void InitRndLocObj(int min, int max, int objtype)
 {
 	int numobjs; // ebx
 	int xp; // esi
@@ -509,7 +509,7 @@ void __fastcall InitRndLocObj(int min, int max, int objtype)
 	}
 }
 
-void __fastcall InitRndLocBigObj(int min, int max, int objtype)
+void InitRndLocBigObj(int min, int max, int objtype)
 {
 	int xp; // edi
 	int yp; // esi
@@ -568,7 +568,7 @@ void __fastcall InitRndLocBigObj(int min, int max, int objtype)
 	}
 }
 
-void __fastcall InitRndLocObj5x5(int min, int max, int objtype)
+void InitRndLocObj5x5(int min, int max, int objtype)
 {
 	int v3; // esi
 	int v4; // edx
@@ -630,7 +630,7 @@ void __fastcall InitRndLocObj5x5(int min, int max, int objtype)
 	}
 }
 
-void __cdecl ClrAllObjects()
+void ClrAllObjects()
 {
 	int *v0; // eax
 	int v1; // edx
@@ -670,7 +670,7 @@ void __cdecl ClrAllObjects()
 // 67976C: using guessed type int trapdir;
 // 67D7C8: using guessed type int hero_cpp_init_value;
 
-void __cdecl AddTortures()
+void AddTortures()
 {
 	int v0; // esi
 	int v1; // edi
@@ -707,7 +707,7 @@ void __cdecl AddTortures()
 	while ( v0 < 112 );
 }
 
-void __cdecl AddCandles()
+void AddCandles()
 {
 	int v0; // esi
 	int v1; // edi
@@ -723,7 +723,7 @@ void __cdecl AddCandles()
 	AddObject(OBJ_STORYCANDLE, v0 + 2, v1);
 }
 
-void __fastcall AddBookLever(int lx1, int ly1, int lx2, int ly2, int x1, int y1, int x2, int y2, int msg)
+void AddBookLever(int lx1, int ly1, int lx2, int ly2, int x1, int y1, int x2, int y2, int msg)
 {
 	int v9; // esi
 	int v10; // edi
@@ -783,7 +783,7 @@ void __fastcall AddBookLever(int lx1, int ly1, int lx2, int ly2, int x1, int y1,
 	object[v16]._oVar6 = object[v16]._oAnimFrame + 1;
 }
 
-void __cdecl InitRndBarrels()
+void InitRndBarrels()
 {
 	int v0; // ebp
 	int v1; // esi
@@ -843,7 +843,7 @@ void __cdecl InitRndBarrels()
 	}
 }
 
-void __fastcall AddL1Objs(int x1, int y1, int x2, int y2)
+void AddL1Objs(int x1, int y1, int x2, int y2)
 {
 	int v4; // ebx
 	int *v5; // edi
@@ -875,7 +875,7 @@ void __fastcall AddL1Objs(int x1, int y1, int x2, int y2)
 	}
 }
 
-void __fastcall AddL2Objs(int x1, int y1, int x2, int y2)
+void AddL2Objs(int x1, int y1, int x2, int y2)
 {
 	int v4; // ebx
 	int *v5; // esi
@@ -905,7 +905,7 @@ void __fastcall AddL2Objs(int x1, int y1, int x2, int y2)
 	}
 }
 
-void __fastcall AddL3Objs(int x1, int y1, int x2, int y2)
+void AddL3Objs(int x1, int y1, int x2, int y2)
 {
 	int v4; // edi
 	int *v5; // esi
@@ -935,12 +935,12 @@ void __fastcall AddL3Objs(int x1, int y1, int x2, int y2)
 	}
 }
 
-bool __fastcall WallTrapLocOk(int xp, int yp)
+bool WallTrapLocOk(int xp, int yp)
 {
 	return (~dFlags[xp][yp] & 8u) >> 3;
 }
 
-void __cdecl AddL2Torches()
+void AddL2Torches()
 {
 	int v0; // esi
 	int v1; // edi
@@ -1003,7 +1003,7 @@ LABEL_18:
 	while ( (signed int)v7 < (signed int)dPiece[1] );
 }
 
-bool __fastcall TorchLocOK(int xp, int yp)
+bool TorchLocOK(int xp, int yp)
 {
 	int v2; // ecx
 	bool result; // al
@@ -1016,7 +1016,7 @@ bool __fastcall TorchLocOK(int xp, int yp)
 	return result;
 }
 
-void __cdecl AddObjTraps()
+void AddObjTraps()
 {
 	int v0; // esi
 	int *v1; // eax
@@ -1110,7 +1110,7 @@ LABEL_28:
 	while ( (signed int)v12 < (signed int)dPiece );
 }
 
-void __cdecl AddChestTraps()
+void AddChestTraps()
 {
 	signed int v0; // ebp
 	_BYTE *v1; // ebx
@@ -1153,7 +1153,7 @@ void __cdecl AddChestTraps()
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall LoadMapObjects(unsigned char *pMap, int startx, int starty, int x1, int y1, int w, int h, int leveridx)
+void LoadMapObjects(unsigned char *pMap, int startx, int starty, int x1, int y1, int w, int h, int leveridx)
 {
 	unsigned char *v8; // ebx
 	int v9; // esi
@@ -1209,7 +1209,7 @@ void __fastcall LoadMapObjects(unsigned char *pMap, int startx, int starty, int 
 }
 // 67D7C0: using guessed type int InitObjFlag;
 
-void __fastcall LoadMapObjs(unsigned char *pMap, int startx, int starty)
+void LoadMapObjs(unsigned char *pMap, int startx, int starty)
 {
 	unsigned char *v3; // esi
 	int v4; // eax
@@ -1255,7 +1255,7 @@ void __fastcall LoadMapObjs(unsigned char *pMap, int startx, int starty)
 }
 // 67D7C0: using guessed type int InitObjFlag;
 
-void __cdecl AddDiabObjs()
+void AddDiabObjs()
 {
 	unsigned char *v0; // esi
 	unsigned char *v1; // esi
@@ -1274,7 +1274,7 @@ void __cdecl AddDiabObjs()
 // 5289C4: using guessed type int diabquad1x;
 // 5289C8: using guessed type int diabquad1y;
 
-void __cdecl AddStoryBooks()
+void AddStoryBooks()
 {
 	int v0; // esi
 	int v1; // edi
@@ -1321,7 +1321,7 @@ void __cdecl AddStoryBooks()
 	AddObject(OBJ_STORYCANDLE, v4, v1 + 1);
 }
 
-void __fastcall AddHookedBodies(int freq)
+void AddHookedBodies(int freq)
 {
 	int v1; // ebx
 	char *v2; // esi
@@ -1412,7 +1412,7 @@ LABEL_22:
 	while ( v1 < 96 );
 }
 
-void __cdecl AddL4Goodies()
+void AddL4Goodies()
 {
 	AddHookedBodies(6);
 	InitRndLocObj(2, 6, OBJ_TNUDEM1);
@@ -1426,7 +1426,7 @@ void __cdecl AddL4Goodies()
 	InitRndLocObj(1, 3, OBJ_CAULDRON);
 }
 
-void __cdecl AddLazStand()
+void AddLazStand()
 {
 	int v0; // edi
 	int v1; // esi
@@ -1479,7 +1479,7 @@ void __cdecl AddLazStand()
 	AddObject(OBJ_STORYCANDLE, v4, v1 + 1);
 }
 
-void __fastcall InitObjects(int a1)
+void InitObjects(int a1)
 {
 	//int v1; // eax
 	//int v2; // eax
@@ -1657,7 +1657,7 @@ void __fastcall InitObjects(int a1)
 // 679660: using guessed type char gbMaxPlayers;
 // 67D7C0: using guessed type int InitObjFlag;
 
-void __fastcall SetMapObjects(char *pMap, int startx, int starty)
+void SetMapObjects(char *pMap, int startx, int starty)
 {
 	char *v3; // esi
 	int v6; // edi
@@ -1766,7 +1766,7 @@ void __fastcall SetMapObjects(char *pMap, int startx, int starty)
 // 67D7C4: using guessed type int numobjfiles;
 // 4427C5: using guessed type int var_10C[56];
 
-void __fastcall DeleteObject(int oi, int i)
+void DeleteObject(int oi, int i)
 {
 	int v2; // eax
 	bool v3; // zf
@@ -1782,7 +1782,7 @@ void __fastcall DeleteObject(int oi, int i)
 		objectactive[i] = objectactive[v2];
 }
 
-void __fastcall SetupObject(int i, int x, int y, int ot)
+void SetupObject(int i, int x, int y, int ot)
 {
 	int v4; // esi
 	int v5; // edi
@@ -1843,7 +1843,7 @@ void __fastcall SetupObject(int i, int x, int y, int ot)
 	object[v4]._oDoorFlag = 0;
 }
 
-void __fastcall SetObjMapRange(int i, int x1, int y1, int x2, int y2, int v)
+void SetObjMapRange(int i, int x1, int y1, int x2, int y2, int v)
 {
 	object[i]._oVar1 = x1;
 	object[i]._oVar2 = y1;
@@ -1852,12 +1852,12 @@ void __fastcall SetObjMapRange(int i, int x1, int y1, int x2, int y2, int v)
 	object[i]._oVar8 = v;
 }
 
-void __fastcall SetBookMsg(int i, int msg)
+void SetBookMsg(int i, int msg)
 {
 	object[i]._oVar7 = msg;
 }
 
-void __fastcall AddL1Door(int i, int x, int y, int ot)
+void AddL1Door(int i, int x, int y, int ot)
 {
 	int v4; // ecx
 	int v5; // edx
@@ -1886,7 +1886,7 @@ void __fastcall AddL1Door(int i, int x, int y, int ot)
 	object[v4]._oVar2 = v8;
 }
 
-void __fastcall AddSCambBook(int i)
+void AddSCambBook(int i)
 {
 	object[i]._oVar1 = setpc_x;
 	object[i]._oVar2 = setpc_y;
@@ -1897,7 +1897,7 @@ void __fastcall AddSCambBook(int i)
 // 5CF330: using guessed type int setpc_h;
 // 5CF334: using guessed type int setpc_w;
 
-void __fastcall AddChest(int i, int t)
+void AddChest(int i, int t)
 {
 	int v2; // edi
 	int v3; // esi
@@ -1956,7 +1956,7 @@ LABEL_22:
 }
 // 5CF31D: using guessed type char setlevel;
 
-void __fastcall AddL2Door(int i, int x, int y, int ot)
+void AddL2Door(int i, int x, int y, int ot)
 {
 	int v4; // esi
 
@@ -1969,7 +1969,7 @@ void __fastcall AddL2Door(int i, int x, int y, int ot)
 	object[v4]._oVar4 = 0;
 }
 
-void __fastcall AddL3Door(int i, int x, int y, int ot)
+void AddL3Door(int i, int x, int y, int ot)
 {
 	int v4; // esi
 
@@ -1982,7 +1982,7 @@ void __fastcall AddL3Door(int i, int x, int y, int ot)
 	object[v4]._oVar4 = 0;
 }
 
-void __fastcall AddSarc(int i)
+void AddSarc(int i)
 {
 	int v1; // esi
 	char v2; // al
@@ -2005,7 +2005,7 @@ void __fastcall AddSarc(int i)
 		object[v1]._oVar2 = PreSpawnSkeleton();
 }
 
-void __fastcall AddFlameTrap(int i)
+void AddFlameTrap(int i)
 {
 	object[i]._oVar1 = trapid;
 	object[i]._oVar2 = 0;
@@ -2015,14 +2015,14 @@ void __fastcall AddFlameTrap(int i)
 // 679768: using guessed type int trapid;
 // 67976C: using guessed type int trapdir;
 
-void __fastcall AddFlameLvr(int i)
+void AddFlameLvr(int i)
 {
 	object[i]._oVar1 = trapid;
 	object[i]._oVar2 = 49;
 }
 // 679768: using guessed type int trapid;
 
-void __fastcall AddTrap(int i)
+void AddTrap(int i)
 {
 	int mt; // eax
 
@@ -2036,7 +2036,7 @@ void __fastcall AddTrap(int i)
 	object[i]._oVar4 = 0;
 }
 
-void __fastcall AddObjLight(int i, int r)
+void AddObjLight(int i, int r)
 {
 	if ( InitObjFlag )
 	{
@@ -2050,7 +2050,7 @@ void __fastcall AddObjLight(int i, int r)
 }
 // 67D7C0: using guessed type int InitObjFlag;
 
-void __fastcall AddBarrel(int i)
+void AddBarrel(int i)
 {
 	int v1; // esi
 	int v2; // eax
@@ -2077,7 +2077,7 @@ void __fastcall AddBarrel(int i)
 		object[v1]._oVar4 = PreSpawnSkeleton();
 }
 
-void __fastcall AddShrine(int i)
+void AddShrine(int i)
 {
 	int v1; // esi
 	signed int v2; // edi
@@ -2129,7 +2129,7 @@ void __fastcall AddShrine(int i)
 // 679660: using guessed type char gbMaxPlayers;
 // 442E0F: using guessed type int var_68[26];
 
-void __fastcall AddBookcase(int i)
+void AddBookcase(int i)
 {
 	int v1; // esi
 
@@ -2138,7 +2138,7 @@ void __fastcall AddBookcase(int i)
 	object[v1]._oPreFlag = 1;
 }
 
-void __fastcall AddPurifyingFountain(int i)
+void AddPurifyingFountain(int i)
 {
 	char *v1; // eax
 
@@ -2149,7 +2149,7 @@ void __fastcall AddPurifyingFountain(int i)
 	object[i]._oRndSeed = GetRndSeed();
 }
 
-void __fastcall AddArmorStand(int i)
+void AddArmorStand(int i)
 {
 	int v1; // eax
 
@@ -2163,7 +2163,7 @@ void __fastcall AddArmorStand(int i)
 }
 // 6AAA3C: using guessed type int armorFlag;
 
-void __fastcall AddDecap(int i)
+void AddDecap(int i)
 {
 	int v1; // esi
 	int v2; // eax
@@ -2179,7 +2179,7 @@ void __fastcall AddDecap(int i)
 	object[v1]._oAnimFrame = v4 + 1;
 }
 
-void __fastcall AddVilebook(int i)
+void AddVilebook(int i)
 {
 	if ( setlevel )
 	{
@@ -2190,7 +2190,7 @@ void __fastcall AddVilebook(int i)
 // 5CCB10: using guessed type char setlvlnum;
 // 5CF31D: using guessed type char setlevel;
 
-void __fastcall AddMagicCircle(int i)
+void AddMagicCircle(int i)
 {
 	int v1; // esi
 	int v2; // eax
@@ -2203,12 +2203,12 @@ void __fastcall AddMagicCircle(int i)
 	object[v1]._oVar5 = 1;
 }
 
-void __fastcall AddBookstand(int i)
+void AddBookstand(int i)
 {
 	object[i]._oRndSeed = GetRndSeed();
 }
 
-void __fastcall AddPedistal(int i)
+void AddPedistal(int i)
 {
 	int v1; // ecx
 	int v2; // eax
@@ -2231,7 +2231,7 @@ void __fastcall AddPedistal(int i)
 // 5CF330: using guessed type int setpc_h;
 // 5CF334: using guessed type int setpc_w;
 
-void __fastcall AddStoryBook(int i)
+void AddStoryBook(int i)
 {
 	int bookframe; // eax
 	int v7; // eax
@@ -2252,7 +2252,7 @@ void __fastcall AddStoryBook(int i)
 	object[i]._oVar4 = v7 + 1;
 }
 
-void __fastcall AddWeaponRack(int i)
+void AddWeaponRack(int i)
 {
 	if ( !weaponFlag )
 	{
@@ -2263,14 +2263,14 @@ void __fastcall AddWeaponRack(int i)
 }
 // 6AAA50: using guessed type int weaponFlag;
 
-void __fastcall AddTorturedBody(int i)
+void AddTorturedBody(int i)
 {
 	object[i]._oRndSeed = GetRndSeed();
 	object[i]._oPreFlag = 1;
 	object[i]._oAnimFrame = random(0, 4) + 1;
 }
 
-void __fastcall GetRndObjLoc(int randarea, int *xx, int *yy)
+void GetRndObjLoc(int randarea, int *xx, int *yy)
 {
 	int *v3; // ebx
 	int v4; // eax
@@ -2326,7 +2326,7 @@ LABEL_3:
 	}
 }
 
-void __cdecl AddMushPatch()
+void AddMushPatch()
 {
 	int i; // bl
 	int y; // [esp+0h] [ebp-8h]
@@ -2343,7 +2343,7 @@ void __cdecl AddMushPatch()
 	}
 }
 
-void __cdecl AddSlainHero()
+void AddSlainHero()
 {
 	int x; // [esp+0h] [ebp-8h]
 	int y; // [esp+4h] [ebp-4h]
@@ -2352,7 +2352,7 @@ void __cdecl AddSlainHero()
 	AddObject(OBJ_SLAINHERO, x + 2, y + 2);
 }
 
-void __fastcall AddObject(int ot, int ox, int oy)
+void AddObject(int ot, int ox, int oy)
 {
 	int v3; // ebp
 	int v4; // esi
@@ -2504,7 +2504,7 @@ LABEL_31:
 	}
 }
 
-void __fastcall Obj_Light(int i, int lr)
+void Obj_Light(int i, int lr)
 {
 	int v2; // esi
 	int v3; // ebx
@@ -2562,7 +2562,7 @@ LABEL_15:
 }
 // 646A28: using guessed type int lightflag;
 
-void __fastcall Obj_Circle(int i)
+void Obj_Circle(int i)
 {
 	int v1; // ecx
 	int v2; // edx
@@ -2624,7 +2624,7 @@ void __fastcall Obj_Circle(int i)
 }
 // 525748: using guessed type char sgbMouseDown;
 
-void __fastcall Obj_StopAnim(int i)
+void Obj_StopAnim(int i)
 {
 	if ( object[i]._oAnimFrame == object[i]._oAnimLen )
 	{
@@ -2633,7 +2633,7 @@ void __fastcall Obj_StopAnim(int i)
 	}
 }
 
-void __fastcall Obj_Door(int i)
+void Obj_Door(int i)
 {
 	int dy; // edx
 	int dx; // eax
@@ -2657,13 +2657,13 @@ void __fastcall Obj_Door(int i)
 	}
 }
 
-void __fastcall Obj_Sarc(int i)
+void Obj_Sarc(int i)
 {
 	if ( object[i]._oAnimFrame == object[i]._oAnimLen )
 		object[i]._oAnimFlag = 0;
 }
 
-void __fastcall ActivateTrapLine(int ttype, int tid)
+void ActivateTrapLine(int ttype, int tid)
 {
 	int v2; // edi
 	int i; // ebp
@@ -2689,7 +2689,7 @@ void __fastcall ActivateTrapLine(int ttype, int tid)
 	}
 }
 
-void __fastcall Obj_FlameTrap(int i)
+void Obj_FlameTrap(int i)
 {
 	int v1; // ecx
 	int *v2; // esi
@@ -2779,7 +2779,7 @@ LABEL_24:
 		ActivateTrapLine(object[v1]._otype, object[v1]._oVar1);
 }
 
-void __fastcall Obj_Trap(int i)
+void Obj_Trap(int i)
 {
 	int edi1; // edi
 	int v2; // esi
@@ -2875,7 +2875,7 @@ LABEL_10:
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall Obj_BCrossDamage(int i)
+void Obj_BCrossDamage(int i)
 {
 	int v1; // esi
 	bool v2; // zf
@@ -2935,7 +2935,7 @@ LABEL_15:
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __cdecl ProcessObjects()
+void ProcessObjects()
 {
 	int v0; // ebx
 	int v1; // edi
@@ -3075,7 +3075,7 @@ LABEL_45:
 	}
 }
 
-void __fastcall ObjSetMicro(int dx, int dy, int pn)
+void ObjSetMicro(int dx, int dy, int pn)
 {
 	int v3; // esi
 	char *v4; // eax
@@ -3112,7 +3112,7 @@ void __fastcall ObjSetMicro(int dx, int dy, int pn)
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall objects_set_door_piece(int x, int y)
+void objects_set_door_piece(int x, int y)
 {
 	int v2; // edi
 	int v3; // ST10_4
@@ -3129,7 +3129,7 @@ void __fastcall objects_set_door_piece(int x, int y)
 	dpiece_defs_map_1[0][0][16 * gendung_get_dpiece_num_from_coord(v3, v2) + 1] = v6;
 }
 
-void __fastcall ObjSetMini(int x, int y, int v)
+void ObjSetMini(int x, int y, int v)
 {
 	unsigned short *v3; // esi
 	unsigned short v4; // ax
@@ -3161,7 +3161,7 @@ void __fastcall ObjSetMini(int x, int y, int v)
 	ObjSetMicro(v10 + 1, v11, v9);
 }
 
-void __fastcall ObjL1Special(int x1, int y1, int x2, int y2)
+void ObjL1Special(int x1, int y1, int x2, int y2)
 {
 	int i; // ebx
 	int v5; // edx
@@ -3219,7 +3219,7 @@ void __fastcall ObjL1Special(int x1, int y1, int x2, int y2)
 	}
 }
 
-void __fastcall ObjL2Special(int x1, int y1, int x2, int y2)
+void ObjL2Special(int x1, int y1, int x2, int y2)
 {
 	int v4; // edi
 	int v5; // esi
@@ -3305,7 +3305,7 @@ void __fastcall ObjL2Special(int x1, int y1, int x2, int y2)
 	}
 }
 
-void __fastcall DoorSet(int oi, int dx, int dy)
+void DoorSet(int oi, int dx, int dy)
 {
 	int v3; // esi
 	int v4; // ebp
@@ -3357,7 +3357,7 @@ LABEL_10:
 	}
 }
 
-void __cdecl RedoPlayerVision()
+void RedoPlayerVision()
 {
 	int *v0; // esi
 
@@ -3374,7 +3374,7 @@ void __cdecl RedoPlayerVision()
 	while ( (signed int)v0 < (signed int)&plr[4].plrlevel );
 }
 
-void __fastcall OperateL1RDoor(int pnum, int oi, unsigned char sendflag)
+void OperateL1RDoor(int pnum, int oi, unsigned char sendflag)
 {
 	int v3; // esi
 	int v4; // eax
@@ -3446,7 +3446,7 @@ void __fastcall OperateL1RDoor(int pnum, int oi, unsigned char sendflag)
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateL1LDoor(int pnum, int oi, unsigned char sendflag)
+void OperateL1LDoor(int pnum, int oi, unsigned char sendflag)
 {
 	int v3; // esi
 	int v4; // eax
@@ -3521,7 +3521,7 @@ void __fastcall OperateL1LDoor(int pnum, int oi, unsigned char sendflag)
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateL2RDoor(int pnum, int oi, unsigned char sendflag)
+void OperateL2RDoor(int pnum, int oi, unsigned char sendflag)
 {
 	int v3; // esi
 	int v4; // eax
@@ -3575,7 +3575,7 @@ void __fastcall OperateL2RDoor(int pnum, int oi, unsigned char sendflag)
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateL2LDoor(int pnum, int oi, unsigned char sendflag)
+void OperateL2LDoor(int pnum, int oi, unsigned char sendflag)
 {
 	int v3; // esi
 	int v4; // eax
@@ -3629,7 +3629,7 @@ void __fastcall OperateL2LDoor(int pnum, int oi, unsigned char sendflag)
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateL3RDoor(int pnum, int oi, unsigned char sendflag)
+void OperateL3RDoor(int pnum, int oi, unsigned char sendflag)
 {
 	int v3; // esi
 	int v4; // eax
@@ -3683,7 +3683,7 @@ void __fastcall OperateL3RDoor(int pnum, int oi, unsigned char sendflag)
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateL3LDoor(int pnum, int oi, unsigned char sendflag)
+void OperateL3LDoor(int pnum, int oi, unsigned char sendflag)
 {
 	int v3; // esi
 	int v4; // eax
@@ -3737,7 +3737,7 @@ void __fastcall OperateL3LDoor(int pnum, int oi, unsigned char sendflag)
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall MonstCheckDoors(int m)
+void MonstCheckDoors(int m)
 {
 	int v1; // ecx
 	int v2; // eax
@@ -3881,7 +3881,7 @@ LABEL_17:
 	}
 }
 
-void __fastcall ObjChangeMap(int x1, int y1, int x2, int y2)
+void ObjChangeMap(int x1, int y1, int x2, int y2)
 {
 	int v4; // ebx
 	int v5; // edi
@@ -3929,7 +3929,7 @@ void __fastcall ObjChangeMap(int x1, int y1, int x2, int y2)
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall ObjChangeMapResync(int x1, int y1, int x2, int y2)
+void ObjChangeMapResync(int x1, int y1, int x2, int y2)
 {
 	int v4; // edi
 	int v5; // esi
@@ -3967,7 +3967,7 @@ void __fastcall ObjChangeMapResync(int x1, int y1, int x2, int y2)
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall OperateL1Door(int pnum, int i, unsigned char sendflag)
+void OperateL1Door(int pnum, int i, unsigned char sendflag)
 {
 	int v3; // ebx
 	int v4; // edi
@@ -4010,7 +4010,7 @@ LABEL_6:
 		OperateL1RDoor(pnuma, v3, sendflag);
 }
 
-void __fastcall OperateLever(int pnum, int i)
+void OperateLever(int pnum, int i)
 {
 	int v2; // esi
 	int *v3; // edi
@@ -4057,7 +4057,7 @@ LABEL_17:
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateBook(int pnum, int i)
+void OperateBook(int pnum, int i)
 {
 	int esi1; // esi
 	int v3; // edx
@@ -4172,7 +4172,7 @@ LABEL_17:
 // 5CF31D: using guessed type char setlevel;
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateBookLever(int pnum, int i)
+void OperateBookLever(int pnum, int i)
 {
 	int v2; // esi
 	int v3; // edi
@@ -4245,7 +4245,7 @@ void __fastcall OperateBookLever(int pnum, int i)
 // 5A5590: using guessed type char TransVal;
 // 646D00: using guessed type char qtextflag;
 
-void __fastcall OperateSChambBk(int pnum, int i)
+void OperateSChambBk(int pnum, int i)
 {
 	int v2; // esi
 	int j; // edi
@@ -4292,7 +4292,7 @@ void __fastcall OperateSChambBk(int pnum, int i)
 }
 // 646D00: using guessed type char qtextflag;
 
-void __fastcall OperateChest(int pnum, int i, unsigned char sendmsg)
+void OperateChest(int pnum, int i, unsigned char sendmsg)
 {
 	int v3; // esi
 	bool v4; // zf
@@ -4386,7 +4386,7 @@ LABEL_26:
 // 5CF31D: using guessed type char setlevel;
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateMushPatch(int pnum, int i)
+void OperateMushPatch(int pnum, int i)
 {
 	int v2; // esi
 	bool v3; // zf
@@ -4441,7 +4441,7 @@ void __fastcall OperateMushPatch(int pnum, int i)
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateInnSignChest(int pnum, int i)
+void OperateInnSignChest(int pnum, int i)
 {
 	char v2; // al
 	int v3; // ecx
@@ -4488,7 +4488,7 @@ LABEL_8:
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateSlainHero(int pnum, int i, unsigned char sendmsg)
+void OperateSlainHero(int pnum, int i, unsigned char sendmsg)
 {
 	unsigned short v3; // di
 	int v4; // esi
@@ -4537,7 +4537,7 @@ LABEL_10:
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateTrapLvr(int i)
+void OperateTrapLvr(int i)
 {
 	int v1; // ecx
 	int v2; // eax
@@ -4589,7 +4589,7 @@ void __fastcall OperateTrapLvr(int i)
 	}
 }
 
-void __fastcall OperateSarc(int pnum, int i, unsigned char sendmsg)
+void OperateSarc(int pnum, int i, unsigned char sendmsg)
 {
 	unsigned short v3; // bp
 	int v4; // esi
@@ -4627,7 +4627,7 @@ void __fastcall OperateSarc(int pnum, int i, unsigned char sendmsg)
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateL2Door(int pnum, int i, unsigned char sendflag)
+void OperateL2Door(int pnum, int i, unsigned char sendflag)
 {
 	int v3; // ebx
 	int v4; // edi
@@ -4670,7 +4670,7 @@ LABEL_6:
 		OperateL2RDoor(pnuma, v3, sendflag);
 }
 
-void __fastcall OperateL3Door(int pnum, int i, unsigned char sendflag)
+void OperateL3Door(int pnum, int i, unsigned char sendflag)
 {
 	int v3; // ebx
 	int v4; // edi
@@ -4713,7 +4713,7 @@ LABEL_6:
 		OperateL3LDoor(pnuma, v3, sendflag);
 }
 
-void __fastcall OperatePedistal(int pnum, int i)
+void OperatePedistal(int pnum, int i)
 {
 	int v2; // esi
 	int v3; // edi
@@ -4758,7 +4758,7 @@ void __fastcall OperatePedistal(int pnum, int i)
 // 5CF334: using guessed type int setpc_w;
 // 676190: using guessed type int deltaload;
 
-void __fastcall TryDisarm(int pnum, int i)
+void TryDisarm(int pnum, int i)
 {
 	int v2; // edi
 	int v3; // esi
@@ -4807,7 +4807,7 @@ void __fastcall TryDisarm(int pnum, int i)
 	}
 }
 
-int __fastcall ItemMiscIdIdx(int imiscid)
+int ItemMiscIdIdx(int imiscid)
 {
 	int result; // eax
 	int *i; // edx
@@ -4818,7 +4818,7 @@ int __fastcall ItemMiscIdIdx(int imiscid)
 	return result;
 }
 
-void __fastcall OperateShrine(int pnum, int i, int sType)
+void OperateShrine(int pnum, int i, int sType)
 {
 	int v3; // esi
 	int *v4; // ebx
@@ -5852,7 +5852,7 @@ LABEL_280:
 // 5BB1ED: using guessed type char leveltype;
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateSkelBook(int pnum, int i, unsigned char sendmsg)
+void OperateSkelBook(int pnum, int i, unsigned char sendmsg)
 {
 	unsigned short v3; // di
 	int v4; // esi
@@ -5891,7 +5891,7 @@ void __fastcall OperateSkelBook(int pnum, int i, unsigned char sendmsg)
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateBookCase(int pnum, int i, unsigned char sendmsg)
+void OperateBookCase(int pnum, int i, unsigned char sendmsg)
 {
 	unsigned short v3; // di
 	int v4; // ebp
@@ -5931,7 +5931,7 @@ void __fastcall OperateBookCase(int pnum, int i, unsigned char sendmsg)
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateDecap(int pnum, int i, unsigned char sendmsg)
+void OperateDecap(int pnum, int i, unsigned char sendmsg)
 {
 	unsigned short v3; // bp
 	int v4; // esi
@@ -5958,7 +5958,7 @@ void __fastcall OperateDecap(int pnum, int i, unsigned char sendmsg)
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateArmorStand(int pnum, int i, unsigned char sendmsg)
+void OperateArmorStand(int pnum, int i, unsigned char sendmsg)
 {
 	unsigned short v3; // di
 	int v4; // esi
@@ -6016,7 +6016,7 @@ LABEL_15:
 }
 // 676190: using guessed type int deltaload;
 
-int __fastcall FindValidShrine(int i)
+int FindValidShrine(int i)
 {
 	bool done; // esi
 	int rv; // eax
@@ -6042,7 +6042,7 @@ int __fastcall FindValidShrine(int i)
 }
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall OperateGoatShrine(int pnum, int i, int sType)
+void OperateGoatShrine(int pnum, int i, int sType)
 {
 	int v3; // edi
 	int v4; // ebx
@@ -6059,7 +6059,7 @@ void __fastcall OperateGoatShrine(int pnum, int i, int sType)
 }
 // 52571C: using guessed type int drawpanflag;
 
-void __fastcall OperateCauldron(int pnum, int i, int sType)
+void OperateCauldron(int pnum, int i, int sType)
 {
 	int v3; // edi
 	int v4; // ebx
@@ -6077,7 +6077,7 @@ void __fastcall OperateCauldron(int pnum, int i, int sType)
 }
 // 52571C: using guessed type int drawpanflag;
 
-bool __fastcall OperateFountains(int pnum, int i)
+bool OperateFountains(int pnum, int i)
 {
 	unsigned short v2; // bx
 	int v3; // esi
@@ -6256,7 +6256,7 @@ LABEL_38:
 // 5BB1ED: using guessed type char leveltype;
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateWeaponRack(int pnum, int i, unsigned char sendmsg)
+void OperateWeaponRack(int pnum, int i, unsigned char sendmsg)
 {
 	unsigned short v3; // di
 	int v4; // esi
@@ -6325,7 +6325,7 @@ LABEL_12:
 // 5BB1ED: using guessed type char leveltype;
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateStoryBook(int pnum, int i)
+void OperateStoryBook(int pnum, int i)
 {
 	unsigned short v2; // di
 	int v3; // esi
@@ -6347,7 +6347,7 @@ void __fastcall OperateStoryBook(int pnum, int i)
 // 646D00: using guessed type char qtextflag;
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateLazStand(int pnum, int i)
+void OperateLazStand(int pnum, int i)
 {
 	int v2; // eax
 	int v3; // edx
@@ -6367,7 +6367,7 @@ void __fastcall OperateLazStand(int pnum, int i)
 // 646D00: using guessed type char qtextflag;
 // 676190: using guessed type int deltaload;
 
-void __fastcall OperateObject(int pnum, int i, unsigned char TeleFlag)
+void OperateObject(int pnum, int i, unsigned char TeleFlag)
 {
 	int v3; // esi
 	int v4; // edi
@@ -6511,7 +6511,7 @@ void __fastcall OperateObject(int pnum, int i, unsigned char TeleFlag)
 	}
 }
 
-void __fastcall SyncOpL1Door(int pnum, int cmd, int i)
+void SyncOpL1Door(int pnum, int cmd, int i)
 {
 	signed int v3; // eax
 	ObjectStruct *v4; // esi
@@ -6538,7 +6538,7 @@ void __fastcall SyncOpL1Door(int pnum, int cmd, int i)
 	}
 }
 
-void __fastcall SyncOpL2Door(int pnum, int cmd, int i)
+void SyncOpL2Door(int pnum, int cmd, int i)
 {
 	signed int v3; // eax
 	ObjectStruct *v4; // esi
@@ -6565,7 +6565,7 @@ void __fastcall SyncOpL2Door(int pnum, int cmd, int i)
 	}
 }
 
-void __fastcall SyncOpL3Door(int pnum, int cmd, int i)
+void SyncOpL3Door(int pnum, int cmd, int i)
 {
 	signed int v3; // eax
 	ObjectStruct *v4; // esi
@@ -6592,7 +6592,7 @@ void __fastcall SyncOpL3Door(int pnum, int cmd, int i)
 	}
 }
 
-void __fastcall SyncOpObject(int pnum, int cmd, int i)
+void SyncOpObject(int pnum, int cmd, int i)
 {
 	switch ( object[i]._otype )
 	{
@@ -6681,7 +6681,7 @@ void __fastcall SyncOpObject(int pnum, int cmd, int i)
 	}
 }
 
-void __fastcall BreakCrux(int i)
+void BreakCrux(int i)
 {
 	int v1; // esi
 	int v2; // edi
@@ -6726,7 +6726,7 @@ LABEL_15:
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall BreakBarrel(int pnum, int i, int dam, unsigned char forcebreak, int sendmsg)
+void BreakBarrel(int pnum, int i, int dam, unsigned char forcebreak, int sendmsg)
 {
 	int v5; // esi
 	bool v6; // zf
@@ -6851,7 +6851,7 @@ void __fastcall BreakBarrel(int pnum, int i, int dam, unsigned char forcebreak, 
 }
 // 676190: using guessed type int deltaload;
 
-void __fastcall BreakObject(int pnum, int oi)
+void BreakObject(int pnum, int oi)
 {
 	int v2; // ebx
 	int v3; // ebp
@@ -6889,7 +6889,7 @@ void __fastcall BreakObject(int pnum, int oi)
 	}
 }
 
-void __fastcall SyncBreakObj(int pnum, int oi)
+void SyncBreakObj(int pnum, int oi)
 {
 	int v2; // eax
 
@@ -6898,7 +6898,7 @@ void __fastcall SyncBreakObj(int pnum, int oi)
 		BreakBarrel(pnum, oi, 0, 1u, 0);
 }
 
-void __fastcall SyncL1Doors(int i)
+void SyncL1Doors(int i)
 {
 	int v1; // ebx
 	int v2; // eax
@@ -6938,7 +6938,7 @@ void __fastcall SyncL1Doors(int i)
 	}
 }
 
-void __fastcall SyncCrux(int i)
+void SyncCrux(int i)
 {
 	signed int v1; // ebx
 	int v2; // edx
@@ -6967,7 +6967,7 @@ LABEL_13:
 		ObjChangeMap(object[i]._oVar1, object[i]._oVar2, object[i]._oVar3, object[i]._oVar4);
 }
 
-void __fastcall SyncLever(int i)
+void SyncLever(int i)
 {
 	int v1; // ecx
 
@@ -6976,7 +6976,7 @@ void __fastcall SyncLever(int i)
 		ObjChangeMap(object[v1]._oVar1, object[v1]._oVar2, object[v1]._oVar3, object[v1]._oVar4);
 }
 
-void __fastcall SyncQSTLever(int i)
+void SyncQSTLever(int i)
 {
 	int v1; // esi
 	int v2; // edx
@@ -7004,7 +7004,7 @@ void __fastcall SyncQSTLever(int i)
 }
 // 5A5590: using guessed type char TransVal;
 
-void __fastcall SyncPedistal(int i)
+void SyncPedistal(int i)
 {
 	int v1; // esi
 	unsigned char *v2; // esi
@@ -7027,7 +7027,7 @@ void __fastcall SyncPedistal(int i)
 }
 // 5CF334: using guessed type int setpc_w;
 
-void __fastcall SyncL2Doors(int i)
+void SyncL2Doors(int i)
 {
 	int v1; // eax
 	int v2; // esi
@@ -7074,7 +7074,7 @@ LABEL_18:
 	}
 }
 
-void __fastcall SyncL3Doors(int i)
+void SyncL3Doors(int i)
 {
 	int v1; // eax
 	int v2; // esi
@@ -7120,7 +7120,7 @@ LABEL_15:
 	}
 }
 
-void __fastcall SyncObjectAnim(int o)
+void SyncObjectAnim(int o)
 {
 	int v1; // edx
 	int v2; // ebx
@@ -7192,7 +7192,7 @@ LABEL_24:
 	}
 }
 
-void __fastcall GetObjectStr(int i)
+void GetObjectStr(int i)
 {
 	int v1; // edi
 

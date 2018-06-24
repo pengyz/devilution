@@ -110,7 +110,7 @@ unsigned char PWATERIN[] = { 6, 6, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 1
 /* rdata */
 unsigned char L5ConvTbl[16] = { 22u, 13u, 1u, 13u, 2u, 13u, 13u, 13u, 4u, 13u, 1u, 13u, 2u, 13u, 16u, 13u };
 
-void __cdecl DRLG_Init_Globals()
+void DRLG_Init_Globals()
 {
 	char v0; // al
 
@@ -131,7 +131,7 @@ void __cdecl DRLG_Init_Globals()
 // 525728: using guessed type int light4flag;
 // 646A28: using guessed type int lightflag;
 
-void __fastcall LoadL1Dungeon(char *sFileName, int vx, int vy)
+void LoadL1Dungeon(char *sFileName, int vx, int vy)
 {
 	char *v3; // esi
 	unsigned char *v4; // esi
@@ -220,7 +220,7 @@ void __fastcall LoadL1Dungeon(char *sFileName, int vx, int vy)
 // 5D2458: using guessed type int dminx;
 // 5D245C: using guessed type int dminy;
 
-void __cdecl DRLG_L1Floor()
+void DRLG_L1Floor()
 {
 	signed int i; // edi
 	signed int v1; // esi
@@ -251,7 +251,7 @@ void __cdecl DRLG_L1Floor()
 	while ( i < 40 );
 }
 
-void __cdecl DRLG_L1Pass3()
+void DRLG_L1Pass3()
 {
 	int v0; // eax
 	int *v1; // edx
@@ -334,7 +334,7 @@ void __cdecl DRLG_L1Pass3()
 	while ( v4 < 40 );
 }
 
-void __cdecl DRLG_InitL1Vals()
+void DRLG_InitL1Vals()
 {
 	int v0; // esi
 	int (*v1)[112]; // edx
@@ -413,7 +413,7 @@ LABEL_23:
 	while ( (signed int)v7 < (signed int)dPiece[1] );
 }
 
-void __fastcall LoadPreL1Dungeon(char *sFileName, int vx, int vy)
+void LoadPreL1Dungeon(char *sFileName, int vx, int vy)
 {
 	unsigned char *v3; // ebx
 	signed int v4; // ecx
@@ -508,7 +508,7 @@ void __fastcall LoadPreL1Dungeon(char *sFileName, int vx, int vy)
 // 5D2458: using guessed type int dminx;
 // 5D245C: using guessed type int dminy;
 
-void __fastcall CreateL5Dungeon(int rseed, int entry)
+void CreateL5Dungeon(int rseed, int entry)
 {
 	int v2; // esi
 
@@ -532,7 +532,7 @@ void __fastcall CreateL5Dungeon(int rseed, int entry)
 // 5D2458: using guessed type int dminx;
 // 5D245C: using guessed type int dminy;
 
-void __cdecl DRLG_LoadL1SP()
+void DRLG_LoadL1SP()
 {
 	setloadflag = 0;
 	if ( QuestStatus(6) )
@@ -554,7 +554,7 @@ void __cdecl DRLG_LoadL1SP()
 // 5276A4: using guessed type int setloadflag;
 // 679660: using guessed type char gbMaxPlayers;
 
-void __cdecl DRLG_FreeL1SP()
+void DRLG_FreeL1SP()
 {
 	void *v0; // ecx
 
@@ -563,7 +563,7 @@ void __cdecl DRLG_FreeL1SP()
 	mem_free_dbg(v0);
 }
 
-void __fastcall DRLG_L5(int entry)
+void DRLG_L5(int entry)
 {
 	signed int v1; // esi
 	signed int v2; // edi
@@ -725,7 +725,7 @@ LABEL_34:
 	DRLG_CheckQuests(setpc_x, setpc_y);
 }
 
-void __fastcall DRLG_PlaceDoor(int x, int y)
+void DRLG_PlaceDoor(int x, int y)
 {
 	int v2; // edi
 	char *v3; // eax
@@ -820,7 +820,7 @@ LABEL_57:
 	*v8 = -128;
 }
 
-void __cdecl DRLG_L1Shadows()
+void DRLG_L1Shadows()
 {
 	signed int v0; // ebx
 	char *v1; // eax
@@ -961,7 +961,7 @@ void __cdecl DRLG_L1Shadows()
 	while ( v10 < 40 );
 }
 
-int __fastcall DRLG_PlaceMiniSet(unsigned char *miniset, int tmin, int tmax, int cx, int cy, bool setview, int noquad, int ldir)
+int DRLG_PlaceMiniSet(unsigned char *miniset, int tmin, int tmax, int cx, int cy, bool setview, int noquad, int ldir)
 {
 	unsigned char *v8; // ebx
 	int v9; // edi
@@ -1188,7 +1188,7 @@ LABEL_57:
 // 5CF320: using guessed type int LvlViewY;
 // 5CF324: using guessed type int LvlViewX;
 
-void __cdecl InitL5Dungeon()
+void InitL5Dungeon()
 {
 	signed int v0; // edx
 	signed int v1; // eax
@@ -1212,7 +1212,7 @@ void __cdecl InitL5Dungeon()
 	while ( v0 < 40 );
 }
 
-void __cdecl L5ClearFlags()
+void L5ClearFlags()
 {
 	signed int v0; // ecx
 	_BYTE *v1; // eax
@@ -1235,7 +1235,7 @@ void __cdecl L5ClearFlags()
 	while ( v0 < 40 );
 }
 
-void __cdecl L5firstRoom()
+void L5firstRoom()
 {
 	signed int v0; // ebx
 	signed int v1; // ebp
@@ -1332,7 +1332,7 @@ void __cdecl L5firstRoom()
 	}
 }
 
-void __fastcall L5drawRoom(int x, int y, int w, int h)
+void L5drawRoom(int x, int y, int w, int h)
 {
 	int i; // esi
 	int v5; // edi
@@ -1355,7 +1355,7 @@ void __fastcall L5drawRoom(int x, int y, int w, int h)
 	}
 }
 
-void __fastcall L5roomGen(int x, int y, int w, int h, bool dir)
+void L5roomGen(int x, int y, int w, int h, bool dir)
 {
 	int v5; // eax
 	int v6; // ecx
@@ -1472,7 +1472,7 @@ void __fastcall L5roomGen(int x, int y, int w, int h, bool dir)
 	}
 }
 
-bool __fastcall L5checkRoom(int x, int y, int width, int height)
+bool L5checkRoom(int x, int y, int width, int height)
 {
 	int v4; // eax
 	int v5; // ebx
@@ -1504,7 +1504,7 @@ LABEL_10:
 	return 0;
 }
 
-int __cdecl L5GetArea()
+int L5GetArea()
 {
 	int rv; // eax
 	signed int i; // edx
@@ -1531,7 +1531,7 @@ int __cdecl L5GetArea()
 	return rv;
 }
 
-void __cdecl L5makeDungeon()
+void L5makeDungeon()
 {
 	signed int v0; // edi
 	signed int v1; // esi
@@ -1562,7 +1562,7 @@ void __cdecl L5makeDungeon()
 	while ( v0 < 40 );
 }
 
-void __cdecl L5makeDmt()
+void L5makeDmt()
 {
 	signed int v0; // ecx
 	_BYTE *v1; // eax
@@ -1614,7 +1614,7 @@ void __cdecl L5makeDmt()
 	while ( v3 <= 77 );
 }
 
-void __cdecl L5AddWall()
+void L5AddWall()
 {
 	int v0; // edi
 	int v1; // esi
@@ -1684,7 +1684,7 @@ void __cdecl L5AddWall()
 	while ( v0 < 40 );
 }
 
-int __fastcall L5HWallOk(int i, int j)
+int L5HWallOk(int i, int j)
 {
 	int v2; // esi
 	char *v3; // edi
@@ -1735,7 +1735,7 @@ int __fastcall L5HWallOk(int i, int j)
 	return result;
 }
 
-int __fastcall L5VWallOk(int i, int j)
+int L5VWallOk(int i, int j)
 {
 	int v2; // ecx
 	int result; // eax
@@ -1775,7 +1775,7 @@ int __fastcall L5VWallOk(int i, int j)
 	return result;
 }
 
-void __fastcall L5HorizWall(int i, int j, char p, int dx)
+void L5HorizWall(int i, int j, char p, int dx)
 {
 	int v4; // edi
 	int v5; // esi
@@ -1853,7 +1853,7 @@ void __fastcall L5HorizWall(int i, int j, char p, int dx)
 	}
 }
 
-void __fastcall L5VertWall(int i, int j, char p, int dy)
+void L5VertWall(int i, int j, char p, int dy)
 {
 	int v4; // edi
 	int v5; // esi
@@ -1943,7 +1943,7 @@ void __fastcall L5VertWall(int i, int j, char p, int dy)
 	}
 }
 
-void __cdecl L5tileFix()
+void L5tileFix()
 {
 	signed int v0; // esi
 	char *v1; // eax
@@ -2224,7 +2224,7 @@ void __cdecl L5tileFix()
 	while ( v35 < 40 );
 }
 
-void __cdecl DRLG_L5Subs()
+void DRLG_L5Subs()
 {
 	signed int v0; // edi
 	int v1; // esi
@@ -2292,7 +2292,7 @@ LABEL_23:
 	while ( v0 < 40 );
 }
 
-void __cdecl L5FillChambers()
+void L5FillChambers()
 {
 	int v0; // edi
 	int v1; // edi
@@ -2482,7 +2482,7 @@ LABEL_107:
 }
 // 5276A4: using guessed type int setloadflag;
 
-void __fastcall DRLG_L5GChamber(int sx, int sy, bool topflag, bool bottomflag, bool leftflag, bool rightflag)
+void DRLG_L5GChamber(int sx, int sy, bool topflag, bool bottomflag, bool leftflag, bool rightflag)
 {
 	int v6; // eax
 	int v7; // edx
@@ -2571,7 +2571,7 @@ void __fastcall DRLG_L5GChamber(int sx, int sy, bool topflag, bool bottomflag, b
 	dungeon[7][v15 + 7] = 15;
 }
 
-void __fastcall DRLG_L5GHall(int x1, int y1, int x2, int y2)
+void DRLG_L5GHall(int x1, int y1, int x2, int y2)
 {
 	int v4; // eax
 	char *v5; // edx
@@ -2610,7 +2610,7 @@ void __fastcall DRLG_L5GHall(int x1, int y1, int x2, int y2)
 	}
 }
 
-void __fastcall DRLG_L5SetRoom(int rx1, int ry1)
+void DRLG_L5SetRoom(int rx1, int ry1)
 {
 	int v2; // edi
 	int v3; // esi
@@ -2662,7 +2662,7 @@ void __fastcall DRLG_L5SetRoom(int rx1, int ry1)
 // 5CF330: using guessed type int setpc_h;
 // 5CF334: using guessed type int setpc_w;
 
-void __cdecl DRLG_L5FloodTVal()
+void DRLG_L5FloodTVal()
 {
 	int v0; // ebx
 	int v1; // esi
@@ -2699,7 +2699,7 @@ void __cdecl DRLG_L5FloodTVal()
 }
 // 5A5590: using guessed type char TransVal;
 
-void __fastcall DRLG_L5FTVR(int i, int j, int x, int y, int d)
+void DRLG_L5FTVR(int i, int j, int x, int y, int d)
 {
 	int v5; // ebx
 	int v6; // esi
@@ -2804,7 +2804,7 @@ void __fastcall DRLG_L5FTVR(int i, int j, int x, int y, int d)
 }
 // 5A5590: using guessed type char TransVal;
 
-void __cdecl DRLG_L5TransFix()
+void DRLG_L5TransFix()
 {
 	signed int v0; // esi
 	char *v1; // eax
@@ -2870,7 +2870,7 @@ void __cdecl DRLG_L5TransFix()
 	while ( v0 < 40 );
 }
 
-void __cdecl DRLG_L5DirtFix()
+void DRLG_L5DirtFix()
 {
 	signed int v0; // ecx
 	char *v1; // eax
@@ -2904,7 +2904,7 @@ void __cdecl DRLG_L5DirtFix()
 	while ( v0 < 40 );
 }
 
-void __cdecl DRLG_L5CornerFix()
+void DRLG_L5CornerFix()
 {
 	signed int v0; // esi
 	signed int v1; // eax

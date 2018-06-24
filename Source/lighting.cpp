@@ -479,7 +479,7 @@ unsigned char byte_49463C[18][18] = /* unused */
 
 unsigned char RadiusAdj[23] = { 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 4, 3, 2, 2, 2, 1, 1, 1, 0, 0, 0, 0 };
 
-void __fastcall SetLightFX(int *x, int *y, short *s_r, short *s_g, int *s_b, int *d_r, int *d_g, int *d_b)
+void SetLightFX(int *x, int *y, short *s_r, short *s_g, int *s_b, int *d_r, int *d_g, int *d_b)
 {
 	short *v8; // eax
 	int v9; // edx
@@ -510,7 +510,7 @@ void __fastcall SetLightFX(int *x, int *y, short *s_r, short *s_g, int *s_b, int
 	}
 }
 
-void __fastcall DoLighting(int nXPos, int nYPos, int nRadius, int Lnum)
+void DoLighting(int nXPos, int nYPos, int nRadius, int Lnum)
 {
 	int v4; // edi
 	int v5; // ebx
@@ -792,7 +792,7 @@ void __fastcall DoLighting(int nXPos, int nYPos, int nRadius, int Lnum)
 	}
 }
 
-void __fastcall DoUnLight(int nXPos, int nYPos, int nRadius)
+void DoUnLight(int nXPos, int nYPos, int nRadius)
 {
 	int max_y; // ebx
 	int y; // esi
@@ -832,7 +832,7 @@ void __fastcall DoUnLight(int nXPos, int nYPos, int nRadius)
 	}
 }
 
-void __fastcall DoUnVision(int nXPos, int nYPos, int nRadius)
+void DoUnVision(int nXPos, int nYPos, int nRadius)
 {
 	int y2; // edi
 	int y1; // esi
@@ -869,7 +869,7 @@ void __fastcall DoUnVision(int nXPos, int nYPos, int nRadius)
 	}
 }
 
-void __fastcall DoVision(int nXPos, int nYPos, int nRadius, unsigned char doautomap, int visible)
+void DoVision(int nXPos, int nYPos, int nRadius, unsigned char doautomap, int visible)
 {
 	char *v5; // esi
 	int v6; // esi
@@ -1032,7 +1032,7 @@ void __fastcall DoVision(int nXPos, int nYPos, int nRadius, unsigned char doauto
 	while ( v27 < 4 );
 }
 
-void __cdecl FreeLightTable()
+void FreeLightTable()
 {
 	char *v0; // ecx
 
@@ -1041,12 +1041,12 @@ void __cdecl FreeLightTable()
 	mem_free_dbg(v0);
 }
 
-void __cdecl InitLightTable()
+void InitLightTable()
 {
 	pLightTbl = (char *)DiabloAllocPtr(6912);
 }
 
-void __cdecl MakeLightTable()
+void MakeLightTable()
 {
 	char *v0; // ebx
 	signed int v1; // esi
@@ -1392,7 +1392,7 @@ void __cdecl MakeLightTable()
 // 5BB1ED: using guessed type char leveltype;
 
 #ifdef _DEBUG
-void __cdecl ToggleLighting()
+void ToggleLighting()
 {
 	int i;
 
@@ -1416,14 +1416,14 @@ void __cdecl ToggleLighting()
 }
 #endif
 
-void __cdecl InitLightMax()
+void InitLightMax()
 {
 	lightmax = light4flag == 0 ? 15 : 3;
 }
 // 525728: using guessed type int light4flag;
 // 642A14: using guessed type char lightmax;
 
-void __cdecl InitLighting()
+void InitLighting()
 {
 	signed int v0; // eax
 
@@ -1441,7 +1441,7 @@ void __cdecl InitLighting()
 // 642A18: using guessed type int dolighting;
 // 646A28: using guessed type int lightflag;
 
-int __fastcall AddLight(int x, int y, int r)
+int AddLight(int x, int y, int r)
 {
 	int lid; // eax
 
@@ -1463,7 +1463,7 @@ int __fastcall AddLight(int x, int y, int r)
 // 642A18: using guessed type int dolighting;
 // 646A28: using guessed type int lightflag;
 
-void __fastcall AddUnLight(int i)
+void AddUnLight(int i)
 {
 	if ( !lightflag && i != -1 )
 	{
@@ -1474,7 +1474,7 @@ void __fastcall AddUnLight(int i)
 // 642A18: using guessed type int dolighting;
 // 646A28: using guessed type int lightflag;
 
-void __fastcall ChangeLightRadius(int i, int r)
+void ChangeLightRadius(int i, int r)
 {
 	if ( !lightflag && i != -1 )
 	{
@@ -1489,7 +1489,7 @@ void __fastcall ChangeLightRadius(int i, int r)
 // 642A18: using guessed type int dolighting;
 // 646A28: using guessed type int lightflag;
 
-void __fastcall ChangeLightXY(int i, int x, int y)
+void ChangeLightXY(int i, int x, int y)
 {
 	if ( !lightflag && i != -1 )
 	{
@@ -1505,7 +1505,7 @@ void __fastcall ChangeLightXY(int i, int x, int y)
 // 642A18: using guessed type int dolighting;
 // 646A28: using guessed type int lightflag;
 
-void __fastcall ChangeLightOff(int i, int x, int y)
+void ChangeLightOff(int i, int x, int y)
 {
 	if ( !lightflag && i != -1 )
 	{
@@ -1521,7 +1521,7 @@ void __fastcall ChangeLightOff(int i, int x, int y)
 // 642A18: using guessed type int dolighting;
 // 646A28: using guessed type int lightflag;
 
-void __fastcall ChangeLight(int i, int x, int y, int r)
+void ChangeLight(int i, int x, int y, int r)
 {
 	if ( !lightflag && i != -1 )
 	{
@@ -1538,7 +1538,7 @@ void __fastcall ChangeLight(int i, int x, int y, int r)
 // 642A18: using guessed type int dolighting;
 // 646A28: using guessed type int lightflag;
 
-void __cdecl ProcessLightList()
+void ProcessLightList()
 {
 	int v0; // ebp
 	int v1; // edi
@@ -1608,12 +1608,12 @@ void __cdecl ProcessLightList()
 // 642A18: using guessed type int dolighting;
 // 646A28: using guessed type int lightflag;
 
-void __cdecl SavePreLighting()
+void SavePreLighting()
 {
 	memcpy(dTransVal2, dTransVal, 0x3100u);
 }
 
-void __cdecl InitVision()
+void InitVision()
 {
 	numvision = 0;
 	dovision = 0;
@@ -1624,7 +1624,7 @@ void __cdecl InitVision()
 // 5A5590: using guessed type char TransVal;
 // 642A0C: using guessed type int dovision;
 
-int __fastcall AddVision(int x, int y, int r, bool mine)
+int AddVision(int x, int y, int r, bool mine)
 {
 	int vid; // eax
 	int v5; // esi
@@ -1648,7 +1648,7 @@ int __fastcall AddVision(int x, int y, int r, bool mine)
 }
 // 642A0C: using guessed type int dovision;
 
-void __fastcall ChangeVisionRadius(int id, int r)
+void ChangeVisionRadius(int id, int r)
 {
 	int i; // esi
 
@@ -1670,7 +1670,7 @@ void __fastcall ChangeVisionRadius(int id, int r)
 }
 // 642A0C: using guessed type int dovision;
 
-void __fastcall ChangeVisionXY(int id, int x, int y)
+void ChangeVisionXY(int id, int x, int y)
 {
 	int i; // esi
 
@@ -1693,7 +1693,7 @@ void __fastcall ChangeVisionXY(int id, int x, int y)
 }
 // 642A0C: using guessed type int dovision;
 
-void __cdecl ProcessVisionList()
+void ProcessVisionList()
 {
 	bool delflag; // ecx
 	int i;
@@ -1744,7 +1744,7 @@ void __cdecl ProcessVisionList()
 // 5A5590: using guessed type char TransVal;
 // 642A0C: using guessed type int dovision;
 
-void __cdecl lighting_color_cycling()
+void lighting_color_cycling()
 {
 	char *v0; // eax
 	signed int v1; // ebx

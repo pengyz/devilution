@@ -8,16 +8,16 @@ extern char log_buffer[388];
 extern LPCVOID lpAddress; // idb
 extern DWORD nNumberOfBytesToWrite; // idb
 
-void __cdecl log_cpp_init_1();
-void __cdecl log_cpp_init_2();
-void __cdecl log_init_mutex();
-void __cdecl j_log_cleanup_mutex();
-void __cdecl log_cleanup_mutex();
-void __cdecl log_flush(bool force_close);
-void *__cdecl log_create(); // should be HANDLE
-void __fastcall log_get_version(VS_FIXEDFILEINFO *file_info);
+void log_cpp_init_1();
+void log_cpp_init_2();
+void log_init_mutex();
+void j_log_cleanup_mutex();
+void log_cleanup_mutex();
+void log_flush(bool force_close);
+void *log_create(); // should be HANDLE
+void log_get_version(VS_FIXEDFILEINFO *file_info);
 void log_printf(char *pszFmt, ...); // LogMessage
-void __cdecl log_dump_computer_info();
+void log_dump_computer_info();
 
 /* data */
 

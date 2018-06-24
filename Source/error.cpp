@@ -55,7 +55,7 @@ char *MsgStrings[44] =
   "Arcane knowledge gained!"
 };
 
-void __fastcall InitDiabloMsg(char e)
+void InitDiabloMsg(char e)
 {
 	int i; // edx
 	bool v2; // sf
@@ -86,7 +86,7 @@ LABEL_4:
 // 52B9F1: using guessed type char msgflag;
 // 52B9F2: using guessed type char msgcnt;
 
-void __cdecl ClrDiabloMsg()
+void ClrDiabloMsg()
 {
 	msgflag = 0;
 	msgcnt = 0;
@@ -95,7 +95,7 @@ void __cdecl ClrDiabloMsg()
 // 52B9F1: using guessed type char msgflag;
 // 52B9F2: using guessed type char msgcnt;
 
-void __cdecl DrawDiabloMsg()
+void DrawDiabloMsg()
 {
 	int v0; // esi
 	signed int v1; // edi

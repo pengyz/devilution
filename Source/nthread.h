@@ -19,20 +19,20 @@ extern int gdwLargestMsgSize; // weak
 extern int gdwNormalMsgSize; // weak
 extern int dword_679764; // weak
 
-void __cdecl nthread_cpp_init_1();
-void __cdecl nthread_cpp_init_2();
-void __cdecl nthread_init_mutex();
-void __cdecl nthread_cleanup_mutex_atexit();
-void __cdecl nthread_cleanup_mutex();
-void __fastcall nthread_terminate_game(char *pszFcn);
-int __fastcall nthread_send_and_recv_turn(int cur_turn, int turn_delta);
-int __fastcall nthread_recv_turns(int *pfSendAsync);
-void __cdecl nthread_set_turn_upper_bit();
-void __fastcall nthread_start(bool set_turn_upper_bit);
+void nthread_cpp_init_1();
+void nthread_cpp_init_2();
+void nthread_init_mutex();
+void nthread_cleanup_mutex_atexit();
+void nthread_cleanup_mutex();
+void nthread_terminate_game(char *pszFcn);
+int nthread_send_and_recv_turn(int cur_turn, int turn_delta);
+int nthread_recv_turns(int *pfSendAsync);
+void nthread_set_turn_upper_bit();
+void nthread_start(bool set_turn_upper_bit);
 unsigned int __stdcall nthread_handler(void *a1);
-void __cdecl nthread_cleanup();
-void __fastcall nthread_ignore_mutex(bool bStart);
-bool __cdecl nthread_has_500ms_passed();
+void nthread_cleanup();
+void nthread_ignore_mutex(bool bStart);
+bool nthread_has_500ms_passed();
 
 /* data */
 

@@ -308,7 +308,7 @@ QuestTalkData Qtalklist[11] =
 };
 int CowPlaying = -1;
 
-int __fastcall GetActiveTowner(int t)
+int GetActiveTowner(int t)
 {
 	int i; // eax
 
@@ -325,7 +325,7 @@ int __fastcall GetActiveTowner(int t)
 	return i;
 }
 
-void __fastcall SetTownerGPtrs(void *pData, void **pAnim)
+void SetTownerGPtrs(void *pData, void **pAnim)
 {
 	void **v2; // esi
 	signed int v3; // edx
@@ -343,7 +343,7 @@ void __fastcall SetTownerGPtrs(void *pData, void **pAnim)
 	while ( v5 < 8 );
 }
 
-void __fastcall NewTownerAnim(int tnum, void *pAnim, int numFrames, int Delay)
+void NewTownerAnim(int tnum, void *pAnim, int numFrames, int Delay)
 {
 	int v4; // ecx
 
@@ -355,7 +355,7 @@ void __fastcall NewTownerAnim(int tnum, void *pAnim, int numFrames, int Delay)
 	towner[v4]._tAnimDelay = Delay;
 }
 
-void __fastcall InitTownerInfo(int i, int w, bool sel, int t, int x, int y, int ao, int tp)
+void InitTownerInfo(int i, int w, bool sel, int t, int x, int y, int ao, int tp)
 {
 	int v8; // ebx
 	int v9; // esi
@@ -378,7 +378,7 @@ void __fastcall InitTownerInfo(int i, int w, bool sel, int t, int x, int y, int 
 	towner[v9]._tSeed = GetRndSeed();
 }
 
-void __fastcall InitQstSnds(int i)
+void InitQstSnds(int i)
 {
 	int v1; // eax
 	_BYTE *v2; // ecx
@@ -407,7 +407,7 @@ void __fastcall InitQstSnds(int i)
 // 69BE90: using guessed type int qline;
 // 6AAC2C: using guessed type int boyloadflag;
 
-void __cdecl InitSmith()
+void InitSmith()
 {
 	int v0; // esi
 	int v1; // esi
@@ -436,7 +436,7 @@ void __cdecl InitSmith()
 	++numtowners;
 }
 
-void __cdecl InitBarOwner()
+void InitBarOwner()
 {
 	int v0; // esi
 	int v1; // esi
@@ -467,7 +467,7 @@ void __cdecl InitBarOwner()
 }
 // 6AAC28: using guessed type int bannerflag;
 
-void __cdecl InitTownDead()
+void InitTownDead()
 {
 	int v0; // esi
 	int v1; // esi
@@ -496,7 +496,7 @@ void __cdecl InitTownDead()
 	++numtowners;
 }
 
-void __cdecl InitWitch()
+void InitWitch()
 {
 	int v0; // esi
 	int v1; // esi
@@ -523,7 +523,7 @@ void __cdecl InitWitch()
 	++numtowners;
 }
 
-void __cdecl InitBarmaid()
+void InitBarmaid()
 {
 	int v0; // esi
 	int v1; // esi
@@ -550,7 +550,7 @@ void __cdecl InitBarmaid()
 	++numtowners;
 }
 
-void __cdecl InitBoy()
+void InitBoy()
 {
 	int v0; // esi
 	int v1; // esi
@@ -579,7 +579,7 @@ void __cdecl InitBoy()
 }
 // 6AAC2C: using guessed type int boyloadflag;
 
-void __cdecl InitHealer()
+void InitHealer()
 {
 	int v0; // esi
 	int v1; // esi
@@ -608,7 +608,7 @@ void __cdecl InitHealer()
 	++numtowners;
 }
 
-void __cdecl InitTeller()
+void InitTeller()
 {
 	int v0; // esi
 	int v1; // esi
@@ -635,7 +635,7 @@ void __cdecl InitTeller()
 	++numtowners;
 }
 
-void __cdecl InitDrunk()
+void InitDrunk()
 {
 	int v0; // esi
 	int v1; // esi
@@ -662,7 +662,7 @@ void __cdecl InitDrunk()
 	++numtowners;
 }
 
-void __cdecl InitCows()
+void InitCows()
 {
 	unsigned char *v0; // eax
 	int v1; // ecx
@@ -725,7 +725,7 @@ void __cdecl InitCows()
 }
 // 6AAC2C: using guessed type int boyloadflag;
 
-void __cdecl InitTowners()
+void InitTowners()
 {
 	numtowners = 0;
 	boyloadflag = 0;
@@ -743,7 +743,7 @@ void __cdecl InitTowners()
 }
 // 6AAC2C: using guessed type int boyloadflag;
 
-void __cdecl FreeTownerGFX()
+void FreeTownerGFX()
 {
 	void **v0; // esi
 	void *v1; // ecx
@@ -771,7 +771,7 @@ void __cdecl FreeTownerGFX()
 }
 // 6ABB9C: using guessed type int dword_6ABB9C;
 
-void __fastcall TownCtrlMsg(int i)
+void TownCtrlMsg(int i)
 {
 	int p; // edi
 	int dx; // ebx
@@ -793,7 +793,7 @@ void __fastcall TownCtrlMsg(int i)
 }
 // 646D00: using guessed type char qtextflag;
 
-void __cdecl TownBlackSmith()
+void TownBlackSmith()
 {
 	int v0; // eax
 
@@ -801,7 +801,7 @@ void __cdecl TownBlackSmith()
 	TownCtrlMsg(v0);
 }
 
-void __cdecl TownBarOwner()
+void TownBarOwner()
 {
 	int v0; // eax
 
@@ -809,7 +809,7 @@ void __cdecl TownBarOwner()
 	TownCtrlMsg(v0);
 }
 
-void __cdecl TownDead()
+void TownDead()
 {
 	int v0; // esi
 	int v1; // eax
@@ -831,7 +831,7 @@ LABEL_6:
 }
 // 646D00: using guessed type char qtextflag;
 
-void __cdecl TownHealer()
+void TownHealer()
 {
 	int v0; // eax
 
@@ -839,7 +839,7 @@ void __cdecl TownHealer()
 	TownCtrlMsg(v0);
 }
 
-void __cdecl TownStory()
+void TownStory()
 {
 	int v0; // eax
 
@@ -847,7 +847,7 @@ void __cdecl TownStory()
 	TownCtrlMsg(v0);
 }
 
-void __cdecl TownDrunk()
+void TownDrunk()
 {
 	int v0; // eax
 
@@ -855,7 +855,7 @@ void __cdecl TownDrunk()
 	TownCtrlMsg(v0);
 }
 
-void __cdecl TownBoy()
+void TownBoy()
 {
 	int v0; // eax
 
@@ -863,7 +863,7 @@ void __cdecl TownBoy()
 	TownCtrlMsg(v0);
 }
 
-void __cdecl TownWitch()
+void TownWitch()
 {
 	int v0; // eax
 
@@ -871,7 +871,7 @@ void __cdecl TownWitch()
 	TownCtrlMsg(v0);
 }
 
-void __cdecl TownBarMaid()
+void TownBarMaid()
 {
 	int v0; // eax
 
@@ -879,7 +879,7 @@ void __cdecl TownBarMaid()
 	TownCtrlMsg(v0);
 }
 
-void __cdecl TownCow()
+void TownCow()
 {
 	int v0; // eax
 
@@ -887,7 +887,7 @@ void __cdecl TownCow()
 	TownCtrlMsg(v0);
 }
 
-void __cdecl ProcessTowners()
+void ProcessTowners()
 {
 	int *v0; // esi
 	char v1; // al
@@ -956,7 +956,7 @@ void __cdecl ProcessTowners()
 	while ( (signed int)v0 < (signed int)&towner[16]._tAnimCnt );
 }
 
-ItemStruct *__fastcall PlrHasItem(int pnum, int item, int *i)
+ItemStruct *PlrHasItem(int pnum, int item, int *i)
 {
 	unsigned int v3; // eax
 	int v4; // ecx
@@ -975,7 +975,7 @@ ItemStruct *__fastcall PlrHasItem(int pnum, int item, int *i)
 	return (ItemStruct *)((char *)&plr[0].InvList[*i] + v3);
 }
 
-void __fastcall TownerTalk(int t)
+void TownerTalk(int t)
 {
 	sgdwCowClicks = 0;
 	sgnCowMsg = 0;
@@ -986,7 +986,7 @@ void __fastcall TownerTalk(int t)
 // 6AAC1C: using guessed type int sgnCowMsg;
 // 6AAC24: using guessed type int sgdwCowClicks;
 
-void __fastcall TalkToTowner(int p, int t)
+void TalkToTowner(int p, int t)
 {
 	int v2; // ebx
 	int v3; // edi
@@ -1476,7 +1476,7 @@ LABEL_86:
 // 679660: using guessed type char gbMaxPlayers;
 // 6AAC18: using guessed type int storeflag;
 
-void __fastcall CowSFX(int pnum)
+void CowSFX(int pnum)
 {
 	if ( CowPlaying == -1 || !effect_is_playing(CowPlaying) )
 	{

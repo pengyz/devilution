@@ -77,7 +77,7 @@ struct diablo_cpp_init
 // 479BF8: using guessed type int diablo_inf;
 // 525514: using guessed type int diablo_cpp_init_value;
 
-void __cdecl FreeGameMem()
+void FreeGameMem()
 {
 	void *v0; // ecx
 	void *v1; // ecx
@@ -108,7 +108,7 @@ void __cdecl FreeGameMem()
 	FreeTownerGFX();
 }
 
-int __fastcall diablo_init_menu(int a1, int bSinglePlayer)
+int diablo_init_menu(int a1, int bSinglePlayer)
 {
 	int v2; // esi
 	int v3; // edi
@@ -146,7 +146,7 @@ LABEL_11:
 // 5256E8: using guessed type int dword_5256E8;
 // 678640: using guessed type char byte_678640;
 
-void __fastcall run_game_loop(int uMsg)
+void run_game_loop(int uMsg)
 {
 	//int v3; // eax
 	bool v5; // zf
@@ -231,7 +231,7 @@ void __fastcall run_game_loop(int uMsg)
 // 52571C: using guessed type int drawpanflag;
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall start_game(int uMsg)
+void start_game(int uMsg)
 {
 	cineflag = 0;
 	zoomflag = 1;
@@ -250,7 +250,7 @@ void __fastcall start_game(int uMsg)
 // 525718: using guessed type char cineflag;
 // 525748: using guessed type char sgbMouseDown;
 
-void __cdecl free_game()
+void free_game()
 {
 	int i; // esi
 
@@ -270,7 +270,7 @@ void __cdecl free_game()
 	FreeGameMem();
 }
 
-bool __cdecl diablo_get_not_running()
+bool diablo_get_not_running()
 {
 	SetLastError(0);
 	CreateEventA(NULL, FALSE, FALSE, "DiabloEvent");
@@ -342,7 +342,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	return 0;
 }
 
-void __fastcall diablo_parse_flags(char *args)
+void diablo_parse_flags(char *args)
 {
 #ifdef _DEBUG
 	int n; // edi
@@ -468,7 +468,7 @@ void __fastcall diablo_parse_flags(char *args)
 // 52A548: using guessed type char gbBackBuf;
 // 52A549: using guessed type char gbEmulate;
 
-void __cdecl diablo_init_screen()
+void diablo_init_screen()
 {
 	int v0; // ecx
 	int *v1; // eax
@@ -493,7 +493,7 @@ void __cdecl diablo_init_screen()
 }
 // 69CEFC: using guessed type int scrollrt_cpp_init_value;
 
-HWND __fastcall diablo_find_window(LPCSTR lpClassName)
+HWND diablo_find_window(LPCSTR lpClassName)
 {
 	HWND result; // eax
 	HWND v2; // esi
@@ -517,7 +517,7 @@ HWND __fastcall diablo_find_window(LPCSTR lpClassName)
 	return result;
 }
 
-void __fastcall diablo_reload_process(HMODULE hModule)
+void diablo_reload_process(HMODULE hModule)
 {
 	char *i; // eax
 	DWORD dwSize; // esi
@@ -602,7 +602,7 @@ LABEL_23:
 	}
 }
 
-int __cdecl PressEscKey()
+int PressEscKey()
 {
 	int result; // eax
 
@@ -839,7 +839,7 @@ int __stdcall GM_Game(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 // 525748: using guessed type char sgbMouseDown;
 // 679660: using guessed type char gbMaxPlayers;
 
-bool __fastcall LeftMouseDown(int a1)
+bool LeftMouseDown(int a1)
 {
 	int v1; // edi
 	int v3; // eax
@@ -1043,7 +1043,7 @@ LABEL_98:
 // 69BD04: using guessed type int questlog;
 // 6AA705: using guessed type char stextflag;
 
-bool __cdecl TryIconCurs()
+bool TryIconCurs()
 {
 	unsigned char v0; // dl
 	int v1; // edx
@@ -1120,7 +1120,7 @@ LABEL_26:
 // 4B8CC1: using guessed type char pcursobj;
 // 4B8CC2: using guessed type char pcursplr;
 
-void __cdecl LeftMouseUp()
+void LeftMouseUp()
 {
 	gmenu_left_mouse(0);
 	control_release_talk_btn();
@@ -1138,7 +1138,7 @@ void __cdecl LeftMouseUp()
 // 4B8C90: using guessed type int panbtndown;
 // 6AA705: using guessed type char stextflag;
 
-void __cdecl RightMouseDown()
+void RightMouseDown()
 {
 	if ( !gmenu_exception() && sgnTimeoutCurs == CURSOR_NONE && PauseMode != 2 && !plr[myplr]._pInvincible )
 	{
@@ -1177,7 +1177,7 @@ void __cdecl RightMouseDown()
 // 52575C: using guessed type int doomflag;
 // 6AA705: using guessed type char stextflag;
 
-bool __fastcall PressSysKey(int wParam)
+bool PressSysKey(int wParam)
 {
 	if ( gmenu_exception() || wParam != VK_F10 )
 		return 0;
@@ -1185,7 +1185,7 @@ bool __fastcall PressSysKey(int wParam)
 	return 1;
 }
 
-void __fastcall diablo_hotkey_msg(int dwMsg)
+void diablo_hotkey_msg(int dwMsg)
 {
 	int v1; // esi
 	char *v2; // eax
@@ -1209,13 +1209,13 @@ void __fastcall diablo_hotkey_msg(int dwMsg)
 // 48437C: using guessed type char *spszMsgKeyTbl[4];
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall ReleaseKey(int vkey)
+void ReleaseKey(int vkey)
 {
 	if ( vkey == VK_SNAPSHOT )
 		CaptureScreen();
 }
 
-void __fastcall PressKey(int vkey)
+void PressKey(int vkey)
 {
 	int v1; // esi
 	int v2; // ecx
@@ -1459,7 +1459,7 @@ LABEL_101:
 // 69BD04: using guessed type int questlog;
 // 6AA705: using guessed type char stextflag;
 
-void __cdecl diablo_pause_game()
+void diablo_pause_game()
 {
 	if ( (unsigned char)gbMaxPlayers <= 1u )
 	{
@@ -1480,7 +1480,7 @@ void __cdecl diablo_pause_game()
 // 525740: using guessed type int PauseMode;
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall PressChar(int vkey)
+void PressChar(int vkey)
 {
 	int v1; // ebx
 	BOOL v4; // ecx
@@ -1796,7 +1796,7 @@ LABEL_27:
 // 69BD04: using guessed type int questlog;
 // 6AA705: using guessed type char stextflag;
 
-void __cdecl LoadLvlGFX()
+void LoadLvlGFX()
 {
 	unsigned char *v0; // eax
 	char *v1; // ecx
@@ -1856,7 +1856,7 @@ LABEL_14:
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __cdecl LoadAllGFX()
+void LoadAllGFX()
 {
 	pSpeedCels = DiabloAllocPtr(0x100000);
 	IncProgress();
@@ -1867,7 +1867,7 @@ void __cdecl LoadAllGFX()
 	IncProgress();
 }
 
-void __fastcall CreateLevel(int lvldir)
+void CreateLevel(int lvldir)
 {
 	int hnd; // cl
 
@@ -1911,7 +1911,7 @@ void __fastcall CreateLevel(int lvldir)
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void __fastcall LoadGameLevel(bool firstflag, int lvldir)
+void LoadGameLevel(bool firstflag, int lvldir)
 {
 	int v2; // ebp
 	bool visited; // edx
@@ -2148,7 +2148,7 @@ LABEL_72:
 // 5CF31D: using guessed type char setlevel;
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall game_loop(bool startup)
+void game_loop(bool startup)
 {
 	int v1; // ecx
 	int v2; // esi
@@ -2183,7 +2183,7 @@ void __fastcall game_loop(bool startup)
 // 525650: using guessed type int gbRunGame;
 // 679660: using guessed type char gbMaxPlayers;
 
-void __cdecl game_logic()
+void game_logic()
 {
 	if ( PauseMode != 2 )
 	{
@@ -2240,7 +2240,7 @@ void __cdecl game_logic()
 // 5BB1ED: using guessed type char leveltype;
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall timeout_cursor(bool timeout)
+void timeout_cursor(bool timeout)
 {
 	if ( timeout )
 	{
@@ -2267,7 +2267,7 @@ void __fastcall timeout_cursor(bool timeout)
 // 52571C: using guessed type int drawpanflag;
 // 525748: using guessed type char sgbMouseDown;
 
-void __cdecl diablo_color_cyc_logic()
+void diablo_color_cyc_logic()
 {
 	DWORD v0; // eax
 

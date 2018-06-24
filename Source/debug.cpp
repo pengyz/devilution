@@ -6,14 +6,14 @@ void *pSquareCel;
 char dMonsDbg[17][112][112];
 char dFlagDbg[17][112][112];
 
-void __cdecl LoadDebugGFX()
+void LoadDebugGFX()
 {
 	if ( visiondebug )
 		pSquareCel = LoadFileInMem("Data\\Square.CEL", 0);
 }
 // 525720: using guessed type int visiondebug;
 
-void __cdecl FreeDebugGFX()
+void FreeDebugGFX()
 {
 	void *v0; // ecx
 
@@ -22,7 +22,7 @@ void __cdecl FreeDebugGFX()
 	mem_free_dbg(v0);
 }
 
-void __cdecl CheckDungeonClear()
+void CheckDungeonClear()
 {
 	int i;
 	int j;
@@ -43,7 +43,7 @@ void __cdecl CheckDungeonClear()
 }
 
 #ifdef _DEBUG
-void __cdecl GiveGoldCheat()
+void GiveGoldCheat()
 {
 	int i; // esi
 	int ni; // ebp
@@ -63,7 +63,7 @@ void __cdecl GiveGoldCheat()
 	}
 }
 
-void __cdecl StoresCheat()
+void StoresCheat()
 {
 	int i; // eax
 
@@ -80,7 +80,7 @@ void __cdecl StoresCheat()
 	SpawnWitch(30);
 }
 
-void __cdecl TakeGoldCheat()
+void TakeGoldCheat()
 {
 	int i; // esi
 	char ig; // cl
@@ -101,7 +101,7 @@ void __cdecl TakeGoldCheat()
 	plr[myplr]._pGold = 0;
 }
 
-void __cdecl MaxSpellsCheat()
+void MaxSpellsCheat()
 {
 	int i; // ebp
 
@@ -115,7 +115,7 @@ void __cdecl MaxSpellsCheat()
 	}
 }
 
-void __fastcall PrintDebugPlayer(bool bNextPlayer)
+void PrintDebugPlayer(bool bNextPlayer)
 {
 	char dstr[128]; // [esp+Ch] [ebp-80h]
 
@@ -140,7 +140,7 @@ void __fastcall PrintDebugPlayer(bool bNextPlayer)
 	}
 }
 
-void __cdecl PrintDebugQuest()
+void PrintDebugQuest()
 {
 	char dstr[128]; // [esp+0h] [ebp-80h]
 
@@ -150,7 +150,7 @@ void __cdecl PrintDebugQuest()
 		dbgqst = 0;
 }
 
-void __fastcall PrintDebugMonster(int m)
+void PrintDebugMonster(int m)
 {
 	bool bActive; // ecx
 	int i; // eax
@@ -177,7 +177,7 @@ void __fastcall PrintDebugMonster(int m)
 	NetSendCmdString(1 << myplr, dstr);
 }
 
-void __cdecl GetDebugMonster()
+void GetDebugMonster()
 {
 	int v0; // ecx
 	int v1; // eax
@@ -200,7 +200,7 @@ void __cdecl GetDebugMonster()
 	PrintDebugMonster(v0);
 }
 
-void __cdecl NextDebugMonster()
+void NextDebugMonster()
 {
 	char dstr[128]; // [esp+0h] [ebp-80h]
 
