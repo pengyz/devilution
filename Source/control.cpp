@@ -2539,7 +2539,7 @@ LABEL_16:
 void DrawDurIcon()
 {
 	int v0; // edx
-	PlayerStruct *v1; // esi
+	PlayerStruct *pPlayer; // esi
 	int v2; // eax
 	int v3; // eax
 	int v4; // eax
@@ -2549,11 +2549,11 @@ void DrawDurIcon()
 		v0 = 656;
 		if ( invflag || sbookflag )
 			v0 = 336;
-		v1 = &plr[myplr];
-		v2 = DrawDurIcon4Item(v1->InvBody, v0, 4);
-		v3 = DrawDurIcon4Item(&v1->InvBody[6], v2, 3);
-		v4 = DrawDurIcon4Item(&v1->InvBody[4], v3, 0);
-		DrawDurIcon4Item(&v1->InvBody[5], v4, 0);
+		pPlayer = &plr[myplr];
+		v2 = DrawDurIcon4Item(pPlayer->InvBody, v0, 4);
+		v3 = DrawDurIcon4Item(&pPlayer->InvBody[6], v2, 3);
+		v4 = DrawDurIcon4Item(&pPlayer->InvBody[4], v3, 0);
+		DrawDurIcon4Item(&pPlayer->InvBody[5], v4, 0);
 	}
 }
 // 4B8968: using guessed type int sbookflag;

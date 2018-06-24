@@ -1,3 +1,7 @@
+#ifndef __STRUCTS_H__
+#define __STRUCTS_H__
+
+
 struct UItemStruct
 {
 	char *UIName;
@@ -1597,3 +1601,4 @@ typedef struct ChatCmd {
 	struct ChatCmd *next;
 	ServerCommand *extern_msgs[2];
 } ChatCmd;
+#endif

@@ -1589,203 +1589,175 @@ LABEL_89:
 
 void CheckInvSwap(int pnum, int bLoc, int idx, int wCI, int seed, int bId)
 {
-	unsigned char v6; // bl
-	PlayerStruct *v7; // eax
-	int p; // [esp+Ch] [ebp-4h]
-
-	v6 = bLoc;
-	p = pnum;
 	RecreateItem(127, idx, wCI, seed, 0);
-	v7 = &plr[p];
-	qmemcpy(&v7->HoldItem, &item[127], sizeof(v7->HoldItem));
+	PlayerStruct * pPlayer = &plr[pnum];
+	qmemcpy(&pPlayer->HoldItem, &item[127], sizeof(pPlayer->HoldItem));
 	if ( bId )
-		v7->HoldItem._iIdentified = 1;
-	if ( v6 < 7u )
+		pPlayer->HoldItem._iIdentified = 1;
+	if ( bLoc < 7u )
 	{
-		qmemcpy(&v7->InvBody[v6], &v7->HoldItem, sizeof(v7->InvBody[v6]));
-		if ( v6 == 4 )
+		qmemcpy(&pPlayer->InvBody[bLoc], &pPlayer->HoldItem, sizeof(pPlayer->InvBody[bLoc]));
+		if ( bLoc == 4 )
 		{
-			if ( v7->HoldItem._iLoc == ILOC_TWOHAND )
-				v7->InvBody[5]._itype = ITYPE_NONE;
+			if ( pPlayer->HoldItem._iLoc == ILOC_TWOHAND )
+				pPlayer->InvBody[5]._itype = ITYPE_NONE;
 		}
-		else if ( v6 == 5 && v7->HoldItem._iLoc == ILOC_TWOHAND )
+		else if ( bLoc == 5 && pPlayer->HoldItem._iLoc == ILOC_TWOHAND )
 		{
-			v7->InvBody[4]._itype = ITYPE_NONE;
+			pPlayer->InvBody[4]._itype = ITYPE_NONE;
 		}
 	}
-	CalcPlrInv(p, 1u);
+	CalcPlrInv(pnum, 1u);
 }
 
 void CheckInvCut(int pnum, int mx, int my)
 {
-	int v3; // ebp
-	signed int v4; // ecx
-	signed int v5; // ebx
-	int v6; // eax
-	int v7; // eax
 	char v8; // al
 	int v9; // edx
-	signed int v10; // esi
 	char *v11; // eax
 	int v12; // ecx
 	int v13; // edx
 	int v14; // eax
-	signed int v15; // esi
-	char *v16; // eax
-	int v17; // eax
 	int v18; // eax
-	signed int v19; // [esp+Ch] [ebp-Ch]
-	int p; // [esp+10h] [ebp-8h]
-	int v21; // [esp+14h] [ebp-4h]
-
-	p = pnum;
-	v3 = pnum;
-	v21 = mx;
+	
 	if ( plr[pnum]._pmode > PM_WALK3 )
 		return;
-	v4 = 0;
 	if ( dropGoldFlag )
 	{
 		dropGoldFlag = 0;
 		dropGoldValue = 0;
 	}
-	v5 = 0;
-	v19 = 0;
-	while ( !v4 )
+
+	bool bFound = false;
+	int invX; // eax
+	int invY; // eax
+	int iItemIndex; // ebx
+	for (iItemIndex = 0; iItemIndex < 0x49; ++iItemIndex)
 	{
-		v6 = InvRect[v5].X;
-		if ( mx >= v6 && mx < v6 + 29 )
+		invX = InvRect[iItemIndex].X;
+		if ( mx >= invX && mx < invX + 29 )
 		{
-			v7 = InvRect[v5].Y;
-			if ( my >= v7 - 29 && my < v7 )
+			invY = InvRect[iItemIndex].Y;
+			if ( my >= invY - 29 && my < invY )
 			{
-				v4 = 1;
-				--v5;
+				bFound = true;
+				break;
 			}
 		}
-		v19 = ++v5;
-		if ( (unsigned int)v5 >= 0x49 )
-		{
-			if ( !v4 )
-				return;
-			break;
-		}
 	}
-	plr[v3].HoldItem._itype = ITYPE_NONE;
-	if ( v5 >= 0 && v5 <= 3 && plr[v3].InvBody[0]._itype != ITYPE_NONE )
+	if(!bFound)
+		return;
+
+	plr[pnum].HoldItem._itype = ITYPE_NONE;
+	if ( iItemIndex >= 0 && iItemIndex <= 3 && plr[pnum].InvBody[0]._itype != ITYPE_NONE )
 	{
 		NetSendCmdDelItem(0, 0);
-		qmemcpy(&plr[v3].HoldItem, plr[v3].InvBody, sizeof(plr[v3].HoldItem));
-		plr[v3].InvBody[0]._itype = ITYPE_NONE;
+		qmemcpy(&plr[pnum].HoldItem, plr[pnum].InvBody, sizeof(plr[pnum].HoldItem));
+		plr[pnum].InvBody[0]._itype = ITYPE_NONE;
 	}
-	if ( v5 == 4 )
+	if ( iItemIndex == 4 )
 	{
-		if ( plr[v3].InvBody[1]._itype == ITYPE_NONE )
+		if ( plr[pnum].InvBody[1]._itype == ITYPE_NONE )
 			goto LABEL_60;
 		NetSendCmdDelItem(0, 1u);
-		qmemcpy(&plr[v3].HoldItem, &plr[v3].InvBody[1], sizeof(plr[v3].HoldItem));
-		plr[v3].InvBody[1]._itype = ITYPE_NONE;
+		qmemcpy(&plr[pnum].HoldItem, &plr[pnum].InvBody[1], sizeof(plr[pnum].HoldItem));
+		plr[pnum].InvBody[1]._itype = ITYPE_NONE;
 	}
-	if ( v5 == 5 )
+	if ( iItemIndex == 5 )
 	{
-		if ( plr[v3].InvBody[2]._itype == ITYPE_NONE )
+		if ( plr[pnum].InvBody[2]._itype == ITYPE_NONE )
 			goto LABEL_60;
 		NetSendCmdDelItem(0, 2u);
-		qmemcpy(&plr[v3].HoldItem, &plr[v3].InvBody[2], sizeof(plr[v3].HoldItem));
-		plr[v3].InvBody[2]._itype = ITYPE_NONE;
+		qmemcpy(&plr[pnum].HoldItem, &plr[pnum].InvBody[2], sizeof(plr[pnum].HoldItem));
+		plr[pnum].InvBody[2]._itype = ITYPE_NONE;
 	}
-	if ( v5 != 6 )
+	if ( iItemIndex != 6 )
 		goto LABEL_26;
-	if ( plr[v3].InvBody[3]._itype != ITYPE_NONE )
+	if ( plr[pnum].InvBody[3]._itype != ITYPE_NONE )
 	{
 		NetSendCmdDelItem(0, 3u);
-		qmemcpy(&plr[v3].HoldItem, &plr[v3].InvBody[3], sizeof(plr[v3].HoldItem));
-		plr[v3].InvBody[3]._itype = ITYPE_NONE;
+		qmemcpy(&plr[pnum].HoldItem, &plr[pnum].InvBody[3], sizeof(plr[pnum].HoldItem));
+		plr[pnum].InvBody[3]._itype = ITYPE_NONE;
 LABEL_26:
-		if ( v5 >= 7 && v5 <= 12 && plr[v3].InvBody[4]._itype != ITYPE_NONE )
+		if ( iItemIndex >= 7 && iItemIndex <= 12 && plr[pnum].InvBody[4]._itype != ITYPE_NONE )
 		{
 			NetSendCmdDelItem(0, 4u);
-			qmemcpy(&plr[v3].HoldItem, &plr[v3].InvBody[4], sizeof(plr[v3].HoldItem));
-			plr[v3].InvBody[4]._itype = ITYPE_NONE;
+			qmemcpy(&plr[pnum].HoldItem, &plr[pnum].InvBody[4], sizeof(plr[pnum].HoldItem));
+			plr[pnum].InvBody[4]._itype = ITYPE_NONE;
 		}
-		if ( v5 >= 13 && v5 <= 18 && plr[v3].InvBody[5]._itype != ITYPE_NONE )
+		if ( iItemIndex >= 13 && iItemIndex <= 18 && plr[pnum].InvBody[5]._itype != ITYPE_NONE )
 		{
 			NetSendCmdDelItem(0, 5u);
-			qmemcpy(&plr[v3].HoldItem, &plr[v3].InvBody[5], sizeof(plr[v3].HoldItem));
-			plr[v3].InvBody[5]._itype = ITYPE_NONE;
+			qmemcpy(&plr[pnum].HoldItem, &plr[pnum].InvBody[5], sizeof(plr[pnum].HoldItem));
+			plr[pnum].InvBody[5]._itype = ITYPE_NONE;
 		}
-		if ( v5 >= 19 && v5 <= 24 && plr[v3].InvBody[6]._itype != ITYPE_NONE )
+		if ( iItemIndex >= 19 && iItemIndex <= 24 && plr[pnum].InvBody[6]._itype != ITYPE_NONE )
 		{
 			NetSendCmdDelItem(0, 6u);
-			qmemcpy(&plr[v3].HoldItem, &plr[v3].InvBody[6], sizeof(plr[v3].HoldItem));
-			plr[v3].InvBody[6]._itype = ITYPE_NONE;
+			qmemcpy(&plr[pnum].HoldItem, &plr[pnum].InvBody[6], sizeof(plr[pnum].HoldItem));
+			plr[pnum].InvBody[6]._itype = ITYPE_NONE;
 		}
-		if ( v5 >= 25 && v5 <= 64 )
+		//invetory item
+		if ( iItemIndex >= 25 && iItemIndex <= 64 )
 		{
-			v8 = plr[v3].InvGrid[v5-25]; // *((_BYTE *)&plr[0].InvList[39]._iVAdd2 + v5 + v3 * 21720 + 3); /* find right address */
+			v8 = plr[pnum].InvGrid[iItemIndex - 25]; // *((_BYTE *)&plr[0].InvList[39]._iVAdd2 + v5 + v3 * 21720 + 3); /* find right address */
 			if ( v8 )
 			{
 				v9 = v8;
 				if ( v8 <= 0 )
 					v9 = -v8;
-				v10 = 0;
-				do
+				for( int i = 0; i < 40; ++i )
 				{
-					v11 = &plr[0].InvGrid[v10 + v3 * 21720];
+					v11 = &plr[pnum].InvGrid[i];
 					v12 = *v11;
 					if ( v12 == v9 || v12 == -v9 )
 						*v11 = 0;
-					++v10;
 				}
-				while ( v10 < 40 );
 				v13 = v9 - 1;
-				qmemcpy(&plr[v3].HoldItem, (char *)&plr[0].InvList[v13] + v3 * 21720, sizeof(plr[v3].HoldItem));
-				v14 = --plr[v3]._pNumInv;
+				qmemcpy(&plr[pnum].HoldItem, &plr[pnum].InvList[v13], sizeof(plr[pnum].HoldItem));
+				v14 = --plr[pnum]._pNumInv;
 				if ( v14 > 0 && v14 != v13 )
 				{
 					qmemcpy(
-						(char *)&plr[0].InvList[v13] + v3 * 21720,
-						(char *)&plr[0].InvList[v14] + v3 * 21720,
-						0x170u);
-					v15 = 0;
-					do
+						(char *)&plr[pnum].InvList[v13],
+						(char *)&plr[pnum].InvList[v14],
+						sizeof(ItemStruct));
+					for ( int i = 0; i < 40 ; ++i )
 					{
-						v16 = &plr[0].InvGrid[v15 + v3 * 21720];
-						if ( *v16 == plr[v3]._pNumInv + 1 )
-							*v16 = v13 + 1;
-						if ( *v16 == -1 - plr[v3]._pNumInv )
-							*v16 = -1 - v13;
-						++v15;
+						char* pGrid = &plr[pnum].InvGrid[i];
+						if ( *pGrid == plr[pnum]._pNumInv + 1 )
+							*pGrid = v13 + 1;
+						if ( *pGrid == -1 - plr[pnum]._pNumInv )
+							*pGrid = -1 - v13;
 					}
-					while ( v15 < 40 );
 				}
-				v5 = v19;
 			}
 		}
-		if ( v5 >= 65 )
+		//it's belt invetory item
+		if ( iItemIndex >= 65 )
 		{
-			v17 = v3 * 21720 + 368 * (v5 - 65);
-			if ( *(int *)((char *)&plr[0].SpdList[0]._itype + v17) != -1 )
+			ItemStruct* pItem = &plr[pnum].SpdList[iItemIndex - 65];
+			if ( pItem->_itype != ITYPE_NONE )
 			{
-				qmemcpy(&plr[v3].HoldItem, (char *)plr[0].SpdList + v17, sizeof(plr[v3].HoldItem));
-				*(int *)((char *)&plr[0].SpdList[0]._itype + v17) = -1;
+				qmemcpy(&plr[pnum].HoldItem, pItem, sizeof(plr[pnum].HoldItem));
+				pItem->_itype = ITYPE_NONE;
 				drawsbarflag = 1;
 			}
 		}
 	}
 LABEL_60:
-	v18 = plr[v3].HoldItem._itype;
+	v18 = plr[pnum].HoldItem._itype;
 	if ( v18 != ITYPE_NONE )
 	{
 		if ( v18 == ITYPE_GOLD )
-			plr[v3]._pGold = CalculateGold(p);
-		CalcPlrInv(p, 1u);
-		CheckItemStats(p);
-		if ( p == myplr )
+			plr[pnum]._pGold = CalculateGold(pnum);
+		CalcPlrInv(pnum, 1u);
+		CheckItemStats(pnum);
+		if ( pnum == myplr )
 		{
 			PlaySFX(IS_IGRAB);
-			SetCursor(plr[v3].HoldItem._iCurs + 12);
-			SetCursorPos(v21 - (cursW >> 1), MouseY - (cursH >> 1));
+			SetCursor(plr[pnum].HoldItem._iCurs + 12);
+			SetCursorPos(mx - (cursW >> 1), MouseY - (cursH >> 1));
 		}
 	}
 }
@@ -1794,13 +1766,13 @@ LABEL_60:
 
 void inv_update_rem_item(int pnum, int iv)
 {
-	unsigned char v2; // dl
+	bool v2; // dl
 
 	if ( (unsigned char)iv < 7u )
 		plr[pnum].InvBody[(unsigned char)iv]._itype = -1;
-	v2 = 0;
+	v2 = false;
 	if ( plr[pnum]._pmode != PM_DEATH )
-		v2 = 1;
+		v2 = true;
 	CalcPlrInv(pnum, v2);
 }
 

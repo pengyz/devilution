@@ -279,16 +279,14 @@ bool diablo_get_not_running()
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	HINSTANCE v4; // esi
 	//int v11; // ecx
 	char Filename[260]; // [esp+8h] [ebp-10Ch]
 	char value_name[8]; // [esp+10Ch] [ebp-8h]
 
-	v4 = hInstance;
 #ifndef DEBUGGER
 	diablo_reload_process(hInstance);
 #endif
-	ghInst = v4;
+	ghInst = hInstance;
 	if ( RestrictedTest() )
 		ErrDlg(TEMPLATE_ERR_RESTRICTED, 0, "C:\\Src\\Diablo\\Source\\DIABLO.CPP", 877);
 	if ( ReadOnlyTest() )

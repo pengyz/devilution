@@ -1,6 +1,7 @@
 //HEADER_GOES_HERE
 
 #include "../types.h"
+#include <cstddef>
 
 int trapid; // weak
 int trapdir; // weak
@@ -3084,7 +3085,7 @@ void ObjSetMicro(int dx, int dy, int pn)
 	int v7; // esi
 	signed int v8; // ecx
 
-	dPiece[0][dy + 112 * dx] = pn;
+	dPiece[dx][dy] = pn;
 	v3 = pn - 1;
 	v4 = (char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(dx, dy);
 	if ( leveltype == 4 )
@@ -3307,217 +3308,199 @@ void ObjL2Special(int x1, int y1, int x2, int y2)
 
 void DoorSet(int oi, int dx, int dy)
 {
-	int v3; // esi
-	int v4; // ebp
-	int v5; // ebx
-	ObjectStruct *v6; // ebp
+	int iPiece = dPiece[dx][dy];
 
-	v3 = dx;
-	v4 = oi;
-	v5 = dPiece[0][dy + 112 * dx];
-	if ( v5 == 43 )
+	if( iPiece == 50 ){
+		ObjectStruct *pObj  = &object[oi];
+		if ( pObj->_otype == OBJ_L1LDOOR )
+			ObjSetMicro(dx, dy, 411);
+		else if ( pObj->_otype == OBJ_L1RDOOR )
+		{
+			ObjSetMicro(dx, dy, 412);
+		}
+	}
+	
+	switch(iPiece){
+	case 43:
 		ObjSetMicro(dx, dy, 392);
-	if ( v5 == 45 )
-		ObjSetMicro(v3, dy, 394);
-	if ( v5 != 50 )
-		goto LABEL_10;
-	v6 = &object[v4];
-	if ( v6->_otype == OBJ_L1LDOOR )
-		ObjSetMicro(v3, dy, 411);
-	if ( v6->_otype == OBJ_L1RDOOR )
-	{
-		ObjSetMicro(v3, dy, 412);
-LABEL_10:
-		if ( v5 == 54 )
-			ObjSetMicro(v3, dy, 397);
-		if ( v5 == 55 )
-			ObjSetMicro(v3, dy, 398);
-		if ( v5 == 61 )
-			ObjSetMicro(v3, dy, 399);
-		if ( v5 == 67 )
-			ObjSetMicro(v3, dy, 400);
-		if ( v5 == 68 )
-			ObjSetMicro(v3, dy, 401);
-		if ( v5 == 69 )
-			ObjSetMicro(v3, dy, 403);
-		if ( v5 == 70 )
-			ObjSetMicro(v3, dy, 404);
-		if ( v5 == 72 )
-			ObjSetMicro(v3, dy, 406);
-		if ( v5 == 212 )
-			ObjSetMicro(v3, dy, 407);
-		if ( v5 == 354 )
-			ObjSetMicro(v3, dy, 409);
-		if ( v5 == 355 )
-			ObjSetMicro(v3, dy, 410);
-		if ( v5 == 411 )
-			ObjSetMicro(v3, dy, 396);
-		if ( v5 == 412 )
-			ObjSetMicro(v3, dy, 396);
+		break;
+	case 45:
+		ObjSetMicro(dx, dy, 394);
+		break;
+	case 54:
+		ObjSetMicro(dx, dy, 397);
+		break;
+	case 55:
+		ObjSetMicro(dx, dy, 398);
+		break;
+	case 61:
+		ObjSetMicro(dx, dy, 399);
+		break;
+	case 67:
+		ObjSetMicro(dx, dy, 400);
+		break;
+	case 68:
+		ObjSetMicro(dx, dy, 401);
+		break;
+	case 69:
+		ObjSetMicro(dx, dy, 403);
+		break;
+	case 70:
+		ObjSetMicro(dx, dy, 404);
+		break;
+	case 72:
+		ObjSetMicro(dx, dy, 406);
+		break;
+	case 212:
+		ObjSetMicro(dx, dy, 407);
+		break;
+	case 354:
+		ObjSetMicro(dx, dy, 409);
+		break;
+	case 355:
+		ObjSetMicro(dx, dy, 410);
+		break;
+	case 411:
+		ObjSetMicro(dx, dy, 396);
+		break;
+	case 412:
+		ObjSetMicro(dx, dy, 396);
+		break;
 	}
 }
 
 void RedoPlayerVision()
 {
-	int *v0; // esi
-
-	v0 = &plr[0].plrlevel;
-	do
+	PlayerStruct *pPlayer = NULL;
+	for ( int i = 0; i < sizeof(plr) / sizeof(PlayerStruct); ++i )
 	{
-		if ( *((_BYTE *)v0 - 23) )
+		pPlayer = &plr[i];
+		if ( pPlayer->plractive )
 		{
-			if ( currlevel == *v0 )
-				ChangeVisionXY(v0[27], v0[1], v0[2]);
+			if ( currlevel == pPlayer->plrlevel )
+				ChangeVisionXY( pPlayer->_pvid, pPlayer->WorldX, pPlayer->WorldY );
 		}
-		v0 += 5430;
 	}
-	while ( (signed int)v0 < (signed int)&plr[4].plrlevel );
 }
 
 void OperateL1RDoor(int pnum, int oi, unsigned char sendflag)
 {
-	int v3; // esi
-	int v4; // eax
-	int v5; // ebx
-	int v6; // edi
-	int v7; // ST04_4
-	int v8; // [esp+Ch] [ebp-Ch]
-	int v9; // [esp+10h] [ebp-8h]
-	int param1; // [esp+14h] [ebp-4h]
-
-	v3 = oi;
-	param1 = oi;
-	v9 = pnum;
-	v4 = object[oi]._oVar4;
-	if ( v4 != 2 )
+	int iObjVar4 = object[oi]._oVar4;
+	if ( iObjVar4 != 2 )
 	{
-		v5 = object[v3]._ox;
-		v6 = object[v3]._oy;
-		if ( v4 )
+		int iObjX = object[oi]._ox;
+		int iObjY = object[oi]._oy;
+		if ( iObjVar4 )
 		{
 			if ( !deltaload )
-				PlaySfxLoc(IS_DOORCLOS, v5, object[v3]._oy);
-			v8 = v6 + 112 * v5;
-			if ( dDead[0][v8] != 0 || dMonster[0][v8] != 0 || dItem[0][v8] != 0 )
+				PlaySfxLoc(IS_DOORCLOS, iObjX, object[oi]._oy);
+			if ( dDead[iObjX][iObjY] != 0 || dMonster[iObjX][iObjY] != 0 || dItem[iObjX][iObjY] != 0 )
 			{
-				object[v3]._oVar4 = 2;
+				object[oi]._oVar4 = 2;
 				return;
 			}
-			if ( v9 == myplr && sendflag )
-				NetSendCmdParam1(1u, CMD_CLOSEDOOR, param1);
-			v7 = object[v3]._oVar1;
-			object[v3]._oVar4 = 0;
-			_LOBYTE(object[v3]._oSelFlag) = 3;
-			ObjSetMicro(v5, v6, v7);
-			if ( object[v3]._oVar2 == 50 )
+			if ( pnum == myplr && sendflag )
+				NetSendCmdParam1(1u, CMD_CLOSEDOOR, oi);
+			int iObjVar1 = object[oi]._oVar1;
+			object[oi]._oVar4 = 0;
+			_LOBYTE(object[oi]._oSelFlag) = 3;
+			ObjSetMicro(iObjX, iObjY, iObjVar1);
+			if ( object[oi]._oVar2 == 50 )
 			{
-				if ( dPiece[-4][v8] == 396 ) /* check *(_DWORD *)&dflags[28][4 * v8 + 32] == 396 ) */
-					ObjSetMicro(v5 - 1, v6, 411);
+				if ( dPiece[iObjX][iObjY-4] == 396 ) /* check *(_DWORD *)&dflags[28][4 * v8 + 32] == 396 ) */
+					ObjSetMicro(iObjX - 1, iObjY, 411);
 				else
-					ObjSetMicro(v5 - 1, v6, 50);
+					ObjSetMicro(iObjX - 1, iObjY, 50);
 			}
 			else
 			{
-				ObjSetMicro(v5 - 1, v6, object[v3]._oVar2);
+				ObjSetMicro(iObjX - 1, iObjY, object[oi]._oVar2);
 			}
-			object[v3]._oAnimFrame -= 2;
-			object[v3]._oPreFlag = 0;
+			object[oi]._oAnimFrame -= 2;
+			object[oi]._oPreFlag = 0;
 		}
 		else
 		{
 			if ( pnum == myplr && sendflag )
 				NetSendCmdParam1(1u, CMD_OPENDOOR, oi);
 			if ( !deltaload )
-				PlaySfxLoc(IS_DOOROPEN, object[v3]._ox, object[v3]._oy);
-			ObjSetMicro(v5, v6, 395);
-			dArch[v5][v6] = 8;
-			objects_set_door_piece(v5, v6 - 1);
-			object[v3]._oAnimFrame += 2;
-			object[v3]._oPreFlag = 1;
-			DoorSet(param1, v5 - 1, v6);
-			object[v3]._oVar4 = 1;
-			_LOBYTE(object[v3]._oSelFlag) = 2;
+				PlaySfxLoc(IS_DOOROPEN, object[oi]._ox, object[oi]._oy);
+			ObjSetMicro(iObjX, iObjY, 395);
+			dArch[iObjX][iObjY] = 8;
+			objects_set_door_piece(iObjX, iObjY - 1);
+			object[oi]._oAnimFrame += 2;
+			object[oi]._oPreFlag = 1;
+			DoorSet(oi, iObjX - 1, iObjY);
+			object[oi]._oVar4 = 1;
+			_LOBYTE(object[oi]._oSelFlag) = 2;
 		}
 		RedoPlayerVision();
 		return;
 	}
 	if ( !deltaload )
-		PlaySfxLoc(IS_DOORCLOS, object[v3]._ox, object[v3]._oy);
+		PlaySfxLoc(IS_DOORCLOS, object[oi]._ox, object[oi]._oy);
 }
 // 676190: using guessed type int deltaload;
 
 void OperateL1LDoor(int pnum, int oi, unsigned char sendflag)
 {
-	int v3; // esi
-	int v4; // eax
-	int v5; // ebx
-	int v6; // edi
-	int v7; // ST04_4
-	int v8; // [esp+Ch] [ebp-Ch]
-	int v9; // [esp+10h] [ebp-8h]
-	int param1; // [esp+14h] [ebp-4h]
-
-	v3 = oi;
-	param1 = oi;
-	v9 = pnum;
-	v4 = object[oi]._oVar4;
-	if ( v4 != 2 )
+	int iObjVal4 = object[oi]._oVar4;
+	if ( iObjVal4 != 2 )
 	{
-		v5 = object[v3]._ox;
-		v6 = object[v3]._oy;
-		if ( v4 )
+		int iObjX = object[oi]._ox;
+		int iObjY = object[oi]._oy;
+		if ( iObjVal4 )
 		{
 			if ( !deltaload )
-				PlaySfxLoc(IS_DOORCLOS, v5, object[v3]._oy);
-			v8 = v6 + 112 * v5;
-			if ( dDead[v5][v6] != 0 || dMonster[0][v8] != 0 || dItem[v5][v6] != 0 )
+				PlaySfxLoc(IS_DOORCLOS, iObjX, object[oi]._oy);
+			if ( dDead[iObjX][iObjY] != 0 || dMonster[iObjX][iObjY] != 0 || dItem[iObjX][iObjY] != 0 )
 			{
-				object[v3]._oVar4 = 2;
+				object[oi]._oVar4 = 2;
 				return;
 			}
-			if ( v9 == myplr && sendflag )
-				NetSendCmdParam1(1u, CMD_CLOSEDOOR, param1);
-			v7 = object[v3]._oVar1;
-			object[v3]._oVar4 = 0;
-			_LOBYTE(object[v3]._oSelFlag) = 3;
-			ObjSetMicro(v5, v6, v7);
-			if ( object[v3]._oVar2 == 50 )
+			if ( pnum == myplr && sendflag )
+				NetSendCmdParam1(1u, CMD_CLOSEDOOR, oi);
+			int iObjVal1 = object[oi]._oVar1;
+			object[oi]._oVar4 = 0;
+			_LOBYTE(object[oi]._oSelFlag) = 3;
+			ObjSetMicro(iObjX, iObjY, iObjVal1);
+			if ( object[oi]._oVar2 == 50 )
 			{
-				if ( dPiece[0][v8-1] == 396 ) /* check  *(_DWORD *)&dflags[39][v8 * 4 + 36] == 396 ) */
-					ObjSetMicro(v5, v6 - 1, 412);
+				if ( dPiece[iObjX][iObjY-1] == 396 ) /* check  *(_DWORD *)&dflags[39][v8 * 4 + 36] == 396 ) */
+					ObjSetMicro(iObjX, iObjY - 1, 412);
 				else
-					ObjSetMicro(v5, v6 - 1, 50);
+					ObjSetMicro(iObjX, iObjY - 1, 50);
 			}
 			else
 			{
-				ObjSetMicro(v5, v6 - 1, object[v3]._oVar2);
+				ObjSetMicro(iObjX, iObjY - 1, object[oi]._oVar2);
 			}
-			object[v3]._oAnimFrame -= 2;
-			object[v3]._oPreFlag = 0;
+			object[oi]._oAnimFrame -= 2;
+			object[oi]._oPreFlag = 0;
 		}
 		else
 		{
 			if ( pnum == myplr && sendflag )
 				NetSendCmdParam1(1u, CMD_OPENDOOR, oi);
 			if ( !deltaload )
-				PlaySfxLoc(IS_DOOROPEN, object[v3]._ox, object[v3]._oy);
-			if ( object[v3]._oVar1 == 214 )
-				ObjSetMicro(v5, v6, 408);
+				PlaySfxLoc(IS_DOOROPEN, object[oi]._ox, object[oi]._oy);
+			if ( object[oi]._oVar1 == 214 )
+				ObjSetMicro(iObjX, iObjY, 408);
 			else
-				ObjSetMicro(v5, v6, 393);
-			dArch[v5][v6] = 7;
-			objects_set_door_piece(v5 - 1, v6);
-			object[v3]._oAnimFrame += 2;
-			object[v3]._oPreFlag = 1;
-			DoorSet(param1, v5, v6 - 1);
-			object[v3]._oVar4 = 1;
-			_LOBYTE(object[v3]._oSelFlag) = 2;
+				ObjSetMicro(iObjX, iObjY, 393);
+			dArch[iObjX][iObjY] = 7;
+			objects_set_door_piece(iObjX - 1, iObjY);
+			object[oi]._oAnimFrame += 2;
+			object[oi]._oPreFlag = 1;
+			DoorSet(oi, iObjX, iObjY - 1);
+			object[oi]._oVar4 = 1;
+			_LOBYTE(object[oi]._oSelFlag) = 2;
 		}
 		RedoPlayerVision();
 		return;
 	}
 	if ( !deltaload )
-		PlaySfxLoc(IS_DOORCLOS, object[v3]._ox, object[v3]._oy);
+		PlaySfxLoc(IS_DOORCLOS, object[oi]._ox, object[oi]._oy);
 }
 // 676190: using guessed type int deltaload;
 
@@ -6367,38 +6350,30 @@ void OperateLazStand(int pnum, int i)
 // 646D00: using guessed type char qtextflag;
 // 676190: using guessed type int deltaload;
 
-void OperateObject(int pnum, int i, unsigned char TeleFlag)
+void OperateObject(int pnum, int oi, unsigned char TeleFlag)
 {
-	int v3; // esi
-	int v4; // edi
-	ObjectStruct *v5; // ebx
-	int v6; // ecx
-	bool sendmsg; // [esp+Ch] [ebp-4h]
-
-	v3 = pnum;
-	v4 = i;
-	sendmsg = pnum == myplr;
-	v5 = &object[i];
-	v6 = v5->_otype;
-	switch ( v5->_otype )
+	bool sendmsg = pnum == myplr;
+	ObjectStruct *pObj = &object[oi];
+	int iObjType = pObj->_otype;
+	switch ( pObj->_otype )
 	{
 		case OBJ_L1LDOOR:
 		case OBJ_L1RDOOR:
 			if ( TeleFlag )
 			{
-				if ( v6 == OBJ_L1LDOOR )
-					OperateL1LDoor(v3, i, OBJ_L1LDOOR);
-				if ( v5->_otype == OBJ_L1RDOOR )
-					OperateL1RDoor(v3, v4, 1u);
+				if ( iObjType == OBJ_L1LDOOR )
+					OperateL1LDoor(pnum, oi, OBJ_L1LDOOR);
+				if ( pObj->_otype == OBJ_L1RDOOR )
+					OperateL1RDoor(pnum, oi, 1u);
 			}
-			else if ( v3 == myplr )
+			else if ( pnum == myplr )
 			{
-				OperateL1Door(v3, i, 1u);
+				OperateL1Door(pnum, oi, 1u);
 			}
 			break;
 		case OBJ_LEVER:
 		case OBJ_SWITCHSKL:
-			OperateLever(v3, i);
+			OperateLever(pnum, oi);
 			break;
 		case OBJ_CHEST1:
 		case OBJ_CHEST2:
@@ -6406,105 +6381,105 @@ void OperateObject(int pnum, int i, unsigned char TeleFlag)
 		case OBJ_TCHEST1:
 		case OBJ_TCHEST2:
 		case OBJ_TCHEST3:
-			OperateChest(v3, i, sendmsg);
+			OperateChest(pnum, oi, sendmsg);
 			break;
 		case OBJ_BOOK2L:
-			OperateBook(v3, i);
+			OperateBook(pnum, oi);
 			break;
 		case OBJ_BOOK2R:
-			OperateSChambBk(v3, i);
+			OperateSChambBk(pnum, oi);
 			break;
 		case OBJ_L2LDOOR:
 		case OBJ_L2RDOOR:
 			if ( TeleFlag )
 			{
-				if ( v6 == OBJ_L2LDOOR )
-					OperateL2LDoor(v3, i, 1u);
-				if ( v5->_otype == OBJ_L2RDOOR )
-					OperateL2RDoor(v3, v4, 1u);
+				if ( iObjType == OBJ_L2LDOOR )
+					OperateL2LDoor(pnum, oi, 1u);
+				if ( pObj->_otype == OBJ_L2RDOOR )
+					OperateL2RDoor(pnum, oi, 1u);
 			}
-			else if ( v3 == myplr )
+			else if ( pnum == myplr )
 			{
-				OperateL2Door(v3, i, 1u);
+				OperateL2Door(pnum, oi, 1u);
 			}
 			break;
 		case OBJ_SARC:
-			OperateSarc(v3, i, sendmsg);
+			OperateSarc(pnum, oi, sendmsg);
 			break;
 		case OBJ_FLAMELVR:
-			OperateTrapLvr(i);
+			OperateTrapLvr(oi);
 			break;
 		case OBJ_SHRINEL:
 		case OBJ_SHRINER:
-			OperateShrine(v3, i, IS_MAGIC);
+			OperateShrine(pnum, oi, IS_MAGIC);
 			break;
 		case OBJ_SKELBOOK:
 		case OBJ_BOOKSTAND:
-			OperateSkelBook(v3, i, sendmsg);
+			OperateSkelBook(pnum, oi, sendmsg);
 			break;
 		case OBJ_BOOKCASEL:
 		case OBJ_BOOKCASER:
-			OperateBookCase(v3, i, sendmsg);
+			OperateBookCase(pnum, oi, sendmsg);
 			break;
 		case OBJ_BLOODFTN:
 		case OBJ_PURIFYINGFTN:
 		case OBJ_MURKYFTN:
 		case OBJ_TEARFTN:
-			OperateFountains(v3, i);
+			OperateFountains(pnum, oi);
 			break;
 		case OBJ_DECAP:
-			OperateDecap(v3, i, sendmsg);
+			OperateDecap(pnum, oi, sendmsg);
 			break;
 		case OBJ_BLINDBOOK:
 		case OBJ_BLOODBOOK:
 		case OBJ_STEELTOME:
-			OperateBookLever(v3, i);
+			OperateBookLever(pnum, oi);
 			break;
 		case OBJ_PEDISTAL:
-			OperatePedistal(v3, i);
+			OperatePedistal(pnum, oi);
 			break;
 		case OBJ_L3LDOOR:
 		case OBJ_L3RDOOR:
 			if ( TeleFlag )
 			{
-				if ( v6 == OBJ_L3LDOOR )
-					OperateL3LDoor(v3, i, 1u);
-				if ( v5->_otype == OBJ_L3RDOOR )
-					OperateL3RDoor(v3, v4, 1u);
+				if ( iObjType == OBJ_L3LDOOR )
+					OperateL3LDoor(pnum, oi, 1u);
+				if ( pObj->_otype == OBJ_L3RDOOR )
+					OperateL3RDoor(pnum, oi, 1u);
 			}
-			else if ( v3 == myplr )
+			else if ( pnum == myplr )
 			{
-				OperateL3Door(v3, i, 1u);
+				OperateL3Door(pnum, oi, 1u);
 			}
 			break;
 		case OBJ_ARMORSTAND:
 		case OBJ_WARARMOR:
-			OperateArmorStand(v3, i, sendmsg);
+			OperateArmorStand(pnum, oi, sendmsg);
 			break;
 		case OBJ_GOATSHRINE:
-			OperateGoatShrine(v3, i, LS_GSHRINE);
+			OperateGoatShrine(pnum, oi, LS_GSHRINE);
 			break;
 		case OBJ_CAULDRON:
-			OperateCauldron(v3, i, LS_CALDRON);
+			OperateCauldron(pnum, oi, LS_CALDRON);
 			break;
 		case OBJ_STORYBOOK:
-			OperateStoryBook(v3, i);
+			OperateStoryBook(pnum, oi);
 			break;
 		case OBJ_WARWEAP:
 		case OBJ_WEAPONRACK:
-			OperateWeaponRack(v3, i, sendmsg);
+			OperateWeaponRack(pnum, oi, sendmsg);
 			break;
 		case OBJ_MUSHPATCH:
-			OperateMushPatch(v3, i);
+			OperateMushPatch(pnum, oi);
 			break;
 		case OBJ_LAZSTAND:
-			OperateLazStand(v3, i);
+			OperateLazStand(pnum, oi);
 			break;
 		case OBJ_SLAINHERO:
-			OperateSlainHero(v3, i, sendmsg);
+			OperateSlainHero(pnum, oi, sendmsg);
 			break;
 		case OBJ_SIGNCHEST:
-			OperateInnSignChest(v3, i);
+			OperateInnSignChest(pnum, oi);
 			break;
 		default:
 			return;

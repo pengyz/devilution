@@ -1,3 +1,6 @@
+#ifndef __ENUMS_H__
+#define __ENUMS_H__
+
 enum unique_base_item
 {
 	UITYPE_NONE = 0x0,
@@ -2477,3 +2480,5 @@ typedef enum {
 	ISPL_3XDAMVDEM = 0x40000000,
 	ISPL_ALLRESZERO = 0x80000000,
 } item_special_effect;
+
+#endif
