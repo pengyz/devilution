@@ -99,7 +99,7 @@ int msg_wait_resync()
 	sgbRecvCmd = CMD_DLEVEL_END;
 	gbBufferMsgs = 1;
 	sgdwOwnerWait = GetTickCount();
-	v0 = UiProgressDialog(ghMainWnd, "Waiting for game data...", 1, msg_wait_for_turns, 20);
+	v0 = UiProgressDialog(Diablo::get()->ghMainWnd, "Waiting for game data...", 1, msg_wait_for_turns, 20);
 	gbBufferMsgs = 0;
 	if ( !v0 )
 		goto LABEL_6;
@@ -507,7 +507,7 @@ void delta_leave_sync(unsigned char bLevel)
 		{
 			v3 = GetRndSeed();
 			v2 = currlevel == 0;
-			glSeedTbl[0] = v3;
+			Diablo::get()->glSeedTbl[0] = v3;
 		}
 		if ( !v2 )
 		{

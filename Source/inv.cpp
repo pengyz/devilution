@@ -1227,7 +1227,7 @@ LABEL_149:
 							{
 								plr[v3]._pRSpell = v34;
 								_LOBYTE(plr[v3]._pRSplType) = 3;
-								drawpanflag = 255;
+								Diablo::get()->drawpanflag = 255;
 							}
 						}
 					}
@@ -1477,7 +1477,7 @@ LABEL_226:
 					if ( v60 == myplr )
 					{
 						if ( cursor_ida == 1 )
-							SetCursorPos(MouseX + (cursW >> 1), MouseY + (cursH >> 1));
+							SetCursorPos(Diablo::get()->MouseX + (cursW >> 1), Diablo::get()->MouseY + (cursH >> 1));
 						SetCursor(cursor_ida);
 					}
 					return;
@@ -1585,7 +1585,7 @@ LABEL_89:
 // 4B8C9C: using guessed type int cursH;
 // 4B8CB4: using guessed type int icursH;
 // 4B8CBC: using guessed type int icursW;
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void CheckInvSwap(int pnum, int bLoc, int idx, int wCI, int seed, int bId)
 {
@@ -1757,7 +1757,7 @@ LABEL_60:
 		{
 			PlaySFX(IS_IGRAB);
 			SetCursor(plr[pnum].HoldItem._iCurs + 12);
-			SetCursorPos(mx - (cursW >> 1), MouseY - (cursH >> 1));
+			SetCursorPos(mx - (cursW >> 1), Diablo::get()->MouseY - (cursH >> 1));
 		}
 	}
 }
@@ -1828,11 +1828,11 @@ void RemoveInvItem(int pnum, int iv)
 		{
 			if ( !(plr[v4]._pScrlSpells[1] & (1 << (v11 - 1) >> 31) | plr[v4]._pScrlSpells[0] & (1 << (v11 - 1))) )
 				plr[v4]._pRSpell = -1;
-			drawpanflag = 255;
+			Diablo::get()->drawpanflag = 255;
 		}
 	}
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void RemoveSpdBarItem(int pnum, int iv)
 {
@@ -1848,21 +1848,21 @@ void RemoveSpdBarItem(int pnum, int iv)
 		if ( v3 != -1 && !(plr[v2]._pScrlSpells[1] & (1 << (v3 - 1) >> 31) | plr[v2]._pScrlSpells[0] & (1 << (v3 - 1))) )
 			plr[v2]._pRSpell = -1;
 	}
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void CheckInvItem()
 {
 	if ( pcurs < CURSOR_FIRSTITEM )
-		CheckInvCut(myplr, MouseX, MouseY);
+		CheckInvCut(myplr, Diablo::get()-> MouseX, Diablo::get()->MouseY);
 	else
-		CheckInvPaste(myplr, MouseX, MouseY);
+		CheckInvPaste(myplr, Diablo::get()-> MouseX, Diablo::get()->MouseY);
 }
 
 void CheckInvScrn()
 {
-	if ( MouseX > 190 && MouseX < 437 && MouseY > 352 && MouseY < 385 )
+	if ( Diablo::get()-> MouseX > 190 && Diablo::get()-> MouseX < 437 && Diablo::get()->MouseY > 352 && Diablo::get()->MouseY < 385 )
 		CheckInvItem();
 }
 
@@ -2806,13 +2806,13 @@ int CheckInvHLight()
 	do
 	{
 		result = InvRect[v0].X;
-		if ( MouseX >= result )
+		if ( Diablo::get()->MouseX >= result )
 		{
 			result += 29;
-			if ( MouseX < result )
+			if ( Diablo::get()->MouseX < result )
 			{
 				result = InvRect[v0].Y;
-				if ( MouseY >= result - 29 && MouseY < result )
+				if ( Diablo::get()->MouseY >= result - 29 && Diablo::get()->MouseY < result )
 					break;
 			}
 		}
@@ -3266,7 +3266,7 @@ int CalculateGold(int pnum)
 		if ( *(v3 - 47) == 11 )
 		{
 			result += *v3;
-			drawpanflag = 255;
+			Diablo::get()->drawpanflag = 255;
 		}
 		v3 += 92;
 		--v4;
@@ -3287,7 +3287,7 @@ int CalculateGold(int pnum)
 	}
 	return result;
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 int DropItemBeforeTrig()
 {

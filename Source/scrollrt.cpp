@@ -481,7 +481,7 @@ void DrawClippedPlayer(int pnum, int x, int y, int px, int py, int animdata, int
 
 void DrawView(int StartX, int StartY)
 {
-	if ( zoomflag )
+	if ( Diablo::get()->zoomflag )
 		DrawGame(StartX, StartY);
 	else
 		DrawZoom(StartX, StartY);
@@ -518,7 +518,7 @@ void DrawView(int StartX, int StartY)
 
 	if ( deathflag )
 		RedBack();
-	else if ( PauseMode )
+	else if ( Diablo::get()->PauseMode )
 		gmenu_draw_pause();
 
 	DrawPlrMsg();
@@ -969,7 +969,7 @@ void scrollrt_draw_clipped_dungeon(char *a1, int sx, int sy, int a4, int a5, int
 	v45 = v8;
 	v40 = *v10;
 	v41 = *(v10 - 1);
-	if ( visiondebug && v50 & 0x40 )
+	if ( Diablo::get()->visiondebug && v50 & 0x40 )
 		Cel2DecodeHdrOnly(dst_buf, (char *)pSquareCel, 1, 64, 0, 8);
 	if ( MissilePreFlag && v50 & 1 )
 		DrawClippedMissile(a1a, sy, a4, a5, 0, 8, 1);
@@ -1635,7 +1635,7 @@ void scrollrt_draw_clipped_dungeon_2(char *buffer, int x, int y, int a4, int a5,
 	v48 = v10;
 	v43 = *v12;
 	v44 = *(v12 - 1);
-	if ( visiondebug && v53 & 0x40 )
+	if ( Diablo::get()->visiondebug && v53 & 0x40 )
 		Cel2DecodeHdrOnly(dst_buf, (char *)pSquareCel, 1, 64, a5, 8);
 	if ( MissilePreFlag && v53 & 1 )
 	{
@@ -2244,7 +2244,7 @@ void scrollrt_draw_dungeon(char *buffer, int x, int y, int a4, int a5, int sx, i
 	v47 = v10;
 	v42 = *v12;
 	v43 = *(v12 - 1);
-	if ( visiondebug && v52 & 0x40 )
+	if ( Diablo::get()->visiondebug && v52 & 0x40 )
 		CelDecodeHdrOnly(dst_buf, (char *)pSquareCel, 1, 64, 0, a5);
 	if ( MissilePreFlag && v52 & 1 )
 		DrawMissile(xa, y, sx, sy, 0, a5, 1);
@@ -2846,7 +2846,7 @@ void ScrollView()
 	if ( pcurs < 12 )
 	{
 		v0 = 0;
-		if ( MouseX >= 20 )
+		if ( Diablo::get()->MouseX >= 20 )
 		{
 			v2 = ViewX;
 			v1 = ViewY;
@@ -2875,7 +2875,7 @@ void ScrollView()
 				v0 = 1;
 			}
 		}
-		if ( MouseX > 620 )
+		if ( Diablo::get()-> MouseX > 620 )
 		{
 			if ( dmaxx - 1 > v2 )
 			{
@@ -2899,7 +2899,7 @@ void ScrollView()
 			}
 		}
 LABEL_19:
-		if ( MouseY >= 20 )
+		if ( Diablo::get()->MouseY >= 20 )
 			goto LABEL_28;
 		if ( dminy < v1 )
 		{
@@ -2923,7 +2923,7 @@ LABEL_27:
 LABEL_28:
 		ViewX = v2;
 		ViewY = v1;
-		if ( MouseY > 460 )
+		if ( Diablo::get()->MouseY > 460 )
 		{
 			if ( v1 >= dmaxy - 1 || dmaxx - 1 <= v2 )
 			{
@@ -2953,8 +2953,8 @@ LABEL_37:
 
 void EnableFrameCount()
 {
-	frameflag = frameflag == 0;
-	framestart = GetTickCount();
+	Diablo::get()->frameflag = Diablo::get()->frameflag == 0;
+	Diablo::get()->framestart = GetTickCount();
 }
 #endif
 
@@ -2962,9 +2962,9 @@ void scrollrt_draw_game_screen(bool draw_cursor)
 {
 	int dwHgt; // edi
 
-	if ( drawpanflag == 255 )
+	if ( Diablo::get()->drawpanflag == 255 )
 	{
-		drawpanflag = 0;
+		Diablo::get()->drawpanflag = 0;
 		dwHgt = 480;
 	}
 	else
@@ -2985,7 +2985,7 @@ void scrollrt_draw_game_screen(bool draw_cursor)
 		dx_unlock_mutex();
 	}
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void scrollrt_draw_cursor_back_buffer()
 {
@@ -3052,8 +3052,8 @@ void scrollrt_draw_cursor_item()
 			v1 = cursH;
 			if ( cursH )
 			{
-				v2 = MouseX - 1;
-				if ( MouseX - 1 >= 0 )
+				v2 = Diablo::get()->MouseX - 1;
+				if ( Diablo::get()->MouseX - 1 >= 0 )
 				{
 					if ( v2 > 639 )
 						return;
@@ -3062,8 +3062,8 @@ void scrollrt_draw_cursor_item()
 				{
 					v2 = 0;
 				}
-				v3 = MouseY - 1;
-				if ( MouseY - 1 >= 0 )
+				v3 = Diablo::get()->MouseY - 1;
+				if ( Diablo::get()->MouseY - 1 >= 0 )
 				{
 					if ( v3 > 479 )
 						return;
@@ -3237,20 +3237,20 @@ void DrawFPS()
 	char String[12]; // [esp+8h] [ebp-10h]
 	HDC hdc; // [esp+14h] [ebp-4h]
 
-	if ( frameflag && window_activated )
+	if ( Diablo::get()->frameflag && window_activated )
 	{
-		++frameend;
+		++Diablo::get()->frameend;
 		v0 = GetTickCount();
-		v1 = v0 - framestart;
-		if ( v0 - framestart >= 1000 )
+		v1 = v0 - Diablo::get()->framestart;
+		if ( v0 - Diablo::get()->framestart >= 1000 )
 		{
-			framestart = v0;
-			framerate = 1000 * frameend / v1;
-			frameend = 0;
+			Diablo::get()->framestart = v0;
+			Diablo::get()->framerate = 1000 * Diablo::get()->frameend / v1;
+			Diablo::get()->frameend = 0;
 		}
-		if ( framerate > 99 )
-			framerate = 99;
-		wsprintfA(String, "%2d", framerate);
+		if ( Diablo::get()->framerate > 99 )
+			Diablo::get()->framerate = 99;
+		wsprintfA(String, "%2d", Diablo::get()->framerate);
 		if ( !lpDDSPrimary->GetDC(&hdc) )
 		{
 			TextOutA(hdc, 0, 400, String, strlen(String));
@@ -3334,9 +3334,9 @@ void DrawAndBlit()
 	bool ctrlPan; // esi
 	int dwHgt; // edi
 
-	if ( gbRunGame )
+	if ( Diablo::get()->gbRunGame )
 	{
-		if ( drawpanflag == 255 )
+		if ( Diablo::get()->drawpanflag == 255 )
 		{
 			drawhpflag = 1;
 			drawmanaflag = 1;
@@ -3348,13 +3348,13 @@ void DrawAndBlit()
 		}
 		else
 		{
-			if ( drawpanflag != 1 )
+			if ( Diablo::get()->drawpanflag != 1 )
 				return;
 			ddsdesc = 1;
 			ctrlPan = 0;
 			dwHgt = 352;
 		}
-		drawpanflag = 0;
+		Diablo::get()->drawpanflag = 0;
 		dx_lock_mutex();
 		if ( leveltype )
 			DrawView(ViewX, ViewY);
@@ -3389,5 +3389,5 @@ void DrawAndBlit()
 }
 // 4B8960: using guessed type int talkflag;
 // 525650: using guessed type int gbRunGame;
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 // 5BB1ED: using guessed type char leveltype;

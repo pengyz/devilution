@@ -1189,7 +1189,7 @@ void CheckTrigForce()
 	int v1; // eax
 
 	trigflag[3] = 0;
-	if ( MouseY <= 351 )
+	if ( Diablo::get()->MouseY <= 351 )
 	{
 		if ( setlevel )
 		{

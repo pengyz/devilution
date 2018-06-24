@@ -568,7 +568,7 @@ void CelDrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, int frame, i
 					always_0a = v13 - (_DWORD)cel_buf;
 				directiona = (int)&v11[(_DWORD)cel_buf];
 				cel_bufa = (char *)gpBuffer + screen_y_times_768[screen_y - 16 * v10] + v21;
-				v14 = -(light4flag != 0);
+				v14 = -(Diablo::get()->light4flag != 0);
 				_LOWORD(v14) = v14 & 0xF400;
 				v15 = v14 + 4096;
 				framea = v15;
@@ -1143,7 +1143,7 @@ void Cel2DrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, int frame, 
 					framea = v12 - (_DWORD)cel_buf;
 				directiona = (int)&v10[(_DWORD)cel_buf];
 				always_0a = (char *)gpBuffer + screen_y_times_768[screen_y - 16 * always_0] + v22;
-				v13 = -(light4flag != 0);
+				v13 = -(Diablo::get()->light4flag != 0);
 				_LOWORD(v13) = v13 & 0xF400;
 				v14 = v13 + 4096;
 				if ( always_1 == 2 )
@@ -2305,7 +2305,7 @@ void Cl2DecodeFrm3(int screen_x, int screen_y, char *pCelBuff, int nCel, int fra
 						v12 = *(_DWORD *)&v8[4 * nCel + 4] - v9;
 					v13 = &v10[(_DWORD)pCelBuffa];
 					v14 = v12 - (_DWORD)pCelBuffa;
-					v15 = -(light4flag != 0);
+					v15 = -(Diablo::get()->light4flag != 0);
 					_LOWORD(v15) = v15 & 0xF400;
 					v16 = v15 + 4096;
 					if ( a8 == 2 )
@@ -2765,7 +2765,7 @@ void Cl2DecodeFrm5(int screen_x, int screen_y, char *pCelBuff, int nCel, int fra
 						v12 = *(_DWORD *)&v8[4 * nCel + 4] - v9;
 					v13 = &v10[(_DWORD)pCelBuffa];
 					v14 = v12 - (_DWORD)pCelBuffa;
-					v15 = -(light4flag != 0);
+					v15 = -(Diablo::get()->light4flag != 0);
 					_LOWORD(v15) = v15 & 0xF400;
 					v16 = v15 + 4096;
 					if ( a8 == 2 )
@@ -2932,9 +2932,9 @@ void PlayInGameMovie(char *pszMovie)
 	PaletteFadeOut(8);
 	play_movie(v1, 0);
 	ClearScreenBuffer();
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 	scrollrt_draw_game_screen(1);
 	PaletteFadeIn(8);
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;

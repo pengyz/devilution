@@ -148,7 +148,7 @@ void InitQuests()
 	while ( v6 < 16 );
 	if ( v0 == 1 )
 	{
-		SetRndSeed(glSeedTbl[15]);
+		SetRndSeed(Diablo::get()->glSeedTbl[15]);
 		_LOBYTE(v11) = 0;
 		if ( random(v11, 2) )
 			quests[13]._qactive = 0;
@@ -169,8 +169,8 @@ void InitQuests()
 		quests[QuestGroup4[v19]]._qactive = 0;
 	}
 #ifdef _DEBUG
-	if ( questdebug != -1 )
-		quests[questdebug]._qactive = 2;
+	if ( Diablo::get()->questdebug != -1 )
+		quests[Diablo::get()->questdebug]._qactive = 2;
 #endif
 	if ( !quests[12]._qactive )
 		quests[12]._qvar2 = 2;
@@ -1305,7 +1305,7 @@ void QuestlogESC()
 	int v0; // esi
 	int i; // edi
 
-	v0 = (MouseY - 32) / 12;
+	v0 = (Diablo::get()->MouseY - 32) / 12;
 	if ( numqlines )
 	{
 		for ( i = 0; i < numqlines; ++i )

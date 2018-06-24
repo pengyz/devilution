@@ -108,7 +108,7 @@ void SetupTownStores()
 	int i; // eax
 	int l; // esi
 
-	SetRndSeed(glSeedTbl[currlevel] * GetTickCount());
+	SetRndSeed(Diablo::get()->glSeedTbl[currlevel] * GetTickCount());
 	if ( gbMaxPlayers == 1 )
 	{
 		l = 0;
@@ -2651,7 +2651,7 @@ void TakePlrsMoney(int cost)
 		}
 	}
 	v12 = 0;
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 	if ( v1 > 0 )
 	{
 		v13 = 21720 * v3;
@@ -2728,7 +2728,7 @@ LABEL_26:
 		}
 	}
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void SmithBuyItem()
 {
@@ -4153,22 +4153,22 @@ void CheckStoreBtn()
 		if ( !leveltype )
 			sfx_stop();
 	}
-	else if ( stextsel != -1 && MouseY >= 32 && MouseY <= 320 )
+	else if ( stextsel != -1 && Diablo::get()->MouseY >= 32 && Diablo::get()->MouseY <= 320 )
 	{
 		if ( stextsize )
 		{
-			v1 = __OFSUB__(MouseX, 24);
-			v0 = MouseX - 24 < 0;
+			v1 = __OFSUB__(Diablo::get()->MouseX, 24);
+			v0 = Diablo::get()->MouseX - 24 < 0;
 		}
 		else
 		{
-			v1 = __OFSUB__(MouseX, 344);
-			v0 = MouseX - 344 < 0;
+			v1 = __OFSUB__(Diablo::get()->MouseX, 344);
+			v0 = Diablo::get()->MouseX - 344 < 0;
 		}
-		if ( !(v0 ^ v1) && MouseX <= 616 )
+		if ( !(v0 ^ v1) && Diablo::get()->MouseX <= 616 )
 		{
-			v2 = (MouseY - 32) / 12;
-			if ( stextscrl && MouseX > 600 )
+			v2 = (Diablo::get()->MouseY - 32) / 12;
+			if ( stextscrl && Diablo::get()->MouseX > 600 )
 			{
 				if ( v2 == 4 )
 				{

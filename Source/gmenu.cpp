@@ -128,7 +128,7 @@ void gmenu_call_proc(TMenuItem *pItem, void (*gmFunc)())
 	int v3; // ecx
 	void (**v4)(); // edx
 
-	PauseMode = 0;
+	Diablo::get()->PauseMode = 0;
 	byte_634464 = 0;
 	v2 = pItem;
 	dword_63447C = gmFunc;
@@ -402,17 +402,17 @@ int gmenu_on_mouse_move(LPARAM lParam)
 bool gmenu_valid_mouse_pos(int *plOffset)
 {
 	*plOffset = 282;
-	if ( MouseX < 282 )
+	if ( Diablo::get()-> MouseX < 282 )
 	{
 		*plOffset = 0;
 		return 0;
 	}
-	if ( MouseX > 538 )
+	if ( Diablo::get()-> MouseX > 538 )
 	{
 		*plOffset = 256;
 		return 0;
 	}
-	*plOffset = MouseX - 282;
+	*plOffset = Diablo::get()-> MouseX - 282;
 	return 1;
 }
 
@@ -428,11 +428,11 @@ int gmenu_left_mouse(int a1)
 
 	if ( a1 )
 	{
-		if ( !dword_634480 || MouseY >= 352 )
+		if ( !dword_634480 || Diablo::get()->MouseY >= 352 )
 			return 0;
-		if ( MouseY - 117 >= 0 )
+		if ( Diablo::get()->MouseY - 117 >= 0 )
 		{
-			v2 = (MouseY - 117) / 45;
+			v2 = (Diablo::get()->MouseY - 117) / 45;
 			if ( v2 < dword_63448C )
 			{
 				v3 = v2;
@@ -440,7 +440,7 @@ int gmenu_left_mouse(int a1)
 				if ( (v4->dwFlags & 0x80000000) != 0 )
 				{
 					v5 = (unsigned int)gmenu_get_lfont(&dword_634480[v3]) >> 1;
-					if ( MouseX >= 320 - v5 && MouseX <= v5 + 320 )
+					if ( Diablo::get()-> MouseX >= 320 - v5 && Diablo::get()-> MouseX <= v5 + 320 )
 					{
 						sgpCurrItem = v4;
 						PlaySFX(IS_TITLEMOV);

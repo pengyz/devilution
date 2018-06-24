@@ -54,7 +54,7 @@ void LoadGame(bool firstflag)
 	int from_save; // [esp+118h] [ebp-8h]
 	int quest_num; // [esp+11Ch] [ebp-4h]
 
-	FreeGameMem();
+	Diablo::get()->FreeGameMem();
 	pfile_remove_temp_files();
 	pfile_get_game_name(dst);
 	ptr = pfile_read(dst, &len);
@@ -77,13 +77,13 @@ void LoadGame(bool firstflag)
 	v46 = v6;
 	do
 	{
-		*(int *)((char *)glSeedTbl + quest_num) = ILoad_2();
+		*(int *)((char *)Diablo::get()->glSeedTbl + quest_num) = ILoad_2();
 		v7 = ILoad();
 		v8 = quest_num;
 		quest_num += 4;
 		v10 = __OFSUB__(quest_num, 68);
 		v9 = quest_num - 68 < 0;
-		*(int *)((char *)gnLevelTypeTbl + v8) = v7;
+		*(int *)((char *)Diablo::get()->gnLevelTypeTbl + v8) = v7;
 	}
 	while ( v9 ^ v10 );
 	LoadPlayer(myplr);
@@ -95,7 +95,7 @@ void LoadGame(bool firstflag)
 	do
 		LoadPortal(quest_num++);
 	while ( quest_num < 4 );
-	LoadGameLevel(firstflag, 4);
+	Diablo::get()->LoadGameLevel(firstflag, 4);
 	SyncInitPlr(myplr);
 	SyncPlrAnim(myplr);
 	ViewX = v1;
@@ -382,7 +382,7 @@ void LoadGame(bool firstflag)
 	missiles_process_charge();
 	ResetPal();
 	SetCursor(CURSOR_HAND);
-	gbProcessPlayers = 1;
+	Diablo::get()->gbProcessPlayers = 1;
 }
 // 5256A0: using guessed type int gbProcessPlayers;
 // 5BB1ED: using guessed type char leveltype;
@@ -593,8 +593,8 @@ void SaveGame()
 	v2 = 0;
 	do
 	{
-		ISave_2(glSeedTbl[v2]);
-		ISave(gnLevelTypeTbl[v2]);
+		ISave_2(Diablo::get()->glSeedTbl[v2]);
+		ISave(Diablo::get()->gnLevelTypeTbl[v2]);
 		++v2;
 	}
 	while ( v2 < 17 );
@@ -996,7 +996,7 @@ void SaveLevel()
 	void *SaveBuff; // [esp+104h] [ebp-8h]
 
 	if ( !currlevel )
-		glSeedTbl[0] = GetRndSeed();
+		Diablo::get()->glSeedTbl[0] = GetRndSeed();
 	v0 = codec_get_encoded_len(262147); /* FILEBUFF */
 	SaveBuff = DiabloAllocPtr(v0);
 	tbuff = SaveBuff;

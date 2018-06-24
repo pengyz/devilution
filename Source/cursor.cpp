@@ -623,31 +623,31 @@ void CheckCursMove()
 	int v82; // [esp+1Ch] [ebp-8h]
 	signed int v83; // [esp+20h] [ebp-4h]
 
-	v0 = MouseX;
-	v1 = MouseY;
+	v0 = Diablo::get()-> MouseX;
+	v1 = Diablo::get()->MouseY;
 	if ( chrflag || questlog )
 	{
-		if ( MouseX >= 160 )
+		if ( Diablo::get()-> MouseX >= 160 )
 		{
-			v0 = MouseX - 160;
+			v0 = Diablo::get()-> MouseX - 160;
 			goto LABEL_10;
 		}
 		goto LABEL_9;
 	}
 	if ( invflag || sbookflag )
 	{
-		if ( MouseX <= 320 )
+		if ( Diablo::get()-> MouseX <= 320 )
 		{
-			v0 = MouseX + 160;
+			v0 = Diablo::get()-> MouseX + 160;
 			goto LABEL_10;
 		}
 LABEL_9:
 		v0 = 0;
 	}
 LABEL_10:
-	if ( MouseY > 351 && track_isscrolling() )
+	if ( Diablo::get()->MouseY > 351 && track_isscrolling() )
 		v1 = 351;
-	if ( !zoomflag )
+	if ( !Diablo::get()->zoomflag )
 	{
 		v0 >>= 1;
 		v1 >>= 1;
@@ -670,7 +670,7 @@ LABEL_10:
 	v4 = v3 >> 5;
 	v5 = v3 & 0x1F;
 	v76 = v2 & 0x3F;
-	v6 = (v2 >> 6) + (v3 >> 5) + ViewX - (zoomflag != 0 ? 10 : 5);
+	v6 = (v2 >> 6) + (v3 >> 5) + ViewX - (Diablo::get()->zoomflag != 0 ? 10 : 5);
 	v7 = v76 >> 1;
 	v8 = v4 + ViewY - (v2 >> 6);
 	if ( v5 < v76 >> 1 )
@@ -726,19 +726,19 @@ LABEL_40:
 		cursmy = v8;
 		return;
 	}
-	if ( MouseY > 352 )
+	if ( Diablo::get()->MouseY > 352 )
 	{
 		CheckPanelInfo();
 		return;
 	}
 	if ( doomflag )
 		return;
-	if ( invflag && MouseX > 320 )
+	if ( invflag && Diablo::get()-> MouseX > 320 )
 	{
 		pcursinvitem = CheckInvHLight();
 		return;
 	}
-	if ( sbookflag && MouseX > 320 || (chrflag || questlog) && MouseX < 320 )
+	if ( sbookflag && Diablo::get()-> MouseX > 320 || (chrflag || questlog) && Diablo::get()-> MouseX < 320 )
 		return;
 	if ( !leveltype )
 	{

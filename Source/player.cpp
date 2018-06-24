@@ -1077,7 +1077,7 @@ void InitPlayer(int pnum, bool FirstTime)
 		plr[v3]._pwtype = (v5 & 0xF) == 4;
 		plr[v3].pManaShield = 0;
 	}
-	if ( plr[v3].plrlevel == currlevel || leveldebug )
+	if ( plr[v3].plrlevel == currlevel || Diablo::get()->leveldebug )
 	{
 		SetPlrAnims(v2);
 		plr[v3]._pxoff = 0;
@@ -1172,14 +1172,14 @@ LABEL_33:
 	plr[v3]._pInvincible = 0;
 	v14 = v2 == myplr;
 #ifdef _DEBUG
-	if ( debug_mode_dollar_sign && FirstTime )
+	if ( Diablo::get()->debug_mode_dollar_sign && FirstTime )
 	{
 		plr[pnum]._pMemSpells[0] |= 0x800000;
 		plr[pnum]._pMemSpells[1] |= 0;
 		if ( !plr[myplr]._pSplLvl[SPL_TELEPORT] )
 			plr[myplr]._pSplLvl[SPL_TELEPORT] = 1;
 	}
-	if ( debug_mode_key_inverted_v && FirstTime )
+	if ( Diablo::get()->debug_mode_key_inverted_v && FirstTime )
 	{
 		plr[pnum]._pMemSpells[0] = -1;
 		plr[pnum]._pMemSpells[1] = 0xFFFFFFF;
@@ -1694,7 +1694,7 @@ void StartWalk(int pnum, int xvel, int yvel, int xadd, int yadd, int EndDir, int
 		InitPlayerLoc(arglist, 0);
 		if ( arglist == myplr )
 		{
-			if ( zoomflag )
+			if ( Diablo::get()->zoomflag )
 			{
 				if ( abs(ScrollInfo._sdx) < 3 )
 				{
@@ -1804,7 +1804,7 @@ void StartWalk2(int pnum, int xvel, int yvel, int xoff, int yoff, int xadd, int 
 		InitPlayerLoc(arglist, v19);
 		if ( arglist == myplr )
 		{
-			if ( zoomflag )
+			if ( Diablo::get()->zoomflag )
 			{
 				if ( abs(ScrollInfo._sdx) < 3 )
 				{
@@ -1919,7 +1919,7 @@ void StartWalk3(int pnum, int xvel, int yvel, int xoff, int yoff, int xadd, int 
 		InitPlayerLoc(arglist, 0);
 		if ( arglist == myplr )
 		{
-			if ( zoomflag )
+			if ( Diablo::get()->zoomflag )
 			{
 				if ( abs(ScrollInfo._sdx) < 3 )
 				{
@@ -2639,7 +2639,7 @@ void DropHalfPlayersGold(int pnum)
 		}
 	}
 	v8 = 0;
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 	if ( v3 > 0 )
 	{
 		ib = 0;
@@ -2727,7 +2727,7 @@ LABEL_28:
 	}
 	plr[v2]._pGold = CalculateGold(v1);
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void SyncPlrKill(int pnum, int earflag)
 {
@@ -2882,7 +2882,7 @@ LABEL_11:
 	if ( v4 == myplr )
 	{
 		v5 = v4;
-		v6 = ghMainWnd;
+		v6 = Diablo::get()->ghMainWnd;
 		plr[v5]._pmode = PM_NEWLVL;
 		plr[v5]._pInvincible = 1;
 		PostMessageA(v6, v3, 0, 0);
@@ -2916,7 +2916,7 @@ void RestartTownLvl(int pnum)
 	if ( v1 == myplr )
 	{
 		plr[v2]._pmode = PM_NEWLVL;
-		v4 = ghMainWnd;
+		v4 = Diablo::get()->ghMainWnd;
 		plr[v2]._pInvincible = 1;
 		PostMessageA(v4, WM_DIABRETOWN, 0, 0);
 	}
@@ -2946,7 +2946,7 @@ void StartWarpLvl(int pnum, int pidx)
 		SetCurrentPortal(v2);
 		v5 = v3;
 		plr[v5]._pmode = PM_NEWLVL;
-		v6 = ghMainWnd;
+		v6 = Diablo::get()->ghMainWnd;
 		plr[v5]._pInvincible = 1;
 		PostMessageA(v6, WM_DIABWARPLVL, 0, 0);
 	}
@@ -3331,7 +3331,7 @@ bool PlrHitMonst(int pnum, int m)
 	if ( CheckMonsterHit(arglist, &ret) )
 		return ret;
 #ifdef _DEBUG
-	if ( (signed int)v46 < v13 || debug_mode_key_inverted_v || debug_mode_dollar_sign )
+	if ( (signed int)v46 < v13 || Diablo::get()->debug_mode_key_inverted_v || Diablo::get()->debug_mode_dollar_sign )
 #else
 	if ( (signed int)v46 < v13 )
 #endif
@@ -3447,7 +3447,7 @@ LABEL_40:
 		if ( v32 & 0x100 )
 			*(int *)((char *)&monster[0]._mFlags + v5) |= 8u;
 #ifdef _DEBUG
-		if ( debug_mode_dollar_sign || debug_mode_key_inverted_v )
+		if ( Diablo::get()->debug_mode_dollar_sign || Diablo::get()->debug_mode_key_inverted_v )
 			monster[m]._mhitpoints = 0; /* double check */
 #endif
 		if ( (signed int)(*(int *)((_BYTE *)&monster[0]._mhitpoints + v5) & 0xFFFFFFC0) > 0 )
@@ -3691,7 +3691,7 @@ LABEL_29:
 			goto LABEL_46;
 		}
 		v15 = (unsigned char)dPlayer[0][v8];
-		if ( (_BYTE)v15 && !FriendlyMode )
+		if ( (_BYTE)v15 && !Diablo::get()->FriendlyMode )
 		{
 			if ( (char)v15 <= 0 )
 				v16 = -1 - v15;
@@ -3871,14 +3871,14 @@ int PM_DoSpell(int pnum)
 			{
 				plr[v2]._pRSpell = -1;
 				_LOBYTE(plr[v2]._pRSplType) = 4;
-				drawpanflag = 255;
+				Diablo::get()->drawpanflag = 255;
 			}
 			if ( _LOBYTE(plr[v2]._pRSplType) == 3
 			  && !(plr[v2]._pISpells[1] & ((unsigned __int64)((__int64)1 << (_LOBYTE(plr[v2]._pRSpell) - 1)) >> 32) | plr[v2]._pISpells[0] & (unsigned int)((__int64)1 << (_LOBYTE(plr[v2]._pRSpell) - 1))) )
 			{
 				plr[v2]._pRSpell = -1;
 				_LOBYTE(plr[v2]._pRSplType) = 4;
-				drawpanflag = 255;
+				Diablo::get()->drawpanflag = 255;
 			}
 		}
 	}
@@ -3900,7 +3900,7 @@ LABEL_16:
 	}
 	return 0;
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 // 5BB1ED: using guessed type char leveltype;
 
 int PM_DoGotHit(int pnum)
@@ -4952,8 +4952,8 @@ void CheckPlrSpell()
 			return;
 		}
 		if ( pcurs != CURSOR_HAND
-		  || MouseY >= 352
-		  || (chrflag && MouseX < 320 || invflag && MouseX > 320)
+		  || Diablo::get()->MouseY >= 352
+		  || (chrflag && Diablo::get()->MouseX < 320 || invflag && Diablo::get()->MouseX > 320)
 		  && v2 != 2
 		  && v2 != 5
 		  && v2 != 26

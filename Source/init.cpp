@@ -181,13 +181,13 @@ void init_create_window()
 	wcex.cbSize = sizeof(wcex);
 	wcex.style = CS_HREDRAW|CS_VREDRAW;
 	wcex.lpfnWndProc = init_redraw_window;
-	wcex.hInstance = ghInst;
-	wcex.hIcon = LoadIconA(ghInst, (LPCSTR)0x65);
+	wcex.hInstance = Diablo::get()->ghInst;
+	wcex.hIcon = LoadIconA(Diablo::get()->ghInst, (LPCSTR)0x65);
 	wcex.hCursor = LoadCursorA(0, (LPCSTR)0x7F00);
 	wcex.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
 	wcex.lpszMenuName = "DIABLO";
 	wcex.lpszClassName = "DIABLO";
-	wcex.hIconSm = (HICON)LoadImageA(ghInst, (LPCSTR)0x65, IMAGE_ICON, 16, 16, LR_DEFAULTCOLOR);
+	wcex.hIconSm = (HICON)LoadImageA(Diablo::get()->ghInst, (LPCSTR)0x65, IMAGE_ICON, 16, 16, LR_DEFAULTCOLOR);
 	if ( !RegisterClassExA(&wcex) )
 		TermMsg("Unable to register window class");
 	if ( GetSystemMetrics(SM_CXSCREEN) >= 640 )
@@ -198,7 +198,7 @@ void init_create_window()
 		nHeight = GetSystemMetrics(SM_CYSCREEN);
 	else
 		nHeight = 480;
-	hWnd = CreateWindowExA(0, "DIABLO", "DIABLO", WS_POPUP, 0, 0, nWidth, nHeight, NULL, NULL, ghInst, NULL);
+	hWnd = CreateWindowExA(0, "DIABLO", "DIABLO", WS_POPUP, 0, 0, nWidth, nHeight, NULL, NULL, Diablo::get()->ghInst, NULL);
 	if ( !hWnd )
 		TermMsg("Unable to create main window");
 	ShowWindow(hWnd, SW_SHOWNORMAL);
@@ -305,7 +305,7 @@ void *init_test_access(char *mpq_path, char *mpq_name, char *reg_loc, int flags,
 	init_strip_trailing_slash(Buffer);
 	if ( !SFileSetBasePath(Buffer) )
 		TermMsg("SFileSetBasePath");
-	if ( !GetModuleFileNameA(ghInst, Filename, 0x104u) )
+	if ( !GetModuleFileNameA(Diablo::get()->ghInst, Filename, 0x104u) )
 		TermMsg("Can't get program name");
 	v7 = strrchr(Filename, '\\');
 	if ( v7 )
@@ -412,7 +412,7 @@ void init_get_file_info()
 	DWORD dwHandle; // [esp+Ch] [ebp-8h]
 	VS_FIXEDFILEINFO *lpBuffer; // [esp+10h] [ebp-4h]
 
-	if ( GetModuleFileNameA(ghInst, diablo_exe_path, 0x104u) )
+	if ( GetModuleFileNameA(Diablo::get()->ghInst, diablo_exe_path, 0x104u) )
 	{
 		v0 = GetFileVersionInfoSizeA(diablo_exe_path, &dwHandle);
 		v1 = v0;
@@ -461,15 +461,15 @@ LRESULT __stdcall init_palette(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam
 			case WM_ERASEBKGND:
 				return 0;
 			case WM_CREATE:
-				ghMainWnd = hWnd;
+				Diablo::get()->ghMainWnd = hWnd;
 				break;
 			case WM_DESTROY:
 				init_cleanup(1);
-				ghMainWnd = 0;
+				Diablo::get()->ghMainWnd = 0;
 				PostQuitMessage(0);
 				break;
 			case WM_PAINT:
-				drawpanflag = 255;
+				Diablo::get()->drawpanflag = 255;
 				break;
 			case WM_CLOSE:
 				return 0;
@@ -477,7 +477,7 @@ LRESULT __stdcall init_palette(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam
 	}
 	return DefWindowProcA(hWnd, Msg, wParam, lParam);
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void init_activate_window(HWND hWnd, bool activated)
 {
@@ -487,7 +487,7 @@ void init_activate_window(HWND hWnd, bool activated)
 	UiAppActivate(activated);
 	dwNewLong = GetWindowLongA(hWnd, GWL_STYLE);
 
-	if ( window_activated && fullscreen )
+	if ( window_activated && Diablo::get()->fullscreen )
 		dwNewLong &= ~WS_SYSMENU;
 	else
 		dwNewLong |= WS_SYSMENU;
@@ -496,12 +496,12 @@ void init_activate_window(HWND hWnd, bool activated)
 
 	if ( window_activated )
 	{
-		drawpanflag = 255;
+		Diablo::get()->drawpanflag = 255;
 		ResetPal();
 	}
 }
 // 484364: using guessed type int fullscreen;
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 // 634980: using guessed type int window_activated;
 
 LRESULT __stdcall init_redraw_window(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)

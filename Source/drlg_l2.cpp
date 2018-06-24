@@ -746,19 +746,19 @@ void CreateL2Dungeon(int rseed, int entry)
 			if ( quests[8]._qactive )
 				goto LABEL_10;
 			currlevel = 6;
-			CreateL2Dungeon(glSeedTbl[6], 4);
+			CreateL2Dungeon(Diablo::get()->glSeedTbl[6], 4);
 			currlevel = 7;
 		}
 		if ( currlevel == 8 )
 		{
 			if ( quests[8]._qactive )
 			{
-				v4 = glSeedTbl[7];
+				v4 = Diablo::get()->glSeedTbl[7];
 				currlevel = 7;
 			}
 			else
 			{
-				v4 = glSeedTbl[6];
+				v4 = Diablo::get()->glSeedTbl[6];
 				currlevel = 6;
 			}
 			CreateL2Dungeon(v4, 4);

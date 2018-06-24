@@ -65,10 +65,10 @@ int __stdcall mainmenu_select_hero_dialog(int u1, int u2, int u3, int u4, int mo
 			TermMsg("Unable to display SelHeroSing");
 		if ( a5 == 2 )
 		{
-			dword_5256E8 = 1;
+			Diablo::get()->dword_5256E8 = 1;
 			goto LABEL_6;
 		}
-		dword_5256E8 = 0;
+		Diablo::get()->dword_5256E8 = 0;
 	}
 	else if ( !UiSelHeroMultDialog(
 				   pfile_ui_set_hero_infos,
@@ -103,7 +103,7 @@ LABEL_6:
 	}
 	return 1;
 }
-// 5256E8: using guessed type int dword_5256E8;
+// 5256E8: using guessed type int Diablo::get()->dword_5256E8;
 // 679660: using guessed type char gbMaxPlayers;
 
 void mainmenu_action(int option)
@@ -167,7 +167,7 @@ int mainmenu_init_menu(int a1)
 	if ( a1 == 4 )
 		return 1;
 	music_stop();
-	v3 = diablo_init_menu(v1 != 2, v1 != 3);
+	v3 = Diablo::get()->diablo_init_menu(v1 != 2, v1 != 3);
 	if ( v3 )
 		mainmenu_refresh_music();
 	return v3;

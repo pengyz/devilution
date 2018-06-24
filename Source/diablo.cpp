@@ -2,82 +2,87 @@
 
 #include "../types.h"
 
-int diablo_cpp_init_value; // weak
-HWND ghMainWnd;
-int glMid1Seed[17];
-int glMid2Seed[17];
-int gnLevelTypeTbl[17];
-int MouseY; // idb
-int MouseX; // idb
-bool gbGameLoopStartup; // idb
-int glSeedTbl[17];
-int gbRunGame; // weak
-int glMid3Seed[17];
-int gbRunGameResult; // weak
-int zoomflag; // weak
-int gbProcessPlayers; // weak
-int glEndSeed[17];
-int dword_5256E8; // weak
-HINSTANCE ghInst; // idb
-int DebugMonsters[10];
-char cineflag; // weak
-int drawpanflag; // weak
-int visiondebug; // weak
-int scrollflag; /* unused */
-int light4flag; // weak
-int leveldebug; // weak
-int monstdebug; // weak
-int trigdebug; /* unused */
-int setseed; // weak
-int debugmonsttypes; // weak
-int PauseMode; // weak
-int sgnTimeoutCurs;
-char sgbMouseDown; // weak
-int color_cycle_timer; // weak
+Diablo* Diablo::m_Instance = NULL;
 
-int diablo_inf = 0x7F800000; // weak
+inline Diablo* Diablo::get()
+{
+	if(!m_Instance)
+		m_Instance = new Diablo();
+	return m_Instance;
+}
 
-/* rdata */
 
-int fullscreen = 1; // weak
+
+Diablo::Diablo()
+{
+	ghMainWnd = 0;
+	glMid1Seed[17];
+	glMid2Seed[17];
+	gnLevelTypeTbl[17];
+	MouseY; // idb
+	MouseX; // idb
+	gbGameLoopStartup; // idb
+	glSeedTbl[17];
+	gbRunGame; // weak
+	glMid3Seed[17];
+	gbRunGameResult; // weak
+	zoomflag; // weak
+	gbProcessPlayers; // weak
+	glEndSeed[17];
+	dword_5256E8; // weak
+	ghInst; // idb
+	DebugMonsters[10];
+	cineflag; // weak
+	drawpanflag; // weak
+	visiondebug; // weak
+	scrollflag; /* unused */
+	light4flag; // weak
+	leveldebug; // weak
+	monstdebug; // weak
+	trigdebug; /* unused */
+	setseed; // weak
+	debugmonsttypes; // weak
+	PauseMode; // weak
+	sgnTimeoutCurs;
+	sgbMouseDown; // weak
+	color_cycle_timer; // weak
+
+	/* rdata */
+	fullscreen = 1; // weak
 #ifdef _DEBUG
-int showintrodebug = 1;
-int questdebug = -1;
-int debug_mode_key_s;
-int debug_mode_key_w;
-int debug_mode_key_inverted_v;
-int debug_mode_dollar_sign;
-int debug_mode_key_d;
-int debug_mode_key_i;
-int dbgplr;
-int dbgqst;
-int dbgmon;
-int frameflag;
-int frameend;
-int framerate;
-int framestart;
+	showintrodebug = 1;
+	questdebug = -1;
+	debug_mode_key_s;
+	debug_mode_key_w;
+	debug_mode_key_inverted_v;
+	debug_mode_dollar_sign;
+	debug_mode_key_d;
+	debug_mode_key_i;
+	dbgplr;
+	dbgqst;
+	dbgmon;
+	frameflag;
+	frameend;
+	framerate;
+	framestart;
 #endif
-int FriendlyMode = 1; // weak
-char *spszMsgTbl[4] =
+	FriendlyMode = 1; // weak
+	spszMsgTbl[0] = "I need help! Come Here!";
+	spszMsgTbl[1] = "Follow me.";
+	spszMsgTbl[2] = "Here's something for you.";
+	spszMsgTbl[3] = "Now you DIE!";
+	spszMsgKeyTbl[0] = "F9";
+	spszMsgKeyTbl[1] = "F10";
+	spszMsgKeyTbl[2] = "F11";
+	spszMsgKeyTbl[3] = "F12";
+}
+Diablo::~Diablo()
 {
-  "I need help! Come Here!",
-  "Follow me.",
-  "Here's something for you.",
-  "Now you DIE!"
-}; // weak
-char *spszMsgKeyTbl[4] = { "F9", "F10", "F11", "F12" }; // weak
 
-struct diablo_cpp_init
-{
-	diablo_cpp_init()
-	{
-		diablo_cpp_init_value = diablo_inf;
-	}
-} _diablo_cpp_init;
-// 479BF8: using guessed type int diablo_inf;
-// 525514: using guessed type int diablo_cpp_init_value;
+}
 
-void FreeGameMem()
+
+void Diablo::FreeGameMem()
 {
 	void *v0; // ecx
 	void *v1; // ecx
@@ -108,7 +113,7 @@ void FreeGameMem()
 	FreeTownerGFX();
 }
 
-int diablo_init_menu(int a1, int bSinglePlayer)
+int Diablo::diablo_init_menu(int a1, int bSinglePlayer)
 {
 	int v2; // esi
 	int v3; // edi
@@ -143,10 +148,10 @@ LABEL_11:
 	return gbRunGameResult;
 }
 // 525698: using guessed type int gbRunGameResult;
-// 5256E8: using guessed type int dword_5256E8;
+// 5256E8: using guessed type int Diablo::get()->dword_5256E8;
 // 678640: using guessed type char byte_678640;
 
-void run_game_loop(int uMsg)
+void Diablo::run_game_loop(int uMsg)
 {
 	//int v3; // eax
 	bool v5; // zf
@@ -163,10 +168,10 @@ void run_game_loop(int uMsg)
 	gbRunGame = 1;
 	gbProcessPlayers = 1;
 	gbRunGameResult = 1;
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 	DrawAndBlit();
 	PaletteFadeIn(8);
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 	gbGameLoopStartup = 1;
 	nthread_ignore_mutex(0);
 	while ( gbRunGame )
@@ -214,7 +219,7 @@ void run_game_loop(int uMsg)
 	PaletteFadeOut(8);
 	SetCursor(0);
 	ClearScreenBuffer();
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 	scrollrt_draw_game_screen(1);
 	SetWindowProc(saveProc);
 	free_game();
@@ -228,10 +233,10 @@ void run_game_loop(int uMsg)
 // 525698: using guessed type int gbRunGameResult;
 // 5256A0: using guessed type int gbProcessPlayers;
 // 525718: using guessed type char cineflag;
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 // 679660: using guessed type char gbMaxPlayers;
 
-void start_game(int uMsg)
+void Diablo::start_game(int uMsg)
 {
 	cineflag = 0;
 	zoomflag = 1;
@@ -248,9 +253,9 @@ void start_game(int uMsg)
 }
 // 52569C: using guessed type int zoomflag;
 // 525718: using guessed type char cineflag;
-// 525748: using guessed type char sgbMouseDown;
+// 525748: using guessed type char Diablo::get()->sgbMouseDown;
 
-void free_game()
+void Diablo::free_game()
 {
 	int i; // esi
 
@@ -267,10 +272,10 @@ void free_game()
 	FreeCursor();
 	FreeLightTable();
 	FreeDebugGFX();
-	FreeGameMem();
+	Diablo::get()->FreeGameMem();
 }
 
-bool diablo_get_not_running()
+bool Diablo::diablo_get_not_running()
 {
 	SetLastError(0);
 	CreateEventA(NULL, FALSE, FALSE, "DiabloEvent");
@@ -286,12 +291,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 #ifndef DEBUGGER
 	diablo_reload_process(hInstance);
 #endif
-	ghInst = hInstance;
+	Diablo::get()->ghInst = hInstance;
 	if ( RestrictedTest() )
 		ErrDlg(TEMPLATE_ERR_RESTRICTED, 0, "C:\\Src\\Diablo\\Source\\DIABLO.CPP", 877);
 	if ( ReadOnlyTest() )
 	{
-		if ( !GetModuleFileNameA(ghInst, Filename, 0x104u) )
+		if ( !GetModuleFileNameA(Diablo::get()->ghInst, Filename, 0x104u) )
 			*Filename = '\0';
 		DirErrDlg(Filename);
 	}
@@ -299,15 +304,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	srand(GetTickCount());
 	encrypt_init_lookup_table();
 	exception_get_filter();
-	if ( !diablo_find_window("DIABLO") && diablo_get_not_running() )
+	if ( !Diablo::get()->diablo_find_window("DIABLO") && Diablo::get()->diablo_get_not_running() )
 	{
-		diablo_init_screen();
-		diablo_parse_flags(lpCmdLine);
+		Diablo::get()->diablo_init_screen();
+		Diablo::get()->diablo_parse_flags(lpCmdLine);
 		init_create_window();
 		sound_init();
 		UiInitialize();
 #ifdef _DEBUG
-		if ( showintrodebug )
+		if ( Diablo::get()->showintrodebug )
 			play_movie("gendata\\logo.smk", 1);
 #else
 		play_movie("gendata\\logo.smk", 1);
@@ -319,7 +324,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			play_movie("gendata\\diablo1.smk", 1);
 		SRegSaveValue("Diablo", value_name, 0, 0);
 #ifdef _DEBUG
-		if ( showintrodebug )
+		if ( Diablo::get()->showintrodebug )
 		{
 			UiTitleDialog(7);
 			BlackPalette();
@@ -331,16 +336,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		mainmenu_action(0); /* v11 fix unused arg */
 		UiDestroy();
 		palette_save_gamme();
-		if ( ghMainWnd )
+		if ( Diablo::get()->ghMainWnd )
 		{
 			Sleep(300);
-			DestroyWindow(ghMainWnd);
+			DestroyWindow(Diablo::get()->ghMainWnd);
 		}
 	}
 	return 0;
 }
 
-void diablo_parse_flags(char *args)
+void Diablo::diablo_parse_flags(char *args)
 {
 #ifdef _DEBUG
 	int n; // edi
@@ -466,14 +471,14 @@ void diablo_parse_flags(char *args)
 // 52A548: using guessed type char gbBackBuf;
 // 52A549: using guessed type char gbEmulate;
 
-void diablo_init_screen()
+void Diablo::diablo_init_screen()
 {
 	int v0; // ecx
 	int *v1; // eax
 
 	v0 = 0;
-	MouseX = 320;
-	MouseY = 240;
+	Diablo::get()->MouseX = 320;
+	Diablo::get()->MouseY = 240;
 	ScrollInfo._sdx = 0;
 	ScrollInfo._sdy = 0;
 	ScrollInfo._sxoff = 0;
@@ -491,7 +496,7 @@ void diablo_init_screen()
 }
 // 69CEFC: using guessed type int scrollrt_cpp_init_value;
 
-HWND diablo_find_window(LPCSTR lpClassName)
+HWND Diablo::diablo_find_window(LPCSTR lpClassName)
 {
 	HWND result; // eax
 	HWND v2; // esi
@@ -515,7 +520,7 @@ HWND diablo_find_window(LPCSTR lpClassName)
 	return result;
 }
 
-void diablo_reload_process(HMODULE hModule)
+void Diablo::diablo_reload_process(HMODULE hModule)
 {
 	char *i; // eax
 	DWORD dwSize; // esi
@@ -600,7 +605,7 @@ LABEL_23:
 	}
 }
 
-int PressEscKey()
+int Diablo::PressEscKey()
 {
 	int result; // eax
 
@@ -677,9 +682,9 @@ LRESULT __stdcall DisableInputWndProc(HWND hWnd, int uMsg, int wParam, int lPara
 			}
 			return init_palette(hWnd, uMsg, wParam, lParam);
 		}
-		if ( !sgbMouseDown )
+		if ( !Diablo::get()->sgbMouseDown )
 		{
-			sgbMouseDown = 1;
+			Diablo::get()->sgbMouseDown = 1;
 LABEL_21:
 			SetCapture(hWnd);
 			return 0;
@@ -688,7 +693,7 @@ LABEL_21:
 	}
 	if ( uMsg == WM_LBUTTONUP )
 	{
-		v5 = sgbMouseDown == 1;
+		v5 = Diablo::get()->sgbMouseDown == 1;
 		goto LABEL_23;
 	}
 	if ( uMsg != WM_RBUTTONDOWN )
@@ -698,28 +703,28 @@ LABEL_21:
 			if ( uMsg == WM_CAPTURECHANGED )
 			{
 				if ( hWnd != (HWND)lParam )
-					sgbMouseDown = 0;
+					Diablo::get()->sgbMouseDown = 0;
 				return 0;
 			}
 			return init_palette(hWnd, uMsg, wParam, lParam);
 		}
-		v5 = sgbMouseDown == 2;
+		v5 = Diablo::get()->sgbMouseDown == 2;
 LABEL_23:
 		if ( v5 )
 		{
-			sgbMouseDown = 0;
+			Diablo::get()->sgbMouseDown = 0;
 			ReleaseCapture();
 		}
 		return 0;
 	}
-	if ( !sgbMouseDown )
+	if ( !Diablo::get()->sgbMouseDown )
 	{
-		sgbMouseDown = 2;
+		Diablo::get()->sgbMouseDown = 2;
 		goto LABEL_21;
 	}
 	return 0;
 }
-// 525748: using guessed type char sgbMouseDown;
+// 525748: using guessed type char Diablo::get()->sgbMouseDown;
 
 int __stdcall GM_Game(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -727,25 +732,25 @@ int __stdcall GM_Game(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		if ( uMsg == WM_LBUTTONUP )
 		{
-			MouseX = (unsigned short)lParam;
-			MouseY = (unsigned int)lParam >> 16;
-			if ( sgbMouseDown != 1 )
+			Diablo::get()->MouseX = (unsigned short)lParam;
+			Diablo::get()->MouseY = (unsigned int)lParam >> 16;
+			if ( Diablo::get()->sgbMouseDown != 1 )
 				return 0;
-			sgbMouseDown = 0;
-			LeftMouseUp();
+			Diablo::get()->sgbMouseDown = 0;
+			Diablo::get()->LeftMouseUp();
 			track_repeat_walk(0);
 		}
 		else
 		{
 			if ( uMsg == WM_RBUTTONDOWN )
 			{
-				MouseX = (unsigned short)lParam;
-				MouseY = (unsigned int)lParam >> 16;
-				if ( !sgbMouseDown )
+				Diablo::get()->MouseX = (unsigned short)lParam;
+				Diablo::get()->MouseY = (unsigned int)lParam >> 16;
+				if ( !Diablo::get()->sgbMouseDown )
 				{
-					sgbMouseDown = 2;
+					Diablo::get()->sgbMouseDown = 2;
 					SetCapture(hWnd);
-					RightMouseDown();
+					Diablo::get()->RightMouseDown();
 				}
 				return 0;
 			}
@@ -755,7 +760,7 @@ int __stdcall GM_Game(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				{
 					if ( hWnd != (HWND)lParam )
 					{
-						sgbMouseDown = 0;
+						Diablo::get()->sgbMouseDown = 0;
 						track_repeat_walk(0);
 					}
 				}
@@ -768,24 +773,24 @@ int __stdcall GM_Game(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					FreeMonsterSnd();
 					music_stop();
 					track_repeat_walk(0);
-					sgbMouseDown = 0;
+					Diablo::get()->sgbMouseDown = 0;
 					ReleaseCapture();
 					ShowProgress(uMsg);
-					drawpanflag = 255;
+					Diablo::get()->drawpanflag = 255;
 					DrawAndBlit();
-					if ( gbRunGame )
+					if ( Diablo::get()->gbRunGame )
 						PaletteFadeIn(8);
 					nthread_ignore_mutex(0);
-					gbGameLoopStartup = 1;
+					Diablo::get()->gbGameLoopStartup = 1;
 					return 0;
 				}
 				return init_palette(hWnd, uMsg, wParam, lParam);
 			}
-			MouseX = (unsigned short)lParam;
-			MouseY = (unsigned int)lParam >> 16;
-			if ( sgbMouseDown != 2 )
+			Diablo::get()->MouseX = (unsigned short)lParam;
+			Diablo::get()->MouseY = (unsigned int)lParam >> 16;
+			if ( Diablo::get()->sgbMouseDown != 2 )
 				return 0;
-			sgbMouseDown = 0;
+			Diablo::get()->sgbMouseDown = 0;
 		}
 		ReleaseCapture();
 		return 0;
@@ -793,51 +798,51 @@ int __stdcall GM_Game(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch ( uMsg )
 	{
 		case WM_LBUTTONDOWN:
-			MouseX = (unsigned short)lParam;
-			MouseY = (unsigned int)lParam >> 16;
-			if ( !sgbMouseDown )
+			Diablo::get()->MouseX = (unsigned short)lParam;
+			Diablo::get()->MouseY = (unsigned int)lParam >> 16;
+			if ( !Diablo::get()->sgbMouseDown )
 			{
-				sgbMouseDown = 1;
+				Diablo::get()->sgbMouseDown = 1;
 				SetCapture(hWnd);
-				track_repeat_walk(LeftMouseDown(wParam));
+				track_repeat_walk(Diablo::get()->LeftMouseDown(wParam));
 			}
 			return 0;
 		case WM_KEYFIRST:
-			PressKey(wParam);
+			Diablo::get()->PressKey(wParam);
 			return 0;
 		case WM_KEYUP:
-			ReleaseKey(wParam);
+			Diablo::get()->ReleaseKey(wParam);
 			return 0;
 		case WM_CHAR:
-			PressChar(wParam);
+			Diablo::get()->PressChar(wParam);
 			return 0;
 		case WM_SYSKEYDOWN:
-			if ( PressSysKey(wParam) )
+			if ( Diablo::get()->PressSysKey(wParam) )
 				return 0;
 			return init_palette(hWnd, uMsg, wParam, lParam);
 		case WM_SYSCOMMAND:
 			if ( wParam == SC_CLOSE )
 			{
-				gbRunGame = 0;
-				gbRunGameResult = 0;
+				Diablo::get()->gbRunGame = 0;
+				Diablo::get()->gbRunGameResult = 0;
 				return 0;
 			}
 			return init_palette(hWnd, uMsg, wParam, lParam);
 	}
 	if ( uMsg != WM_MOUSEFIRST )
 		return init_palette(hWnd, uMsg, wParam, lParam);
-	MouseX = (unsigned short)lParam;
-	MouseY = (unsigned int)lParam >> 16;
+	Diablo::get()->MouseX = (unsigned short)lParam;
+	Diablo::get()->MouseY = (unsigned int)lParam >> 16;
 	gmenu_on_mouse_move((unsigned short)lParam);
 	return 0;
 }
 // 525650: using guessed type int gbRunGame;
 // 525698: using guessed type int gbRunGameResult;
-// 52571C: using guessed type int drawpanflag;
-// 525748: using guessed type char sgbMouseDown;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
+// 525748: using guessed type char Diablo::get()->sgbMouseDown;
 // 679660: using guessed type char gbMaxPlayers;
 
-bool LeftMouseDown(int a1)
+bool Diablo::LeftMouseDown(int a1)
 {
 	int v1; // edi
 	int v3; // eax
@@ -875,7 +880,7 @@ bool LeftMouseDown(int a1)
 		CheckStoreBtn();
 		return 0;
 	}
-	if ( MouseY >= 352 )
+	if ( Diablo::get()->MouseY >= 352 )
 	{
 		if ( !talkflag && !dropGoldFlag )
 		{
@@ -889,7 +894,7 @@ bool LeftMouseDown(int a1)
 	}
 	if ( gmenu_exception() || TryIconCurs() )
 		return 0;
-	if ( questlog && MouseX > 32 && MouseX < 288 && MouseY > 32 && MouseY < 308 )
+	if ( questlog && Diablo::get()-> MouseX > 32 && Diablo::get()-> MouseX < 288 && Diablo::get()->MouseY > 32 && Diablo::get()->MouseY < 308 )
 	{
 		QuestlogESC();
 		return 0;
@@ -900,18 +905,18 @@ bool LeftMouseDown(int a1)
 		sfx_stop();
 		return 0;
 	}
-	if ( chrflag && MouseX < 320 )
+	if ( chrflag && Diablo::get()-> MouseX < 320 )
 	{
 		CheckChrBtns();
 		return 0;
 	}
-	if ( invflag && MouseX > 320 )
+	if ( invflag && Diablo::get()-> MouseX > 320 )
 	{
 		if ( !dropGoldFlag )
 			CheckInvItem();
 		return 0;
 	}
-	if ( sbookflag && MouseX > 320 )
+	if ( sbookflag && Diablo::get()-> MouseX > 320 )
 	{
 		CheckSBook();
 		return 0;
@@ -1041,7 +1046,7 @@ LABEL_98:
 // 69BD04: using guessed type int questlog;
 // 6AA705: using guessed type char stextflag;
 
-bool TryIconCurs()
+bool Diablo::TryIconCurs()
 {
 	unsigned char v0; // dl
 	int v1; // edx
@@ -1118,7 +1123,7 @@ LABEL_26:
 // 4B8CC1: using guessed type char pcursobj;
 // 4B8CC2: using guessed type char pcursplr;
 
-void LeftMouseUp()
+void Diablo::LeftMouseUp()
 {
 	gmenu_left_mouse(0);
 	control_release_talk_btn();
@@ -1136,7 +1141,7 @@ void LeftMouseUp()
 // 4B8C90: using guessed type int panbtndown;
 // 6AA705: using guessed type char stextflag;
 
-void RightMouseDown()
+void Diablo::RightMouseDown()
 {
 	if ( !gmenu_exception() && sgnTimeoutCurs == CURSOR_NONE && PauseMode != 2 && !plr[myplr]._pInvincible )
 	{
@@ -1150,8 +1155,8 @@ void RightMouseDown()
 			{
 				SetSpell();
 			}
-			else if ( MouseY >= 352
-				   || (!sbookflag || MouseX <= 320)
+			else if ( Diablo::get()->MouseY >= 352
+				   || (!sbookflag || Diablo::get()-> MouseX <= 320)
 				   && !TryIconCurs()
 				   && (pcursinvitem == -1 || !UseInvItem(myplr, pcursinvitem)) )
 			{
@@ -1175,7 +1180,7 @@ void RightMouseDown()
 // 52575C: using guessed type int doomflag;
 // 6AA705: using guessed type char stextflag;
 
-bool PressSysKey(int wParam)
+bool Diablo::PressSysKey(int wParam)
 {
 	if ( gmenu_exception() || wParam != VK_F10 )
 		return 0;
@@ -1183,7 +1188,7 @@ bool PressSysKey(int wParam)
 	return 1;
 }
 
-void diablo_hotkey_msg(int dwMsg)
+void Diablo::diablo_hotkey_msg(int dwMsg)
 {
 	int v1; // esi
 	char *v2; // eax
@@ -1193,7 +1198,7 @@ void diablo_hotkey_msg(int dwMsg)
 	v1 = dwMsg;
 	if ( gbMaxPlayers != 1 )
 	{
-		if ( !GetModuleFileNameA(ghInst, Filename, 0x104u) )
+		if ( !GetModuleFileNameA(Diablo::get()->ghInst, Filename, 0x104u) )
 			TermMsg("Can't get program name");
 		v2 = strrchr(Filename, '\\');
 		if ( v2 )
@@ -1207,13 +1212,13 @@ void diablo_hotkey_msg(int dwMsg)
 // 48437C: using guessed type char *spszMsgKeyTbl[4];
 // 679660: using guessed type char gbMaxPlayers;
 
-void ReleaseKey(int vkey)
+void Diablo::ReleaseKey(int vkey)
 {
 	if ( vkey == VK_SNAPSHOT )
 		CaptureScreen();
 }
 
-void PressKey(int vkey)
+void Diablo::PressKey(int vkey)
 {
 	int v1; // esi
 	int v2; // ecx
@@ -1427,17 +1432,17 @@ LABEL_106:
 										gamemenu_off();
 										goto LABEL_110;
 									}
-									v4 = MouseX;
-									if ( MouseX >= 480 || MouseY >= 352 )
+									v4 = Diablo::get()-> MouseX;
+									if ( Diablo::get()-> MouseX >= 480 || Diablo::get()->MouseY >= 352 )
 									{
 LABEL_101:
-										if ( !invflag && chrflag && v4 > 160 && MouseY < 352 )
-											SetCursorPos(v4 - 160, MouseY);
+										if ( !invflag && chrflag && v4 > 160 && Diablo::get()->MouseY < 352 )
+											SetCursorPos(v4 - 160, Diablo::get()->MouseY);
 										goto LABEL_106;
 									}
-									SetCursorPos(MouseX + 160, MouseY);
+									SetCursorPos(Diablo::get()->MouseX + 160, Diablo::get()->MouseY);
 								}
-								v4 = MouseX;
+								v4 = Diablo::get()-> MouseX;
 								goto LABEL_101;
 						}
 					}
@@ -1457,7 +1462,7 @@ LABEL_101:
 // 69BD04: using guessed type int questlog;
 // 6AA705: using guessed type char stextflag;
 
-void diablo_pause_game()
+void Diablo::diablo_pause_game()
 {
 	if ( (unsigned char)gbMaxPlayers <= 1u )
 	{
@@ -1471,14 +1476,14 @@ void diablo_pause_game()
 			FreeMonsterSnd();
 			track_repeat_walk(0);
 		}
-		drawpanflag = 255;
+		Diablo::get()->drawpanflag = 255;
 	}
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 // 525740: using guessed type int PauseMode;
 // 679660: using guessed type char gbMaxPlayers;
 
-void PressChar(int vkey)
+void Diablo::PressChar(int vkey)
 {
 	int v1; // ebx
 	BOOL v4; // ecx
@@ -1652,12 +1657,12 @@ LABEL_72:
 					if ( !v4 || chrflag )
 					{
 LABEL_24:
-						if ( MouseX < 480 )
+						if ( Diablo::get()-> MouseX < 480 )
 						{
-							v5 = MouseY;
-							if ( MouseY < 352 )
+							v5 = Diablo::get()->MouseY;
+							if ( Diablo::get()->MouseY < 352 )
 							{
-								v6 = MouseX + 160;
+								v6 = Diablo::get()-> MouseX + 160;
 								goto LABEL_27;
 							}
 						}
@@ -1665,12 +1670,12 @@ LABEL_24:
 					else
 					{
 LABEL_18:
-						if ( MouseX > 160 )
+						if ( Diablo::get()-> MouseX > 160 )
 						{
-							v5 = MouseY;
-							if ( MouseY < 352 )
+							v5 = Diablo::get()->MouseY;
+							if ( Diablo::get()->MouseY < 352 )
 							{
-								v6 = MouseX - 160;
+								v6 = Diablo::get()-> MouseX - 160;
 LABEL_27:
 								SetCursorPos(v6, v5);
 								return;
@@ -1794,7 +1799,7 @@ LABEL_27:
 // 69BD04: using guessed type int questlog;
 // 6AA705: using guessed type char stextflag;
 
-void LoadLvlGFX()
+void Diablo::LoadLvlGFX()
 {
 	unsigned char *v0; // eax
 	char *v1; // ecx
@@ -1854,7 +1859,7 @@ LABEL_14:
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void LoadAllGFX()
+void Diablo::LoadAllGFX()
 {
 	pSpeedCels = DiabloAllocPtr(0x100000);
 	IncProgress();
@@ -1865,7 +1870,7 @@ void LoadAllGFX()
 	IncProgress();
 }
 
-void CreateLevel(int lvldir)
+void Diablo::CreateLevel(int lvldir)
 {
 	int hnd; // cl
 
@@ -1877,25 +1882,25 @@ void CreateLevel(int lvldir)
 			hnd = 0;
 			break;
 		case 1:
-			CreateL5Dungeon(glSeedTbl[currlevel], lvldir);
+			CreateL5Dungeon(Diablo::get()->glSeedTbl[currlevel], lvldir);
 			InitL1Triggers();
 			Freeupstairs();
 			hnd = 1;
 			break;
 		case 2:
-			CreateL2Dungeon(glSeedTbl[currlevel], lvldir);
+			CreateL2Dungeon(Diablo::get()->glSeedTbl[currlevel], lvldir);
 			InitL2Triggers();
 			Freeupstairs();
 			hnd = 2;
 			break;
 		case 3:
-			CreateL3Dungeon(glSeedTbl[currlevel], lvldir);
+			CreateL3Dungeon(Diablo::get()->glSeedTbl[currlevel], lvldir);
 			InitL3Triggers();
 			Freeupstairs();
 			hnd = 3;
 			break;
 		case 4:
-			CreateL4Dungeon(glSeedTbl[currlevel], lvldir);
+			CreateL4Dungeon(Diablo::get()->glSeedTbl[currlevel], lvldir);
 			InitL4Triggers();
 			Freeupstairs();
 			hnd = 4;
@@ -1909,7 +1914,7 @@ void CreateLevel(int lvldir)
 }
 // 5BB1ED: using guessed type char leveltype;
 
-void LoadGameLevel(bool firstflag, int lvldir)
+void Diablo::LoadGameLevel(bool firstflag, int lvldir)
 {
 	int v2; // ebp
 	bool visited; // edx
@@ -1918,10 +1923,10 @@ void LoadGameLevel(bool firstflag, int lvldir)
 
 	v2 = 0;
 	if ( setseed )
-		glSeedTbl[currlevel] = setseed;
+		Diablo::get()->glSeedTbl[currlevel] = setseed;
 	music_stop();
 	SetCursor(CURSOR_HAND);
-	SetRndSeed(glSeedTbl[currlevel]);
+	SetRndSeed(Diablo::get()->glSeedTbl[currlevel]);
 	IncProgress();
 	MakeLightTable();
 	LoadLvlGFX();
@@ -1942,7 +1947,7 @@ void LoadGameLevel(bool firstflag, int lvldir)
 		InitAutomapOnce();
 		InitHelp();
 	}
-	SetRndSeed(glSeedTbl[currlevel]);
+	SetRndSeed(Diablo::get()->glSeedTbl[currlevel]);
 	if ( !leveltype )
 		SetupTownStores();
 	IncProgress();
@@ -1959,7 +1964,7 @@ void LoadGameLevel(bool firstflag, int lvldir)
 		CreateLevel(lvldir);
 		IncProgress();
 		FillSolidBlockTbls();
-		SetRndSeed(glSeedTbl[currlevel]);
+		SetRndSeed(Diablo::get()->glSeedTbl[currlevel]);
 		if ( leveltype )
 		{
 			GetLevelMTypes();
@@ -2004,7 +2009,7 @@ void LoadGameLevel(bool firstflag, int lvldir)
 					visited = visited || plr[i]._pLvlVisited[currlevel];
 			}
 		}
-		SetRndSeed(glSeedTbl[currlevel]);
+		SetRndSeed(Diablo::get()->glSeedTbl[currlevel]);
 		if ( leveltype )
 		{
 			if ( firstflag || lvldir == 4 || !plr[myplr]._pLvlVisited[currlevel] || gbMaxPlayers != 1 )
@@ -2146,7 +2151,7 @@ LABEL_72:
 // 5CF31D: using guessed type char setlevel;
 // 679660: using guessed type char gbMaxPlayers;
 
-void game_loop(bool startup)
+void Diablo::game_loop(bool startup)
 {
 	int v1; // ecx
 	int v2; // esi
@@ -2181,7 +2186,7 @@ void game_loop(bool startup)
 // 525650: using guessed type int gbRunGame;
 // 679660: using guessed type char gbMaxPlayers;
 
-void game_logic()
+void Diablo::game_logic()
 {
 	if ( PauseMode != 2 )
 	{
@@ -2189,7 +2194,7 @@ void game_logic()
 			PauseMode = 2;
 		if ( gbMaxPlayers == 1 && gmenu_exception() )
 		{
-			drawpanflag |= 1u;
+			Diablo::get()->drawpanflag |= 1u;
 		}
 		else
 		{
@@ -2226,19 +2231,19 @@ void game_logic()
 			ClearPlrMsg();
 			CheckTriggers();
 			CheckQuests();
-			drawpanflag |= 1u;
+			Diablo::get()->drawpanflag |= 1u;
 			pfile_update(0);
 		}
 	}
 }
 // 5256A0: using guessed type int gbProcessPlayers;
 // 525718: using guessed type char cineflag;
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 // 525740: using guessed type int PauseMode;
 // 5BB1ED: using guessed type char leveltype;
 // 679660: using guessed type char gbMaxPlayers;
 
-void timeout_cursor(bool timeout)
+void Diablo::timeout_cursor(bool timeout)
 {
 	if ( timeout )
 	{
@@ -2250,7 +2255,7 @@ void timeout_cursor(bool timeout)
 			AddPanelString("-- Network timeout --", 1);
 			AddPanelString("-- Waiting for players --", 1);
 			SetCursor(CURSOR_HOURGLASS);
-			drawpanflag = 255;
+			Diablo::get()->drawpanflag = 255;
 		}
 		scrollrt_draw_game_screen(1);
 	}
@@ -2259,13 +2264,13 @@ void timeout_cursor(bool timeout)
 		SetCursor(sgnTimeoutCurs);
 		sgnTimeoutCurs = 0;
 		ClearPanel();
-		drawpanflag = 255;
+		Diablo::get()->drawpanflag = 255;
 	}
 }
-// 52571C: using guessed type int drawpanflag;
-// 525748: using guessed type char sgbMouseDown;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
+// 525748: using guessed type char Diablo::get()->sgbMouseDown;
 
-void diablo_color_cyc_logic()
+void Diablo::diablo_color_cyc_logic()
 {
 	DWORD v0; // eax
 

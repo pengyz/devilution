@@ -1285,7 +1285,7 @@ bool MonsterTrapHit(int m, int mindam, int maxdam, int dist, int t, int shift)
 	if ( CheckMonsterHit(arglist, (bool *)&t) )
 		return t;
 #ifdef _DEBUG
-	if ( v14 >= v10 && !debug_mode_dollar_sign && !debug_mode_key_inverted_v && monster[v6]._mmode != MM_STONE )
+	if ( v14 >= v10 && !Diablo::get()->debug_mode_dollar_sign && !Diablo::get()->debug_mode_key_inverted_v && monster[v6]._mmode != MM_STONE )
 		return 0;
 #else
 	if ( v14 >= v10 && monster[v6]._mmode != MM_STONE )
@@ -1300,7 +1300,7 @@ bool MonsterTrapHit(int m, int mindam, int maxdam, int dist, int t, int shift)
 	else
 		monster[v6]._mhitpoints -= v13;
 #ifdef _DEBUG
-	if ( debug_mode_dollar_sign || debug_mode_key_inverted_v )
+	if ( Diablo::get()->debug_mode_dollar_sign || Diablo::get()->debug_mode_key_inverted_v )
 		monster[v6]._mhitpoints = 0;
 #endif
 	if ( (signed int)(monster[v6]._mhitpoints & 0xFFFFFFC0) > 0 )
@@ -1427,7 +1427,7 @@ bool MonsterMHit(int pnum, int m, int mindam, int maxdam, int dist, int t, int s
 	if ( CheckMonsterHit(arglist, &ret) )
 		return ret;
 #ifdef _DEBUG
-	if ( v25 >= v13 && !debug_mode_key_inverted_v && !debug_mode_dollar_sign )
+	if ( v25 >= v13 && !Diablo::get()->debug_mode_key_inverted_v && !Diablo::get()->debug_mode_dollar_sign )
 		return 0;
 #else
 	if ( v25 >= v13 )
@@ -1547,7 +1547,7 @@ bool PlayerMHit(int pnum, int m, int dist, int mind, int maxd, int mtype, int sh
 	v10 = 100;
 	v32 = random(pnum, 100);
 #ifdef _DEBUG
-	if ( debug_mode_dollar_sign || debug_mode_key_inverted_v )
+	if ( Diablo::get()->debug_mode_dollar_sign || Diablo::get()->debug_mode_key_inverted_v )
 		v32 = 1000;
 #endif
 	if ( !missiledata[mtype].mType )

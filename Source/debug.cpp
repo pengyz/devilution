@@ -8,7 +8,7 @@ char dFlagDbg[17][112][112];
 
 void LoadDebugGFX()
 {
-	if ( visiondebug )
+	if ( Diablo::get()->visiondebug )
 		pSquareCel = LoadFileInMem("Data\\Square.CEL", 0);
 }
 // 525720: using guessed type int visiondebug;
@@ -120,22 +120,22 @@ void PrintDebugPlayer(bool bNextPlayer)
 	char dstr[128]; // [esp+Ch] [ebp-80h]
 
 	if ( bNextPlayer )
-		dbgplr = ((_BYTE)dbgplr + 1) & 3;
+		Diablo::get()->dbgplr = ((_BYTE)Diablo::get()->dbgplr + 1) & 3;
 
-	sprintf(dstr, "Plr %i : Active = %i", dbgplr, plr[dbgplr].plractive);
+	sprintf(dstr, "Plr %i : Active = %i", Diablo::get()->dbgplr, plr[Diablo::get()->dbgplr].plractive);
 	NetSendCmdString(1 << myplr, dstr);
 
-	if ( plr[dbgplr].plractive )
+	if ( plr[Diablo::get()->dbgplr].plractive )
 	{
-		sprintf(dstr, "  Plr %i is %s", dbgplr, plr[dbgplr]._pName);
+		sprintf(dstr, "  Plr %i is %s", Diablo::get()->dbgplr, plr[Diablo::get()->dbgplr]._pName);
 		NetSendCmdString(1 << myplr, dstr);
-		sprintf(dstr, "  Lvl = %i : Change = %i", plr[dbgplr].plrlevel, plr[dbgplr]._pLvlChanging);
+		sprintf(dstr, "  Lvl = %i : Change = %i", plr[Diablo::get()->dbgplr].plrlevel, plr[Diablo::get()->dbgplr]._pLvlChanging);
 		NetSendCmdString(1 << myplr, dstr);
-		sprintf(dstr, "  x = %i, y = %i : tx = %i, ty = %i", plr[dbgplr].WorldX, plr[dbgplr].WorldY, plr[dbgplr]._ptargx, plr[dbgplr]._ptargy);
+		sprintf(dstr, "  x = %i, y = %i : tx = %i, ty = %i", plr[Diablo::get()->dbgplr].WorldX, plr[Diablo::get()->dbgplr].WorldY, plr[Diablo::get()->dbgplr]._ptargx, plr[Diablo::get()->dbgplr]._ptargy);
 		NetSendCmdString(1 << myplr, dstr);
-		sprintf(dstr, "  mode = %i : daction = %i : walk[0] = %i", plr[dbgplr]._pmode, plr[dbgplr].destAction, plr[dbgplr].walkpath[0]);
+		sprintf(dstr, "  mode = %i : daction = %i : walk[0] = %i", plr[Diablo::get()->dbgplr]._pmode, plr[Diablo::get()->dbgplr].destAction, plr[Diablo::get()->dbgplr].walkpath[0]);
 		NetSendCmdString(1 << myplr, dstr);
-		sprintf(dstr, "  inv = %i : hp = %i", plr[dbgplr]._pInvincible, plr[dbgplr]._pHitPoints);
+		sprintf(dstr, "  inv = %i : hp = %i", plr[Diablo::get()->dbgplr]._pInvincible, plr[Diablo::get()->dbgplr]._pHitPoints);
 		NetSendCmdString(1 << myplr, dstr);
 	}
 }
@@ -144,10 +144,10 @@ void PrintDebugQuest()
 {
 	char dstr[128]; // [esp+0h] [ebp-80h]
 
-	sprintf(dstr, "Quest %i :  Active = %i, Var1 = %i", dbgqst, quests[dbgqst]._qactive, quests[dbgqst]._qvar1);
+	sprintf(dstr, "Quest %i :  Active = %i, Var1 = %i", Diablo::get()->dbgqst, quests[Diablo::get()->dbgqst]._qactive, quests[Diablo::get()->dbgqst]._qvar1);
 	NetSendCmdString(1 << myplr, dstr);
-	if ( ++dbgqst == 16 )
-		dbgqst = 0;
+	if ( ++Diablo::get()->dbgqst == 16 )
+		Diablo::get()->dbgqst = 0;
 }
 
 void PrintDebugMonster(int m)
@@ -194,7 +194,7 @@ void GetDebugMonster()
 		}
 		else
 		{
-			v0 = dbgmon;
+			v0 = Diablo::get()->dbgmon;
 		}
 	}
 	PrintDebugMonster(v0);
@@ -204,10 +204,10 @@ void NextDebugMonster()
 {
 	char dstr[128]; // [esp+0h] [ebp-80h]
 
-	if ( dbgmon++ == 200 )
-		dbgmon = 0;
+	if ( Diablo::get()->dbgmon++ == 200 )
+		Diablo::get()->dbgmon = 0;
 
-	sprintf(dstr, "Current debug monster = %i", dbgmon);
+	sprintf(dstr, "Current debug monster = %i", Diablo::get()->dbgmon);
 	NetSendCmdString(1 << myplr, dstr);
 }
 #endif

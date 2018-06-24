@@ -501,7 +501,7 @@ LABEL_10:
 			if ( !currlevel && !*(_DWORD *)v20 )
 				SetSpellTrans(4);
 			DrawSpellCel(v17, xp, (char *)pSpellCels, (char)SpellITbl[v4], 56);
-			if ( MouseX >= v17 - 64 && MouseX < v17 - 64 + 56 && MouseY >= v22 && MouseY < v22 + 56 )
+			if ( Diablo::get()-> MouseX >= v17 - 64 && Diablo::get()-> MouseX < v17 - 64 + 56 && Diablo::get()->MouseY >= v22 && Diablo::get()->MouseY < v22 + 56 )
 			{
 				pSpell = v4;
 				pSplType = v1;
@@ -635,7 +635,7 @@ void SetSpell()
 	{
 		ClearPanel();
 		v0 = myplr;
-		drawpanflag = 255;
+		Diablo::get()->drawpanflag = 255;
 		plr[v0]._pRSpell = pSpell;
 		_LOBYTE(plr[v0]._pRSplType) = pSplType;
 	}
@@ -643,7 +643,7 @@ void SetSpell()
 // 4B8834: using guessed type int pSpell;
 // 4B8954: using guessed type int pSplType;
 // 4B8C98: using guessed type int spselflag;
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void SetSpeedSpell(int slot)
 {
@@ -739,13 +739,13 @@ void ToggleSpell(int slot)
 		}
 		if ( v9 & ((unsigned __int64)((__int64)1 << ((unsigned char)v2 - 1)) >> 32) | v8 & (unsigned int)((__int64)1 << ((unsigned char)v2 - 1)) )
 		{
-			drawpanflag = 255;
+			Diablo::get()->drawpanflag = 255;
 			plr[v3]._pRSpell = v12;
 			_LOBYTE(plr[v3]._pRSplType) = *v11;
 		}
 	}
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void CPrintString(int No, unsigned char pszStr, int Just)
 {
@@ -1295,7 +1295,7 @@ void DrawCtrlPan()
 	if ( numpanbtns == 8 )
 	{
 		CelDecodeOnly(151, 634, pMultiBtns, panbtn[6] + 1, 33);
-		if ( FriendlyMode )
+		if ( Diablo::get()->FriendlyMode )
 			v3 = panbtn[7] + 3;
 		else
 			v3 = panbtn[7] + 5;
@@ -1408,8 +1408,8 @@ void DoPanBtn()
 	int (*v4)[5]; // eax
 	int v5; // ecx
 
-	v0 = MouseX;
-	v1 = MouseY;
+	v0 = Diablo::get()-> MouseX;
+	v1 = Diablo::get()->MouseY;
 	v2 = numpanbtns;
 	v3 = 0;
 	if ( numpanbtns > 0 )
@@ -1455,12 +1455,12 @@ void control_check_btn_press()
 	int v0; // edx
 	int v1; // esi
 
-	v0 = MouseX;
-	v1 = MouseY;
-	if ( MouseX >= PanBtnPos[3][0]
-	  && MouseX <= PanBtnPos[3][0] + PanBtnPos[3][2]
-	  && MouseY >= PanBtnPos[3][1]
-	  && MouseY <= PanBtnPos[3][1] + PanBtnPos[3][3] )
+	v0 = Diablo::get()-> MouseX;
+	v1 = Diablo::get()->MouseY;
+	if ( Diablo::get()-> MouseX >= PanBtnPos[3][0]
+	  && Diablo::get()-> MouseX <= PanBtnPos[3][0] + PanBtnPos[3][2]
+	  && Diablo::get()->MouseY >= PanBtnPos[3][1]
+	  && Diablo::get()->MouseY <= PanBtnPos[3][1] + PanBtnPos[3][3] )
 	{
 		control_set_button_down(3);
 	}
@@ -1514,14 +1514,14 @@ void CheckPanelInfo()
 		{
 			v1 = v0;
 			v2 = PanBtnPos[v0][0];
-			if ( MouseX >= v2 && MouseX <= v2 + PanBtnPos[v1][2] )
+			if ( Diablo::get()->MouseX >= v2 && Diablo::get()->MouseX <= v2 + PanBtnPos[v1][2] )
 			{
 				v3 = PanBtnPos[v1][1];
-				if ( MouseY >= v3 && MouseY <= v3 + PanBtnPos[v1][3] )
+				if ( Diablo::get()->MouseY >= v3 && Diablo::get()->MouseY <= v3 + PanBtnPos[v1][3] )
 				{
 					if ( v0 == 7 )
 					{
-						if ( FriendlyMode )
+						if ( Diablo::get()->FriendlyMode )
 							strcpy(infostr, "Player friendly");
 						else
 							strcpy(infostr, "Player attack");
@@ -1544,7 +1544,7 @@ void CheckPanelInfo()
 		}
 		while ( v0 < numpanbtns );
 	}
-	if ( !spselflag && MouseX >= 565 && MouseX < 621 && MouseY >= 416 && MouseY < 472 )
+	if ( !spselflag && Diablo::get()->MouseX >= 565 && Diablo::get()->MouseX < 621 && Diablo::get()->MouseY >= 416 && Diablo::get()->MouseY < 472 )
 	{
 		strcpy(infostr, "Select current spell button");
 		_LOBYTE(infoclr) = 0;
@@ -1618,7 +1618,7 @@ LABEL_54:
 			}
 		}
 	}
-	if ( MouseX > 190 && MouseX < 437 && MouseY > 356 && MouseY < 385 )
+	if ( Diablo::get()-> MouseX > 190 && Diablo::get()-> MouseX < 437 && Diablo::get()->MouseY > 356 && Diablo::get()->MouseY < 385 )
 		pcursinvitem = CheckInvHLight();
 }
 // 484368: using guessed type int FriendlyMode;
@@ -1648,14 +1648,14 @@ void CheckBtnUp()
 		v1 = &panbtn[v0];
 		if ( *v1 )
 		{
-			v2 = MouseX;
+			v2 = Diablo::get()-> MouseX;
 			*v1 = 0;
 			v3 = v0;
 			v4 = PanBtnPos[v0][0];
 			if ( v2 >= v4 && v2 <= v4 + PanBtnPos[v3][2] )
 			{
 				v5 = PanBtnPos[v3][1];
-				if ( MouseY >= v5 && MouseY <= v5 + PanBtnPos[v3][3] )
+				if ( Diablo::get()->MouseY >= v5 && Diablo::get()->MouseY <= v5 + PanBtnPos[v3][3] )
 				{
 					switch ( v0 )
 					{
@@ -1703,7 +1703,7 @@ void CheckBtnUp()
 								control_type_message();
 							break;
 						case PANBTN_FRIENDLY:
-							FriendlyMode = FriendlyMode == 0;
+							Diablo::get()->FriendlyMode = Diablo::get()->FriendlyMode == 0;
 							break;
 						default:
 							break;
@@ -2377,14 +2377,14 @@ void MY_PlrStringXY(int x, int y, int width, char *pszStr, char col, int base)
 
 void CheckLvlBtn()
 {
-	if ( !lvlbtndown && MouseX >= 40 && MouseX <= 81 && MouseY >= 313 && MouseY <= 335 )
+	if ( !lvlbtndown && Diablo::get()-> MouseX >= 40 && Diablo::get()-> MouseX <= 81 && Diablo::get()->MouseY >= 313 && Diablo::get()->MouseY <= 335 )
 		lvlbtndown = 1;
 }
 // 4B851C: using guessed type int lvlbtndown;
 
 void ReleaseLvlBtn()
 {
-	if ( MouseX >= 40 && MouseX <= 81 && MouseY >= 313 && MouseY <= 335 )
+	if ( Diablo::get()-> MouseX >= 40 && Diablo::get()-> MouseX <= 81 && Diablo::get()->MouseY >= 313 && Diablo::get()->MouseY <= 335 )
 		chrflag = 1;
 	lvlbtndown = 0;
 }
@@ -2426,7 +2426,7 @@ void CheckChrBtns()
 		v1 = myplr;
 		if ( plr[myplr]._pStatPts )
 		{
-			v2 = MouseX;
+			v2 = Diablo::get()-> MouseX;
 			v3 = SLOBYTE(plr[v1]._pClass);
 			while ( 1 )
 			{
@@ -2459,7 +2459,7 @@ LABEL_12:
 						if ( v2 >= v11 && v2 <= v11 + attribute_inc_rects[v10].w )
 						{
 							v12 = attribute_inc_rects[v10].y;
-							if ( MouseY >= v12 && MouseY <= v12 + attribute_inc_rects[v10].h )
+							if ( Diablo::get()->MouseY >= v12 && Diablo::get()->MouseY <= v12 + attribute_inc_rects[v10].h )
 							{
 								chrbtn[v0] = 1;
 								chrbtnactive = 1;
@@ -2498,10 +2498,10 @@ void ReleaseChrBtns()
 			*v1 = 0;
 			v2 = v0;
 			v3 = attribute_inc_rects[v0].x;
-			if ( MouseX >= v3 && MouseX <= v3 + attribute_inc_rects[v2].w )
+			if ( Diablo::get()-> MouseX >= v3 && Diablo::get()-> MouseX <= v3 + attribute_inc_rects[v2].w )
 			{
 				v4 = attribute_inc_rects[v2].y;
-				if ( MouseY >= v4 && MouseY <= v4 + attribute_inc_rects[v2].h )
+				if ( Diablo::get()->MouseY >= v4 && Diablo::get()->MouseY <= v4 + attribute_inc_rects[v2].h )
 				{
 					if ( v0 )
 					{
@@ -2638,7 +2638,7 @@ void RedBack()
 	int _EAX;
 	char *_EBX;
 
-	v0 = -(light4flag != 0);
+	v0 = -(Diablo::get()->light4flag != 0);
 	_LOWORD(v0) = v0 & 0xF400;
 	v12 = v0 + 0x1200;
 	if ( leveltype == 4 )
@@ -2861,12 +2861,12 @@ void CheckSBook()
 	__int64 v6; // [esp+8h] [ebp-10h]
 	int v7; // [esp+10h] [ebp-8h]
 
-	v0 = MouseY;
-	v1 = MouseX;
-	if ( MouseX >= 331 && MouseX < 368 && MouseY >= 18 && MouseY < 314 )
+	v0 = Diablo::get()->MouseY;
+	v1 = Diablo::get()-> MouseX;
+	if ( Diablo::get()-> MouseX >= 331 && Diablo::get()-> MouseX < 368 && Diablo::get()->MouseY >= 18 && Diablo::get()->MouseY < 314 )
 	{
-		v2 = SpellPages[0][7 * sbooktab + (MouseY - 18) / 43];
-		v7 = SpellPages[0][7 * sbooktab + (MouseY - 18) / 43];
+		v2 = SpellPages[0][7 * sbooktab + (Diablo::get()->MouseY - 18) / 43];
+		v7 = SpellPages[0][7 * sbooktab + (Diablo::get()->MouseY - 18) / 43];
 		if ( v2 != -1 )
 		{
 			v3 = myplr;
@@ -2880,19 +2880,19 @@ void CheckSBook()
 					v5 = 1;
 				if ( v6 & v4 )
 					v5 = 0;
-				drawpanflag = 255;
+				Diablo::get()->drawpanflag = 255;
 				plr[v3]._pRSpell = v7;
 				_LOBYTE(plr[v3]._pRSplType) = v5;
 			}
-			v1 = MouseX;
-			v0 = MouseY;
+			v1 = Diablo::get()->MouseX;
+			v0 = Diablo::get()->MouseY;
 		}
 	}
 	if ( v1 >= 327 && v1 < 633 && v0 >= 320 && v0 < 349 )
 		sbooktab = (v1 - 327) / 76;
 }
 // 4B8950: using guessed type int sbooktab;
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 char *get_pieces_str(int nGold)
 {
@@ -3205,13 +3205,13 @@ int control_check_talk_btn()
 
 	if ( !talkflag )
 		return 0;
-	if ( MouseX < 172 )
+	if ( Diablo::get()->MouseX < 172 )
 		return 0;
-	v0 = MouseY;
-	if ( MouseY < 421 || MouseX > 233 )
+	v0 = Diablo::get()->MouseY;
+	if ( Diablo::get()->MouseY < 421 || Diablo::get()->MouseX > 233 )
 		return 0;
 	result = 0;
-	if ( MouseY <= 475 )
+	if ( Diablo::get()->MouseY <= 475 )
 	{
 		talkbtndown[0] = 0;
 		talkbtndown[1] = 0;
@@ -3231,13 +3231,13 @@ void control_release_talk_btn()
 
 	if ( talkflag )
 	{
-		v0 = MouseX;
+		v0 = Diablo::get()-> MouseX;
 		talkbtndown[0] = 0;
 		talkbtndown[1] = 0;
 		talkbtndown[2] = 0;
-		if ( v0 >= 172 && MouseY >= 421 && v0 <= 233 && MouseY <= 475 )
+		if ( v0 >= 172 && Diablo::get()->MouseY >= 421 && v0 <= 233 && Diablo::get()->MouseY <= 475 )
 		{
-			v1 = (MouseY - 421) / 18;
+			v1 = (Diablo::get()->MouseY - 421) / 18;
 			v2 = 0;
 			do
 			{
@@ -3284,7 +3284,7 @@ void control_type_message()
 		talkbtndown[1] = 0;
 		talkbtndown[2] = 0;
 		sgbPlrTalkTbl = 144;
-		drawpanflag = 255;
+		Diablo::get()->drawpanflag = 255;
 		sgbTalkSavePos = sgbNextTalkSave;
 	}
 }
@@ -3292,18 +3292,18 @@ void control_type_message()
 // 4B84CD: using guessed type char sgbTalkSavePos;
 // 4B8840: using guessed type int sgbPlrTalkTbl;
 // 4B8960: using guessed type int talkflag;
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 // 679660: using guessed type char gbMaxPlayers;
 
 void control_reset_talk()
 {
 	talkflag = 0;
 	sgbPlrTalkTbl = 0;
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 }
 // 4B8840: using guessed type int sgbPlrTalkTbl;
 // 4B8960: using guessed type int talkflag;
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 int control_talk_last_key(int a1)
 {

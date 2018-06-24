@@ -2237,7 +2237,7 @@ void AddStoryBook(int i)
 	int bookframe; // eax
 	int v7; // eax
 
-	SetRndSeed(glSeedTbl[16]);
+	SetRndSeed(Diablo::get()->glSeedTbl[16]);
 	bookframe = random(0, 3);
 
 	object[i]._oVar1 = bookframe;
@@ -2616,14 +2616,14 @@ void Obj_Circle(int i)
 				quests[15]._qvar1 = 4;
 			AddMissile(plr[myplr].WorldX, plr[myplr].WorldY, 35, 46, plr[myplr]._pdir, 3, 0, myplr, 0, 0);
 			track_repeat_walk(0);
-			sgbMouseDown = 0;
+			Diablo::get()->sgbMouseDown = 0;
 			ReleaseCapture();
 			ClrPlrPath(myplr);
 			StartStand(myplr, 0);
 		}
 	}
 }
-// 525748: using guessed type char sgbMouseDown;
+// 525748: using guessed type char Diablo::get()->sgbMouseDown;
 
 void Obj_StopAnim(int i)
 {
@@ -5822,7 +5822,7 @@ LABEL_221:
 				InitDiabloMsg(v7);
 LABEL_280:
 				CalcPlrInv(arglist, 1u);
-				drawpanflag = 255;
+				Diablo::get()->drawpanflag = 255;
 				if ( arglist == myplr )
 					NetSendCmdParam2(0, CMD_PLROPOBJ, arglist, param2);
 				return;
@@ -5831,7 +5831,7 @@ LABEL_280:
 	}
 }
 // 4B84DC: using guessed type int dropGoldFlag;
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 // 5BB1ED: using guessed type char leveltype;
 // 676190: using guessed type int deltaload;
 
@@ -6038,9 +6038,9 @@ void OperateGoatShrine(int pnum, int i, int sType)
 	object[v5]._oVar1 = FindValidShrine(v3);
 	OperateShrine(v4, v3, sType);
 	object[v5]._oAnimDelay = 2;
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void OperateCauldron(int pnum, int i, int sType)
 {
@@ -6056,9 +6056,9 @@ void OperateCauldron(int pnum, int i, int sType)
 	OperateShrine(v4, v3, sType);
 	object[v5]._oAnimFlag = 0;
 	object[v5]._oAnimFrame = 3;
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 bool OperateFountains(int pnum, int i)
 {
@@ -6232,10 +6232,10 @@ LABEL_38:
 			}
 			break;
 	}
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 	return v5;
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 // 5BB1ED: using guessed type char leveltype;
 // 676190: using guessed type int deltaload;
 

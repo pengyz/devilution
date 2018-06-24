@@ -367,7 +367,7 @@ int multi_handle_delta()
 
 	if ( gbGameDestroyed )
 	{
-		gbRunGame = 0;
+		Diablo::get()->gbRunGame = 0;
 		return 0;
 	}
 	v0 = 0;
@@ -447,7 +447,7 @@ void multi_begin_timeout()
 
 	bGroupPlayers = 0;
 #ifdef _DEBUG
-	if ( sgbTimeout && !debug_mode_key_i )
+	if ( sgbTimeout && !Diablo::get()->debug_mode_key_i )
 #else
 	if ( sgbTimeout )
 #endif
@@ -495,7 +495,7 @@ void multi_begin_timeout()
 		}
 		else
 		{
-			gbRunGame = 0;
+			Diablo::get()->gbRunGame = 0;
 		}
 	}
 }
@@ -885,8 +885,8 @@ int NetInit(int bSinglePlayer, int *pfExitProgram)
 	SetRndSeed(sgGameInitInfo.dwSeed);
 	do
 	{
-		glSeedTbl[v2] = GetRndSeed();
-		gnLevelTypeTbl[v2] = InitNewSeed(v2);
+		Diablo::get()->glSeedTbl[v2] = GetRndSeed();
+		Diablo::get()->gnLevelTypeTbl[v2] = InitNewSeed(v2);
 		++v2;
 	}
 	while ( v2 < 17 );
@@ -958,7 +958,7 @@ void SetupLocalCoords()
 	int x; // ecx
 	int y; // edx
 
-	if ( !leveldebug || (unsigned char)gbMaxPlayers > 1u )
+	if ( !Diablo::get()->leveldebug || (unsigned char)gbMaxPlayers > 1u )
 	{
 		currlevel = 0;
 		leveltype = 0;
@@ -967,7 +967,7 @@ void SetupLocalCoords()
 	x = 75;
 	y = 68;
 #ifdef _DEBUG
-	if ( debug_mode_key_inverted_v || debug_mode_key_d )
+	if ( Diablo::get()->debug_mode_key_inverted_v || Diablo::get()->debug_mode_key_d )
 	{
 		x = 49;
 		y = 23;

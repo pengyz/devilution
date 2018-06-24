@@ -82,7 +82,7 @@ void LoadSysPal()
 	for(i = 0; i < 256; i++)
 		system_palette[i].peFlags = PC_NOCOLLAPSE|PC_RESERVED;
 
-	if ( !fullscreen )
+	if ( !Diablo::get()->fullscreen )
 	{
 		hDC = GetDC(NULL);
 		gdwPalEntries = GetDeviceCaps(hDC, NUMRESERVED) / 2;
@@ -168,7 +168,7 @@ void palette_update()
 	{
 		v0 = 0;
 		v1 = 256;
-		if ( !fullscreen )
+		if ( !Diablo::get()->fullscreen )
 		{
 			v0 = gdwPalEntries;
 			v1 = 2 * (128 - gdwPalEntries);

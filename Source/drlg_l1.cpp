@@ -125,7 +125,7 @@ void DRLG_Init_Globals()
 	if ( lightflag )
 		v0 = 0;
 	else
-		v0 = light4flag == 0 ? 15 : 3;
+		v0 = Diablo::get()->light4flag == 0 ? 15 : 3;
 	memset(dTransVal, v0, 0x3100u);
 }
 // 525728: using guessed type int light4flag;

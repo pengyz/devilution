@@ -23,7 +23,7 @@ void pfile_init_save_directory()
 	char Buffer[260]; // [esp+4h] [ebp-104h]
 
 	if ( GetWindowsDirectoryA(Buffer, 0x104u)
-	  && (pfile_check_available_space(Buffer), GetModuleFileNameA(ghInst, Buffer, 0x104u)) )
+	  && (pfile_check_available_space(Buffer), GetModuleFileNameA(Diablo::get()->ghInst, Buffer, 0x104u)) )
 	{
 		pfile_check_available_space(Buffer);
 	}
@@ -164,7 +164,7 @@ void pfile_get_save_path(char *pszBuf, int dwBufSize, int save_num)
 	v4 = "\\multi_%d.sv";
 	if ( (unsigned char)gbMaxPlayers <= 1u )
 		v4 = "\\single_%d.sv";
-	v5 = GetModuleFileNameA(ghInst, pszBuf, 0x104u);
+	v5 = GetModuleFileNameA(Diablo::get()->ghInst, pszBuf, 0x104u);
 	v6 = strrchr(v3, '\\');
 	if ( v6 )
 		*v6 = 0;
@@ -392,7 +392,7 @@ char *GetSaveDirectory(char *dst, int dst_size, int save_num)
 	if ( (unsigned char)gbMaxPlayers <= 1u )
 	{
 		v4 = "\\single_%d.sv";
-		v5 = GetModuleFileNameA(ghInst, dst, 0x104u);
+		v5 = GetModuleFileNameA(Diablo::get()->ghInst, dst, 0x104u);
 		v6 = strrchr(v3, '\\');
 		if ( v6 )
 			*v6 = '\0';

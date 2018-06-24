@@ -969,7 +969,7 @@ void CalcPlrItemVals(int p, bool Loadgfx)
 	{
 		plr[v5]._pRSpell = -1;
 		_LOBYTE(plr[v5]._pRSplType) = 4;
-		drawpanflag = 255;
+		Diablo::get()->drawpanflag = 255;
 	}
 	plr[v5]._pISplLvlAdd = v51;
 	plr[v5]._pIEnAc = v50;
@@ -1102,7 +1102,7 @@ LABEL_86:
 	drawmanaflag = 1;
 	drawhpflag = 1;
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void CalcPlrScrolls(int p)
 {
@@ -1158,11 +1158,11 @@ void CalcPlrScrolls(int p)
 		{
 			plr[v1]._pRSpell = -1;
 			_LOBYTE(plr[v1]._pRSplType) = 4;
-			drawpanflag = 255;
+			Diablo::get()->drawpanflag = 255;
 		}
 	}
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void CalcPlrStaff(int pnum)
 {

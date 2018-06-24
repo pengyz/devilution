@@ -101,7 +101,7 @@ void UseMana(int id, int sn)
 		{
 			case RSPLTYPE_SPELL:
 #ifdef _DEBUG
-				if ( !debug_mode_key_inverted_v )
+				if ( !Diablo::get()->debug_mode_key_inverted_v )
 				{
 #endif
 					v3 = GetManaAmount(id, sn);
@@ -132,7 +132,7 @@ bool CheckSpell(int id, int sn, char st, bool manaonly)
 	v5 = sn;
 	v6 = id;
 #ifdef _DEBUG
-	if ( debug_mode_key_inverted_v )
+	if ( Diablo::get()->debug_mode_key_inverted_v )
 		return 1;
 #endif
 	if ( !manaonly && pcurs != 1 )

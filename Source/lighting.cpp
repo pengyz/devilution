@@ -1104,11 +1104,11 @@ void MakeLightTable()
 
 	v51 = 0;
 	v0 = pLightTbl;
-	v1 = light4flag != 0 ? 3 : 15;
-	v50 = light4flag != 0 ? 3 : 15;
+	v1 = Diablo::get()->light4flag != 0 ? 3 : 15;
+	v50 = Diablo::get()->light4flag != 0 ? 3 : 15;
 	if ( v1 > 0 )
 	{
-		v49 = light4flag != 0 ? 3 : 15;
+		v49 = Diablo::get()->light4flag != 0 ? 3 : 15;
 		do
 		{
 			*v0++ = 0;
@@ -1191,7 +1191,7 @@ void MakeLightTable()
 				++v52;
 			}
 			while ( v52 < 16 );
-			if ( light4flag )
+			if ( Diablo::get()->light4flag )
 				v51 += 5;
 			else
 				++v51;
@@ -1418,7 +1418,7 @@ void ToggleLighting()
 
 void InitLightMax()
 {
-	lightmax = light4flag == 0 ? 15 : 3;
+	lightmax = Diablo::get()->light4flag == 0 ? 15 : 3;
 }
 // 525728: using guessed type int light4flag;
 // 642A14: using guessed type char lightmax;
@@ -1756,9 +1756,9 @@ void lighting_color_cycling()
 	if ( leveltype == 4 )
 	{
 		v0 = pLightTbl;
-		if ( (light4flag != 0 ? 4 : 16) > 0 )
+		if ( (Diablo::get()->light4flag != 0 ? 4 : 16) > 0 )
 		{
-			v1 = light4flag != 0 ? 4 : 16;
+			v1 = Diablo::get()->light4flag != 0 ? 4 : 16;
 			do
 			{
 				v2 = v0 + 1;

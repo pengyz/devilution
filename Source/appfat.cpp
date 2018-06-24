@@ -580,9 +580,9 @@ void MsgBox(char *pszFmt, va_list va)
 	char Text[256]; // [esp+0h] [ebp-100h]
 
 	wvsprintfA(Text, pszFmt, va);
-	if ( ghMainWnd )
-		SetWindowPos(ghMainWnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE|SWP_NOMOVE|SWP_NOSIZE);
-	MessageBoxA(ghMainWnd, Text, "ERROR", MB_TASKMODAL|MB_ICONHAND);
+	if ( Diablo::get()->ghMainWnd )
+		SetWindowPos(Diablo::get()->ghMainWnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOACTIVATE|SWP_NOMOVE|SWP_NOSIZE);
+	MessageBoxA(Diablo::get()->ghMainWnd, Text, "ERROR", MB_TASKMODAL|MB_ICONHAND);
 }
 
 void FreeDlg()
@@ -684,7 +684,7 @@ void TermDlg(int template_id, int error_code, char *log_file_path, int log_line_
 		v6 = v7 + 1;
 	v8 = GetErr(v4);
 	wsprintfA((LPSTR)dwInitParam, "%s\nat: %s line %d", v8, v6, log_line_nr);
-	if ( DialogBoxParamA(ghInst, (LPCSTR)(unsigned short)v5, ghMainWnd, (DLGPROC)FuncDlg, (LPARAM)dwInitParam) == -1 )
+	if ( DialogBoxParamA(Diablo::get()->ghInst, (LPCSTR)(unsigned short)v5, Diablo::get()->ghMainWnd, (DLGPROC)FuncDlg, (LPARAM)dwInitParam) == -1 )
 		TermMsg("ErrDlg: %d", v5);
 	TermMsg(0);
 }
@@ -740,7 +740,7 @@ void ErrDlg(template_id template_id, int error_code, char *log_file_path, int lo
 		v4 = v7 + 1;
 	v8 = GetErr(v5);
 	wsprintfA((LPSTR)dwInitParam, "%s\nat: %s line %d", v8, v4, log_line_nr);
-	DialogBoxParamA(ghInst, (LPCSTR)v6, ghMainWnd, (DLGPROC)FuncDlg, (LPARAM)dwInitParam);
+	DialogBoxParamA(Diablo::get()->ghInst, (LPCSTR)v6, Diablo::get()->ghMainWnd, (DLGPROC)FuncDlg, (LPARAM)dwInitParam);
 }
 
 void FileErrDlg(char *error)
@@ -751,7 +751,7 @@ void FileErrDlg(char *error)
 	FreeDlg();
 	if ( !v1 )
 		v1 = &empty_string;
-	if ( DialogBoxParamA(ghInst, (LPCSTR)0x6A, ghMainWnd, (DLGPROC)FuncDlg, (LPARAM)v1) == -1 )
+	if ( DialogBoxParamA(Diablo::get()->ghInst, (LPCSTR)0x6A, Diablo::get()->ghMainWnd, (DLGPROC)FuncDlg, (LPARAM)v1) == -1 )
 		TermMsg("FileErrDlg");
 	TermMsg(0);
 }
@@ -762,7 +762,7 @@ void DiskFreeDlg(char *error)
 
 	v1 = error;
 	FreeDlg();
-	if ( DialogBoxParamA(ghInst, (LPCSTR)0x6E, ghMainWnd, (DLGPROC)FuncDlg, (LPARAM)v1) == -1 )
+	if ( DialogBoxParamA(Diablo::get()->ghInst, (LPCSTR)0x6E, Diablo::get()->ghMainWnd, (DLGPROC)FuncDlg, (LPARAM)v1) == -1 )
 		TermMsg("DiskFreeDlg");
 	TermMsg(0);
 }
@@ -772,7 +772,7 @@ bool InsertCDDlg()
 	int v0; // edi
 
 	ShowCursor(1);
-	v0 = DialogBoxParamA(ghInst, (LPCSTR)0x70, ghMainWnd, (DLGPROC)FuncDlg, (LPARAM)&empty_string);
+	v0 = DialogBoxParamA(Diablo::get()->ghInst, (LPCSTR)0x70, Diablo::get()->ghMainWnd, (DLGPROC)FuncDlg, (LPARAM)&empty_string);
 	if ( v0 == -1 )
 		TermMsg("InsertCDDlg");
 	ShowCursor(0);
@@ -785,7 +785,7 @@ void DirErrDlg(char *error)
 
 	v1 = error;
 	FreeDlg();
-	if ( DialogBoxParamA(ghInst, (LPCSTR)0x72, ghMainWnd, (DLGPROC)FuncDlg, (LPARAM)v1) == -1 )
+	if ( DialogBoxParamA(Diablo::get()->ghInst, (LPCSTR)0x72, Diablo::get()->ghMainWnd, (DLGPROC)FuncDlg, (LPARAM)v1) == -1 )
 		TermMsg("DirErrorDlg");
 	TermMsg(0);
 }

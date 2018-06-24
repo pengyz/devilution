@@ -551,10 +551,10 @@ void GetLevelMTypes() /* note-decompile this function again and check */
 			v13 += 128;
 		}
 		while ( (signed int)v13 < (signed int)&monsterdata[111].mMaxDLvl );
-		if ( monstdebug )
+		if ( Diablo::get()->monstdebug )
 		{
-			for (i = 0; i < debugmonsttypes; i++)
-				AddMonsterType(DebugMonsters[i], 1);
+			for (i = 0; i < Diablo::get()->debugmonsttypes; i++)
+				AddMonsterType(Diablo::get()->DebugMonsters[i], 1);
 		}
 		else
 		{
@@ -2616,7 +2616,7 @@ void M_DiabloDeath(int i, unsigned char sendmsg)
 	quests[5]._qactive = 3;
 	if ( v2 )
 		NetSendCmdQuest(1u, 5u);
-	gbProcessPlayers = 0;
+	Diablo::get()->gbProcessPlayers = 0;
 	_LOBYTE(sgbSaveSoundOn) = gbSoundOn;
 	v4 = 0;
 	for ( j = 0; j < nummonsters; ++j )
@@ -3389,7 +3389,7 @@ void M_TryH2HHit(int i, int pnum, int Hit, int MinDam, int MaxDam)
 			_LOBYTE(v11) = 98;
 			v36 = random(v11, 100);
 #ifdef _DEBUG
-			if ( debug_mode_dollar_sign || debug_mode_key_inverted_v )
+			if ( Diablo::get()->debug_mode_dollar_sign || Diablo::get()->debug_mode_key_inverted_v )
 				v36 = 1000;
 #endif
 			v12 = 5;
@@ -4126,11 +4126,11 @@ void PrepDoEnding()
 	bool v4; // zf
 
 	gbSoundOn = sgbSaveSoundOn;
-	gbRunGame = 0;
+	Diablo::get()->gbRunGame = 0;
 	deathflag = 0;
 	v0 = &plr[myplr].pDiabloKillLevel;
 	v1 = gnDifficulty + 1;
-	cineflag = 1;
+	Diablo::get()->cineflag = 1;
 	if ( *v0 > (unsigned int)(gnDifficulty + 1) )
 		v1 = *v0;
 	*v0 = v1;

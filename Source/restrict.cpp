@@ -48,7 +48,7 @@ bool ReadOnlyTest()
 	FILE *pFile; // eax
 	char Filename[260]; // [esp+4h] [ebp-104h]
 
-	if ( GetModuleFileNameA(ghInst, Filename, sizeof(Filename)) )
+	if ( GetModuleFileNameA(Diablo::get()->ghInst, Filename, sizeof(Filename)) )
 	{
 		pos = strrchr(Filename, '\\');
 		if ( pos )

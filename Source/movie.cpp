@@ -28,8 +28,8 @@ void play_movie(char *pszMovie, bool user_can_close)
 	if ( window_activated )
 	{
 		saveProc = SetWindowProc(MovieWndProc);
-		InvalidateRect(ghMainWnd, 0, 0);
-		UpdateWindow(ghMainWnd);
+		InvalidateRect(Diablo::get()->ghMainWnd, 0, 0);
+		UpdateWindow(Diablo::get()->ghMainWnd);
 		movie_playing = 1;
 		sound_disable_music(1);
 		sfx_stop();

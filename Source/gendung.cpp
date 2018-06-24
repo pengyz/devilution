@@ -316,7 +316,7 @@ LABEL_36:
 	gendung_4191BF(2047);
 	v19 = 0;
 	v20 = 0;
-	if ( light4flag )
+	if ( Diablo::get()->light4flag )
 	{
 		do
 		{
@@ -338,7 +338,7 @@ LABEL_36:
 		v58 = 128;
 		v22 = 128;
 	}
-	v23 = -(light4flag != 0);
+	v23 = -(Diablo::get()->light4flag != 0);
 	v63 = 0;
 	_LOBYTE(v23) = v23 & 0xF4;
 	v54 = 0;
@@ -650,7 +650,7 @@ void SetDungeonMicros()
 	while ( (signed int)v8 < (signed int)dpiece_defs_map_2[0][16] ); /* check */
 	gendung_418D91();
 	gendung_4192C2();
-	if ( zoomflag )
+	if ( Diablo::get()->zoomflag )
 	{
 		scr_pix_width = 640;
 		scr_pix_height = 352;
@@ -1439,7 +1439,7 @@ bool SkipThemeRoom(int x, int y)
 
 void InitLevels()
 {
-	if ( !leveldebug )
+	if ( !Diablo::get()->leveldebug )
 	{
 		currlevel = 0;
 		leveltype = 0;

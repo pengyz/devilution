@@ -1297,7 +1297,7 @@ void T_DrawView(int StartX, int StartY)
 {
 	light_table_index = 0;
 	cel_transparency_active = 0;
-	if ( zoomflag )
+	if ( Diablo::get()->zoomflag )
 		T_DrawGame(StartX, StartY);
 	else
 		T_DrawZoom(StartX, StartY);
@@ -1338,7 +1338,7 @@ void T_DrawView(int StartX, int StartY)
 		DrawHelp();
 	if ( msgflag )
 		DrawDiabloMsg();
-	if ( PauseMode && !deathflag )
+	if ( Diablo::get()->PauseMode && !deathflag )
 		gmenu_draw_pause();
 	DrawPlrMsg();
 	gmenu_draw();
@@ -1403,7 +1403,7 @@ void town_init_dpiece_defs_map()
 		++y;
 	}
 	while ( (signed int)v6 < (signed int)dPiece[1] );
-	if ( zoomflag )
+	if ( Diablo::get()->zoomflag )
 	{
 		scr_pix_width = 640;
 		scr_pix_height = 352;

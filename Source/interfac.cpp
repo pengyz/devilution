@@ -62,10 +62,10 @@ void DrawCutscene()
 		while ( v0 < sgdwProgress );
 	}
 	dx_unlock_mutex();
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 	scrollrt_draw_game_screen(0);
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void DrawProgress(int screen_x, int screen_y, int progress_id)
 {
@@ -112,7 +112,7 @@ void ShowProgress(int uMsg)
 				SaveLevel();
 			else
 				DeltaSaveLevel();
-			FreeGameMem();
+			Diablo::get()->FreeGameMem();
 			v4 = ++currlevel;
 			goto LABEL_38;
 		case WM_DIABPREVLVL:
@@ -122,8 +122,8 @@ void ShowProgress(int uMsg)
 			else
 				DeltaSaveLevel();
 			IncProgress();
-			FreeGameMem();
-			leveltype = gnLevelTypeTbl[--currlevel];
+			Diablo::get()->FreeGameMem();
+			leveltype = Diablo::get()->gnLevelTypeTbl[--currlevel];
 			IncProgress();
 			v5 = 1;
 			goto LABEL_33;
@@ -133,7 +133,7 @@ void ShowProgress(int uMsg)
 			else
 				DeltaSaveLevel();
 			setlevel = 0;
-			FreeGameMem();
+			Diablo::get()->FreeGameMem();
 			IncProgress();
 			GetReturnLvlPos();
 			v7 = 3;
@@ -146,7 +146,7 @@ void ShowProgress(int uMsg)
 				DeltaSaveLevel();
 			setlevel = 1;
 			leveltype = setlvltype;
-			FreeGameMem();
+			Diablo::get()->FreeGameMem();
 			IncProgress();
 			v7 = 2;
 			goto LABEL_32;
@@ -156,7 +156,7 @@ void ShowProgress(int uMsg)
 				SaveLevel();
 			else
 				DeltaSaveLevel();
-			FreeGameMem();
+			Diablo::get()->FreeGameMem();
 			GetPortalLevel();
 			IncProgress();
 			v7 = 5;
@@ -167,9 +167,9 @@ void ShowProgress(int uMsg)
 				SaveLevel();
 			else
 				DeltaSaveLevel();
-			FreeGameMem();
+			Diablo::get()->FreeGameMem();
 			currlevel = plr[myplr].plrlevel;
-			leveltype = gnLevelTypeTbl[currlevel];
+			leveltype = Diablo::get()->gnLevelTypeTbl[currlevel];
 			IncProgress();
 			v7 = 6;
 			goto LABEL_32;
@@ -179,9 +179,9 @@ void ShowProgress(int uMsg)
 				SaveLevel();
 			else
 				DeltaSaveLevel();
-			FreeGameMem();
+			Diablo::get()->FreeGameMem();
 			currlevel = plr[myplr].plrlevel;
-			leveltype = gnLevelTypeTbl[currlevel];
+			leveltype = Diablo::get()->gnLevelTypeTbl[currlevel];
 			IncProgress();
 			v7 = 7;
 LABEL_32:
@@ -195,24 +195,24 @@ LABEL_33:
 				SaveLevel();
 			else
 				DeltaSaveLevel();
-			FreeGameMem();
+			Diablo::get()->FreeGameMem();
 			currlevel = plr[myplr].plrlevel;
 			v4 = currlevel;
 LABEL_38:
-			leveltype = gnLevelTypeTbl[v4];
+			leveltype = Diablo::get()->gnLevelTypeTbl[v4];
 			IncProgress();
 			v3 = 0;
 			goto LABEL_39;
 		case WM_DIABNEWGAME:
 			IncProgress();
-			FreeGameMem();
+			Diablo::get()->FreeGameMem();
 			IncProgress();
 			pfile_remove_temp_files();
 			v3 = 1;
 LABEL_39:
 			v5 = 0;
 LABEL_40:
-			LoadGameLevel(v3, v5);
+			Diablo::get()->LoadGameLevel(v3, v5);
 			goto LABEL_41;
 		case WM_DIABLOADGAME:
 			IncProgress();
@@ -268,7 +268,7 @@ void InitCutscene(int interface_mode)
 	switch ( interface_mode )
 	{
 		case WM_DIABNEXTLVL:
-			v1 = gnLevelTypeTbl[currlevel];
+			v1 = Diablo::get()->gnLevelTypeTbl[currlevel];
 			if ( !v1 )
 				goto LABEL_31;
 			v2 = v1 - 1;
@@ -288,7 +288,7 @@ void InitCutscene(int interface_mode)
 			v6 = "Gendata\\Cutgate.pal";
 			goto LABEL_30;
 		case WM_DIABPREVLVL:
-			v7 = &gnLevelTypeTbl[currlevel];
+			v7 = &Diablo::get()->gnLevelTypeTbl[currlevel];
 			if ( !*(v7 - 1) )
 				goto LABEL_31;
 			v8 = *v7;
@@ -331,7 +331,7 @@ LABEL_10:
 			goto LABEL_30;
 		case WM_DIABTOWNWARP:
 		case WM_DIABTWARPUP:
-			v12 = gnLevelTypeTbl[plr[myplr].plrlevel];
+			v12 = Diablo::get()->gnLevelTypeTbl[plr[myplr].plrlevel];
 			if ( !v12 )
 				goto LABEL_31;
 			v13 = v12 - 2;

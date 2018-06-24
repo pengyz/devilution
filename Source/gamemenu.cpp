@@ -48,7 +48,7 @@ void gamemenu_previous()
 		v1 = sgMultiMenu;
 	}
 	gmenu_call_proc(v1, v0);
-	PressEscKey();
+	Diablo::get()->PressEscKey();
 }
 // 679660: using guessed type char gbMaxPlayers;
 
@@ -92,18 +92,18 @@ void gamemenu_new_game()
 	}
 
 	deathflag = 0;
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 	scrollrt_draw_game_screen(1);
-	gbRunGame = 0;
+	Diablo::get()->gbRunGame = 0;
 	gamemenu_off();
 }
 // 525650: using guessed type int gbRunGame;
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void gamemenu_quit_game()
 {
 	gamemenu_new_game();
-	gbRunGameResult = 0;
+	Diablo::get()->gbRunGameResult = 0;
 }
 // 525698: using guessed type int gbRunGameResult;
 
@@ -115,20 +115,20 @@ void gamemenu_load_game()
 	gamemenu_off();
 	SetCursor(0);
 	InitDiabloMsg(10);
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 	DrawAndBlit();
 	LoadGame(0);
 	ClrDiabloMsg();
 	PaletteFadeOut(8);
 	deathflag = 0;
-	drawpanflag = 255;
+	Diablo::get()->drawpanflag = 255;
 	DrawAndBlit();
 	PaletteFadeIn(8);
 	SetCursor(CURSOR_HAND);
 	interface_msg_pump();
 	SetWindowProc(saveProc);
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void gamemenu_save_game()
 {
@@ -146,18 +146,18 @@ void gamemenu_save_game()
 			SetCursor(0);
 			gamemenu_off();
 			InitDiabloMsg(11);
-			drawpanflag = 255;
+			Diablo::get()->drawpanflag = 255;
 			DrawAndBlit();
 			SaveGame();
 			ClrDiabloMsg();
-			drawpanflag = 255;
+			Diablo::get()->drawpanflag = 255;
 			SetCursor(CURSOR_HAND);
 			interface_msg_pump();
 			SetWindowProc(saveProc);
 		}
 	}
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
 
 void gamemenu_restart_town()
 {

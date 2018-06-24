@@ -73,7 +73,7 @@ void dx_init(HWND hWnd)
 	v3 = dx_DirectDrawCreate(v2, &lpDDInterface, NULL);
 	if ( v3 )
 		TermDlg(104, v3, "C:\\Src\\Diablo\\Source\\dx.cpp", 149);
-	fullscreen = 1;
+	Diablo::get()->fullscreen = 1;
 	v4 = lpDDInterface->SetCooperativeLevel(v1, DDSCL_EXCLUSIVE|DDSCL_ALLOWREBOOT|DDSCL_FULLSCREEN);
 	if ( v4 == DDERR_EXCLUSIVEMODEALREADYSET )
 	{
@@ -244,8 +244,8 @@ void dx_cleanup()
 {
 	void *v0; // ecx
 
-	if ( ghMainWnd )
-		ShowWindow(ghMainWnd, SW_HIDE);
+	if ( Diablo::get()->ghMainWnd )
+		ShowWindow(Diablo::get()->ghMainWnd, SW_HIDE);
 	SDrawDestroy();
 	EnterCriticalSection(&sgMemCrit);
 	if ( sgpBackBuf )
@@ -289,10 +289,10 @@ void dx_reinit()
 	while ( sgdwLockCount )
 		dx_unlock_mutex();
 	dx_cleanup();
-	drawpanflag = 255;
-	dx_init(ghMainWnd);
+	Diablo::get()->drawpanflag = 255;
+	dx_init(Diablo::get()->ghMainWnd);
 	for ( ; v0; --v0 )
 		dx_lock_mutex();
 	LeaveCriticalSection(&sgMemCrit);
 }
-// 52571C: using guessed type int drawpanflag;
+// 52571C: using guessed type int Diablo::get()->drawpanflag;
