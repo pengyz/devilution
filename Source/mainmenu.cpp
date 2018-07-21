@@ -2,45 +2,29 @@
 
 #include "../types.h"
 
-int mainmenu_cpp_init_value; // weak
 char chr_name_str[16];
-
-int mainmenu_inf = 0x7F800000; // weak
 
 /* rdata */
 
 int menu_music_track_id = 5; // idb
 
-struct mainmenu_cpp_init
-{
-    mainmenu_cpp_init()
-    {
-        mainmenu_cpp_init_value = mainmenu_inf;
-    }
-} _mainmenu_cpp_init;
-// 47F074: using guessed type int mainmenu_inf;
-// 646CE0: using guessed type int mainmenu_cpp_init_value;
-
 void __cdecl mainmenu_refresh_music()
 {
-    int v0; // eax
+    int tmpMenuMusicId = menu_music_track_id;
 
-    music_start(menu_music_track_id);
-    v0 = menu_music_track_id;
+    music_start(tmpMenuMusicId);
     do
     {
-        if (++v0 == 6)
-            v0 = 0;
-    } while (!v0 || v0 == 1);
-    menu_music_track_id = v0;
+        if (++tmpMenuMusicId == 6)
+            tmpMenuMusicId = 0;
+    } while (!tmpMenuMusicId || tmpMenuMusicId == 1);
+    menu_music_track_id = tmpMenuMusicId;
 }
 
-void __stdcall mainmenu_create_hero(char *a1, char *a2)
+void __stdcall mainmenu_create_hero(char *szUserName, char *a2)
 {
-    // char *v2; // [esp-14h] [ebp-14h]
-
-    if (UiValidPlayerName(a1)) /* v2 */
-        pfile_create_save_file(a1, a2);
+    if (UiValidPlayerName(szUserName))
+        pfile_create_save_file(szUserName, a2);
 }
 
 int __stdcall mainmenu_select_hero_dialog(int u1, int u2, int u3, int u4, int mode, char *cname, int clen, char *cdesc, int cdlen, int *multi) /* fix args */
@@ -107,44 +91,35 @@ LABEL_6:
 
 void __fastcall mainmenu_action(int option)
 {
-    int v1; // eax
-    int a2; // [esp+0h] [ebp-4h]
-
-    a2 = option;
+    int iRet; // eax
+    bool bExit = false;
     mainmenu_refresh_music();
-    do
+    while (!bExit && iRet)
     {
-        while (1)
+        option = 0;
+        if (!UiMainMenuDialog("Diablo v1.09", &option, effects_play_sound, 30))
+            TermMsg("Unable to display mainmenu");
+        switch (option)
         {
-            a2 = 0;
-            if (!UiMainMenuDialog("Diablo v1.09", &a2, effects_play_sound, 30))
-                TermMsg("Unable to display mainmenu");
-            if (a2 == 1)
+            case MAINMENU_SINGLE_PLAYER:
+                iRet = mainmenu_single_player();
                 break;
-            switch (a2)
-            {
-                case MAINMENU_MULTIPLAYER:
-                    v1 = mainmenu_multi_player();
-                    goto LABEL_15;
-                case MAINMENU_REPLAY_INTRO:
-                    goto LABEL_10;
-                case MAINMENU_SHOW_CREDITS:
-                    UiCreditsDialog(16);
-                    break;
-                case MAINMENU_EXIT_DIABLO:
-                    goto LABEL_16;
-                case MAINMENU_ATTRACT_MODE:
-                LABEL_10:
-                    if (window_activated)
-                        mainmenu_play_intro();
-                    break;
-            }
+            case MAINMENU_MULTIPLAYER:
+                iRet = mainmenu_multi_player();
+                break;
+            case MAINMENU_SHOW_CREDITS:
+                UiCreditsDialog(16);
+                break;
+            case MAINMENU_EXIT_DIABLO:
+                bExit = true;
+                break;
+            case MAINMENU_REPLAY_INTRO:
+            case MAINMENU_ATTRACT_MODE:
+                if (window_activated)
+                    mainmenu_play_intro();
+                break;
         }
-        v1 = mainmenu_single_player();
-    LABEL_15:
-        ;
-    } while (v1);
-LABEL_16:
+    }
     music_stop();
 }
 // 634980: using guessed type int window_activated;
@@ -158,17 +133,13 @@ int __cdecl mainmenu_single_player()
 
 int __fastcall mainmenu_init_menu(int a1)
 {
-    int v1; // esi
-    int v3; // esi
-
-    v1 = a1;
     if (a1 == 4)
         return 1;
     music_stop();
-    v3 = diablo_init_menu(v1 != 2, v1 != 3);
-    if (v3)
+    int iRet = diablo_init_menu(a1 != 2, a1 != 3);
+    if (iRet)
         mainmenu_refresh_music();
-    return v3;
+    return iRet;
 }
 
 int __cdecl mainmenu_multi_player()
@@ -181,6 +152,6 @@ int __cdecl mainmenu_multi_player()
 void __cdecl mainmenu_play_intro()
 {
     music_stop();
-    play_movie("gendata\\diablo1.smk", 1);
+    play_movie("gendata\\diablo1.smk", true);
     mainmenu_refresh_music();
 }
