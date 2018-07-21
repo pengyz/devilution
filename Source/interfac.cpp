@@ -49,7 +49,7 @@ void __cdecl DrawCutscene()
 {
     unsigned int v0; // esi
 
-    dx_lock_mutex();
+    DxInterface::get()->dx_lock_mutex();
     CelDecodeOnly(64, 639, sgpBackCel, 1, 640);
     v0 = 0;
     if (sgdwProgress)
@@ -61,7 +61,7 @@ void __cdecl DrawCutscene()
                 progress_id);
         while (v0 < sgdwProgress);
     }
-    dx_unlock_mutex();
+    DxInterface::get()->dx_unlock_mutex();
     drawpanflag = 255;
     scrollrt_draw_game_screen(0);
 }
@@ -72,7 +72,7 @@ void __fastcall DrawProgress(int screen_x, int screen_y, int progress_id)
     _BYTE *v3; // eax
     signed int v4; // ecx
 
-    v3 = (unsigned char *)gpBuffer + screen_y_times_768[screen_y] + screen_x;
+    v3 = (unsigned char *)DxInterface::get()->gpBuffer + screen_y_times_768[screen_y] + screen_x;
     v4 = 22;
     do
     {

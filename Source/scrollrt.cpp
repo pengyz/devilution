@@ -618,7 +618,7 @@ void __fastcall DrawGame(int x, int y)
             break;
     }
     a6 = 0;
-    screen_buf_end = (int)gpBuffer + screen_y_times_768[160];
+    screen_buf_end = (int)DxInterface::get()->gpBuffer + screen_y_times_768[160];
     do
     {
         scrollrt_draw_upper(v3, ya++, v2, v4, a5, a6, 0);
@@ -629,7 +629,7 @@ void __fastcall DrawGame(int x, int y)
         v4 = v5 + 16;
         ++a6;
     } while (a6 < 4);
-    screen_buf_end = (int)gpBuffer + screen_y_times_768[512];
+    screen_buf_end = (int)DxInterface::get()->gpBuffer + screen_y_times_768[512];
     if (v11 > 0)
     {
         do
@@ -733,7 +733,7 @@ void __fastcall scrollrt_draw_lower(int x, int y, int sx, int sy, int a5, int so
                 arch_draw_type = 2;
                 v12 = screen_y_times_768[sy];
                 cel_transparency_active = v11;
-                v13 = (char *)gpBuffer + v12;
+                v13 = (char *)DxInterface::get()->gpBuffer + v12;
                 level_cel_block = v8[1];
                 v14 = (int)&v13[sx + 32];
                 if (level_cel_block)
@@ -761,10 +761,10 @@ void __fastcall scrollrt_draw_lower(int x, int y, int sx, int sy, int a5, int so
                 if (v20 && leveltype == DTYPE_HELL)
                     drawLowerScreen(v19 - 24576);
                 v21 = sy;
-                scrollrt_draw_clipped_dungeon((char *)gpBuffer + screen_y_times_768[sy] + sx, sxa, sya, sx, sy, 0);
+                scrollrt_draw_clipped_dungeon((char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + sx, sxa, sya, sx, sy, 0);
                 goto LABEL_21;
             }
-            world_draw_black_tile((unsigned char *)gpBuffer + screen_y_times_768[sy] + sx);
+            world_draw_black_tile((unsigned char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + sx);
         }
         v21 = sy;
     LABEL_21:
@@ -802,7 +802,7 @@ LABEL_23:
                     cel_transparency_active = v26;
                     arch_draw_type = 1;
                     level_cel_block = v27;
-                    v29 = (unsigned char *)gpBuffer + v28 + sx;
+                    v29 = (unsigned char *)DxInterface::get()->gpBuffer + v28 + sx;
                     if (v27)
                         drawLowerScreen(v29);
                     v30 = v8[1];
@@ -824,12 +824,12 @@ LABEL_23:
                             drawLowerScreen(v29 + 32);
                         v31 = i + 2;
                     }
-                    scrollrt_draw_clipped_dungeon((char *)gpBuffer + *v25 + sx, sxa, sya, sx, sy, 1);
+                    scrollrt_draw_clipped_dungeon((char *)DxInterface::get()->gpBuffer + *v25 + sx, sxa, sya, sx, sy, 1);
                     v21 = sy;
                 }
                 else
                 {
-                    world_draw_black_tile((unsigned char *)gpBuffer + screen_y_times_768[v21] + sx);
+                    world_draw_black_tile((unsigned char *)DxInterface::get()->gpBuffer + screen_y_times_768[v21] + sx);
                 }
                 v22 = v47;
             }
@@ -853,7 +853,7 @@ LABEL_23:
             v36 = (unsigned char)(nTransTable[v34] & TransList[dung_map[0][v33]]);
             v37 = *v8;
             v51 = v35;
-            v38 = (char *)gpBuffer + *v35;
+            v38 = (char *)DxInterface::get()->gpBuffer + *v35;
             cel_transparency_active = v36;
             arch_draw_type = 1;
             level_cel_block = v37;
@@ -885,11 +885,11 @@ LABEL_23:
                 if (leveltype == DTYPE_HELL)
                     drawLowerScreen(v44 - 24576);
             }
-            scrollrt_draw_clipped_dungeon((char *)gpBuffer + *v51 + sx, sxa, sya, sx, sy, 0);
+            scrollrt_draw_clipped_dungeon((char *)DxInterface::get()->gpBuffer + *v51 + sx, sxa, sya, sx, sy, 0);
         }
         else
         {
-            world_draw_black_tile((unsigned char *)gpBuffer + screen_y_times_768[v21] + sx);
+            world_draw_black_tile((unsigned char *)DxInterface::get()->gpBuffer + screen_y_times_768[v21] + sx);
         }
     }
 }
@@ -1409,7 +1409,7 @@ void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int 
             {
                 a6a = 0;
                 cel_transparency_active = (unsigned char)(nTransTable[v10] & TransList[dung_map[0][v9]]);
-                a1a = (unsigned char *)gpBuffer + screen_y_times_768[sy] + v8 - 24544;
+                a1a = (unsigned char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + v8 - 24544;
                 if ((dword_5A5594 >> 1) - 1 > 0)
                 {
                     v24 = (unsigned short *)(v29 + 6);
@@ -1430,7 +1430,7 @@ void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int 
                 v12 = 2 * a6 + 2;
                 if (v12 < 8)
                     scrollrt_draw_clipped_dungeon_2(
-                    (char *)gpBuffer + screen_y_times_768[sy] - 12288 * v12 + v8,
+                    (char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] - 12288 * v12 + v8,
                         xa,
                         v7,
                         a6,
@@ -1467,7 +1467,7 @@ void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int 
                 {
                     a6b = 0;
                     cel_transparency_active = (unsigned char)(nTransTable[v15] & TransList[dung_map[0][v14]]);
-                    v16 = (unsigned char *)gpBuffer + screen_y_times_768[sy] + v8 - 24576;
+                    v16 = (unsigned char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + v8 - 24576;
                     if ((dword_5A5594 >> 1) - 1 > 0)
                     {
                         a5a = (unsigned short *)(v29 + 6);
@@ -1491,7 +1491,7 @@ void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int 
                     }
                     if (2 * a6 + 2 < 8)
                         scrollrt_draw_clipped_dungeon_2(
-                        (char *)gpBuffer + screen_y_times_768[sy] - ((3 * a6 + 3) << 13) + v8,
+                        (char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] - ((3 * a6 + 3) << 13) + v8,
                             xa,
                             a1,
                             a6,
@@ -1523,7 +1523,7 @@ void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int 
             {
                 a6c = 0;
                 cel_transparency_active = (unsigned char)(nTransTable[v20] & TransList[dung_map[0][v19]]);
-                a1b = (unsigned char *)gpBuffer + screen_y_times_768[sy] + v8 - 24576;
+                a1b = (unsigned char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + v8 - 24576;
                 if ((dword_5A5594 >> 1) - 1 > 0)
                 {
                     a5b = (unsigned short *)(v29 + 4);
@@ -1544,7 +1544,7 @@ void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int 
                 v22 = 2 * a6 + 2;
                 if (v22 < 8)
                     scrollrt_draw_clipped_dungeon_2(
-                    (char *)gpBuffer + screen_y_times_768[sy] - 12288 * v22 + v8,
+                    (char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] - 12288 * v22 + v8,
                         xa,
                         v7,
                         a6,
@@ -1998,7 +1998,7 @@ void __fastcall scrollrt_draw_upper(int x, int y, int sx, int sy, int a5, int a6
             if (v11)
             {
                 cel_transparency_active = (unsigned char)(nTransTable[v11] & TransList[dung_map[0][v10]]);
-                v12 = (char *)gpBuffer + screen_y_times_768[sy];
+                v12 = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy];
                 v13 = (int)&v12[sx + 32];
                 if (a6 >= 0)
                 {
@@ -2035,11 +2035,11 @@ void __fastcall scrollrt_draw_upper(int x, int y, int sx, int sy, int a5, int a6
                         drawUpperScreen(v17 - 24576);
                 }
                 v7 = ya;
-                scrollrt_draw_dungeon((char *)gpBuffer + screen_y_times_768[sy] + sx, xa, ya, a6, a5a, sx, sy, 0);
+                scrollrt_draw_dungeon((char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + sx, xa, ya, a6, a5a, sx, sy, 0);
             }
             else
             {
-                world_draw_black_tile((unsigned char *)gpBuffer + screen_y_times_768[sy] + sx);
+                world_draw_black_tile((unsigned char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + sx);
             }
         }
         sx += 64;
@@ -2071,7 +2071,7 @@ void __fastcall scrollrt_draw_upper(int x, int y, int sx, int sy, int a5, int a6
                     v25 = screen_y_times_768[sy];
                     cel_transparency_active = v23;
                     level_cel_block = v24;
-                    v26 = (unsigned char *)gpBuffer + v25 + sx;
+                    v26 = (unsigned char *)DxInterface::get()->gpBuffer + v25 + sx;
                     if (v24)
                         drawUpperScreen(v26);
                     v27 = v9[1];
@@ -2095,13 +2095,13 @@ void __fastcall scrollrt_draw_upper(int x, int y, int sx, int sy, int a5, int a6
                                 drawUpperScreen(v26 + 32);
                         }
                     }
-                    scrollrt_draw_dungeon((char *)gpBuffer + screen_y_times_768[sy] + sx, xa, ya, a6, a5a, sx, sy, 1);
+                    scrollrt_draw_dungeon((char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + sx, xa, ya, a6, a5a, sx, sy, 1);
                     v7 = ya;
                     v20 = v41;
                 }
                 else
                 {
-                    world_draw_black_tile((unsigned char *)gpBuffer + screen_y_times_768[sy] + sx);
+                    world_draw_black_tile((unsigned char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + sx);
                 }
             }
             ++xa;
@@ -2124,7 +2124,7 @@ void __fastcall scrollrt_draw_upper(int x, int y, int sx, int sy, int a5, int a6
         {
             arch_draw_type = 1;
             cel_transparency_active = (unsigned char)(nTransTable[v32] & TransList[dung_map[0][v31]]);
-            v33 = (unsigned char *)gpBuffer + screen_y_times_768[sy] + sx;
+            v33 = (unsigned char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + sx;
             if (a6 >= 0)
             {
                 v34 = *v9;
@@ -2156,11 +2156,11 @@ void __fastcall scrollrt_draw_upper(int x, int y, int sx, int sy, int a5, int a6
                 if (v39)
                     drawUpperScreen(v37 - 24576);
             }
-            scrollrt_draw_dungeon((char *)gpBuffer + screen_y_times_768[sy] + sx, xa, ya, a6, a5a, sx, sy, 0);
+            scrollrt_draw_dungeon((char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + sx, xa, ya, a6, a5a, sx, sy, 0);
         }
         else
         {
-            world_draw_black_tile((unsigned char *)gpBuffer + screen_y_times_768[sy] + sx);
+            world_draw_black_tile((unsigned char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + sx);
         }
     }
 }
@@ -2722,7 +2722,7 @@ void __fastcall DrawZoom(int x, int y)
             break;
     }
     a6 = 0;
-    screen_buf_end = (int)gpBuffer + screen_y_times_768[143];
+    screen_buf_end = (int)DxInterface::get()->gpBuffer + screen_y_times_768[143];
     do
     {
         scrollrt_draw_upper(v3, ya++, v2, v4, a5, a6, 0);
@@ -2733,7 +2733,7 @@ void __fastcall DrawZoom(int x, int y)
         v4 = v5 + 16;
         ++a6;
     } while (a6 < 4);
-    screen_buf_end = (int)gpBuffer + screen_y_times_768[320];
+    screen_buf_end = (int)DxInterface::get()->gpBuffer + screen_y_times_768[320];
     if (v18 > 0)
     {
         do
@@ -2776,9 +2776,9 @@ void __fastcall DrawZoom(int x, int y)
     a6b = 391744;
     v19 = 320;
 LABEL_24:
-    v11 = (_WORD *)((char *)gpBuffer + a6b);
-    v12 = (char *)gpBuffer + a5a;
-    v13 = &gpBuffer->row_unused_1[1].col_unused_1[a6b];
+    v11 = (_WORD *)((char *)DxInterface::get()->gpBuffer + a6b);
+    v12 = (char *)DxInterface::get()->gpBuffer + a5a;
+    v13 = &DxInterface::get()->gpBuffer->row_unused_1[1].col_unused_1[a6b];
     v14 = 176;
     do
     {
@@ -2813,12 +2813,12 @@ void __cdecl ClearScreenBuffer()
 {
     int i; // edx
 
-    dx_lock_mutex();
+    DxInterface::get()->dx_lock_mutex();
 
     for (i = 0; i < 480; i++)
-        memset(gpBuffer->row[i].pixels, 0, 640);
+        memset(DxInterface::get()->gpBuffer->row[i].pixels, 0, 640);
 
-    dx_unlock_mutex();
+    DxInterface::get()->dx_unlock_mutex();
 }
 
 #ifdef _DEBUG
@@ -2958,16 +2958,16 @@ void __fastcall scrollrt_draw_game_screen(bool draw_cursor)
     }
     if (draw_cursor)
     {
-        dx_lock_mutex();
+        DxInterface::get()->dx_lock_mutex();
         scrollrt_draw_cursor_item();
-        dx_unlock_mutex();
+        DxInterface::get()->dx_unlock_mutex();
     }
     DrawMain(dwHgt, 0, 0, 0, 0, 0);
     if (draw_cursor)
     {
-        dx_lock_mutex();
+        DxInterface::get()->dx_lock_mutex();
         scrollrt_draw_cursor_back_buffer();
-        dx_unlock_mutex();
+        DxInterface::get()->dx_unlock_mutex();
     }
 }
 // 52571C: using guessed type int drawpanflag;
@@ -2986,7 +2986,7 @@ void __cdecl scrollrt_draw_cursor_back_buffer()
     {
         v1 = sgdwCursY;
         v2 = cursor_draw_back_buffer;
-        v3 = &gpBuffer->row[sgdwCursY].pixels[sgdwCursX];
+        v3 = &DxInterface::get()->gpBuffer->row[sgdwCursY].pixels[sgdwCursX];
         v4 = sgdwCursHgt;
         if (sgdwCursHgt)
         {
@@ -3069,7 +3069,7 @@ void __cdecl scrollrt_draw_cursor_item()
                 v14 = cursor_draw_back_buffer;
                 v6 = 1 - v3 + v5;
                 sgdwCursHgt = v6;
-                v7 = &gpBuffer->row[v3].pixels[v2 & 0xFFFFFFFC];
+                v7 = &DxInterface::get()->gpBuffer->row[v3].pixels[v2 & 0xFFFFFFFC];
                 if (v6)
                 {
                     v8 = v6;
@@ -3085,7 +3085,7 @@ void __cdecl scrollrt_draw_cursor_item()
                 }
                 v9 = v2 + 1;
                 v10 = v3 + 1;
-                screen_buf_end = (int)gpBuffer + screen_y_times_768[640] - v0 - 2;
+                screen_buf_end = (int)DxInterface::get()->gpBuffer + screen_y_times_768[640] - v0 - 2;
                 if (pcurs < 12)
                 {
                     Cel2DrawHdrOnly(v9 + 64, v1 + v10 + 159, (char *)pCursCels, pcurs, v0, 0, 8);
@@ -3121,16 +3121,16 @@ void __fastcall DrawMain(int dwHgt, int draw_desc, int draw_hp, int draw_mana, i
     signed int a4; // [esp+1Ch] [ebp-8h]
 
     a4 = dwHgt;
-    if (window_activated && lpDDSPrimary)
+    if (window_activated && DxInterface::get()->lpDDSPrimary)
     {
-        if (lpDDSPrimary->IsLost() == DDERR_SURFACELOST)
+        if (DxInterface::get()->lpDDSPrimary->IsLost() == DDERR_SURFACELOST)
         {
-            if (lpDDSPrimary->Restore())
+            if (DxInterface::get()->lpDDSPrimary->Restore())
                 return;
             ResetPal();
             a4 = 480;
         }
-        if (!lpDDSBackBuf)
+        if (!DxInterface::get()->lpDDSBackBuf)
         {
             v6 = 1;
         LABEL_8:
@@ -3138,7 +3138,7 @@ void __fastcall DrawMain(int dwHgt, int draw_desc, int draw_hp, int draw_mana, i
             while (1)
             {
                 DDS_desc.dwSize = 108;
-                v8 = lpDDSPrimary->Lock(NULL, &DDS_desc, DDLOCK_WRITEONLY | DDLOCK_WAIT, NULL);
+                v8 = DxInterface::get()->lpDDSPrimary->Lock(NULL, &DDS_desc, DDLOCK_WRITEONLY | DDLOCK_WAIT, NULL);
                 if (!v8)
                     break;
                 if (v7 - GetTickCount() > 5000)
@@ -3151,7 +3151,7 @@ void __fastcall DrawMain(int dwHgt, int draw_desc, int draw_hp, int draw_mana, i
                     if (v6 && v8 == E_FAIL)
                     {
                         v6 = 0;
-                        dx_reinit();
+                        DxInterface::get()->dx_reinit();
                         a4 = 480;
                         goto LABEL_8;
                     }
@@ -3195,9 +3195,9 @@ void __fastcall DrawMain(int dwHgt, int draw_desc, int draw_hp, int draw_mana, i
             if (sgdwCursWdt)
                 DoBlitScreen(sgdwCursX, sgdwCursY, sgdwCursWdt, sgdwCursHgt);
         }
-        if (!lpDDSBackBuf)
+        if (!DxInterface::get()->lpDDSBackBuf)
         {
-            v9 = lpDDSPrimary->Unlock(NULL);
+            v9 = DxInterface::get()->lpDDSPrimary->Unlock(NULL);
             if (v9 != DDERR_SURFACELOST)
             {
                 if (v9)
@@ -3234,10 +3234,10 @@ void __cdecl DrawFPS()
         if (framerate > 99)
             framerate = 99;
         wsprintfA(String, "%2d", framerate);
-        if (!lpDDSPrimary->GetDC(&hdc))
+        if (!DxInterface::get()->lpDDSPrimary->GetDC(&hdc))
         {
             TextOutA(hdc, 0, 400, String, strlen(String));
-            lpDDSPrimary->ReleaseDC(hdc);
+            DxInterface::get()->lpDDSPrimary->ReleaseDC(hdc);
         }
     }
 }
@@ -3262,7 +3262,7 @@ void __fastcall DoBlitScreen(int dwX, int dwY, int dwWdt, int dwHgt)
 
     v4 = dwY;
     v5 = dwX;
-    if (lpDDSBackBuf)
+    if (DxInterface::get()->lpDDSBackBuf)
     {
         Rect.left = dwX + 64;
         Rect.right = dwX + 64 + dwWdt - 1;
@@ -3271,7 +3271,7 @@ void __fastcall DoBlitScreen(int dwX, int dwY, int dwWdt, int dwHgt)
         a4 = GetTickCount();
         while (1)
         {
-            error_code = lpDDSPrimary->BltFast(v5, v4, lpDDSBackBuf, &Rect, DDBLTFAST_WAIT);
+            error_code = DxInterface::get()->lpDDSPrimary->BltFast(v5, v4, DxInterface::get()->lpDDSBackBuf, &Rect, DDBLTFAST_WAIT);
             if (!error_code)
                 break;
             if (a4 - GetTickCount() <= 5000)
@@ -3295,8 +3295,8 @@ void __fastcall DoBlitScreen(int dwX, int dwY, int dwWdt, int dwHgt)
         v6 = 768 - dwWdt;
         error_codea = (unsigned int)dwWdt >> 2;
         v16 = v6;
-        dx_lock_mutex();
-        v7 = (char *)gpBuffer + v14;
+        DxInterface::get()->dx_lock_mutex();
+        v7 = (char *)DxInterface::get()->gpBuffer + v14;
         v8 = (char *)DDS_desc.lpSurface + v15;
         v9 = dwHgt;
         do
@@ -3306,10 +3306,11 @@ void __fastcall DoBlitScreen(int dwX, int dwY, int dwWdt, int dwHgt)
             v8 += 4 * error_codea + v17;
             --v9;
         } while (v9);
-        dx_unlock_mutex();
+        DxInterface::get()->dx_unlock_mutex();
     }
 }
 
+//the main draw function
 void __cdecl DrawAndBlit()
 {
     bool ddsdesc; // ebp
@@ -3337,7 +3338,7 @@ void __cdecl DrawAndBlit()
             dwHgt = 352;
         }
         drawpanflag = 0;
-        dx_lock_mutex();
+        DxInterface::get()->dx_lock_mutex();
         if (leveltype)
             DrawView(ViewX, ViewY);
         else
@@ -3358,11 +3359,11 @@ void __cdecl DrawAndBlit()
             dwHgt = 480;
         }
         scrollrt_draw_cursor_item();
-        dx_unlock_mutex();
+        DxInterface::get()->dx_unlock_mutex();
         DrawMain(dwHgt, ddsdesc, drawhpflag, drawmanaflag, drawsbarflag, drawbtnflag);
-        dx_lock_mutex();
+        DxInterface::get()->dx_lock_mutex();
         scrollrt_draw_cursor_back_buffer();
-        dx_unlock_mutex();
+        DxInterface::get()->dx_unlock_mutex();
         drawhpflag = 0;
         drawmanaflag = 0;
         drawbtnflag = 0;

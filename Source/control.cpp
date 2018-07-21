@@ -207,7 +207,7 @@ void __fastcall DrawSpellCel(int xp, int yp, char *Trans, int nCel, int w)
 
     v5 = &Trans[4 * nCel];
     v6 = &Trans[*(_DWORD *)v5];
-    v7 = (char *)gpBuffer + screen_y_times_768[yp] + xp;
+    v7 = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[yp] + xp;
     v18 = (int)&v6[*((_DWORD *)v5 + 1) - *(_DWORD *)v5];
     _EBX = byte_4B8B88;
     do
@@ -758,7 +758,7 @@ void __fastcall CPrintString(int No, unsigned char pszStr, int Just)
 
     v3 = (int *)((char *)pPanelText + 4 * pszStr);
     v4 = (char *)pPanelText + *v3;
-    v5 = (char *)gpBuffer + No;
+    v5 = (char *)DxInterface::get()->gpBuffer + No;
     v6 = (int)&v4[v3[1] - *v3];
     if ((_BYTE)Just)
     {
@@ -945,7 +945,7 @@ void __fastcall DrawPanelBox(int x, int y, int w, int h, int sx, int sy)
     unsigned int v11; // ecx
 
     v6 = (char *)pBtmBuff + 640 * y + x;
-    v7 = &gpBuffer->row_unused_1[sy].col_unused_1[sx];
+    v7 = &DxInterface::get()->gpBuffer->row_unused_1[sy].col_unused_1[sx];
     v8 = h;
     do
     {
@@ -974,7 +974,7 @@ void __fastcall SetFlaskHeight(char *buf, int min, int max, int c, int r)
     int v7; // edx
 
     v5 = &buf[88 * min];
-    v6 = &gpBuffer->row_unused_1[r].col_unused_1[c];
+    v6 = &DxInterface::get()->gpBuffer->row_unused_1[r].col_unused_1[c];
     v7 = max - min;
     do
     {
@@ -1029,9 +1029,9 @@ void __cdecl DrawLifeFlask()
     if (80 - (signed int)v0 > 11)
         v1 = 11;
     v2 = v1 + 2;
-    DrawFlask(pLifeBuff, 88, 277, gpBuffer, 383405, v2);
+    DrawFlask(pLifeBuff, 88, 277, DxInterface::get()->gpBuffer, 383405, v2);
     if (v2 != 13)
-        DrawFlask(pBtmBuff, 640, 640 * v2 + 2029, gpBuffer, 768 * v2 + 383405, 13 - v2);
+        DrawFlask(pBtmBuff, 640, 640 * v2 + 2029, DxInterface::get()->gpBuffer, 768 * v2 + 383405, 13 - v2);
 }
 
 void __cdecl UpdateLifeFlask()
@@ -1070,9 +1070,9 @@ void __cdecl DrawManaFlask()
     if (80 - v0 > 11)
         v1 = 11;
     v2 = v1 + 2;
-    DrawFlask(pManaBuff, 88, 277, gpBuffer, 383771, v2);
+    DrawFlask(pManaBuff, 88, 277, DxInterface::get()->gpBuffer, 383771, v2);
     if (v2 != 13)
-        DrawFlask(pBtmBuff, 640, 640 * v2 + 2395, gpBuffer, 768 * v2 + 383771, 13 - v2);
+        DrawFlask(pBtmBuff, 640, 640 * v2 + 2395, DxInterface::get()->gpBuffer, 768 * v2 + 383771, 13 - v2);
 }
 
 void __cdecl control_update_life_mana()
@@ -2600,7 +2600,7 @@ void __cdecl RedBack()
     v12 = v0 + 0x1200;
     if (leveltype == DTYPE_HELL)
     {
-        v7 = gpBuffer->row[0].pixels;
+        v7 = DxInterface::get()->gpBuffer->row[0].pixels;
         _EBX = &pLightTbl[v12];
         v9 = 352;
         do
@@ -2620,7 +2620,7 @@ void __cdecl RedBack()
     }
     else
     {
-        v1 = gpBuffer->row[0].pixels;
+        v1 = DxInterface::get()->gpBuffer->row[0].pixels;
         _EBX = &pLightTbl[v12];
         v3 = 352;
         do
@@ -3070,7 +3070,7 @@ void __cdecl DrawTalkPan()
         } while (v4 < 39);
         *v3 = 0;
     LABEL_10:
-        CelDecDatOnly((char *)gpBuffer + a4, (char *)pCelBuff, frame, 12);
+        CelDecDatOnly((char *)DxInterface::get()->gpBuffer + a4, (char *)pCelBuff, frame, 12);
         v5 = 0;
         a1 = plr[0]._pName;
         v10 = 0;

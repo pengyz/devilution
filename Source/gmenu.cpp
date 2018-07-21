@@ -283,7 +283,7 @@ void __fastcall gmenu_clear_buffer(int x, int y, int width, int height)
     char *i; // esi
 
     v4 = height;
-    for (i = (char *)gpBuffer + screen_y_times_768[y] + x; v4; --v4)
+    for (i = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[y] + x; v4; --v4)
     {
         memset(i, 205, width);
         i -= 768;

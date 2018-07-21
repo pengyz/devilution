@@ -11,27 +11,27 @@ void __cdecl CaptureScreen()
     if (hObject != INVALID_HANDLE_VALUE)
     {
         DrawAndBlit();
-        lpDDPalette->GetEntries(0, 0, 256, palette);
+        DxInterface::get()->lpDDPalette->GetEntries(0, 0, 256, palette);
         RedPalette(palette);
 
-        dx_lock_mutex();
+        DxInterface::get()->dx_lock_mutex();
         bool success = CaptureHdr(hObject, 640, 480);
         if (success)
         {
-            success = CapturePix(hObject, 640, 480, 768, (BYTE*)gpBuffer->row[0].pixels);
+            success = CapturePix(hObject, 640, 480, 768, (BYTE*)DxInterface::get()->gpBuffer->row[0].pixels);
             if (success)
             {
                 success = CapturePal(hObject, palette);
             }
         }
-        dx_unlock_mutex();
+        DxInterface::get()->dx_unlock_mutex();
         CloseHandle(hObject);
 
         if (!success)
             DeleteFileA(FileName);
 
         Sleep(300);
-        lpDDPalette->SetEntries(0, 0, 256, palette);
+        DxInterface::get()->lpDDPalette->SetEntries(0, 0, 256, palette);
     }
 }
 
@@ -167,5 +167,5 @@ void __fastcall RedPalette(PALETTEENTRY *pal)
         red[i].peFlags = 0;
     }
 
-    lpDDPalette->SetEntries(0, 0, 256, red);
+    DxInterface::get()->lpDDPalette->SetEntries(0, 0, 256, red);
 }

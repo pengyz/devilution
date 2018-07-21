@@ -151,10 +151,10 @@ void __fastcall town_draw_clipped_town(void *unused, int x, int y, int sx, int s
     char *v27; // [esp+Ch] [ebp-Ch]
     int xa; // [esp+10h] [ebp-8h]
     int v29; // [esp+14h] [ebp-4h]
-
+    
     xa = x;
     v6 = 112 * x;
-    v27 = (char *)gpBuffer + screen_y_times_768[sy] + sx;
+    v27 = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + sx;
     v7 = v6 + y;
     v29 = v6 + y;
     v8 = dItem[v6 / 0x70][y];
@@ -279,7 +279,7 @@ void __fastcall town_draw_lower(int x, int y, int sx, int sy, int a5, int some_f
         {
             v6 = sy;
             v7 = &screen_y_times_768[sy];
-            a1 = (unsigned char *)&gpBuffer->row_unused_1[0].col_unused_1[*v7 + 32 + sx];
+            a1 = (unsigned char *)&DxInterface::get()->gpBuffer->row_unused_1[0].col_unused_1[*v7 + 32 + sx];
             v25 = 1;
             v8 = (char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(x, y);
             do
@@ -291,11 +291,11 @@ void __fastcall town_draw_lower(int x, int y, int sx, int sy, int a5, int some_f
                 v25 += 2;
                 a1 -= 24576;
             } while (v25 < 17);
-            town_draw_clipped_town((char *)gpBuffer + *v7 + sx, xa, ya, sx, sy, 0);
+            town_draw_clipped_town((char *)DxInterface::get()->gpBuffer + *v7 + sx, xa, ya, sx, sy, 0);
         }
         else
         {
-            town_clear_low_buf((int)gpBuffer + screen_y_times_768[sy] + sx);
+            town_clear_low_buf((int)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + sx);
             v6 = sy;
         }
         ++xa;
@@ -318,7 +318,7 @@ void __fastcall town_draw_lower(int x, int y, int sx, int sy, int a5, int some_f
         {
             if (y >= 0 && y < 112 && v12 >= 0 && v12 < 12544 && (level_cel_block = dPiece[0][v12 + y]) != 0)
             {
-                v13 = (unsigned char *)gpBuffer + *v11 + sx;
+                v13 = (unsigned char *)DxInterface::get()->gpBuffer + *v11 + sx;
                 v14 = (char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(xa, ya);
                 v26 = 0;
                 do
@@ -334,12 +334,12 @@ void __fastcall town_draw_lower(int x, int y, int sx, int sy, int a5, int some_f
                     v26 += 2;
                     v13 -= 24576;
                 } while (v26 < 16);
-                town_draw_clipped_town((char *)gpBuffer + *v11 + sx, xa, ya, sx, sy, 1);
+                town_draw_clipped_town((char *)DxInterface::get()->gpBuffer + *v11 + sx, xa, ya, sx, sy, 1);
                 v12 = a5a;
             }
             else
             {
-                town_clear_low_buf((int)gpBuffer + *v11 + sx);
+                town_clear_low_buf((int)DxInterface::get()->gpBuffer + *v11 + sx);
             }
             ++xa;
             sx += 64;
@@ -356,7 +356,7 @@ void __fastcall town_draw_lower(int x, int y, int sx, int sy, int a5, int some_f
         if (y >= 0 && y < 112 && xa >= 0 && xa < 112 && (level_cel_block = dPiece[0][y + 112 * xa]) != 0)
         {
             v18 = &screen_y_times_768[v6];
-            v19 = (unsigned char *)gpBuffer + *v18 + sx;
+            v19 = (unsigned char *)DxInterface::get()->gpBuffer + *v18 + sx;
             v20 = (char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(xa, ya);
             v27 = 0;
             do
@@ -368,11 +368,11 @@ void __fastcall town_draw_lower(int x, int y, int sx, int sy, int a5, int some_f
                 v27 += 2;
                 v19 -= 24576;
             } while (v27 < 16);
-            town_draw_clipped_town((char *)gpBuffer + *v18 + sx, xa, ya, sx, sy, 0);
+            town_draw_clipped_town((char *)DxInterface::get()->gpBuffer + *v18 + sx, xa, ya, sx, sy, 0);
         }
         else
         {
-            town_clear_low_buf((int)gpBuffer + screen_y_times_768[v6] + sx);
+            town_clear_low_buf((int)DxInterface::get()->gpBuffer + screen_y_times_768[v6] + sx);
         }
     }
 }
@@ -585,7 +585,7 @@ void __fastcall town_draw_lower_2(int x, int y, int sx, int sy, int a5, int a6, 
             {
                 v8 = sy;
                 v9 = &screen_y_times_768[sy];
-                a1 = (unsigned char *)gpBuffer + *v9 + sx - 24544;
+                a1 = (unsigned char *)DxInterface::get()->gpBuffer + *v9 + sx - 24544;
                 sxa = 0;
                 v10 = &dpiece_defs_map_1[0][0][16 * gendung_get_dpiece_num_from_coord(x, y) + 3];
                 v23 = v10;
@@ -603,11 +603,11 @@ void __fastcall town_draw_lower_2(int x, int y, int sx, int sy, int a5, int a6, 
                     v23 += 2;
                 } while (sxa < 7);
                 if (2 * a6 + 2 < 8)
-                    town_draw_clipped_town_2((int)gpBuffer + *v9 + v7, xa, ya, a6, 2 * a6 + 2, v7, sy, 0);
+                    town_draw_clipped_town_2((int)DxInterface::get()->gpBuffer + *v9 + v7, xa, ya, a6, 2 * a6 + 2, v7, sy, 0);
                 goto LABEL_16;
             }
         }
-        town_clear_low_buf((int)gpBuffer + screen_y_times_768[sy] + v7);
+        town_clear_low_buf((int)DxInterface::get()->gpBuffer + screen_y_times_768[sy] + v7);
         v8 = sy;
     LABEL_16:
         ++xa;
@@ -629,7 +629,7 @@ LABEL_18:
         {
             if (ya >= 0 && ya < 112 && v14 >= 0 && v14 < 12544 && (level_cel_block = dPiece[0][v14 + ya]) != 0)
             {
-                a1a = (unsigned char *)gpBuffer + *v13 + v11 - 24576;
+                a1a = (unsigned char *)DxInterface::get()->gpBuffer + *v13 + v11 - 24576;
                 sxb = 0;
                 v15 = &dpiece_defs_map_1[0][0][16 * gendung_get_dpiece_num_from_coord(xa, ya) + 3];
                 do
@@ -651,12 +651,12 @@ LABEL_18:
                 } while (sxb < 7);
                 v18 = 2 * a6 + 2;
                 if (v18 < 8)
-                    town_draw_clipped_town_2((int)gpBuffer + *v13 - 12288 * v18 + v11, xa, ya, a6, 2 * a6 + 2, v11, sy, 1);
+                    town_draw_clipped_town_2((int)DxInterface::get()->gpBuffer + *v13 - 12288 * v18 + v11, xa, ya, a6, 2 * a6 + 2, v11, sy, 1);
                 v14 = a5a;
             }
             else
             {
-                town_clear_low_buf((int)gpBuffer + *v13 + v11);
+                town_clear_low_buf((int)DxInterface::get()->gpBuffer + *v13 + v11);
             }
             ++xa;
             v14 += 112;
@@ -672,7 +672,7 @@ LABEL_18:
         if (ya >= 0 && ya < 112 && xa >= 0 && xa < 112 && (level_cel_block = dPiece[0][ya + 112 * xa]) != 0)
         {
             v20 = &screen_y_times_768[v8];
-            a1b = (unsigned char *)gpBuffer + *v20 + v11 - 24576;
+            a1b = (unsigned char *)DxInterface::get()->gpBuffer + *v20 + v11 - 24576;
             sxc = 0;
             v21 = &dpiece_defs_map_1[0][0][16 * gendung_get_dpiece_num_from_coord(xa, ya) + 2];
             do
@@ -689,11 +689,11 @@ LABEL_18:
                 v21 += 2;
             } while (sxc < 7);
             if (2 * a6 + 2 < 8)
-                town_draw_clipped_town_2((int)gpBuffer + *v20 + v11, xa, ya, a6, 2 * a6 + 2, v11, sy, 0);
+                town_draw_clipped_town_2((int)DxInterface::get()->gpBuffer + *v20 + v11, xa, ya, a6, 2 * a6 + 2, v11, sy, 0);
         }
         else
         {
-            town_clear_low_buf((int)gpBuffer + screen_y_times_768[v8] + v11);
+            town_clear_low_buf((int)DxInterface::get()->gpBuffer + screen_y_times_768[v8] + v11);
         }
     }
 }
@@ -850,7 +850,7 @@ void __fastcall town_draw_upper(int x, int y, int sx, int sy, int a5, int a6, in
             v11 = sy;
             if (!v10)
             {
-                a1 = (int *)&gpBuffer->row_unused_1[0].col_unused_1[sx + 32 + screen_y_times_768[sy]];
+                a1 = (int *)&DxInterface::get()->gpBuffer->row_unused_1[0].col_unused_1[sx + 32 + screen_y_times_768[sy]];
                 sxa = 0;
                 v12 = &dpiece_defs_map_1[0][0][16 * gendung_get_dpiece_num_from_coord(x, y) + 1];
                 do
@@ -866,12 +866,12 @@ void __fastcall town_draw_upper(int x, int y, int sx, int sy, int a5, int a6, in
                     ++sxa;
                     v12 += 2;
                 } while (sxa < 7);
-                town_draw_town_all((char *)gpBuffer + v8 + screen_y_times_768[sy], xa, ya, a6, dir, v8, sy, 0);
+                town_draw_town_all((char *)DxInterface::get()->gpBuffer + v8 + screen_y_times_768[sy], xa, ya, a6, dir, v8, sy, 0);
                 v7 = ya;
                 goto LABEL_17;
             }
         }
-        town_clear_upper_buf((int)gpBuffer + screen_y_times_768[v11] + v8);
+        town_clear_upper_buf((int)DxInterface::get()->gpBuffer + screen_y_times_768[v11] + v8);
     LABEL_17:
         ++xa;
         ya = --v7;
@@ -889,17 +889,17 @@ LABEL_19:
         {
             if (v7 < 0 || v7 >= 112 || v15 < 0 || v15 >= 12544)
             {
-                v17 = gpBuffer;
+                v17 = DxInterface::get()->gpBuffer;
             }
             else
             {
                 v16 = dPiece[0][v15 + v7];
                 level_cel_block = v16;
                 v10 = v16 == 0;
-                v17 = gpBuffer;
+                v17 = DxInterface::get()->gpBuffer;
                 if (!v10)
                 {
-                    v18 = (unsigned char *)gpBuffer + v14 + screen_y_times_768[sy];
+                    v18 = (unsigned char *)DxInterface::get()->gpBuffer + v14 + screen_y_times_768[sy];
                     v19 = (char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(xa, ya);
                     sxb = 0;
                     do
@@ -918,7 +918,7 @@ LABEL_19:
                         v18 -= 24576;
                         ++sxb;
                     } while (sxb < 7);
-                    town_draw_town_all((char *)gpBuffer + v14 + screen_y_times_768[sy], xa, ya, a6, dir, v14, sy, 1);
+                    town_draw_town_all((char *)DxInterface::get()->gpBuffer + v14 + screen_y_times_768[sy], xa, ya, a6, dir, v14, sy, 1);
                     v15 = a5a;
                     v7 = ya;
                     goto LABEL_36;
@@ -950,7 +950,7 @@ LABEL_19:
             v23 = sy;
             if (!v10)
             {
-                v24 = (unsigned char *)gpBuffer + v14 + screen_y_times_768[sy];
+                v24 = (unsigned char *)DxInterface::get()->gpBuffer + v14 + screen_y_times_768[sy];
                 v25 = (char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(xa, v7);
                 sxc = 0;
                 do
@@ -965,11 +965,11 @@ LABEL_19:
                     v24 -= 24576;
                     ++sxc;
                 } while (sxc < 7);
-                town_draw_town_all((char *)gpBuffer + v14 + screen_y_times_768[sy], xa, ya, a6, dir, v14, sy, 0);
+                town_draw_town_all((char *)DxInterface::get()->gpBuffer + v14 + screen_y_times_768[sy], xa, ya, a6, dir, v14, sy, 0);
                 return;
             }
         }
-        town_clear_upper_buf((int)gpBuffer + screen_y_times_768[v23] + v14);
+        town_clear_upper_buf((int)DxInterface::get()->gpBuffer + screen_y_times_768[v23] + v14);
     }
 }
 // 69CF14: using guessed type int level_cel_block;
@@ -1058,7 +1058,7 @@ void __fastcall T_DrawGame(int x, int y)
             break;
     }
     a6 = 0;
-    screen_buf_end = (int)gpBuffer + screen_y_times_768[160];
+    screen_buf_end = (int)DxInterface::get()->gpBuffer + screen_y_times_768[160];
     do
     {
         town_draw_upper(v3, ya++, v2, v4, a5, a6, 0);
@@ -1069,7 +1069,7 @@ void __fastcall T_DrawGame(int x, int y)
         v4 = v5 + 16;
         ++a6;
     } while (a6 < 7);
-    screen_buf_end = (int)gpBuffer + screen_y_times_768[512];
+    screen_buf_end = (int)DxInterface::get()->gpBuffer + screen_y_times_768[512];
     if (v11 > 0)
     {
         do
@@ -1183,7 +1183,7 @@ void __fastcall T_DrawZoom(int x, int y)
             break;
     }
     a6 = 0;
-    screen_buf_end = (int)gpBuffer + screen_y_times_768[143];
+    screen_buf_end = (int)DxInterface::get()->gpBuffer + screen_y_times_768[143];
     do
     {
         town_draw_upper(v3, ya++, v2, v4, a5, a6, 0);
@@ -1194,7 +1194,7 @@ void __fastcall T_DrawZoom(int x, int y)
         v4 = v5 + 16;
         ++a6;
     } while (a6 < 7);
-    screen_buf_end = (int)gpBuffer + screen_y_times_768[320];
+    screen_buf_end = (int)DxInterface::get()->gpBuffer + screen_y_times_768[320];
     if (v18 > 0)
     {
         do
@@ -1236,9 +1236,9 @@ void __fastcall T_DrawZoom(int x, int y)
     a5a = 391744;
     v19 = 320;
 LABEL_24:
-    v11 = (_WORD *)((char *)gpBuffer + a5a);
-    v12 = (char *)gpBuffer + a6b;
-    v13 = &gpBuffer->row_unused_1[1].col_unused_1[a5a];
+    v11 = (_WORD *)((char *)DxInterface::get()->gpBuffer + a5a);
+    v12 = (char *)DxInterface::get()->gpBuffer + a6b;
+    v13 = &DxInterface::get()->gpBuffer->row_unused_1[1].col_unused_1[a5a];
     v14 = 176;
     do
     {

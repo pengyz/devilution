@@ -86,11 +86,11 @@ void __fastcall CelDrawDatOnly(char *pDecodeTo, char *pRLEBytes, int dwRLESize, 
 
 void __fastcall CelDecodeOnly(int screen_x, int screen_y, void *pCelBuff, int frame, int frame_width)
 {
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         if (pCelBuff)
             CelDrawDatOnly(
-            (char *)gpBuffer + screen_y_times_768[screen_y] + screen_x,
+            (char *)DxInterface::get()->gpBuffer + screen_y_times_768[screen_y] + screen_x,
                 (char *)pCelBuff + *((_DWORD *)pCelBuff + frame),
                 *((_DWORD *)pCelBuff + frame + 1) - *((_DWORD *)pCelBuff + frame),
                 frame_width);
@@ -121,7 +121,7 @@ void __fastcall CelDrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int f
 
     v12 = screen_y;
     v11 = screen_x;
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         if (pCelBuff)
         {
@@ -135,7 +135,7 @@ void __fastcall CelDrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int f
                 else
                     v10 = *(_DWORD *)&pCelBuff[4 * frame + 4] - v7 - v9;
                 CelDrawDatOnly(
-                    (char *)gpBuffer + screen_y_times_768[v12 - 16 * always_0] + v11,
+                    (char *)DxInterface::get()->gpBuffer + screen_y_times_768[v12 - 16 * always_0] + v11,
                     &v8[v9],
                     v10,
                     frame_width);
@@ -417,11 +417,11 @@ void __fastcall CelDecodeLightOnly(int screen_x, int screen_y, char *pCelBuff, i
     int v9; // [esp-8h] [ebp-14h]
 
     v5 = screen_y;
-    if (gpBuffer && pCelBuff)
+    if (DxInterface::get()->gpBuffer && pCelBuff)
     {
         v6 = *(_DWORD *)&pCelBuff[4 * frame];
         v7 = &pCelBuff[v6];
-        v8 = (char *)gpBuffer + screen_y_times_768[v5] + screen_x;
+        v8 = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[v5] + screen_x;
         v9 = *(_DWORD *)&pCelBuff[4 * frame + 4] - v6;
         if (light_table_index)
             CelDecDatLightOnly(v8, v7, v9, frame_width);
@@ -446,7 +446,7 @@ void __fastcall CelDecodeHdrLightOnly(int screen_x, int screen_y, char *pCelBuff
 
     v7 = screen_y;
     v15 = screen_x;
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         v8 = pCelBuff;
         if (pCelBuff)
@@ -462,7 +462,7 @@ void __fastcall CelDecodeHdrLightOnly(int screen_x, int screen_y, char *pCelBuff
                 else
                     v12 = *(_DWORD *)&v8[4 * frame + 4] - v9 - (_DWORD)cel_buf;
                 v13 = &v10[(_DWORD)cel_buf];
-                v14 = (char *)gpBuffer + screen_y_times_768[v7 - 16 * always_0] + v15;
+                v14 = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[v7 - 16 * always_0] + v15;
                 if (light_table_index)
                     CelDecDatLightOnly(v14, v13, v12, frame_width);
                 else
@@ -542,7 +542,7 @@ void __fastcall CelDrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, i
     int directiona; // [esp+28h] [ebp+18h]
 
     v21 = screen_x;
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         v8 = pCelBuff;
         if (pCelBuff)
@@ -560,7 +560,7 @@ void __fastcall CelDrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, i
                 else
                     always_0a = v13 - (_DWORD)cel_buf;
                 directiona = (int)&v11[(_DWORD)cel_buf];
-                cel_bufa = (char *)gpBuffer + screen_y_times_768[screen_y - 16 * v10] + v21;
+                cel_bufa = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[screen_y - 16 * v10] + v21;
                 v14 = -(light4flag != 0);
                 _LOWORD(v14) = v14 & 0xF400;
                 v15 = v14 + 4096;
@@ -622,7 +622,7 @@ void __fastcall Cel2DecDatOnly(char *pDecodeTo, char *pRLEBytes, int frame_conte
     char *v11; // [esp+4h] [ebp-8h]
 
     v11 = pRLEBytes;
-    if (pDecodeTo && pRLEBytes && gpBuffer)
+    if (pDecodeTo && pRLEBytes && DxInterface::get()->gpBuffer)
     {
         v4 = pRLEBytes;
         v5 = pDecodeTo;
@@ -682,7 +682,7 @@ void __fastcall Cel2DrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int 
 
     v12 = screen_y;
     v11 = screen_x;
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         if (pCelBuff)
         {
@@ -696,7 +696,7 @@ void __fastcall Cel2DrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int 
                 else
                     v10 = *(_DWORD *)&pCelBuff[4 * frame + 4] - v7 - v9;
                 Cel2DecDatOnly(
-                    (char *)gpBuffer + screen_y_times_768[v12 - 16 * a6] + v11,
+                    (char *)DxInterface::get()->gpBuffer + screen_y_times_768[v12 - 16 * a6] + v11,
                     &v8[v9],
                     v10,
                     frame_width);
@@ -747,7 +747,7 @@ void __fastcall Cel2DecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_
     int v9; // ST00_4
     char *a3; // [esp+Ch] [ebp-10h]
 
-    if (pDecodeTo && pRLEBytes && gpBuffer)
+    if (pDecodeTo && pRLEBytes && DxInterface::get()->gpBuffer)
     {
         a3 = &pLightTbl[256 * light_table_index];
         v4 = pRLEBytes;
@@ -863,7 +863,7 @@ void __fastcall Cel2DecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame
     int _EAX;
     char *_EBX;
 
-    if (pDecodeTo && pRLEBytes && gpBuffer)
+    if (pDecodeTo && pRLEBytes && DxInterface::get()->gpBuffer)
     {
         v27 = &pLightTbl[256 * light_table_index];
         v4 = pRLEBytes;
@@ -1007,7 +1007,7 @@ void __fastcall Cel2DecodeHdrLight(int screen_x, int screen_y, char *pCelBuff, i
     char *cel_buf; // [esp+18h] [ebp+8h]
 
     v7 = screen_y;
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         v8 = pCelBuff;
         if (pCelBuff)
@@ -1027,7 +1027,7 @@ void __fastcall Cel2DecodeHdrLight(int screen_x, int screen_y, char *pCelBuff, i
                 else
                     v14 = v12 - (_DWORD)cel_buf;
                 v15 = &v10[(_DWORD)cel_buf];
-                v16 = (char *)gpBuffer + screen_y_times_768[v7 - 16 * a6] + screen_x;
+                v16 = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[v7 - 16 * a6] + screen_x;
                 if (light_table_index)
                     Cel2DecDatLightOnly(v16, v15, v14, frame_width);
                 else
@@ -1108,7 +1108,7 @@ void __fastcall Cel2DrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, 
     int directiona; // [esp+28h] [ebp+18h]
 
     v22 = screen_x;
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         v8 = pCelBuff;
         if (pCelBuff)
@@ -1125,7 +1125,7 @@ void __fastcall Cel2DrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, 
                 else
                     framea = v12 - (_DWORD)cel_buf;
                 directiona = (int)&v10[(_DWORD)cel_buf];
-                always_0a = (char *)gpBuffer + screen_y_times_768[screen_y - 16 * always_0] + v22;
+                always_0a = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[screen_y - 16 * always_0] + v22;
                 v13 = -(light4flag != 0);
                 _LOWORD(v13) = v13 & 0xF400;
                 v14 = v13 + 4096;
@@ -1265,7 +1265,7 @@ void __fastcall CelDecodeClr(char colour, int screen_x, int screen_y, char *pCel
     v19 = colour;
     if (pCelBuff)
     {
-        if (gpBuffer)
+        if (DxInterface::get()->gpBuffer)
         {
             v8 = &pCelBuff[4 * frame];
             v17 = &pCelBuff[*(_DWORD *)v8];
@@ -1281,7 +1281,7 @@ void __fastcall CelDecodeClr(char colour, int screen_x, int screen_y, char *pCel
                 else
                     v18 = *((_DWORD *)v8 + 1) - *(_DWORD *)v8 - v16;
                 v10 = &v17[v16];
-                v11 = (char *)gpBuffer + screen_y_times_768[screen_y - 16 * a7] + screen_x;
+                v11 = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[screen_y - 16 * a7] + screen_x;
                 do
                 {
                     v12 = frame_width;
@@ -1342,7 +1342,7 @@ void __fastcall CelDrawHdrClrHL(char colour, int screen_x, int screen_y, char *p
     v21 = colour;
     if (pCelBuff)
     {
-        if (gpBuffer)
+        if (DxInterface::get()->gpBuffer)
         {
             v8 = &pCelBuff[4 * frame];
             v19 = &pCelBuff[*(_DWORD *)v8];
@@ -1358,7 +1358,7 @@ void __fastcall CelDrawHdrClrHL(char colour, int screen_x, int screen_y, char *p
                 else
                     v20 = *((_DWORD *)v8 + 1) - *(_DWORD *)v8 - v18;
                 v10 = &v19[v18];
-                v11 = (char *)gpBuffer + screen_y_times_768[screen_y - 16 * a7] + screen_x;
+                v11 = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[screen_y - 16 * a7] + screen_x;
                 do
                 {
                     v12 = frame_width;
@@ -1433,7 +1433,7 @@ void __fastcall ENG_set_pixel(int screen_x, int screen_y, char pixel)
 
     if (screen_y >= 0 && screen_y < 640 && screen_x >= 64 && screen_x < 704)
     {
-        v3 = (char *)gpBuffer + screen_y_times_768[screen_y] + screen_x;
+        v3 = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[screen_y] + screen_x;
         if ((unsigned int)v3 < screen_buf_end)
             *v3 = pixel;
     }
@@ -1448,13 +1448,13 @@ void __fastcall engine_draw_pixel(int x, int y)
     {
         if (!dword_52B99C || x >= 0 && x < 640 && y >= 64 && y < 704)
         {
-            v2 = (unsigned char *)gpBuffer + screen_y_times_768[x] + y;
+            v2 = (unsigned char *)DxInterface::get()->gpBuffer + screen_y_times_768[x] + y;
             goto LABEL_14;
         }
     }
     else if (!dword_52B99C || y >= 0 && y < 640 && x >= 64 && x < 704)
     {
-        v2 = (unsigned char *)gpBuffer + screen_y_times_768[y] + x;
+        v2 = (unsigned char *)DxInterface::get()->gpBuffer + screen_y_times_768[y] + x;
     LABEL_14:
         if ((unsigned int)v2 < screen_buf_end)
             *v2 = byte_52B96C;
@@ -2004,7 +2004,7 @@ void __fastcall Cl2DecodeFrm1(int x, int y, char *pCelBuff, int nCel, int width,
     int v11; // eax
     char *pCelBuffa; // [esp+18h] [ebp+8h]
 
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         v8 = pCelBuff;
         if (pCelBuff)
@@ -2019,7 +2019,7 @@ void __fastcall Cl2DecodeFrm1(int x, int y, char *pCelBuff, int nCel, int width,
                     if (dir2 == 8 || (v11 = *(unsigned short *)(v10 + dir2), !*(_WORD *)(v10 + dir2)))
                         v11 = *((_DWORD *)v8 + nCel + 1) - (_DWORD)pCelBuffa;
                     Cl2DecDatFrm1(
-                        (char *)gpBuffer + screen_y_times_768[y - 16 * dir1] + x,
+                        (char *)DxInterface::get()->gpBuffer + screen_y_times_768[y - 16 * dir1] + x,
                         (char *)(*(unsigned short *)(v10 + dir1) + v10),
                         v11 - *(unsigned short *)(v10 + dir1),
                         width);
@@ -2118,7 +2118,7 @@ void __fastcall Cl2DecodeFrm2(char colour, int screen_x, int screen_y, char *pCe
     int v11; // [esp+Ch] [ebp-8h]
 
     v11 = screen_x;
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         if (pCelBuff)
         {
@@ -2131,7 +2131,7 @@ void __fastcall Cl2DecodeFrm2(char colour, int screen_x, int screen_y, char *pCe
                     if (a8 == 8 || (v10 = *(unsigned short *)&v9[a8], !*(_WORD *)&v9[a8]))
                         v10 = *(_DWORD *)&pCelBuff[4 * nCel + 4] - v8;
                     Cl2DecDatFrm2(
-                        (char *)gpBuffer + screen_y_times_768[screen_y - 16 * a7] + v11,
+                        (char *)DxInterface::get()->gpBuffer + screen_y_times_768[screen_y - 16 * a7] + v11,
                         &v9[*(unsigned short *)&pCelBuff[v8 + a7]],
                         v10 - *(unsigned short *)&pCelBuff[v8 + a7],
                         frame_width,
@@ -2248,7 +2248,7 @@ void __fastcall Cl2DecodeFrm3(int screen_x, int screen_y, char *pCelBuff, int nC
     int v16; // eax
     char *pCelBuffa; // [esp+18h] [ebp+8h]
 
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         v8 = pCelBuff;
         if (pCelBuff)
@@ -2273,7 +2273,7 @@ void __fastcall Cl2DecodeFrm3(int screen_x, int screen_y, char *pCelBuff, int nC
                     if (a8 >= 4)
                         v16 = v16 + (a8 << 8) - 256;
                     Cl2DecDatLightTbl1(
-                        (char *)gpBuffer + screen_y_times_768[screen_y - 16 * a6] + screen_x,
+                        (char *)DxInterface::get()->gpBuffer + screen_y_times_768[screen_y - 16 * a6] + screen_x,
                         v13,
                         v14,
                         frame_width,
@@ -2383,7 +2383,7 @@ void __fastcall Cl2DecodeLightTbl(int screen_x, int screen_y, char *pCelBuff, in
     char *pCelBuffa; // [esp+18h] [ebp+8h]
 
     v7 = screen_y;
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         v8 = pCelBuff;
         if (pCelBuff)
@@ -2400,7 +2400,7 @@ void __fastcall Cl2DecodeLightTbl(int screen_x, int screen_y, char *pCelBuff, in
                         v12 = *(_DWORD *)&v8[4 * nCel + 4] - v9;
                     v13 = v12 - (_DWORD)pCelBuffa;
                     v14 = &v10[(_DWORD)pCelBuffa];
-                    v15 = (char *)gpBuffer + screen_y_times_768[v7 - 16 * a6] + screen_x;
+                    v15 = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[v7 - 16 * a6] + screen_x;
                     if (light_table_index)
                         Cl2DecDatLightTbl1(
                             v15,
@@ -2429,7 +2429,7 @@ void __fastcall Cl2DecodeFrm4(int screen_x, int screen_y, char *pCelBuff, int nC
 
     v7 = screen_y;
     v12 = screen_x;
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         v8 = pCelBuff;
         if (pCelBuff)
@@ -2444,7 +2444,7 @@ void __fastcall Cl2DecodeFrm4(int screen_x, int screen_y, char *pCelBuff, int nC
                     if (a7 == 8 || (v11 = *(unsigned short *)(v10 + a7), !*(_WORD *)(v10 + a7)))
                         v11 = *(_DWORD *)&v8[4 * nCel + 4] - (_DWORD)pCelBuffa;
                     Cl2DecDatFrm4(
-                        (char *)gpBuffer + screen_y_times_768[v7 - 16 * a6] + v12,
+                        (char *)DxInterface::get()->gpBuffer + screen_y_times_768[v7 - 16 * a6] + v12,
                         (char *)(*(unsigned short *)(v10 + a6) + v10),
                         v11 - *(unsigned short *)(v10 + a6),
                         frame_width);
@@ -2554,7 +2554,7 @@ void __fastcall Cl2DecodeClrHL(char colour, int screen_x, int screen_y, char *pC
 
     v12 = screen_x;
     a5 = colour;
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         if (pCelBuff)
         {
@@ -2569,7 +2569,7 @@ void __fastcall Cl2DecodeClrHL(char colour, int screen_x, int screen_y, char *pC
                         v11 = *(_DWORD *)&pCelBuff[4 * nCel + 4] - v8;
                     screen_buf_end -= 768;
                     Cl2DecDatClrHL(
-                        (char *)gpBuffer + screen_y_times_768[screen_y - 16 * a7] + v12,
+                        (char *)DxInterface::get()->gpBuffer + screen_y_times_768[screen_y - 16 * a7] + v12,
                         &v9[v10],
                         v11 - v10,
                         frame_width,
@@ -2696,7 +2696,7 @@ void __fastcall Cl2DecodeFrm5(int screen_x, int screen_y, char *pCelBuff, int nC
     int v16; // eax
     char *pCelBuffa; // [esp+18h] [ebp+8h]
 
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         v8 = pCelBuff;
         if (pCelBuff)
@@ -2721,7 +2721,7 @@ void __fastcall Cl2DecodeFrm5(int screen_x, int screen_y, char *pCelBuff, int nC
                     if (a8 >= 4)
                         v16 = v16 + (a8 << 8) - 256;
                     Cl2DecDatLightTbl2(
-                        (char *)gpBuffer + screen_y_times_768[screen_y - 16 * a6] + screen_x,
+                        (char *)DxInterface::get()->gpBuffer + screen_y_times_768[screen_y - 16 * a6] + screen_x,
                         v13,
                         v14,
                         frame_width,
@@ -2839,7 +2839,7 @@ void __fastcall Cl2DecodeFrm6(int screen_x, int screen_y, char *pCelBuff, int nC
     char *pCelBuffa; // [esp+18h] [ebp+8h]
 
     v7 = screen_y;
-    if (gpBuffer)
+    if (DxInterface::get()->gpBuffer)
     {
         v8 = pCelBuff;
         if (pCelBuff)
@@ -2856,7 +2856,7 @@ void __fastcall Cl2DecodeFrm6(int screen_x, int screen_y, char *pCelBuff, int nC
                         v12 = *(_DWORD *)&v8[4 * nCel + 4] - v9;
                     v13 = v12 - (_DWORD)pCelBuffa;
                     v14 = &v10[(_DWORD)pCelBuffa];
-                    v15 = (char *)gpBuffer + screen_y_times_768[v7 - 16 * a6] + screen_x;
+                    v15 = (char *)DxInterface::get()->gpBuffer + screen_y_times_768[v7 - 16 * a6] + screen_x;
                     if (light_table_index)
                         Cl2DecDatLightTbl2(v15, v14, v13, frame_width, &pLightTbl[256 * light_table_index]);
                     else

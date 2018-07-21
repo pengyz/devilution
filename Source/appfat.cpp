@@ -234,7 +234,7 @@ void __cdecl FreeDlg()
         Sleep(20000u);
     terminating = 1;
     cleanup_thread_id = GetCurrentThreadId();
-    dx_cleanup();
+    DxInterface::get()->dx_cleanup();
     if ((unsigned char)gbMaxPlayers > 1u)
     {
         if (SNetLeaveGame(3))

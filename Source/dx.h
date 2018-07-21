@@ -1,38 +1,40 @@
 //HEADER_GOES_HERE
 #ifndef __DX_H__
 #define __DX_H__
+#include <mutex>
 
-extern void *sgpBackBuf;
-extern int dx_cpp_init_value; // weak
-extern IDirectDraw *lpDDInterface;
-extern IDirectDrawPalette *lpDDPalette; // idb
-extern int sgdwLockCount;
-extern Screen *gpBuffer;
-extern IDirectDrawSurface *lpDDSBackBuf;
-extern IDirectDrawSurface *lpDDSPrimary;
-extern char gbBackBuf; // weak
-extern char gbEmulate; // weak
-extern HMODULE ghDiabMod; // idb
+class DxInterface {
 
-void __cdecl dx_cpp_init_1();
-void __cdecl dx_cpp_init_2();
-void __cdecl dx_init_mutex();
-void __cdecl dx_cleanup_mutex_atexit();
-void __cdecl dx_cleanup_mutex();
-void __fastcall dx_init(HWND hWnd);
-void __cdecl dx_create_back_buffer();
-void __cdecl dx_create_primary_surface();
-HRESULT __fastcall dx_DirectDrawCreate(GUID *guid, IDirectDraw **DD, void *unknown);
-void __cdecl j_dx_lock_mutex();
-void __cdecl dx_lock_mutex();
-void __cdecl j_dx_unlock_mutex();
-void __cdecl dx_unlock_mutex();
-void __cdecl dx_cleanup();
-void __cdecl dx_reinit();
-void __cdecl j_dx_reinit();
+private:
+    DxInterface() = default;
+public:
+    virtual ~DxInterface() = default;
+    static DxInterface* get();
+public:
+    void dx_init(HWND hWnd);
+    void dx_create_back_buffer();
+    void dx_create_primary_surface();
+    HRESULT dx_DirectDrawCreate(GUID *guid, IDirectDraw **DD, void *unknown);
+    void dx_lock_mutex();
+    void dx_unlock_mutex();
+    void dx_cleanup();
+    void dx_reinit();
 
-/* data */
+public:
+    void *sgpBackBuf = nullptr;
+    IDirectDraw *lpDDInterface = nullptr;
+    IDirectDrawPalette *lpDDPalette = nullptr;
+    int sgdwLockCount = 0;
+    Screen *gpBuffer = nullptr;
+    IDirectDrawSurface *lpDDSBackBuf = nullptr;
+    IDirectDrawSurface *lpDDSPrimary = nullptr;
+    std::mutex m_mutex;
+    char gbBackBuf;
+    char gbEmulate;
+    HMODULE ghDiabMod;
 
-extern int dx_inf; // weak
+private:
+    static DxInterface* m_instance;
+};
 
 #endif /* __DX_H__ */

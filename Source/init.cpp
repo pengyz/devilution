@@ -59,7 +59,7 @@ void __fastcall init_cleanup(bool show_cursor)
     effects_cleanup_sfx();
     sound_cleanup();
     NetClose();
-    dx_cleanup();
+    DxInterface::get()->dx_cleanup();
     MI_Dummy(v1);
     StormDestroy();
     if (v1)
@@ -203,7 +203,7 @@ void __fastcall init_create_window(int nCmdShow)
     ShowWindow(hWnd, SW_SHOWNORMAL); // nCmdShow used only in beta: ShowWindow(hWnd, nCmdShow)
     UpdateWindow(hWnd);
     init_await_mom_parent_exit();
-    dx_init(hWnd);
+    DxInterface::get()->dx_init(hWnd);
     BlackPalette();
     snd_init(hWnd);
     init_archives();

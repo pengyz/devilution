@@ -40,10 +40,10 @@ void __cdecl palette_init()
     palette_load_gamma();
     memcpy(system_palette, orig_palette, 0x400u);
     LoadSysPal();
-    v0 = lpDDInterface->CreatePalette(DDPCAPS_ALLOW256 | DDPCAPS_8BIT, system_palette, &lpDDPalette, NULL);
+    v0 = DxInterface::get()->lpDDInterface->CreatePalette(DDPCAPS_ALLOW256 | DDPCAPS_8BIT, system_palette, &DxInterface::get()->lpDDPalette, NULL);
     if (v0)
         TermDlg(111, v0, "C:\\Src\\Diablo\\Source\\PALETTE.CPP", 143);
-    v1 = lpDDSPrimary->SetPalette(lpDDPalette);
+    v1 = DxInterface::get()->lpDDSPrimary->SetPalette(DxInterface::get()->lpDDPalette);
     if (v1)
         TermDlg(111, v1, "C:\\Src\\Diablo\\Source\\PALETTE.CPP", 146);
 }
@@ -105,11 +105,11 @@ void __fastcall LoadPalette(char *pszFileName)
 {
     int i; // eax
     char PalData[256][3]; // [esp+0h] [ebp-304h]
-    void *pBuf; // [esp+300h] [ebp-4h]
+    void *hFile; // [esp+300h] [ebp-4h]
 
-    WOpenFile(pszFileName, &pBuf, 0);
-    WReadFile(pBuf, (char *)PalData, 768);
-    WCloseFile(pBuf);
+    WOpenFile(pszFileName, &hFile, 0);
+    WReadFile(hFile, (char *)PalData, 768);
+    WCloseFile(hFile);
 
     for (i = 0; i < 256; i++)
     {
@@ -139,9 +139,9 @@ void __fastcall LoadRndLvlPal(int l)
 
 void __cdecl ResetPal()
 {
-    if (!lpDDSPrimary
-        || lpDDSPrimary->IsLost() != DDERR_SURFACELOST
-        || !lpDDSPrimary->Restore())
+    if (!DxInterface::get()->lpDDSPrimary
+        || DxInterface::get()->lpDDSPrimary->IsLost() != DDERR_SURFACELOST
+        || !DxInterface::get()->lpDDSPrimary->Restore())
     {
         SDrawRealizePalette();
     }
@@ -164,7 +164,7 @@ void __cdecl palette_update()
     int v0; // ecx
     int v1; // eax
 
-    if (lpDDPalette)
+    if (DxInterface::get()->lpDDPalette)
     {
         v0 = 0;
         v1 = 256;
@@ -233,7 +233,7 @@ void __fastcall SetFadeLevel(int fadeval)
 {
     int i; // eax
 
-    if (lpDDInterface)
+    if (DxInterface::get()->lpDDInterface)
     {
         for (i = 0; i < 255; i++)
         {
@@ -242,7 +242,7 @@ void __fastcall SetFadeLevel(int fadeval)
             system_palette[i].peBlue = (fadeval * logical_palette[i].peBlue) >> 8;
         }
         Sleep(3);
-        lpDDInterface->WaitForVerticalBlank(DDWAITVB_BLOCKBEGIN, NULL);
+        DxInterface::get()->lpDDInterface->WaitForVerticalBlank(DDWAITVB_BLOCKBEGIN, NULL);
         palette_update();
     }
 }

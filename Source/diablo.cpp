@@ -354,12 +354,12 @@ void __fastcall diablo_parse_flags(char *args)
             ;
         if (!_strcmpi("dd_emulate", args))
         {
-            gbEmulate = 1;
+            DxInterface::get()->gbEmulate = 1;
             args += strlen("dd_emulate");
         }
         else if (!_strcmpi("dd_backbuf", args))
         {
-            gbBackBuf = 1;
+            DxInterface::get()->gbBackBuf = 1;
             args += strlen("dd_backbuf");
         }
         else if (!_strcmpi("ds_noduplicates", args))

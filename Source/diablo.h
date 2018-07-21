@@ -35,7 +35,6 @@ extern int sgnTimeoutCurs;
 extern char sgbMouseDown; // weak
 extern int color_cycle_timer; // weak
 
-void __cdecl diablo_cpp_init();
 void __cdecl FreeGameMem();
 int __fastcall diablo_init_menu(int a1, int bSinglePlayer);
 void __fastcall run_game_loop(int uMsg);
@@ -54,7 +53,6 @@ bool __fastcall LeftMouseDown(int a1);
 bool __cdecl TryIconCurs();
 void __cdecl LeftMouseUp();
 void __cdecl RightMouseDown();
-void __fastcall j_gmenu_on_mouse_move(LPARAM lParam);
 bool __fastcall PressSysKey(int wParam);
 void __fastcall diablo_hotkey_msg(int dwMsg);
 void __fastcall ReleaseKey(int vkey);

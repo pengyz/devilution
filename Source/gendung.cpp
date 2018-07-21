@@ -71,67 +71,57 @@ short dpiece_defs_map_2[16][112][112];
 
 void __cdecl FillSolidBlockTbls()
 {
-    unsigned char *v0; // eax
-    char *v1; // ecx
-    unsigned char *v2; // esi
-    int v3; // edx
-    unsigned char v4; // bl
+    unsigned char *pFileData; // eax
+    char *szFileName; // ecx
     int size; // [esp+8h] [ebp-4h]
 
-    memset(nBlockTable, 0, 0x801u);
-    memset(nSolidTable, 0, 0x801u);
-    memset(nTransTable, 0, 0x801u);
-    memset(nMissileTable, 0, 0x801u);
-    memset(nTrapTable, 0, 0x801u);
-    if (leveltype != DTYPE_TOWN)
+    memset(nBlockTable, 0, sizeof(nBlockTable));
+    memset(nSolidTable, 0, sizeof(nSolidTable));
+    memset(nTransTable, 0, sizeof(nTransTable));
+    memset(nMissileTable, 0, sizeof(nMissileTable));
+    memset(nTrapTable, 0, sizeof(nTrapTable));
+    switch (leveltype)
     {
-        switch (leveltype)
+        case DTYPE_TOWN:
+            szFileName = "Levels\\TownData\\Town.SOL";
+            break;
+        case DTYPE_CATHEDRAL:
+            szFileName = "Levels\\L1Data\\L1.SOL";
+            break;
+        case DTYPE_CATACOMBS:
+            szFileName = "Levels\\L2Data\\L2.SOL";
+            break;
+        case DTYPE_CAVES:
+            szFileName = "Levels\\L3Data\\L3.SOL";
+            break;
+        case DTYPE_HELL:
+            szFileName = "Levels\\L4Data\\L4.SOL";
+            break;
+        default:
+            TermMsg("FillSolidBlockTbls");
+            break;
+    }
+    pFileData = LoadFileInMem(szFileName, &size);
+
+    if (size >= 1)
+    {
+        for (int i = 0; i < size; i++)
         {
-            case DTYPE_CATHEDRAL:
-                v1 = "Levels\\L1Data\\L1.SOL";
-                break;
-            case DTYPE_CATACOMBS:
-                v1 = "Levels\\L2Data\\L2.SOL";
-                break;
-            case DTYPE_CAVES:
-                v1 = "Levels\\L3Data\\L3.SOL";
-                break;
-            case DTYPE_HELL:
-                v1 = "Levels\\L4Data\\L4.SOL";
-                break;
-            default:
-                TermMsg("FillSolidBlockTbls");
-                // v0 = (unsigned char *)size; /* check error */
-                goto LABEL_13;
+            uchar iFlag = pFileData[i];
+            if (iFlag & 1)
+                nSolidTable[i + 1] = 1;
+            if (iFlag & 2)
+                nBlockTable[i + 1] = 1;
+            if (iFlag & 4)
+                nMissileTable[i + 1] = 1;
+            if (iFlag & 8)
+                nTransTable[i + 1] = 1;
+            if ((iFlag & 0x80u) != 0)
+                nTrapTable[i + 1] = 1;
+            block_lvid[i + 1] = (iFlag >> 4) & 7;
         }
     }
-    else
-    {
-        v1 = "Levels\\TownData\\Town.SOL";
-    }
-    v0 = LoadFileInMem(v1, &size);
-LABEL_13:
-    v2 = v0;
-    if ((unsigned int)size >= 1)
-    {
-        v3 = 0;
-        do
-        {
-            v4 = *v2++;
-            if (v4 & 1)
-                nSolidTable[v3 + 1] = 1;
-            if (v4 & 2)
-                nBlockTable[v3 + 1] = 1;
-            if (v4 & 4)
-                nMissileTable[v3 + 1] = 1;
-            if (v4 & 8)
-                nTransTable[v3 + 1] = 1;
-            if ((v4 & 0x80u) != 0)
-                nTrapTable[v3 + 1] = 1;
-            block_lvid[v3++ + 1] = (v4 >> 4) & 7;
-        } while (v3 + 1 <= (unsigned int)size);
-    }
-    mem_free_dbg(v0);
+    mem_free_dbg(pFileData);
 }
 // 5BB1ED: using guessed type char leveltype;
 

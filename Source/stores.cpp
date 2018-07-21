@@ -164,7 +164,7 @@ void __cdecl DrawSTextBack()
     signed int v6; // ecx
 
     CelDecodeOnly(408, 487, pSTextBoxCels, 1, 271);
-    v0 = &gpBuffer->row[324].pixels[347];
+    v0 = &DxInterface::get()->gpBuffer->row[324].pixels[347];
     v1 = 148;
     do
     {
@@ -334,8 +334,8 @@ void __fastcall DrawSLine(int y)
         v10 = 66;
         v9 = 502;
     }
-    v3 = (char *)gpBuffer + v8;
-    v4 = (char *)gpBuffer + v2;
+    v3 = (char *)DxInterface::get()->gpBuffer + v8;
+    v4 = (char *)DxInterface::get()->gpBuffer + v2;
     v5 = 3;
     do
     {
