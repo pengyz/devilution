@@ -139,9 +139,9 @@ void __cdecl FreeMonsters();
 bool __fastcall DirOK(int i, int mdir);
 bool __fastcall PosOkMissile(int x, int y);
 bool __fastcall CheckNoSolid(int x, int y);
-bool __fastcall LineClearF(bool (__fastcall *Clear)(int, int), int x1, int y1, int x2, int y2);
+bool __fastcall LineClearF(bool(__fastcall *Clear)(int, int), int x1, int y1, int x2, int y2);
 bool __fastcall LineClear(int x1, int y1, int x2, int y2);
-bool __fastcall LineClearF1(bool (__fastcall *Clear)(int, int, int), int monst, int x1, int y1, int x2, int y2);
+bool __fastcall LineClearF1(bool(__fastcall *Clear)(int, int, int), int monst, int x1, int y1, int x2, int y2);
 void __fastcall SyncMonsterAnim(int i);
 void __fastcall M_FallenFear(int x, int y);
 void __fastcall PrintMonstHistory(int mt);
@@ -190,6 +190,6 @@ extern int rnd20[4];
 extern int rnd60[4];
 //
 
-extern void (__fastcall *AiProc[])(int i);
+extern void(__fastcall *AiProc[])(int i);
 
 #endif /* __MONSTER_H__ */

@@ -22,7 +22,7 @@ void __fastcall mpqapi_alloc_block(int block_offset, int block_size);
 _BLOCKENTRY *__fastcall mpqapi_new_block(int *block_index);
 int __fastcall mpqapi_get_hash_index_of_path(char *pszName);
 int __fastcall mpqapi_get_hash_index(short index, int hash_a, int hash_b, int locale);
-void __fastcall mpqapi_remove_hash_entries(bool (__stdcall *fnGetName)(int, char *));
+void __fastcall mpqapi_remove_hash_entries(bool(__stdcall *fnGetName)(int, char *));
 bool __fastcall mpqapi_write_file(char *pszName, char *pbData, int dwLen);
 _BLOCKENTRY *__fastcall mpqapi_add_file(char *pszName, _BLOCKENTRY *pBlk, int block_index);
 bool __fastcall mpqapi_write_file_contents(char *pszName, char *pbData, int dwLen, _BLOCKENTRY *pBlk);

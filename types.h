@@ -39,7 +39,6 @@
 #include "3rdParty/Storm/Source/storm.h"
 #include "3rdParty/PKWare/pkware.h"
 
-
 #include "defs.h"
 
 // temporarily enable debug features for all builds

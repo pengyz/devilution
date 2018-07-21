@@ -35,7 +35,7 @@ BOOL STORMAPI SNetSendTurn(char *data, size_t databytes) rBool;
 
 BOOL STORMAPI SNetSetGameMode(DWORD modeFlags, bool makePublic) rBool;
 
-BOOL STORMAPI SNetEnumGamesEx(int a1, int a2, int (__fastcall *callback)(DWORD, DWORD, DWORD), int *hintnextcall) rBool;
+BOOL STORMAPI SNetEnumGamesEx(int a1, int a2, int(__fastcall *callback)(DWORD, DWORD, DWORD), int *hintnextcall) rBool;
 BOOL STORMAPI SNetSetServerChatCommand(const char *command) rBool;
 
 BOOL STORMAPI SNetDisconnectAll(DWORD flags) rBool;
@@ -83,7 +83,7 @@ BOOL STORMAPI SFileReadFile(HANDLE hFile, void *buffer, DWORD nNumberOfBytesToRe
 
 void STORMAPI SFileSetLocale(LCID lcLocale) rVoid;
 
-BOOL STORMAPI SFileSetIoErrorMode(int mode, BOOL (STORMAPI *callback)(char*,int,int) ) rBool;
+BOOL STORMAPI SFileSetIoErrorMode(int mode, BOOL(STORMAPI *callback)(char*, int, int)) rBool;
 BOOL STORMAPI SFileGetArchiveName(HANDLE hArchive, char *name, int length) rBool;
 BOOL STORMAPI SFileGetFileName(HANDLE hFile, char *buffer, int length) rBool;
 
@@ -223,16 +223,16 @@ int STORMAPI SBigPowMod(void *buffer1, void *buffer2, int a3, int a4) rInt;
 int STORMAPI SBigToBinaryBuffer(void *buffer, int length, int a3, int a4) rInt;
 //
 
-void __stdcall SDrawMessageBox(char *,char *,int) rVoid;
+void __stdcall SDrawMessageBox(char *, char *, int) rVoid;
 void __cdecl SDrawDestroy(void) rVoid;
 bool __cdecl StormDestroy(void) rBool;
 bool __stdcall SFileSetBasePath(char *) rBool;
 void __cdecl SDrawRealizePalette(void) rVoid;
 bool __cdecl SVidPlayContinue(void) rBool;
 bool __stdcall SNetGetOwnerTurnsWaiting(int *) rBool;
-void * __stdcall SNetUnregisterEventHandler(int,void (__stdcall*)(struct _SNETEVENT *)) rPVoid;
-void * __stdcall SNetRegisterEventHandler(int,void (__stdcall*)(struct _SNETEVENT *)) rPVoid;
+void * __stdcall SNetUnregisterEventHandler(int, void(__stdcall*)(struct _SNETEVENT *)) rPVoid;
+void * __stdcall SNetRegisterEventHandler(int, void(__stdcall*)(struct _SNETEVENT *)) rPVoid;
 bool __stdcall SNetSetBasePlayer(int) rBool;
-int __stdcall SNetInitializeProvider(unsigned long,struct _SNETPROGRAMDATA *,struct _SNETPLAYERDATA *,struct _SNETUIDATA *,struct _SNETVERSIONDATA *) rInt;
+int __stdcall SNetInitializeProvider(unsigned long, struct _SNETPROGRAMDATA *, struct _SNETPLAYERDATA *, struct _SNETUIDATA *, struct _SNETVERSIONDATA *) rInt;
 int __stdcall SNetGetProviderCaps(struct _SNETCAPS *) rInt;
-int __stdcall SFileSetFilePointer(HANDLE,int,HANDLE,int) rInt;
+int __stdcall SFileSetFilePointer(HANDLE, int, HANDLE, int) rInt;

@@ -9,7 +9,7 @@
 				(((word) << (bits)) | ((word) >> (32-(bits))))
 #define SHA1HashSize 20
 
-//sha
+ //sha
 extern SHA1Context sgSHA1[3];
 
 void __cdecl SHA1Clear();

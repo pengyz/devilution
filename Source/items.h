@@ -134,7 +134,6 @@ extern UItemStruct UniqueItemList[91];
 
 /* rdata */
 
-
 extern ItemDataStruct AllItemsList[157];
 extern unsigned char ItemCAnimTbl[169];
 extern char *ItemDropStrs[35];

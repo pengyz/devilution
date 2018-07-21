@@ -50,10 +50,6 @@
 #define PAL16_RED		224
 #define PAL16_GRAY		240
 
-
-
-
-
 /////////////////////////////////////////////////////////////////////////
 /* temporary stuff from the decompiler */
 /* remove all the garbage below in the future */
@@ -63,10 +59,10 @@
 
 inline void memset32(void *s, unsigned int c, size_t n)
 {
-	unsigned int *p = (unsigned int *)s;
-	for (int i = 0; i < n; i++) {
-		p[i] = c;
-	}
+    unsigned int *p = (unsigned int *)s;
+    for (int i = 0; i < n; i++) {
+        p[i] = c;
+    }
 }
 
 typedef          __int64 ll;
@@ -120,7 +116,6 @@ typedef ull             uint64;
 #define BYTE1(x)   BYTEn(x,  1)         // byte 1 (counting from 0)
 #define BYTE2(x)   BYTEn(x,  2)
 
-
 // now signed macros (the same but with sign extension)
 #define SBYTEn(x, n)   (*((int8*)&(x)+n))
 #define SWORDn(x, n)   (*((int16*)&(x)+n))
@@ -128,12 +123,9 @@ typedef ull             uint64;
 #define SLOBYTE(x)  SBYTEn(x,LOW_IND(x,int8))
 #define SHIWORD(x)  SWORDn(x,HIGH_IND(x,int16))
 
-
-
 // Helper functions to represent some assembly instructions.
 
 #ifdef __cplusplus
-
 
 // memcpy() with determined behavoir: it always copies
 // from the start to the end of the buffer
@@ -153,35 +145,35 @@ inline void *qmemcpy(void *dst, const void *src, size_t cnt)
 } */
 
 // Generate a reference to pair of operands
-template<class T>  int16 __PAIR__( int8  high, T low) { return ((( int16)high) << sizeof(high)*8) | uint8(low); }
-template<class T>  int32 __PAIR__( int16 high, T low) { return ((( int32)high) << sizeof(high)*8) | uint16(low); }
-template<class T>  int64 __PAIR__( int32 high, T low) { return ((( int64)high) << sizeof(high)*8) | uint32(low); }
-template<class T> uint16 __PAIR__(uint8  high, T low) { return (((uint16)high) << sizeof(high)*8) | uint8(low); }
-template<class T> uint32 __PAIR__(uint16 high, T low) { return (((uint32)high) << sizeof(high)*8) | uint16(low); }
-template<class T> uint64 __PAIR__(uint32 high, T low) { return (((uint64)high) << sizeof(high)*8) | uint32(low); }
+template<class T>  int16 __PAIR__(int8  high, T low) { return (((int16)high) << sizeof(high) * 8) | uint8(low); }
+template<class T>  int32 __PAIR__(int16 high, T low) { return (((int32)high) << sizeof(high) * 8) | uint16(low); }
+template<class T>  int64 __PAIR__(int32 high, T low) { return (((int64)high) << sizeof(high) * 8) | uint32(low); }
+template<class T> uint16 __PAIR__(uint8  high, T low) { return (((uint16)high) << sizeof(high) * 8) | uint8(low); }
+template<class T> uint32 __PAIR__(uint16 high, T low) { return (((uint32)high) << sizeof(high) * 8) | uint16(low); }
+template<class T> uint64 __PAIR__(uint32 high, T low) { return (((uint64)high) << sizeof(high) * 8) | uint32(low); }
 
 // rotate left
 template<class T> T __ROL__(T value, int count)
 {
-  const uint nbits = sizeof(T) * 8;
+    const uint nbits = sizeof(T) * 8;
 
-  if ( count > 0 )
-  {
-    count %= nbits;
-    T high = value >> (nbits - count);
-    if ( T(-1) < 0 ) // signed value
-      high &= ~((T(-1) << count));
-    value <<= count;
-    value |= high;
-  }
-  else
-  {
-    count = -count % nbits;
-    T low = value << (nbits - count);
-    value >>= count;
-    value |= low;
-  }
-  return value;
+    if (count > 0)
+    {
+        count %= nbits;
+        T high = value >> (nbits - count);
+        if (T(-1) < 0) // signed value
+            high &= ~((T(-1) << count));
+        value <<= count;
+        value |= high;
+    }
+    else
+    {
+        count = -count % nbits;
+        T low = value << (nbits - count);
+        value >>= count;
+        value |= low;
+    }
+    return value;
 }
 
 inline uint16 __ROR2__(uint16 value, int count) { return __ROL__((uint16)value, -count); }
@@ -190,30 +182,30 @@ inline uint32 __ROR4__(uint32 value, int count) { return __ROL__((uint32)value, 
 // sign flag
 template<class T> int8 __SETS__(T x)
 {
-  if ( sizeof(T) == 1 )
-    return int8(x) < 0;
-  if ( sizeof(T) == 2 )
-    return int16(x) < 0;
-  if ( sizeof(T) == 4 )
-    return int32(x) < 0;
-  return int64(x) < 0;
+    if (sizeof(T) == 1)
+        return int8(x) < 0;
+    if (sizeof(T) == 2)
+        return int16(x) < 0;
+    if (sizeof(T) == 4)
+        return int32(x) < 0;
+    return int64(x) < 0;
 }
 
 // overflow flag of subtraction (x-y)
 template<class T, class U> int8 __OFSUB__(T x, U y)
 {
-  if ( sizeof(T) < sizeof(U) )
-  {
-    U x2 = x;
-    int8 sx = __SETS__(x2);
-    return (sx ^ __SETS__(y)) & (sx ^ __SETS__(x2-y));
-  }
-  else
-  {
-    T y2 = y;
-    int8 sx = __SETS__(x);
-    return (sx ^ __SETS__(y2)) & (sx ^ __SETS__(x-y2));
-  }
+    if (sizeof(T) < sizeof(U))
+    {
+        U x2 = x;
+        int8 sx = __SETS__(x2);
+        return (sx ^ __SETS__(y)) & (sx ^ __SETS__(x2 - y));
+    }
+    else
+    {
+        T y2 = y;
+        int8 sx = __SETS__(x);
+        return (sx ^ __SETS__(y2)) & (sx ^ __SETS__(x - y2));
+    }
 }
 
 #endif
