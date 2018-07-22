@@ -1,18 +1,43 @@
-#pragma once
+﻿#pragma once
 
 #ifndef __BLIZZARD_STORM_HEADER
 #define __BLIZZARD_STORM_HEADER
 
-#include <windows.h>
-#include <winuser.h>
-#include <winsock.h>
-#include <ddraw.h>
+// #include <windows.h>
+// #include <winuser.h>
+// #include <winsock.h>
+// #include <ddraw.h>
+
+//TODO: this tempory definations
+using HGDIOBJ = void*;
+using HANDLE = void*;
+using HDC = void*;
+using HMODULE = void*;
+using LPCSTR = const char*;
+//using HWND = unsigned int;
+//using size_t = unsigned int;
+
+#ifndef WORD
+#define WORD unsigned short
+#endif
+
+#ifndef BOOL
+#define BOOL int
+#endif
+
+#ifndef DWORD
+#define DWORD unsigned int
+#endif
 
 // Note to self: Linker error => forgot a return value in cpp
 
 // Storm API definition
 #ifndef STORMAPI
+#ifdef __GNUC__
+#define STORMAPI __attribute__((__stdcall__))
+#else
 #define STORMAPI __stdcall
+#endif
 #endif
 
 #ifndef __STORM_SMAX
