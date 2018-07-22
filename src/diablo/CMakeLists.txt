@@ -1,0 +1,79 @@
+﻿add_executable(Diablo
+    appfat.cpp
+    automap.cpp
+    capture.cpp
+    codec.cpp
+    control.cpp
+    cursor.cpp
+    dead.cpp
+    debug.cpp
+    diablo.cpp
+    doom.cpp
+    drlg_l1.cpp
+    drlg_l2.cpp
+    drlg_l3.cpp
+    drlg_l4.cpp
+    dthread.cpp
+    dx.cpp
+    effects.cpp
+    encrypt.cpp
+    engine.cpp
+    error.cpp
+    fault.cpp
+    gamemenu.cpp
+    gendung.cpp
+    gmenu.cpp
+    help.cpp
+    init.cpp
+    interfac.cpp
+    inv.cpp
+    items.cpp
+    lighting.cpp
+    loadsave.cpp
+    logging.cpp
+    mainmenu.cpp
+    minitext.cpp
+    missiles.cpp
+    monster.cpp
+    movie.cpp
+    mpqapi.cpp
+    msg.cpp
+    msgcmd.cpp
+    multi.cpp
+    nthread.cpp
+    objects.cpp
+    pack.cpp
+    palette.cpp
+    path.cpp
+    pfile.cpp
+    player.cpp
+    plrmsg.cpp
+    portal.cpp
+    quests.cpp
+    restrict.cpp
+    scrollrt.cpp
+    setmaps.cpp
+    sha.cpp
+    sound.cpp
+    spells.cpp
+    stores.cpp
+    sync.cpp
+    textdat.cpp
+    themes.cpp
+    tmsg.cpp
+    town.cpp
+    towners.cpp
+    track.cpp
+    trigs.cpp
+    wave.cpp
+    world.cpp
+)
+
+#add_executable(Diablo
+#    main.cpp
+#)
+
+#target_link_libraries(Diablo NuklearMisc)
+
+target_link_libraries(Diablo ${HUNTER_LIBS})
+set_target_properties(Diablo PROPERTIES COMPILE_FLAGS "${FA_COMPILER_FLAGS}")
