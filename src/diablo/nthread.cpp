@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int nthread_cpp_init_value; // weak
 char byte_679704; // weak
@@ -65,7 +65,7 @@ void __fastcall nthread_terminate_game(char *pszFcn)
     int v2; // eax
     char *v3; // eax
 
-    v1 = pszFcn;
+    /*v1 = pszFcn;
     v2 = SErrGetLastError();
     if (v2 != STORM_ERROR_INVALID_PLAYER)
     {
@@ -78,46 +78,46 @@ void __fastcall nthread_terminate_game(char *pszFcn)
             v3 = GetLastErr();
             TermMsg("%s:\n%s", v1, v3);
         }
-    }
+    }*/
 }
 // 67862D: using guessed type char gbGameDestroyed;
 
 int __fastcall nthread_send_and_recv_turn(int cur_turn, int turn_delta)
 {
-    int v2; // ebx
-    unsigned int v3; // edi
-    char *v5; // ecx
-    int v6; // eax
-    int turn; // [esp+Ch] [ebp-8h]
-    int turns; // [esp+10h] [ebp-4h]
+    //int v2; // ebx
+    //unsigned int v3; // edi
+    //char *v5; // ecx
+    //int v6; // eax
+    //int turn; // [esp+Ch] [ebp-8h]
+    //int turns; // [esp+10h] [ebp-4h]
 
-    v2 = turn_delta;
-    v3 = cur_turn;
-    if (SNetGetTurnsInTransit(&turns))
-    {
-        if (turns >= (unsigned int)gdwTurnsInTransit)
-            return v3;
-        while (1)
-        {
-            ++turns;
-            v6 = dword_679754 | v3 & 0x7FFFFFFF;
-            dword_679754 = 0;
-            turn = v6;
-            if (!SNetSendTurn((char *)&turn, 4))
-                break;
-            v3 += v2;
-            if (v3 >= 0x7FFFFFFF)
-                v3 = (unsigned short)v3;
-            if (turns >= (unsigned int)gdwTurnsInTransit)
-                return v3;
-        }
-        v5 = "SNetSendTurn";
-    }
-    else
-    {
-        v5 = "SNetGetTurnsInTransit";
-    }
-    nthread_terminate_game(v5);
+    //v2 = turn_delta;
+    //v3 = cur_turn;
+    //if (SNetGetTurnsInTransit(&turns))
+    //{
+    //    if (turns >= (unsigned int)gdwTurnsInTransit)
+    //        return v3;
+    //    while (1)
+    //    {
+    //        ++turns;
+    //        v6 = dword_679754 | v3 & 0x7FFFFFFF;
+    //        dword_679754 = 0;
+    //        turn = v6;
+    //        if (!SNetSendTurn((char *)&turn, 4))
+    //            break;
+    //        v3 += v2;
+    //        if (v3 >= 0x7FFFFFFF)
+    //            v3 = (unsigned short)v3;
+    //        if (turns >= (unsigned int)gdwTurnsInTransit)
+    //            return v3;
+    //    }
+    //    v5 = "SNetSendTurn";
+    //}
+    //else
+    //{
+    //    v5 = "SNetGetTurnsInTransit";
+    //}
+    //nthread_terminate_game(v5);
     return 0;
 }
 // 679738: using guessed type int gdwTurnsInTransit;
@@ -125,39 +125,39 @@ int __fastcall nthread_send_and_recv_turn(int cur_turn, int turn_delta)
 
 int __fastcall nthread_recv_turns(int *pfSendAsync)
 {
-    int *v1; // esi
-    bool v2; // zf
+    //int *v1; // esi
+    //bool v2; // zf
 
-    v1 = pfSendAsync;
-    *pfSendAsync = 0;
-    if (--sgbPacketCountdown)
-    {
-        dword_679764 += 50;
-        return 1;
-    }
-    v2 = sgbSyncCountdown-- == 1;
-    sgbPacketCountdown = byte_679704;
-    if (!v2)
-        goto LABEL_11;
-    if (SNetReceiveTurns(0, 4, (char **)glpMsgTbl, (unsigned int *)gdwMsgLenTbl, (unsigned long *)player_state))
-    {
-        if (!byte_679758)
-        {
-            byte_679758 = 1;
-            dword_679764 = GetTickCount();
-        }
-        sgbSyncCountdown = 4;
-        multi_msg_countdown();
-    LABEL_11:
-        *v1 = 1;
-        dword_679764 += 50;
-        return 1;
-    }
-    if (SErrGetLastError() != STORM_ERROR_NO_MESSAGES_WAITING)
-        nthread_terminate_game("SNetReceiveTurns");
-    byte_679758 = 0;
-    sgbSyncCountdown = 1;
-    sgbPacketCountdown = 1;
+    //v1 = pfSendAsync;
+    //*pfSendAsync = 0;
+    //if (--sgbPacketCountdown)
+    //{
+    //    dword_679764 += 50;
+    //    return 1;
+    //}
+    //v2 = sgbSyncCountdown-- == 1;
+    //sgbPacketCountdown = byte_679704;
+    //if (!v2)
+    //    goto LABEL_11;
+    //if (SNetReceiveTurns(0, 4, (char **)glpMsgTbl, (unsigned int *)gdwMsgLenTbl, (unsigned long *)player_state))
+    //{
+    //    if (!byte_679758)
+    //    {
+    //        byte_679758 = 1;
+    //        dword_679764 = GetTickCount();
+    //    }
+    //    sgbSyncCountdown = 4;
+    //    multi_msg_countdown();
+    //LABEL_11:
+    //    *v1 = 1;
+    //    dword_679764 += 50;
+    //    return 1;
+    //}
+    //if (SErrGetLastError() != STORM_ERROR_NO_MESSAGES_WAITING)
+    //    nthread_terminate_game("SNetReceiveTurns");
+    //byte_679758 = 0;
+    //sgbSyncCountdown = 1;
+    //sgbPacketCountdown = 1;
     return 0;
 }
 // 679704: using guessed type char byte_679704;
@@ -174,68 +174,68 @@ void __cdecl nthread_set_turn_upper_bit()
 
 void __fastcall nthread_start(bool set_turn_upper_bit)
 {
-    BOOL v1; // esi
-    char *v3; // eax
-    unsigned int v4; // esi
-    unsigned int v5; // eax
-    char *v6; // eax
-    _SNETCAPS caps; // [esp+8h] [ebp-24h]
+    //BOOL v1; // esi
+    //char *v3; // eax
+    //unsigned int v4; // esi
+    //unsigned int v5; // eax
+    //char *v6; // eax
+    //_SNETCAPS caps; // [esp+8h] [ebp-24h]
 
-    v1 = set_turn_upper_bit;
-    dword_679764 = GetTickCount();
-    sgbPacketCountdown = 1;
-    sgbSyncCountdown = 1;
-    byte_679758 = 1;
-    if (v1)
-        nthread_set_turn_upper_bit();
-    else
-        dword_679754 = 0;
-    caps.size = 36;
-    if (!SNetGetProviderCaps(&caps))
-    {
-        v3 = GetLastErr();
-        TermMsg("SNetGetProviderCaps:\n%s", v3);
-    }
-    gdwTurnsInTransit = caps.defaultturnsintransit;
-    if (!caps.defaultturnsintransit)
-        gdwTurnsInTransit = 1;
-    if (caps.defaultturnssec <= 0x14u && caps.defaultturnssec)
-        byte_679704 = 0x14u / caps.defaultturnssec;
-    else
-        byte_679704 = 1;
-    v4 = 512;
-    if (caps.maxmessagesize < 0x200u)
-        v4 = caps.maxmessagesize;
-    gdwDeltaBytesSec = (unsigned int)caps.bytessec >> 2;
-    gdwLargestMsgSize = v4;
-    if (caps.maxplayers > 4u)
-        caps.maxplayers = 4;
-    v5 = (3 * (caps.bytessec * (unsigned int)(unsigned char)byte_679704 / 0x14) >> 2) / caps.maxplayers;
-    gdwNormalMsgSize = v5;
-    if (v5 < 0x80)
-    {
-        do
-        {
-            byte_679704 *= 2;
-            v5 *= 2;
-        } while (v5 < 0x80);
-        gdwNormalMsgSize = v5;
-    }
-    if (v5 > v4)
-        gdwNormalMsgSize = v4;
-    if ((unsigned char)gbMaxPlayers > 1u)
-    {
-        sgbThreadIsRunning = 0;
-        EnterCriticalSection(&sgMemCrit);
-        byte_679734 = 1;
-        sghThread = (HANDLE)_beginthreadex(NULL, 0, nthread_handler, NULL, 0, &glpNThreadId);
-        if (sghThread == (HANDLE)-1)
-        {
-            v6 = GetLastErr();
-            TermMsg("nthread2:\n%s", v6);
-        }
-        SetThreadPriority(sghThread, THREAD_PRIORITY_HIGHEST);
-    }
+    //v1 = set_turn_upper_bit;
+    //dword_679764 = GetTickCount();
+    //sgbPacketCountdown = 1;
+    //sgbSyncCountdown = 1;
+    //byte_679758 = 1;
+    //if (v1)
+    //    nthread_set_turn_upper_bit();
+    //else
+    //    dword_679754 = 0;
+    //caps.size = 36;
+    //if (!SNetGetProviderCaps(&caps))
+    //{
+    //    v3 = GetLastErr();
+    //    TermMsg("SNetGetProviderCaps:\n%s", v3);
+    //}
+    //gdwTurnsInTransit = caps.defaultturnsintransit;
+    //if (!caps.defaultturnsintransit)
+    //    gdwTurnsInTransit = 1;
+    //if (caps.defaultturnssec <= 0x14u && caps.defaultturnssec)
+    //    byte_679704 = 0x14u / caps.defaultturnssec;
+    //else
+    //    byte_679704 = 1;
+    //v4 = 512;
+    //if (caps.maxmessagesize < 0x200u)
+    //    v4 = caps.maxmessagesize;
+    //gdwDeltaBytesSec = (unsigned int)caps.bytessec >> 2;
+    //gdwLargestMsgSize = v4;
+    //if (caps.maxplayers > 4u)
+    //    caps.maxplayers = 4;
+    //v5 = (3 * (caps.bytessec * (unsigned int)(unsigned char)byte_679704 / 0x14) >> 2) / caps.maxplayers;
+    //gdwNormalMsgSize = v5;
+    //if (v5 < 0x80)
+    //{
+    //    do
+    //    {
+    //        byte_679704 *= 2;
+    //        v5 *= 2;
+    //    } while (v5 < 0x80);
+    //    gdwNormalMsgSize = v5;
+    //}
+    //if (v5 > v4)
+    //    gdwNormalMsgSize = v4;
+    //if ((unsigned char)gbMaxPlayers > 1u)
+    //{
+    //    sgbThreadIsRunning = 0;
+    //    EnterCriticalSection(&sgMemCrit);
+    //    byte_679734 = 1;
+    //    sghThread = (HANDLE)_beginthreadex(NULL, 0, nthread_handler, NULL, 0, &glpNThreadId);
+    //    if (sghThread == (HANDLE)-1)
+    //    {
+    //        v6 = GetLastErr();
+    //        TermMsg("nthread2:\n%s", v6);
+    //    }
+    //    SetThreadPriority(sghThread, THREAD_PRIORITY_HIGHEST);
+    //}
 }
 // 679660: using guessed type char gbMaxPlayers;
 // 679704: using guessed type char byte_679704;

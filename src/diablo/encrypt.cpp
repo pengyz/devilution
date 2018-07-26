@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int encrypt_table[1280];
 
@@ -113,44 +113,45 @@ void __cdecl encrypt_init_lookup_table() // InitScratchSpace
 
 int __fastcall encrypt_compress(void *buf, int size) // MPQCompress_PKWare
 {
-    unsigned char *v2; // ebx
-    unsigned char *v3; // esi
-    int v4; // ecx
-    unsigned char *v5; // edi
-    TDataInfo param; // [esp+Ch] [ebp-20h]
-    unsigned int type; // [esp+20h] [ebp-Ch]
-    unsigned int dsize; // [esp+24h] [ebp-8h]
-    char *ptr; // [esp+28h] [ebp-4h]
+    //unsigned char *v2; // ebx
+    //unsigned char *v3; // esi
+    //int v4; // ecx
+    //unsigned char *v5; // edi
+    //TDataInfo param; // [esp+Ch] [ebp-20h]
+    //unsigned int type; // [esp+20h] [ebp-Ch]
+    //unsigned int dsize; // [esp+24h] [ebp-8h]
+    //char *ptr; // [esp+28h] [ebp-4h]
 
-    v2 = (unsigned char *)buf;
-    v3 = (unsigned char *)size;
-    ptr = (char *)DiabloAllocPtr(CMP_BUFFER_SIZE); // 36312
-    v4 = 2 * (_DWORD)v3;
-    if ((unsigned int)(2 * (_DWORD)v3) < 0x2000)
-        v4 = 0x2000;
-    v5 = (unsigned char *)DiabloAllocPtr(v4);
-    param.pbInBuffEnd = 0;
-    param.pbOutBuffEnd = 0;
-    type = 0;
-    param.pbInBuff = v2;
-    param.pbOutBuff = v5;
-    param.pbSize = v3;
-    dsize = 4096;
-    implode(
-        encrypt_pkware_read,
-        encrypt_pkware_write,
-        ptr,
-        &param,
-        &type,
-        &dsize);
-    if (param.pbOutBuffEnd < v3)
-    {
-        memcpy(v2, v5, (size_t)param.pbOutBuffEnd);
-        v3 = param.pbOutBuffEnd;
-    }
-    mem_free_dbg(ptr);
-    mem_free_dbg(v5);
-    return (int)v3;
+    //v2 = (unsigned char *)buf;
+    //v3 = (unsigned char *)size;
+    //ptr = (char *)DiabloAllocPtr(CMP_BUFFER_SIZE); // 36312
+    //v4 = 2 * (_DWORD)v3;
+    //if ((unsigned int)(2 * (_DWORD)v3) < 0x2000)
+    //    v4 = 0x2000;
+    //v5 = (unsigned char *)DiabloAllocPtr(v4);
+    //param.pbInBuffEnd = 0;
+    //param.pbOutBuffEnd = 0;
+    //type = 0;
+    //param.pbInBuff = v2;
+    //param.pbOutBuff = v5;
+    //param.pbSize = v3;
+    //dsize = 4096;
+    //implode(
+    //    encrypt_pkware_read,
+    //    encrypt_pkware_write,
+    //    ptr,
+    //    &param,
+    //    &type,
+    //    &dsize);
+    //if (param.pbOutBuffEnd < v3)
+    //{
+    //    memcpy(v2, v5, (size_t)param.pbOutBuffEnd);
+    //    v3 = param.pbOutBuffEnd;
+    //}
+    //mem_free_dbg(ptr);
+    //mem_free_dbg(v5);
+    //return (int)v3;
+    return 0;
 }
 
 unsigned int __cdecl encrypt_pkware_read(char *buf, unsigned int *size, void *param) // ReadPKWare
@@ -178,27 +179,27 @@ void __cdecl encrypt_pkware_write(char *buf, unsigned int *size, void *param) //
 
 void __fastcall encrypt_decompress(void *param, int recv_size, int dwMaxBytes) // MPQDecompress_PKWare
 {
-    unsigned char *v3; // edi
-    unsigned char *v4; // ebx
-    unsigned char *v5; // esi
-    TDataInfo info; // [esp+Ch] [ebp-18h]
-    char *ptr; // [esp+20h] [ebp-4h]
+    //unsigned char *v3; // edi
+    //unsigned char *v4; // ebx
+    //unsigned char *v5; // esi
+    //TDataInfo info; // [esp+Ch] [ebp-18h]
+    //char *ptr; // [esp+20h] [ebp-4h]
 
-    v3 = (unsigned char *)param;
-    v4 = (unsigned char *)recv_size;
-    ptr = (char *)DiabloAllocPtr(CMP_BUFFER_SIZE); // 36312
-    v5 = (unsigned char *)DiabloAllocPtr(dwMaxBytes);
-    info.pbInBuffEnd = 0;
-    info.pbOutBuffEnd = 0;
-    info.pbInBuff = v3;
-    info.pbOutBuff = v5;
-    info.pbSize = v4;
-    explode(
-        encrypt_pkware_read,
-        encrypt_pkware_write,
-        ptr,
-        &info);
-    memcpy(v3, v5, (size_t)info.pbOutBuffEnd);
-    mem_free_dbg(ptr);
-    mem_free_dbg(v5);
+    //v3 = (unsigned char *)param;
+    //v4 = (unsigned char *)recv_size;
+    //ptr = (char *)DiabloAllocPtr(CMP_BUFFER_SIZE); // 36312
+    //v5 = (unsigned char *)DiabloAllocPtr(dwMaxBytes);
+    //info.pbInBuffEnd = 0;
+    //info.pbOutBuffEnd = 0;
+    //info.pbInBuff = v3;
+    //info.pbOutBuff = v5;
+    //info.pbSize = v4;
+    //explode(
+    //    encrypt_pkware_read,
+    //    encrypt_pkware_write,
+    //    ptr,
+    //    &info);
+    //memcpy(v3, v5, (size_t)info.pbOutBuffEnd);
+    //mem_free_dbg(ptr);
+    //mem_free_dbg(v5);
 }

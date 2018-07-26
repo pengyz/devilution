@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int pfile_cpp_init_value;
 char hero_names[320];
@@ -200,13 +200,14 @@ bool __fastcall pfile_create_player_description(char *dst, int len)
     v3 = dst;
     pfile_read_player_from_save();
     game_2_ui_player(plr, &hero_info, gbValidSaveFile);
-    UiSetupPlayerInfo(chr_name_str, &hero_info, 'DRTL');
+    //UiSetupPlayerInfo(chr_name_str, &hero_info, 'DRTL');
     if (!v3 || !v2)
         goto LABEL_5;
-    v4 = UiCreatePlayerDescription(&hero_info, 'DRTL', src);
+    //v4 = UiCreatePlayerDescription(&hero_info, 'DRTL', src);
+    v4 = 1;
     if (v4)
     {
-        SStrCopy(v3, src, v2);
+        //SStrCopy(v3, src, v2);
     LABEL_5:
         v4 = 1;
     }
@@ -215,36 +216,36 @@ bool __fastcall pfile_create_player_description(char *dst, int len)
 
 int __fastcall pfile_create_save_file(char *name_1, char *name_2)
 {
-    char *v2; // edi
-    char *v3; // ebp
-    int v4; // esi
-    int v5; // eax
-    char *v7; // [esp+20h] [ebp-30h]
-    _uiheroinfo heroinfo; // [esp+24h] [ebp-2Ch]
+    //char *v2; // edi
+    //char *v3; // ebp
+    //int v4; // esi
+    //int v5; // eax
+    //char *v7; // [esp+20h] [ebp-30h]
+    //_uiheroinfo heroinfo; // [esp+24h] [ebp-2Ch]
 
-    v2 = name_2;
-    v3 = name_1;
-    if (pfile_get_save_num_from_name(name_2) != 10)
-        return 0;
-    v4 = 0;
-    v7 = plr[0]._pName;
-    while (_strcmpi(v3, v7))
-    {
-        v7 += 21720;
-        ++v4;
-        if (v7 == plr[4]._pName)
-            return 0;
-    }
-    v5 = pfile_get_save_num_from_name(v3);
-    if (v5 == 10)
-        return 0;
-    SStrCopy(&hero_names[32 * v5], v2, 32);
-    SStrCopy(plr[v4]._pName, v2, 32);
-    if (!_strcmpi(chr_name_str, v3))
-        SStrCopy(chr_name_str, v2, 16);
-    game_2_ui_player(plr, &heroinfo, gbValidSaveFile);
-    UiSetupPlayerInfo(chr_name_str, &heroinfo, 'DRTL');
-    pfile_write_hero();
+    //v2 = name_2;
+    //v3 = name_1;
+    //if (pfile_get_save_num_from_name(name_2) != 10)
+    //    return 0;
+    //v4 = 0;
+    //v7 = plr[0]._pName;
+    //while (_strcmpi(v3, v7))
+    //{
+    //    v7 += 21720;
+    //    ++v4;
+    //    if (v7 == plr[4]._pName)
+    //        return 0;
+    //}
+    //v5 = pfile_get_save_num_from_name(v3);
+    //if (v5 == 10)
+    //    return 0;
+    //SStrCopy(&hero_names[32 * v5], v2, 32);
+    //SStrCopy(plr[v4]._pName, v2, 32);
+    //if (!_strcmpi(chr_name_str, v3))
+    //    SStrCopy(chr_name_str, v2, 16);
+    //game_2_ui_player(plr, &heroinfo, gbValidSaveFile);
+    //UiSetupPlayerInfo(chr_name_str, &heroinfo, 'DRTL');
+    //pfile_write_hero();
     return 1;
 }
 
@@ -324,7 +325,7 @@ bool __stdcall pfile_ui_set_hero_infos(void(__stdcall *ui_add_hero_info)(_uihero
             v1 = strrchr(FileName, '\\') + 1;
             if (v1 != (char *)1 && OpenFile(FileName, &ReOpenBuff, 0x4000u) != -1)
             {
-                if (!SRegLoadString("Diablo\\Converted", (const char *)v1, 0, NewFileName, 260))
+                /*if (!SRegLoadString("Diablo\\Converted", (const char *)v1, 0, NewFileName, 260))
                 {
                     while (1)
                     {
@@ -345,7 +346,7 @@ bool __stdcall pfile_ui_set_hero_infos(void(__stdcall *ui_add_hero_info)(_uihero
                             SetFileAttributesA(NewFileName, v4);
                         }
                     }
-                }
+                }*/
             }
         LABEL_13:
             ++lpSrcStr;

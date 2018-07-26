@@ -139,7 +139,8 @@ int __fastcall diablo_init_menu(int a1, int bSinglePlayer)
     }
     gbRunGameResult = pfExitProgram == 0;
 LABEL_11:
-    SNetDestroy();
+    //TODO: net interface
+    //SNetDestroy();
     return gbRunGameResult;
 }
 // 525698: using guessed type int gbRunGameResult;
@@ -307,7 +308,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         diablo_parse_flags(lpCmdLine);
         init_create_window(nCmdShow);
         sound_init();
-        UiInitialize();
+        //UiInitialize();
 #ifdef _DEBUG
         if (showintrodebug)
             play_movie("gendata\\logo.smk", 1);
@@ -315,15 +316,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         play_movie("gendata\\logo.smk", 1);
 #endif
         strcpy(value_name, "Intro");
-        if (!SRegLoadValue("Diablo", value_name, 0, (int *)&hInstance))
-            hInstance = (HINSTANCE)1;
+        //TODO: load value
+        /*if (!SRegLoadValue("Diablo", value_name, 0, (int *)&hInstance))
+            hInstance = (HINSTANCE)1;*/
         if (hInstance)
             play_movie("gendata\\diablo1.smk", 1);
-        SRegSaveValue("Diablo", value_name, 0, 0);
+        //TODO: regValue
+        //SRegSaveValue("Diablo", value_name, 0, 0);
 #ifdef _DEBUG
         if (showintrodebug)
         {
-            UiTitleDialog(7);
+            //UiTitleDialog(7);
             BlackPalette();
         }
 #else
@@ -331,7 +334,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         BlackPalette();
 #endif
         mainmenu_action(0); /* v11 fix unused arg */
-        UiDestroy();
+        //UiDestroy();
         palette_save_gamme();
         if (ghMainWnd)
         {
@@ -2202,7 +2205,7 @@ void __cdecl game_logic()
                     ScrollView();
             }
 #endif
-            sound_update();
+            //sound_update();
             ClearPlrMsg();
             CheckTriggers();
             CheckQuests();

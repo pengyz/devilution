@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 LightListStruct VisionList[32];
 char lightactive[32];

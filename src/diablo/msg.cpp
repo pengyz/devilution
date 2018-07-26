@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int sgdwOwnerWait; // weak
 int msg_cpp_init_value; // weak
@@ -91,30 +91,30 @@ TMegaPkt *__cdecl msg_get_next_packet()
 
 int __cdecl msg_wait_resync()
 {
-    int v0; // eax
+    //int v0; // eax
 
-    msg_get_next_packet();
-    sgbDeltaChunks = 0;
-    sgnCurrMegaPlayer = -1;
-    sgbRecvCmd = CMD_DLEVEL_END;
-    gbBufferMsgs = 1;
-    sgdwOwnerWait = GetTickCount();
-    v0 = UiProgressDialog(ghMainWnd, "Waiting for game data...", 1, msg_wait_for_turns, 20);
-    gbBufferMsgs = 0;
-    if (!v0)
-        goto LABEL_6;
-    if (gbGameDestroyed)
-    {
-        DrawDlg("The game ended");
-    LABEL_6:
-        msg_free_packets();
-        return 0;
-    }
-    if (sgbDeltaChunks != 21)
-    {
-        DrawDlg("Unable to get level data");
-        goto LABEL_6;
-    }
+    //msg_get_next_packet();
+    //sgbDeltaChunks = 0;
+    //sgnCurrMegaPlayer = -1;
+    //sgbRecvCmd = CMD_DLEVEL_END;
+    //gbBufferMsgs = 1;
+    //sgdwOwnerWait = GetTickCount();
+    //v0 = UiProgressDialog(ghMainWnd, "Waiting for game data...", 1, msg_wait_for_turns, 20);
+    //gbBufferMsgs = 0;
+    //if (!v0)
+    //    goto LABEL_6;
+    //if (gbGameDestroyed)
+    //{
+    //    DrawDlg("The game ended");
+    //LABEL_6:
+    //    msg_free_packets();
+    //    return 0;
+    //}
+    //if (sgbDeltaChunks != 21)
+    //{
+    //    DrawDlg("Unable to get level data");
+    //    goto LABEL_6;
+    //}
     return 1;
 }
 // 65AB18: using guessed type int sgdwOwnerWait;
@@ -151,8 +151,8 @@ int __cdecl msg_wait_for_turns()
     {
         nthread_send_and_recv_turn(0, 0);
         //_LOBYTE(v0) = SNetGetOwnerTurnsWaiting(&turns);
-        if (!SNetGetOwnerTurnsWaiting(&turns) && SErrGetLastError() == STORM_ERROR_NOT_IN_GAME)
-            return 100;
+        /*if (!SNetGetOwnerTurnsWaiting(&turns) && SErrGetLastError() == STORM_ERROR_NOT_IN_GAME)
+            return 100;*/
         if (GetTickCount() - sgdwOwnerWait <= 2000 && turns < (unsigned int)gdwTurnsInTransit)
             return 0;
         ++sgbDeltaChunks;
@@ -1523,7 +1523,7 @@ int __fastcall ParseCmd(int pnum, TCmd *pCmd)
         default:
             if (v5 < CMD_DLEVEL_0 || v5 > CMD_DLEVEL_END)
             {
-                SNetDropPlayer(pnum, 0x40000006);
+                //SNetDropPlayer(pnum, 0x40000006);
                 return 0;
             }
             v7 = v3;

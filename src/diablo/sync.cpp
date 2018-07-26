@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 short sync_word_6AA708[200];
 int dword_6AA898; // weak

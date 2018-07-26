@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int log_cpp_init_value; // weak
 static CRITICAL_SECTION sgMemCrit;
@@ -137,35 +137,35 @@ void *__cdecl log_create()
 
 void __fastcall log_get_version(VS_FIXEDFILEINFO *file_info)
 {
-    DWORD v1; // eax
-    DWORD v2; // esi
-    void *v3; // ebx
-    unsigned int v4; // eax
-    char Filename[260]; // [esp+8h] [ebp-114h]
-    DWORD dwHandle; // [esp+10Ch] [ebp-10h]
-    LPVOID lpBuffer; // [esp+110h] [ebp-Ch]
-    unsigned int puLen; // [esp+114h] [ebp-8h]
-    void *v9; // [esp+118h] [ebp-4h]
+    //DWORD v1; // eax
+    //DWORD v2; // esi
+    //void *v3; // ebx
+    //unsigned int v4; // eax
+    //char Filename[260]; // [esp+8h] [ebp-114h]
+    //DWORD dwHandle; // [esp+10Ch] [ebp-10h]
+    //LPVOID lpBuffer; // [esp+110h] [ebp-Ch]
+    //unsigned int puLen; // [esp+114h] [ebp-8h]
+    //void *v9; // [esp+118h] [ebp-4h]
 
-    v9 = file_info;
-    memset(file_info, 0, 0x34u);
-    if (GetModuleFileNameA(0, Filename, 0x104u))
-    {
-        v1 = GetFileVersionInfoSizeA(Filename, &dwHandle);
-        v2 = v1;
-        if (v1)
-        {
-            v3 = VirtualAlloc(0, v1, 0x1000u, 4u);
-            if (GetFileVersionInfoA(Filename, 0, v2, v3) && VerQueryValueA(v3, "\\", &lpBuffer, &puLen))
-            {
-                v4 = puLen;
-                if (puLen >= 0x34)
-                    v4 = 52;
-                memcpy(v9, lpBuffer, v4);
-            }
-            VirtualFree(v3, 0, 0x8000u);
-        }
-    }
+    //v9 = file_info;
+    //memset(file_info, 0, 0x34u);
+    //if (GetModuleFileNameA(0, Filename, 0x104u))
+    //{
+    //    v1 = GetFileVersionInfoSizeA(Filename, &dwHandle);
+    //    v2 = v1;
+    //    if (v1)
+    //    {
+    //        v3 = VirtualAlloc(0, v1, 0x1000u, 4u);
+    //        if (GetFileVersionInfoA(Filename, 0, v2, v3) && VerQueryValueA(v3, "\\", &lpBuffer, &puLen))
+    //        {
+    //            v4 = puLen;
+    //            if (puLen >= 0x34)
+    //                v4 = 52;
+    //            memcpy(v9, lpBuffer, v4);
+    //        }
+    //        VirtualFree(v3, 0, 0x8000u);
+    //    }
+    //}
 }
 
 void log_printf(const char *pszFmt, ...)

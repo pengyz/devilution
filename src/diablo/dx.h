@@ -2,6 +2,7 @@
 #ifndef __DX_H__
 #define __DX_H__
 #include <mutex>
+#include <ddraw.h>
 
 class DxInterface {
 

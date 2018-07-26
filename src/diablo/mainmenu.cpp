@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 char chr_name_str[16];
 
@@ -23,8 +23,8 @@ void __cdecl mainmenu_refresh_music()
 
 void __stdcall mainmenu_create_hero(char *szUserName, char *a2)
 {
-    if (UiValidPlayerName(szUserName))
-        pfile_create_save_file(szUserName, a2);
+    //if (UiValidPlayerName(szUserName))
+    pfile_create_save_file(szUserName, a2);
 }
 
 int __stdcall mainmenu_select_hero_dialog(int u1, int u2, int u3, int u4, int mode, char *cname, int clen, char *cdesc, int cdlen, int *multi) /* fix args */
@@ -37,7 +37,7 @@ int __stdcall mainmenu_select_hero_dialog(int u1, int u2, int u3, int u4, int mo
     a5 = 0;
     if (gbMaxPlayers == 1)
     {
-        if (!UiSelHeroSingDialog(
+        /*if (!UiSelHeroSingDialog(
             pfile_ui_set_hero_infos,
             pfile_ui_save_create,
             pfile_delete_save,
@@ -45,7 +45,7 @@ int __stdcall mainmenu_select_hero_dialog(int u1, int u2, int u3, int u4, int mo
             &a5,
             chr_name_str,
             &gnDifficulty))
-            TermMsg("Unable to display SelHeroSing");
+            TermMsg("Unable to display SelHeroSing");*/
         if (a5 == 2)
         {
             dword_5256E8 = 1;
@@ -53,7 +53,7 @@ int __stdcall mainmenu_select_hero_dialog(int u1, int u2, int u3, int u4, int mo
         }
         dword_5256E8 = 0;
     }
-    else if (!UiSelHeroMultDialog(
+    /*else if (!UiSelHeroMultDialog(
         pfile_ui_set_hero_infos,
         pfile_ui_save_create,
         pfile_delete_save,
@@ -63,10 +63,10 @@ int __stdcall mainmenu_select_hero_dialog(int u1, int u2, int u3, int u4, int mo
         chr_name_str))
     {
         TermMsg("Can't load multiplayer dialog");
-    }
+    }*/
     if (a5 == 4)
     {
-        SErrSetLastError(1223);
+        //SErrSetLastError(1223);
         return 0;
     }
 LABEL_6:
@@ -81,8 +81,9 @@ LABEL_6:
     }
     if (cname)
     {
-        if (clen)
-            SStrCopy(cname, chr_name_str, clen);
+        if (clen) {
+            //SStrCopy(cname, chr_name_str, clen);
+        }
     }
     return 1;
 }
@@ -97,8 +98,8 @@ void __fastcall mainmenu_action(int option)
     while (!bExit && iRet)
     {
         option = 0;
-        if (!UiMainMenuDialog("Diablo v1.09", &option, effects_play_sound, 30))
-            TermMsg("Unable to display mainmenu");
+        /*if (!UiMainMenuDialog("Diablo v1.09", &option, effects_play_sound, 30))
+            TermMsg("Unable to display mainmenu");*/
         switch (option)
         {
             case MAINMENU_SINGLE_PLAYER:
@@ -108,7 +109,7 @@ void __fastcall mainmenu_action(int option)
                 iRet = mainmenu_multi_player();
                 break;
             case MAINMENU_SHOW_CREDITS:
-                UiCreditsDialog(16);
+                //UiCreditsDialog(16);
                 break;
             case MAINMENU_EXIT_DIABLO:
                 bExit = true;

@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 char gbSomebodyWonGameKludge; // weak
 char pkdata_6761C0[4100];
@@ -103,8 +103,8 @@ void __fastcall multi_send_packet(void *packet, int dwSize)
     NetRecvPlrData(&pkt);
     pkt.hdr.wLen = v3 + 19;
     memcpy(pkt.body, v2, v3);
-    if (!SNetSendMessage(myplr, &pkt.hdr, (unsigned short)pkt.hdr.wLen))
-        nthread_terminate_game("SNetSendMessage0");
+    /*if (!SNetSendMessage(myplr, &pkt.hdr, (unsigned short)pkt.hdr.wLen))
+        nthread_terminate_game("SNetSendMessage0");*/
 }
 
 void __fastcall NetRecvPlrData(TPkt *pkt)
@@ -152,8 +152,8 @@ void __fastcall NetSendHiPri(unsigned char *pbMsg, unsigned char bLen)
         size = v7;
         v8 = gdwNormalMsgSize - v7;
         pkt.hdr.wLen = v8;
-        if (!SNetSendMessage(-2, &pkt.hdr, v8))
-            nthread_terminate_game("SNetSendMessage");
+        /*if (!SNetSendMessage(-2, &pkt.hdr, v8))
+            nthread_terminate_game("SNetSendMessage");*/
     }
 }
 // 678628: using guessed type int dword_678628;
@@ -210,8 +210,8 @@ void __fastcall multi_send_msg_packet(int a1, unsigned char *a2, unsigned char l
     {
         if (v4 & v8)
         {
-            if (!SNetSendMessage(v5, &pkt.hdr, len + 19) && SErrGetLastError() != STORM_ERROR_INVALID_PLAYER)
-                break;
+            /*if (!SNetSendMessage(v5, &pkt.hdr, len + 19) && SErrGetLastError() != STORM_ERROR_INVALID_PLAYER)
+                break;*/
         }
         ++v5;
         v4 *= 2;
@@ -509,8 +509,8 @@ void __cdecl multi_check_drop_player()
         v1 = player_state[v0];
         if (!(v1 & 0x40000))
         {
-            if (v1 & 0x10000)
-                SNetDropPlayer(v0, 0x40000006);
+            /*if (v1 & 0x10000)
+                SNetDropPlayer(v0, 0x40000006);*/
         }
         ++v0;
     } while (v0 < 4);
@@ -541,82 +541,82 @@ void __cdecl multi_process_network_packets()
     multi_clear_left_tbl();
     multi_process_tmsgs();
     //_LOBYTE(v0) = SNetReceiveMessage((int *)arglist, (char **)&pkt, &len);
-    if (SNetReceiveMessage((int *)arglist, (char **)&pkt, &len))
-    {
-        do
-        {
-            ++dword_676198;
-            multi_clear_left_tbl();
-            v1 = pkt;
-            v2 = pkt;
-            if ((unsigned int)len >= 0x13
-                && *(_DWORD *)arglist < 4u
-                && pkt->wCheck == 'ip'
-                && (unsigned short)pkt->wLen == len)
-            {
-                v3 = *(_DWORD *)arglist;
-                v4 = *(_DWORD *)arglist == myplr;
-                plr[v3]._pownerx = (unsigned char)pkt->px;
-                v5 = &v1->py;
-                plr[v3]._pownery = (unsigned char)v1->py;
-                if (!v4)
-                {
-                    v4 = gbBufferMsgs == 1;
-                    plr[v3]._pHitPoints = v1->php;
-                    plr[v3]._pMaxHP = v1->pmhp;
-                    plr[v3]._pBaseStr = (unsigned char)v1->bstr;
-                    plr[v3]._pBaseMag = (unsigned char)v1->bmag;
-                    plr[v3]._pBaseDex = (unsigned char)v1->bdex;
-                    if (!v4 && plr[v3].plractive && plr[v3]._pHitPoints)
-                    {
-                        if (currlevel != plr[v3].plrlevel || plr[v3]._pLvlChanging)
-                        {
-                            plr[v3].WorldX = (unsigned char)v1->px;
-                            plr[v3].WorldY = (unsigned char)*v5;
-                            plr[v3]._px = (unsigned char)v1->px;
-                            plr[v3]._py = (unsigned char)*v5;
-                            plr[v3]._ptargx = (unsigned char)v1->targx;
-                            plr[v3]._ptargy = (unsigned char)v1->targy;
-                        }
-                        else
-                        {
-                            v6 = abs(plr[v3].WorldX - (unsigned char)v1->px);
-                            v7 = abs(plr[*(_DWORD *)arglist].WorldY - (unsigned char)*v5);
-                            if ((v6 > 3 || v7 > 3) && !dPlayer[(unsigned char)v2->px][(unsigned char)*v5])
-                            {
-                                FixPlrWalkTags(*(int *)arglist);
-                                v8 = *(_DWORD *)arglist;
-                                v9 = *(_DWORD *)arglist;
-                                plr[v9]._poldx = plr[*(_DWORD *)arglist].WorldX;
-                                plr[v9]._poldy = plr[v9].WorldY;
-                                FixPlrWalkTags(v8);
-                                v10 = *(_DWORD *)arglist;
-                                plr[v10].WorldX = (unsigned char)v2->px;
-                                plr[v10].WorldY = (unsigned char)*v5;
-                                plr[v10]._px = (unsigned char)v2->px;
-                                plr[v10]._py = (unsigned char)*v5;
-                                dPlayer[plr[v10].WorldX][plr[v10].WorldY] = arglist[0] + 1;
-                            }
-                            v11 = abs(plr[*(_DWORD *)arglist]._px - plr[*(_DWORD *)arglist].WorldX);
-                            v12 = abs(plr[*(_DWORD *)arglist]._py - plr[*(_DWORD *)arglist].WorldY);
-                            v13 = *(_DWORD *)arglist;
-                            if (v11 > 1 || v12 > 1)
-                            {
-                                v14 = *(_DWORD *)arglist;
-                                plr[v14]._px = plr[*(_DWORD *)arglist].WorldX;
-                                plr[v14]._py = plr[v13].WorldY;
-                            }
-                            MakePlrPath(v13, (unsigned char)v2->targx, (unsigned char)v2->targy, 1u);
-                        }
-                    }
-                }
-                multi_handle_all_packets(*(int *)arglist, (TPkt *)&v2[1], len - 19);
-            }
-            //_LOBYTE(v15) = SNetReceiveMessage((int *)arglist, (char **)&pkt, &len);
-        } while (SNetReceiveMessage((int *)arglist, (char **)&pkt, &len));
-    }
-    if (SErrGetLastError() != STORM_ERROR_NO_MESSAGES_WAITING)
-        nthread_terminate_game("SNetReceiveMsg");
+    //if (SNetReceiveMessage((int *)arglist, (char **)&pkt, &len))
+    //{
+    //    do
+    //    {
+    //        ++dword_676198;
+    //        multi_clear_left_tbl();
+    //        v1 = pkt;
+    //        v2 = pkt;
+    //        if ((unsigned int)len >= 0x13
+    //            && *(_DWORD *)arglist < 4u
+    //            && pkt->wCheck == 'ip'
+    //            && (unsigned short)pkt->wLen == len)
+    //        {
+    //            v3 = *(_DWORD *)arglist;
+    //            v4 = *(_DWORD *)arglist == myplr;
+    //            plr[v3]._pownerx = (unsigned char)pkt->px;
+    //            v5 = &v1->py;
+    //            plr[v3]._pownery = (unsigned char)v1->py;
+    //            if (!v4)
+    //            {
+    //                v4 = gbBufferMsgs == 1;
+    //                plr[v3]._pHitPoints = v1->php;
+    //                plr[v3]._pMaxHP = v1->pmhp;
+    //                plr[v3]._pBaseStr = (unsigned char)v1->bstr;
+    //                plr[v3]._pBaseMag = (unsigned char)v1->bmag;
+    //                plr[v3]._pBaseDex = (unsigned char)v1->bdex;
+    //                if (!v4 && plr[v3].plractive && plr[v3]._pHitPoints)
+    //                {
+    //                    if (currlevel != plr[v3].plrlevel || plr[v3]._pLvlChanging)
+    //                    {
+    //                        plr[v3].WorldX = (unsigned char)v1->px;
+    //                        plr[v3].WorldY = (unsigned char)*v5;
+    //                        plr[v3]._px = (unsigned char)v1->px;
+    //                        plr[v3]._py = (unsigned char)*v5;
+    //                        plr[v3]._ptargx = (unsigned char)v1->targx;
+    //                        plr[v3]._ptargy = (unsigned char)v1->targy;
+    //                    }
+    //                    else
+    //                    {
+    //                        v6 = abs(plr[v3].WorldX - (unsigned char)v1->px);
+    //                        v7 = abs(plr[*(_DWORD *)arglist].WorldY - (unsigned char)*v5);
+    //                        if ((v6 > 3 || v7 > 3) && !dPlayer[(unsigned char)v2->px][(unsigned char)*v5])
+    //                        {
+    //                            FixPlrWalkTags(*(int *)arglist);
+    //                            v8 = *(_DWORD *)arglist;
+    //                            v9 = *(_DWORD *)arglist;
+    //                            plr[v9]._poldx = plr[*(_DWORD *)arglist].WorldX;
+    //                            plr[v9]._poldy = plr[v9].WorldY;
+    //                            FixPlrWalkTags(v8);
+    //                            v10 = *(_DWORD *)arglist;
+    //                            plr[v10].WorldX = (unsigned char)v2->px;
+    //                            plr[v10].WorldY = (unsigned char)*v5;
+    //                            plr[v10]._px = (unsigned char)v2->px;
+    //                            plr[v10]._py = (unsigned char)*v5;
+    //                            dPlayer[plr[v10].WorldX][plr[v10].WorldY] = arglist[0] + 1;
+    //                        }
+    //                        v11 = abs(plr[*(_DWORD *)arglist]._px - plr[*(_DWORD *)arglist].WorldX);
+    //                        v12 = abs(plr[*(_DWORD *)arglist]._py - plr[*(_DWORD *)arglist].WorldY);
+    //                        v13 = *(_DWORD *)arglist;
+    //                        if (v11 > 1 || v12 > 1)
+    //                        {
+    //                            v14 = *(_DWORD *)arglist;
+    //                            plr[v14]._px = plr[*(_DWORD *)arglist].WorldX;
+    //                            plr[v14]._py = plr[v13].WorldY;
+    //                        }
+    //                        MakePlrPath(v13, (unsigned char)v2->targx, (unsigned char)v2->targy, 1u);
+    //                    }
+    //                }
+    //            }
+    //            multi_handle_all_packets(*(int *)arglist, (TPkt *)&v2[1], len - 19);
+    //        }
+    //        //_LOBYTE(v15) = SNetReceiveMessage((int *)arglist, (char **)&pkt, &len);
+    //    } while (SNetReceiveMessage((int *)arglist, (char **)&pkt, &len));
+    //}
+    //if (SErrGetLastError() != STORM_ERROR_NO_MESSAGES_WAITING)
+    //    nthread_terminate_game("SNetReceiveMsg");
 }
 // 676194: using guessed type char gbBufferMsgs;
 // 676198: using guessed type int dword_676198;
@@ -653,46 +653,46 @@ void __cdecl multi_process_tmsgs()
 
 void __fastcall multi_send_zero_packet(int pnum, char a2, void *pbSrc, int dwLen)
 {
-    unsigned int v4; // edi
-    short v5; // si
-    unsigned short dwBody; // ax
-    TPkt pkt; // [esp+Ch] [ebp-208h]
-    int pnuma; // [esp+20Ch] [ebp-8h]
-    int v10; // [esp+210h] [ebp-4h]
+    //unsigned int v4; // edi
+    //short v5; // si
+    //unsigned short dwBody; // ax
+    //TPkt pkt; // [esp+Ch] [ebp-208h]
+    //int pnuma; // [esp+20Ch] [ebp-8h]
+    //int v10; // [esp+210h] [ebp-4h]
 
-    v4 = dwLen;
-    _LOBYTE(v10) = a2;
-    pnuma = pnum;
-    v5 = 0;
-    while (v4)
-    {
-        pkt.hdr.wCheck = 'ip';
-        pkt.body[0] = v10;
-        dwBody = gdwLargestMsgSize - 24;
-        pkt.hdr.px = 0;
-        pkt.hdr.py = 0;
-        pkt.hdr.targx = 0;
-        pkt.hdr.targy = 0;
-        pkt.hdr.php = 0;
-        pkt.hdr.pmhp = 0;
-        pkt.hdr.bstr = 0;
-        pkt.hdr.bmag = 0;
-        pkt.hdr.bdex = 0;
-        *(_WORD *)&pkt.body[1] = v5;
-        if (v4 < gdwLargestMsgSize - 24)
-            dwBody = v4;
-        *(_WORD *)&pkt.body[3] = dwBody;
-        memcpy(&pkt.body[5], pbSrc, dwBody);
-        pkt.hdr.wLen = *(_WORD *)&pkt.body[3] + 24;
-        if (!SNetSendMessage(pnuma, &pkt.hdr, *(unsigned short *)&pkt.body[3] + 24))
-        {
-            nthread_terminate_game("SNetSendMessage2");
-            return;
-        }
-        pbSrc = (char *)pbSrc + *(unsigned short *)&pkt.body[3];
-        v4 -= *(unsigned short *)&pkt.body[3];
-        v5 += *(_WORD *)&pkt.body[3];
-    }
+    //v4 = dwLen;
+    //_LOBYTE(v10) = a2;
+    //pnuma = pnum;
+    //v5 = 0;
+    //while (v4)
+    //{
+    //    pkt.hdr.wCheck = 'ip';
+    //    pkt.body[0] = v10;
+    //    dwBody = gdwLargestMsgSize - 24;
+    //    pkt.hdr.px = 0;
+    //    pkt.hdr.py = 0;
+    //    pkt.hdr.targx = 0;
+    //    pkt.hdr.targy = 0;
+    //    pkt.hdr.php = 0;
+    //    pkt.hdr.pmhp = 0;
+    //    pkt.hdr.bstr = 0;
+    //    pkt.hdr.bmag = 0;
+    //    pkt.hdr.bdex = 0;
+    //    *(_WORD *)&pkt.body[1] = v5;
+    //    if (v4 < gdwLargestMsgSize - 24)
+    //        dwBody = v4;
+    //    *(_WORD *)&pkt.body[3] = dwBody;
+    //    memcpy(&pkt.body[5], pbSrc, dwBody);
+    //    pkt.hdr.wLen = *(_WORD *)&pkt.body[3] + 24;
+    //    if (!SNetSendMessage(pnuma, &pkt.hdr, *(unsigned short *)&pkt.body[3] + 24))
+    //    {
+    //        nthread_terminate_game("SNetSendMessage2");
+    //        return;
+    //    }
+    //    pbSrc = (char *)pbSrc + *(unsigned short *)&pkt.body[3];
+    //    v4 -= *(unsigned short *)&pkt.body[3];
+    //    v5 += *(_WORD *)&pkt.body[3];
+    //}
 }
 // 67975C: using guessed type int gdwLargestMsgSize;
 
@@ -705,7 +705,7 @@ void __cdecl NetClose()
         dthread_cleanup();
         tmsg_cleanup();
         multi_event_handler(0);
-        SNetLeaveGame(3);
+        //SNetLeaveGame(3);
         msgcmd_cmd_cleanup();
         if ((unsigned char)gbMaxPlayers > 1u)
             Sleep(2000);
@@ -722,7 +722,7 @@ char __fastcall multi_event_handler(int a1)
     int v4; // eax
     char *v5; // eax
 
-    v1 = a1;
+    /*v1 = a1;
     v2 = SNetRegisterEventHandler;
     if (!a1)
         v2 = SNetUnregisterEventHandler;
@@ -736,7 +736,7 @@ char __fastcall multi_event_handler(int a1)
             TermMsg("SNetRegisterEventHandler:\n%s", v5);
         }
         ++v3;
-    } while (v3 < 3);
+    } while (v3 < 3);*/
     return v4;
 }
 
@@ -779,113 +779,113 @@ void __stdcall multi_handle_events(_SNETEVENT *pEvt)
 
 int __fastcall NetInit(int bSinglePlayer, int *pfExitProgram)
 {
-    int v2; // ebx
-    int v4; // eax
-    //int v5; // ecx
-    TCmdPlrInfoHdr *v6; // edx
-    bool v7; // zf
-    //int v9; // eax
-    //int v10; // eax
-    _SNETPROGRAMDATA ProgramData; // [esp+8h] [ebp-A8h]
-    _SNETUIDATA UiData; // [esp+44h] [ebp-6Ch]
-    _SNETPLAYERDATA a2; // [esp+94h] [ebp-1Ch]
-    int v14; // [esp+A4h] [ebp-Ch]
-    unsigned int len; // [esp+A8h] [ebp-8h]
-    int *a4; // [esp+ACh] [ebp-4h]
+    //int v2; // ebx
+    //int v4; // eax
+    ////int v5; // ecx
+    //TCmdPlrInfoHdr *v6; // edx
+    //bool v7; // zf
+    ////int v9; // eax
+    ////int v10; // eax
+    //_SNETPROGRAMDATA ProgramData; // [esp+8h] [ebp-A8h]
+    //_SNETUIDATA UiData; // [esp+44h] [ebp-6Ch]
+    //_SNETPLAYERDATA a2; // [esp+94h] [ebp-1Ch]
+    //int v14; // [esp+A4h] [ebp-Ch]
+    //unsigned int len; // [esp+A8h] [ebp-8h]
+    //int *a4; // [esp+ACh] [ebp-4h]
 
-    a4 = pfExitProgram;
-    v14 = bSinglePlayer;
-    v2 = 0;
-    while (1)
-    {
-        *a4 = 0;
-        SetRndSeed(0);
-        sgGameInitInfo.dwSeed = time(NULL);
-        _LOBYTE(sgGameInitInfo.bDiff) = gnDifficulty;
-        memset(&ProgramData, 0, 0x3Cu);
-        ProgramData.size = 60;
-        ProgramData.programname = "Diablo Retail";
-        ProgramData.programdescription = gszVersionNumber;
-        ProgramData.programid = 'DRTL';
-        ProgramData.versionid = 42;
-        ProgramData.maxplayers = 4;
-        ProgramData.initdata = &sgGameInitInfo;
-        ProgramData.initdatabytes = 8;
-        ProgramData.optcategorybits = 15;
-        ProgramData.lcid = 1033;
-        memset(&a2, 0, 0x10u);
-        a2.size = 16;
-        memset(&UiData, 0, 0x50u);
-        UiData.size = 80;
-        UiData.parentwindow = SDrawGetFrameWindow(0);
-        UiData.artcallback = UiArtCallback;
-        UiData.createcallback = UiCreateGameCallback;
-        UiData.drawdesccallback = UiDrawDescCallback;
-        UiData.messageboxcallback = UiMessageBoxCallback;
-        UiData.soundcallback = UiSoundCallback;
-        UiData.authcallback = UiAuthCallback;
-        UiData.getdatacallback = UiGetDataCallback;
-        UiData.categorycallback = UiCategoryCallback;
-        UiData.selectnamecallback = (void(__cdecl *)())mainmenu_select_hero_dialog;
-        UiData.changenamecallback = (void(__cdecl *)())mainmenu_create_hero;
-        UiData.profilebitmapcallback = UiProfileDraw;
-        UiData.profilecallback = UiProfileCallback;
-        UiData.profilefields = UiProfileGetString();
-        memset(sgbPlayerTurnBitTbl, 0, 4u);
-        gbGameDestroyed = 0;
-        memset(sgbPlayerLeftGameTbl, 0, 4u);
-        memset(sgdwPlayerLeftReasonTbl, 0, 0x10u);
-        memset(sgbSendDeltaTbl, 0, 4u);
-        memset(plr, 0, 0x15360u);
-        memset(sgwPackPlrOffsetTbl, 0, 8u);
-        SNetSetBasePlayer(0);
-        if (v14)
-            v4 = multi_init_single(&ProgramData, &a2, &UiData);
-        else
-            v4 = multi_init_multi(&ProgramData, &a2, &UiData, a4);
-        if (!v4)
-            return 0;
-        sgbNetInited = 1;
-        sgbTimeout = 0;
-        delta_init();
-        InitPlrMsg();
-        multi_clear_pkt(pkdata_6761C0);
-        multi_clear_pkt(pkdata_678658);
-        dword_678628 = 0;
-        sync_clear_pkt();
-        nthread_start(sgbPlayerTurnBitTbl[myplr]);
-        dthread_start();
-        MI_Dummy(0); /* v5 */
-        sgdwGameLoops = 0;
-        sgbSentThisCycle = 0;
-        gbDeltaSender = myplr;
-        gbSomebodyWonGameKludge = 0;
-        nthread_send_and_recv_turn(0, 0);
-        SetupLocalCoords();
-        _LOBYTE(v6) = CMD_SEND_PLRINFO;
-        multi_send_pinfo(-2, v6);
-        gbActivePlayers = 1;
-        v7 = sgbPlayerTurnBitTbl[myplr] == 0;
-        plr[myplr].plractive = 1;
-        if (v7 || msg_wait_resync())
-            break;
-        NetClose();
-        byte_678640 = 0;
-    }
-    gnDifficulty = _LOBYTE(sgGameInitInfo.bDiff);
-    SetRndSeed(sgGameInitInfo.dwSeed);
-    do
-    {
-        glSeedTbl[v2] = GetRndSeed();
-        gnLevelTypeTbl[v2] = InitNewSeed(v2);
-        ++v2;
-    } while (v2 < 17);
-    //_LOBYTE(v9) = SNetGetGameInfo(GAMEINFO_NAME, szPlayerName, 128, len);
-    if (!SNetGetGameInfo(GAMEINFO_NAME, szPlayerName, 128, &len))
-        nthread_terminate_game("SNetGetGameInfo1");
-    //_LOBYTE(v10) = SNetGetGameInfo(GAMEINFO_PASSWORD, szPlayerDescript, 128, len);
-    if (!SNetGetGameInfo(GAMEINFO_PASSWORD, szPlayerDescript, 128, &len))
-        nthread_terminate_game("SNetGetGameInfo2");
+    //a4 = pfExitProgram;
+    //v14 = bSinglePlayer;
+    //v2 = 0;
+    //while (1)
+    //{
+    //    *a4 = 0;
+    //    SetRndSeed(0);
+    //    sgGameInitInfo.dwSeed = time(NULL);
+    //    _LOBYTE(sgGameInitInfo.bDiff) = gnDifficulty;
+    //    memset(&ProgramData, 0, 0x3Cu);
+    //    ProgramData.size = 60;
+    //    ProgramData.programname = "Diablo Retail";
+    //    ProgramData.programdescription = gszVersionNumber;
+    //    ProgramData.programid = 'DRTL';
+    //    ProgramData.versionid = 42;
+    //    ProgramData.maxplayers = 4;
+    //    ProgramData.initdata = &sgGameInitInfo;
+    //    ProgramData.initdatabytes = 8;
+    //    ProgramData.optcategorybits = 15;
+    //    ProgramData.lcid = 1033;
+    //    memset(&a2, 0, 0x10u);
+    //    a2.size = 16;
+    //    memset(&UiData, 0, 0x50u);
+    //    UiData.size = 80;
+    //    UiData.parentwindow = SDrawGetFrameWindow(0);
+    //    UiData.artcallback = UiArtCallback;
+    //    UiData.createcallback = UiCreateGameCallback;
+    //    UiData.drawdesccallback = UiDrawDescCallback;
+    //    UiData.messageboxcallback = UiMessageBoxCallback;
+    //    UiData.soundcallback = UiSoundCallback;
+    //    UiData.authcallback = UiAuthCallback;
+    //    UiData.getdatacallback = UiGetDataCallback;
+    //    UiData.categorycallback = UiCategoryCallback;
+    //    UiData.selectnamecallback = (void(__cdecl *)())mainmenu_select_hero_dialog;
+    //    UiData.changenamecallback = (void(__cdecl *)())mainmenu_create_hero;
+    //    UiData.profilebitmapcallback = UiProfileDraw;
+    //    UiData.profilecallback = UiProfileCallback;
+    //    UiData.profilefields = UiProfileGetString();
+    //    memset(sgbPlayerTurnBitTbl, 0, 4u);
+    //    gbGameDestroyed = 0;
+    //    memset(sgbPlayerLeftGameTbl, 0, 4u);
+    //    memset(sgdwPlayerLeftReasonTbl, 0, 0x10u);
+    //    memset(sgbSendDeltaTbl, 0, 4u);
+    //    memset(plr, 0, 0x15360u);
+    //    memset(sgwPackPlrOffsetTbl, 0, 8u);
+    //    SNetSetBasePlayer(0);
+    //    if (v14)
+    //        v4 = multi_init_single(&ProgramData, &a2, &UiData);
+    //    else
+    //        v4 = multi_init_multi(&ProgramData, &a2, &UiData, a4);
+    //    if (!v4)
+    //        return 0;
+    //    sgbNetInited = 1;
+    //    sgbTimeout = 0;
+    //    delta_init();
+    //    InitPlrMsg();
+    //    multi_clear_pkt(pkdata_6761C0);
+    //    multi_clear_pkt(pkdata_678658);
+    //    dword_678628 = 0;
+    //    sync_clear_pkt();
+    //    nthread_start(sgbPlayerTurnBitTbl[myplr]);
+    //    dthread_start();
+    //    MI_Dummy(0); /* v5 */
+    //    sgdwGameLoops = 0;
+    //    sgbSentThisCycle = 0;
+    //    gbDeltaSender = myplr;
+    //    gbSomebodyWonGameKludge = 0;
+    //    nthread_send_and_recv_turn(0, 0);
+    //    SetupLocalCoords();
+    //    _LOBYTE(v6) = CMD_SEND_PLRINFO;
+    //    multi_send_pinfo(-2, v6);
+    //    gbActivePlayers = 1;
+    //    v7 = sgbPlayerTurnBitTbl[myplr] == 0;
+    //    plr[myplr].plractive = 1;
+    //    if (v7 || msg_wait_resync())
+    //        break;
+    //    NetClose();
+    //    byte_678640 = 0;
+    //}
+    //gnDifficulty = _LOBYTE(sgGameInitInfo.bDiff);
+    //SetRndSeed(sgGameInitInfo.dwSeed);
+    //do
+    //{
+    //    glSeedTbl[v2] = GetRndSeed();
+    //    gnLevelTypeTbl[v2] = InitNewSeed(v2);
+    //    ++v2;
+    //} while (v2 < 17);
+    ////_LOBYTE(v9) = SNetGetGameInfo(GAMEINFO_NAME, szPlayerName, 128, len);
+    //if (!SNetGetGameInfo(GAMEINFO_NAME, szPlayerName, 128, &len))
+    //    nthread_terminate_game("SNetGetGameInfo1");
+    ////_LOBYTE(v10) = SNetGetGameInfo(GAMEINFO_PASSWORD, szPlayerDescript, 128, len);
+    //if (!SNetGetGameInfo(GAMEINFO_PASSWORD, szPlayerDescript, 128, &len))
+    //    nthread_terminate_game("SNetGetGameInfo2");
     return 1;
 }
 // 6761B8: using guessed type char gbSomebodyWonGameKludge;
@@ -990,63 +990,63 @@ int __fastcall multi_init_single(_SNETPROGRAMDATA *client_info, _SNETPLAYERDATA 
     char *v6; // eax
 
     //_LOBYTE(v3) = SNetInitializeProvider(0, client_info, user_info, ui_info, &fileinfo);
-    if (SNetInitializeProvider(0, client_info, user_info, ui_info, &fileinfo))
-    {
-        ui_info = 0;
-        //_LOBYTE(v5) = SNetCreateGame("local", "local", "local", 0, (char *)&sgGameInitInfo.dwSeed, 8, 1, "local", "local", (int *)&ui_info);
-        if (!SNetCreateGame("local", "local", "local", 0, (char *)&sgGameInitInfo.dwSeed, 8, 1, "local", "local", (int *)&ui_info))
-        {
-            v6 = GetLastErr();
-            TermMsg("SNetCreateGame1:\n%s", v6);
-        }
-        myplr = 0;
-        gbMaxPlayers = 1;
-        result = 1;
-    }
-    else
-    {
-        SErrGetLastError();
-        result = 0;
-    }
+    //if (SNetInitializeProvider(0, client_info, user_info, ui_info, &fileinfo))
+    //{
+    //    ui_info = 0;
+    //    //_LOBYTE(v5) = SNetCreateGame("local", "local", "local", 0, (char *)&sgGameInitInfo.dwSeed, 8, 1, "local", "local", (int *)&ui_info);
+    //    if (!SNetCreateGame("local", "local", "local", 0, (char *)&sgGameInitInfo.dwSeed, 8, 1, "local", "local", (int *)&ui_info))
+    //    {
+    //        v6 = GetLastErr();
+    //        TermMsg("SNetCreateGame1:\n%s", v6);
+    //    }
+    //    myplr = 0;
+    //    gbMaxPlayers = 1;
+    //    result = 1;
+    //}
+    //else
+    //{
+    //    SErrGetLastError();
+    //    result = 0;
+    //}
     return result;
 }
 // 679660: using guessed type char gbMaxPlayers;
 
 int __fastcall multi_init_multi(_SNETPROGRAMDATA *client_info, _SNETPLAYERDATA *user_info, _SNETUIDATA *ui_info, int *a4)
 {
-    _SNETPLAYERDATA *v4; // ebx
-    signed int i; // edi
-    int a6; // [esp+Ch] [ebp-Ch]
-    int a2; // [esp+10h] [ebp-8h]
-    int type; // [esp+14h] [ebp-4h]
+    //_SNETPLAYERDATA *v4; // ebx
+    //signed int i; // edi
+    //int a6; // [esp+Ch] [ebp-Ch]
+    //int a2; // [esp+10h] [ebp-8h]
+    //int type; // [esp+14h] [ebp-4h]
 
-    v4 = user_info;
-    a2 = (int)client_info;
-    for (i = 1; ; i = 0)
-    {
-        type = 0;
-        if (byte_678640)
-        {
-            if (!UiSelectProvider(0, (_SNETPROGRAMDATA *)a2, v4, ui_info, &fileinfo, &type)
-                && (!i || SErrGetLastError() != STORM_ERROR_REQUIRES_UPGRADE || !multi_upgrade(a4)))
-            {
-                return 0;
-            }
-            if (type == 'BNET')
-                plr[0].pBattleNet = 1;
-        }
-        multi_event_handler(1);
-        if (UiSelectGame(1, (_SNETPROGRAMDATA *)a2, v4, ui_info, &fileinfo, &a6))
-            break;
-        byte_678640 = 1;
-    }
-    if ((unsigned int)a6 >= 4)
-        return 0;
-    myplr = a6;
-    gbMaxPlayers = 4;
-    pfile_read_player_from_save();
-    if (type == 'BNET')
-        plr[myplr].pBattleNet = 1;
+    //v4 = user_info;
+    //a2 = (int)client_info;
+    //for (i = 1; ; i = 0)
+    //{
+    //    type = 0;
+    //    if (byte_678640)
+    //    {
+    //        if (!UiSelectProvider(0, (_SNETPROGRAMDATA *)a2, v4, ui_info, &fileinfo, &type)
+    //            && (!i || SErrGetLastError() != STORM_ERROR_REQUIRES_UPGRADE || !multi_upgrade(a4)))
+    //        {
+    //            return 0;
+    //        }
+    //        if (type == 'BNET')
+    //            plr[0].pBattleNet = 1;
+    //    }
+    //    multi_event_handler(1);
+    //    if (UiSelectGame(1, (_SNETPROGRAMDATA *)a2, v4, ui_info, &fileinfo, &a6))
+    //        break;
+    //    byte_678640 = 1;
+    //}
+    //if ((unsigned int)a6 >= 4)
+    //    return 0;
+    //myplr = a6;
+    //gbMaxPlayers = 4;
+    //pfile_read_player_from_save();
+    //if (type == 'BNET')
+    //    plr[myplr].pBattleNet = 1;
     return 1;
 }
 // 678640: using guessed type char byte_678640;
@@ -1054,26 +1054,27 @@ int __fastcall multi_init_multi(_SNETPROGRAMDATA *client_info, _SNETPLAYERDATA *
 
 int __fastcall multi_upgrade(int *a1)
 {
-    int *v1; // esi
-    int result; // eax
-    int status; // [esp+4h] [ebp-4h]
+    //int *v1; // esi
+    //int result; // eax
+    //int status; // [esp+4h] [ebp-4h]
 
-    v1 = a1;
-    SNetPerformUpgrade((unsigned long *)&status);
-    result = 1;
-    if (status && status != 1)
-    {
-        if (status == 2)
-        {
-            *v1 = 1;
-        }
-        else if (status == -1)
-        {
-            DrawDlg("Network upgrade failed");
-        }
-        result = 0;
-    }
-    return result;
+    //v1 = a1;
+    //SNetPerformUpgrade((unsigned long *)&status);
+    //result = 1;
+    //if (status && status != 1)
+    //{
+    //    if (status == 2)
+    //    {
+    //        *v1 = 1;
+    //    }
+    //    else if (status == -1)
+    //    {
+    //        DrawDlg("Network upgrade failed");
+    //    }
+    //    result = 0;
+    //}
+    //return result;
+    return 0;
 }
 
 void __fastcall multi_player_joins(int pnum, TCmdPlrInfoHdr *cmd, int a3)

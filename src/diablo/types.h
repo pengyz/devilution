@@ -5,15 +5,18 @@
 
 #include "resource.h"
 
-// #include <windows.h>
 #include <stdio.h>
-// #include <ddraw.h>
-// #include <dsound.h>
-// #include <io.h>
+#ifdef WIN32
+#include <windows.h>
+#include <ddraw.h>
+#include <dsound.h>
+#include <io.h>
+#include <process.h>
+#include <shlobj.h>
+#endif
 #include <math.h>
 #include <time.h>
-// #include <process.h>
-// #include <shlobj.h>
+
 
 #ifdef __GNUC__
 #include <ctype.h>
@@ -35,11 +38,7 @@
 #include "enums.h"
 #include "structs.h"
 
-#include "../../3rdParty/DiabloUI/diabloui.h"
-//#include "../../3rdParty/Storm/Source/storm.h"
 #include "StormLib.h"
-#include "../../3rdParty/PKWare/pkware.h"
-
 #include "defs.h"
 
 // temporarily enable debug features for all builds

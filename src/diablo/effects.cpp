@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int effects_cpp_init_value; // weak
 int sfxdelay; // weak
@@ -903,7 +903,7 @@ void __cdecl sfx_stop()
 {
     if (sfx_stream)
     {
-        SFileDdaEnd(sfx_stream);
+        //SFileDdaEnd(sfx_stream);
         SFileCloseFile(sfx_stream);
         sfx_stream = 0;
         sfx_data_cur = 0;
@@ -1072,92 +1072,93 @@ int __fastcall calc_snd_position(int x, int y, int *plVolume, int *plPan)
 
 void __fastcall PlaySFX(int psfx)
 {
-    int v1; // eax
+    //int v1; // eax
 
-    v1 = RndSFX(psfx);
-    PlaySFX_priv(&sgSFX[v1], 0, 0, 0);
+    //v1 = RndSFX(psfx);
+    //PlaySFX_priv(&sgSFX[v1], 0, 0, 0);
 }
 
-void __fastcall PlaySFX_priv(TSFX *pSFX, char loc, int x, int y)
-{
-    int v4; // edi
-    TSFX *v5; // esi
-    TSnd *v6; // ecx
-    //int v7; // eax
-    TSnd *v8; // ecx
-    int volume_delta; // [esp+Ch] [ebp-8h]
-    int pan; // [esp+10h] [ebp-4h]
+//void __fastcall PlaySFX_priv(TSFX *pSFX, char loc, int x, int y)
+//{
+//    int v4; // edi
+//    TSFX *v5; // esi
+//    TSnd *v6; // ecx
+//    //int v7; // eax
+//    TSnd *v8; // ecx
+//    int volume_delta; // [esp+Ch] [ebp-8h]
+//    int pan; // [esp+10h] [ebp-4h]
+//
+//    v4 = loc;
+//    v5 = pSFX;
+//    if (!plr[myplr].pLvlLoad || gbMaxPlayers == 1)
+//    {
+//        if (gbSndInited)
+//        {
+//            if (gbSoundOn)
+//            {
+//                if (!gbBufferMsgs)
+//                {
+//                    if (pSFX->bFlags & 3 || (v6 = pSFX->pSnd) == 0 || !snd_playing(v6))
+//                    {
+//                        pan = 0;
+//                        volume_delta = 0;
+//                        if (!v4 || calc_snd_position(x, y, &volume_delta, &pan))
+//                        {
+//                            if (v5->bFlags & 1)
+//                            {
+//                                stream_play(v5, volume_delta, pan);
+//                            }
+//                            else
+//                            {
+//                                if (!v5->pSnd)
+//                                    v5->pSnd = sound_file_load(v5->pszName);
+//                                v8 = v5->pSnd;
+//                                if (v8)
+//                                    snd_play_snd(v8, volume_delta, pan);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
 
-    v4 = loc;
-    v5 = pSFX;
-    if (!plr[myplr].pLvlLoad || gbMaxPlayers == 1)
-    {
-        if (gbSndInited)
-        {
-            if (gbSoundOn)
-            {
-                if (!gbBufferMsgs)
-                {
-                    if (pSFX->bFlags & 3 || (v6 = pSFX->pSnd) == 0 || !snd_playing(v6))
-                    {
-                        pan = 0;
-                        volume_delta = 0;
-                        if (!v4 || calc_snd_position(x, y, &volume_delta, &pan))
-                        {
-                            if (v5->bFlags & 1)
-                            {
-                                stream_play(v5, volume_delta, pan);
-                            }
-                            else
-                            {
-                                if (!v5->pSnd)
-                                    v5->pSnd = sound_file_load(v5->pszName);
-                                v8 = v5->pSnd;
-                                if (v8)
-                                    snd_play_snd(v8, volume_delta, pan);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 // 4A22D5: using guessed type char gbSoundOn;
 // 676194: using guessed type char gbBufferMsgs;
 // 679660: using guessed type char gbMaxPlayers;
 
-void __fastcall stream_play(TSFX *pSFX, int lVolume, int lPan)
-{
-    int v3; // esi
-    TSFX *v4; // edi
-    int v5; // esi
-    //int v6; // eax
-    //int v7; // eax
-
-    v3 = lVolume;
-    v4 = pSFX;
-    sfx_stop();
-    v5 = sound_get_or_set_sound_volume(1) + v3;
-    if (v5 >= -1600)
-    {
-        if (v5 > 0)
-            v5 = 0;
-        //_LOBYTE(v6) = SFileOpenFile(v4->pszName, &sfx_stream);
-        if (SFileOpenFile(v4->pszName, &sfx_stream))
-        {
-            //_LOBYTE(v7) = SFileDdaBeginEx(sfx_stream, 0x40000, 0, 0, v5, lPan, 0);
-            if (SFileDdaBeginEx(sfx_stream, 0x40000, 0, 0, v5, lPan, 0))
-                sfx_data_cur = v4;
-            else
-                sfx_stop();
-        }
-        else
-        {
-            sfx_stream = 0;
-        }
-    }
-}
+//void __fastcall stream_play(TSFX *pSFX, int lVolume, int lPan)
+//{
+//    int v3; // esi
+//    TSFX *v4; // edi
+//    int v5; // esi
+//    //int v6; // eax
+//    //int v7; // eax
+//
+//    v3 = lVolume;
+//    v4 = pSFX;
+//    sfx_stop();
+//    v5 = sound_get_or_set_sound_volume(1) + v3;
+//    if (v5 >= -1600)
+//    {
+//        if (v5 > 0)
+//            v5 = 0;
+//        //_LOBYTE(v6) = SFileOpenFile(v4->pszName, &sfx_stream);
+//        if (SFileOpenFile(v4->pszName, &sfx_stream))
+//        {
+//            //_LOBYTE(v7) = SFileDdaBeginEx(sfx_stream, 0x40000, 0, 0, v5, lPan, 0);
+//            if (SFileDdaBeginEx(sfx_stream, 0x40000, 0, 0, v5, lPan, 0))
+//                sfx_data_cur = v4;
+//            else
+//                sfx_stop();
+//        }
+//        else
+//        {
+//            sfx_stream = 0;
+//        }
+//    }
+//}
 
 int __fastcall RndSFX(int psfx)
 {
@@ -1195,19 +1196,19 @@ int __fastcall RndSFX(int psfx)
 
 void __fastcall PlaySfxLoc(int psfx, int x, int y)
 {
-    int v3; // esi
-    int v4; // eax
-    TSnd *v5; // ecx
+    //int v3; // esi
+    //int v4; // eax
+    //TSnd *v5; // ecx
 
-    v3 = x;
-    v4 = RndSFX(psfx);
-    if (v4 >= 0 && v4 <= 3)
-    {
-        v5 = sgSFX[v4].pSnd;
-        if (v5)
-            v5->start_tc = 0;
-    }
-    PlaySFX_priv(&sgSFX[v4], 1, v3, y);
+    //v3 = x;
+    //v4 = RndSFX(psfx);
+    //if (v4 >= 0 && v4 <= 3)
+    //{
+    //    v5 = sgSFX[v4].pSnd;
+    //    if (v5)
+    //        v5->start_tc = 0;
+    //}
+    //PlaySFX_priv(&sgSFX[v4], 1, v3, y);
 }
 
 void __cdecl FreeMonsterSnd()
@@ -1257,32 +1258,32 @@ void __cdecl sound_stop()
     }
 }
 
-void __cdecl sound_update()
-{
-    //int v0; // ebp
-    //unsigned int v1; // ecx
-//	int v2; // eax
-    unsigned int v3; // [esp-Ch] [ebp-Ch]
-    unsigned int v4; // [esp-8h] [ebp-8h]
-    //int v5; // [esp-4h] [ebp-4h]
-
-    if (gbSndInited)
-    {
-        snd_update(0);
-        //v5 = v0;
-        //v4 = v1;
-        //v3 = v1;
-        if (sfx_stream)
-        {
-            //_LOBYTE(v2) = SFileDdaGetPos(sfx_stream, (int)&v4, (int)&v3);
-            if (SFileDdaGetPos(sfx_stream, (int)&v4, (int)&v3))
-            {
-                if (v4 >= v3)
-                    sfx_stop();
-            }
-        }
-    }
-}
+//void __cdecl sound_update()
+//{
+//    //int v0; // ebp
+//    //unsigned int v1; // ecx
+////	int v2; // eax
+//    unsigned int v3; // [esp-Ch] [ebp-Ch]
+//    unsigned int v4; // [esp-8h] [ebp-8h]
+//    //int v5; // [esp-4h] [ebp-4h]
+//
+//    if (gbSndInited)
+//    {
+//        snd_update(0);
+//        //v5 = v0;
+//        //v4 = v1;
+//        //v3 = v1;
+//        if (sfx_stream)
+//        {
+//            //_LOBYTE(v2) = SFileDdaGetPos(sfx_stream, (int)&v4, (int)&v3);
+//            if (SFileDdaGetPos(sfx_stream, (int)&v4, (int)&v3))
+//            {
+//                if (v4 >= v3)
+//                    sfx_stop();
+//            }
+//        }
+//    }
+//}
 // 415DBA: could not find valid save-restore pair for ebp
 
 void __cdecl effects_cleanup_sfx()

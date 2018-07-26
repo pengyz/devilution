@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int plrmsg_ticks; // weak
 char plr_msg_slot; // weak

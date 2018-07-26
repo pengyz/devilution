@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 _SNETVERSIONDATA fileinfo;
 int init_cpp_init_value; // weak
@@ -55,13 +55,13 @@ void __fastcall init_cleanup(bool show_cursor)
         SFileCloseArchive(unused_mpq);
         unused_mpq = 0;
     }
-    UiDestroy();
+    //UiDestroy();
     effects_cleanup_sfx();
     sound_cleanup();
     NetClose();
     DxInterface::get()->dx_cleanup();
     MI_Dummy(v1);
-    StormDestroy();
+    //StormDestroy();
     if (v1)
         ShowCursor(1);
 }
@@ -301,8 +301,8 @@ void *__fastcall init_test_access(char *mpq_path, char *mpq_name, char *reg_loc,
     if (!GetCurrentDirectoryA(0x104u, Buffer))
         TermMsg("Can't get program path");
     init_strip_trailing_slash(Buffer);
-    if (!SFileSetBasePath(Buffer))
-        TermMsg("SFileSetBasePath");
+    /*if (!SFileSetBasePath(Buffer))
+        TermMsg("SFileSetBasePath");*/
     if (!GetModuleFileNameA(ghInst, Filename, 0x104u))
         TermMsg("Can't get program name");
     v7 = strrchr(Filename, '\\');
@@ -331,7 +331,7 @@ void *__fastcall init_test_access(char *mpq_path, char *mpq_name, char *reg_loc,
     v15[0] = 0;
     if (reg_loc)
     {
-        if (SRegLoadString("Archives", (const char *)reg_loc, 0, v15, 260))
+        /*if (SRegLoadString("Archives", (const char *)reg_loc, 0, v15, 260))
         {
             init_strip_trailing_slash(v15);
             strcpy(v5, v15);
@@ -343,6 +343,7 @@ void *__fastcall init_test_access(char *mpq_path, char *mpq_name, char *reg_loc,
 #endif
                 return archive;
         }
+        */
     }
     if (on_cd && init_read_test_file(v15, mpq_namea, flags, &archive))
     {
@@ -403,34 +404,34 @@ int __fastcall init_read_test_file(char *mpq_path, char *mpq_name, int flags, vo
 
 void __cdecl init_get_file_info()
 {
-    int v0; // eax
-    DWORD v1; // edi
-    void *v2; // ebx
-    unsigned int uBytes; // [esp+8h] [ebp-Ch]
-    DWORD dwHandle; // [esp+Ch] [ebp-8h]
-    VS_FIXEDFILEINFO *lpBuffer; // [esp+10h] [ebp-4h]
+    //int v0; // eax
+    //DWORD v1; // edi
+    //void *v2; // ebx
+    //unsigned int uBytes; // [esp+8h] [ebp-Ch]
+    //DWORD dwHandle; // [esp+Ch] [ebp-8h]
+    //VS_FIXEDFILEINFO *lpBuffer; // [esp+10h] [ebp-4h]
 
-    if (GetModuleFileNameA(ghInst, diablo_exe_path, 0x104u))
-    {
-        v0 = GetFileVersionInfoSizeA(diablo_exe_path, &dwHandle);
-        v1 = v0;
-        if (v0)
-        {
-            v2 = DiabloAllocPtr(v0);
-            if (GetFileVersionInfoA(diablo_exe_path, 0, v1, v2))
-            {
-                if (VerQueryValueA(v2, "\\", (LPVOID *)&lpBuffer, &uBytes))
-                    sprintf(
-                        gszVersionNumber,
-                        "version %d.%d.%d.%d",
-                        lpBuffer->dwProductVersionMS >> 16,
-                        lpBuffer->dwProductVersionMS & 0xFFFF,
-                        lpBuffer->dwProductVersionLS >> 16,
-                        lpBuffer->dwProductVersionLS & 0xFFFF);
-            }
-            mem_free_dbg(v2);
-        }
-    }
+    //if (GetModuleFileNameA(ghInst, diablo_exe_path, 0x104u))
+    //{
+    //    v0 = GetFileVersionInfoSizeA(diablo_exe_path, &dwHandle);
+    //    v1 = v0;
+    //    if (v0)
+    //    {
+    //        v2 = DiabloAllocPtr(v0);
+    //        if (GetFileVersionInfoA(diablo_exe_path, 0, v1, v2))
+    //        {
+    //            if (VerQueryValueA(v2, "\\", (LPVOID *)&lpBuffer, &uBytes))
+    //                sprintf(
+    //                    gszVersionNumber,
+    //                    "version %d.%d.%d.%d",
+    //                    lpBuffer->dwProductVersionMS >> 16,
+    //                    lpBuffer->dwProductVersionMS & 0xFFFF,
+    //                    lpBuffer->dwProductVersionLS >> 16,
+    //                    lpBuffer->dwProductVersionLS & 0xFFFF);
+    //        }
+    //        mem_free_dbg(v2);
+    //    }
+    //}
 }
 
 LRESULT __stdcall init_palette(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
@@ -445,11 +446,12 @@ LRESULT __stdcall init_palette(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam
         {
             if (Msg == WM_QUERYNEWPALETTE)
             {
-                SDrawRealizePalette();
+                //SDrawRealizePalette();
                 return 1;
             }
-            if (Msg == WM_PALETTECHANGED && (HWND)wParam != hWnd)
-                SDrawRealizePalette();
+            if (Msg == WM_PALETTECHANGED && (HWND)wParam != hWnd) {
+                //SDrawRealizePalette();
+            }
         }
     }
     else
@@ -482,7 +484,7 @@ void __fastcall init_activate_window(HWND hWnd, bool activated)
     LONG dwNewLong; // eax
 
     window_activated = activated;
-    UiAppActivate(activated);
+    //UiAppActivate(activated);
     dwNewLong = GetWindowLongA(hWnd, GWL_STYLE);
 
     if (window_activated && fullscreen)

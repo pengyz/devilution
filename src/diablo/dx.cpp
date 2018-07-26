@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 DxInterface* DxInterface::m_instance = nullptr;
 
@@ -47,7 +47,8 @@ void DxInterface::dx_init(HWND hWnd)
     palette_init();
     GdiSetBatchLimit(1);
     dx_create_back_buffer();
-    SDrawManualInitialize(hWnd, lpDDInterface, lpDDSPrimary, 0, 0, lpDDSBackBuf, lpDDPalette, 0);
+    //TODO: draw manual initialize, we should replace it with openGL
+    //SDrawManualInitialize(hWnd, lpDDInterface, lpDDSPrimary, 0, 0, lpDDSBackBuf, lpDDPalette, 0);
 }
 // 484364: using guessed type int fullscreen;
 // 52A549: using guessed type char gbEmulate;
@@ -198,7 +199,8 @@ void DxInterface::dx_cleanup()
 
     if (ghMainWnd)
         ShowWindow(ghMainWnd, SW_HIDE);
-    SDrawDestroy();
+    //TODO: draw?
+    //SDrawDestroy();
     m_mutex.lock();
     if (sgpBackBuf)
     {

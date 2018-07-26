@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int wave_cpp_init_value; // weak
 
@@ -51,17 +51,17 @@ void __fastcall WGetFileArchive(HANDLE hsFile, int *a2, char *dwInitParam)
     v4 = hsFile;
     if ((unsigned int)*a2 >= 5)
         FileErrDlg(dwInitParam);
-    if (v4 && SFileGetFileArchive(v4, &archive) && archive != diabdat_mpq)
-    {
-        Sleep(0x14u);
-        ++*v3;
-    }
-    else
-    {
-        //_LOBYTE(v6) = InsertCDDlg();
-        if (!InsertCDDlg())
-            FileErrDlg(dwInitParam);
-    }
+    //if (v4 && SFileGetFileArchive(v4, &archive) && archive != diabdat_mpq)
+    //{
+    //    Sleep(0x14u);
+    //    ++*v3;
+    //}
+    //else
+    //{
+    //    //_LOBYTE(v6) = InsertCDDlg();
+    //    if (!InsertCDDlg())
+    //        FileErrDlg(dwInitParam);
+    //}
 }
 
 int __fastcall WOpenFile(char *dwInitParam, HANDLE *phsFile, int a3)
@@ -73,14 +73,14 @@ int __fastcall WOpenFile(char *dwInitParam, HANDLE *phsFile, int a3)
 
     a2a = 0;
     v3 = phsFile;
-    for (i = dwInitParam; ; WGetFileArchive(0, &a2a, i))
-    {
-        //_LOBYTE(v5) = SFileOpenFile(i, v3);
-        if (SFileOpenFile(i, v3))
-            return 1;
-        if (a3 && SErrGetLastError() == 2)
-            break;
-    }
+    //for (i = dwInitParam; ; WGetFileArchive(0, &a2a, i))
+    //{
+    //    //_LOBYTE(v5) = SFileOpenFile(i, v3);
+    //    if (SFileOpenFile(i, v3))
+    //        return 1;
+    //    if (a3 && SErrGetLastError() == 2)
+    //        break;
+    //}
     return 0;
 }
 
@@ -113,14 +113,14 @@ int __fastcall WSetFilePointer(HANDLE file1, int offset, HANDLE file2, int whenc
     int result; // eax
     int a2; // [esp+8h] [ebp-4h]
 
-    a2 = 0;
-    v4 = offset;
-    for (i = file1; ; WGetFileArchive(i, &a2, 0))
-    {
-        result = SFileSetFilePointer(i, v4, file2, whence);
-        if (result != -1)
-            break;
-    }
+    //a2 = 0;
+    //v4 = offset;
+    //for (i = file1; ; WGetFileArchive(i, &a2, 0))
+    //{
+    //    result = SFileSetFilePointer(i, v4, file2, whence);
+    //    if (result != -1)
+    //        break;
+    //}
     return result;
 }
 

@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int plr_lframe_size; // idb
 int plr_wframe_size; // idb

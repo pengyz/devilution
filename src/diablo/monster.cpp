@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int MissileFileFlag; // weak
 int monster_cpp_init_value; // weak
@@ -4050,8 +4050,8 @@ void __cdecl DoEnding()
     char bMusicOn; // bl
     int v3; // esi
 
-    if ((unsigned char)gbMaxPlayers > 1u)
-        SNetLeaveGame(0x40000004);
+    /*if ((unsigned char)gbMaxPlayers > 1u)
+        SNetLeaveGame(0x40000004);*/
     music_stop();
     if ((unsigned char)gbMaxPlayers > 1u)
         Sleep(1000);

@@ -1,5 +1,10 @@
 ﻿#include "platform_defs.h"
-#include "StormLib.h"
+
+
+#ifdef __GNUC__
+using FILETIME = time_t;
+#endif // __GNUC__
+
 
 struct UItemStruct
 {
@@ -668,8 +673,6 @@ struct PkItemStruct
     int dwBuff;
 };
 #pragma pack(pop)
-
-using FILETIME = time_t;
 /* __declspec(align(2)) */
 #pragma pack(push, 1)
 struct PkPlayerStruct

@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 void *sgpBackCel;
 float interfac_cpp_init_value;

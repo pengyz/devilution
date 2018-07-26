@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int mpqapi_cpp_init_value; // weak
 int sgdwMpqOffset; // idb
@@ -85,8 +85,8 @@ bool __fastcall mpqapi_reg_load_modification_time(char *dst, int size)
     v2 = size;
     v3 = dst;
     memset(dst, 0, size);
-    if (!SRegLoadData("Diablo", "Video Player ", 0, (unsigned char *)v3, v2, (unsigned long *)&nbytes_read) || nbytes_read != v2)
-        return 0;
+    /*if (!SRegLoadData("Diablo", "Video Player ", 0, (unsigned char *)v3, v2, (unsigned long *)&nbytes_read) || nbytes_read != v2)
+        return 0;*/
     if (v2 >= 8)
     {
         v6 = v2 >> 3;
@@ -121,27 +121,28 @@ void __fastcall mpqapi_xor_buf(char *pbData)
 
 bool __fastcall mpqapi_reg_store_modification_time(char *pbData, int dwLen)
 {
-    int v2; // ebx
-    char *v3; // ebp
-    char *v4; // edi
-    unsigned int v5; // esi
-    char *v6; // ecx
+    //int v2; // ebx
+    //char *v3; // ebp
+    //char *v4; // edi
+    //unsigned int v5; // esi
+    //char *v6; // ecx
 
-    v2 = dwLen;
-    v3 = pbData;
-    v4 = pbData;
-    if ((unsigned int)dwLen >= 8)
-    {
-        v5 = (unsigned int)dwLen >> 3;
-        do
-        {
-            v6 = v4;
-            v4 += 8;
-            mpqapi_xor_buf(v6);
-            --v5;
-        } while (v5);
-    }
-    return SRegSaveData("Diablo", "Video Player ", 0, (unsigned char *)v3, v2);
+    //v2 = dwLen;
+    //v3 = pbData;
+    //v4 = pbData;
+    //if ((unsigned int)dwLen >= 8)
+    //{
+    //    v5 = (unsigned int)dwLen >> 3;
+    //    do
+    //    {
+    //        v6 = v4;
+    //        v4 += 8;
+    //        mpqapi_xor_buf(v6);
+    //        --v5;
+    //    } while (v5);
+    //}
+    //return SRegSaveData("Diablo", "Video Player ", 0, (unsigned char *)v3, v2);
+    return true;
 }
 
 void __fastcall mpqapi_remove_hash_entry(char *pszName)

@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 PALETTEENTRY logical_palette[256];
 int palette_cpp_init_value; // weak
@@ -28,8 +28,8 @@ struct palette_cpp_init
 
 void __cdecl palette_save_gamme()
 {
-    SRegSaveValue("Diablo", "Gamma Correction", 0, gamma_correction);
-    SRegSaveValue("Diablo", "Color Cycling", 0, color_cycling_enabled);
+    //SRegSaveValue("Diablo", "Gamma Correction", 0, gamma_correction);
+    //SRegSaveValue("Diablo", "Color Cycling", 0, color_cycling_enabled);
 }
 
 void __cdecl palette_init()
@@ -54,8 +54,8 @@ void __cdecl palette_load_gamma()
     int value; // [esp+8h] [ebp-4h]
 
     value = gamma_correction;
-    if (!SRegLoadValue("Diablo", "Gamma Correction", 0, &value))
-        value = 100;
+    //if (!SRegLoadValue("Diablo", "Gamma Correction", 0, &value))
+    value = 100;
     if (value >= 30)
     {
         if (value > 100)
@@ -66,10 +66,10 @@ void __cdecl palette_load_gamma()
         value = 30;
     }
     gamma_correction = value - value % 5;
-    if (SRegLoadValue("Diablo", "Color Cycling", 0, &value))
+    /*if (SRegLoadValue("Diablo", "Color Cycling", 0, &value))
         v3 = value;
-    else
-        v3 = 1;
+    else*/
+    v3 = 1;
     color_cycling_enabled = v3;
 }
 
@@ -143,7 +143,7 @@ void __cdecl ResetPal()
         || DxInterface::get()->lpDDSPrimary->IsLost() != DDERR_SURFACELOST
         || !DxInterface::get()->lpDDSPrimary->Restore())
     {
-        SDrawRealizePalette();
+        //SDrawRealizePalette();
     }
 }
 
@@ -173,7 +173,7 @@ void __cdecl palette_update()
             v0 = gdwPalEntries;
             v1 = 2 * (128 - gdwPalEntries);
         }
-        SDrawUpdatePalette(v0, v1, &system_palette[v0], 0);
+        //SDrawUpdatePalette(v0, v1, &system_palette[v0], 0);
     }
 }
 // 484364: using guessed type int fullscreen;

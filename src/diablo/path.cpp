@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 // preallocated nodes, search is terminated after 300 nodes are visited
 PATHNODE path_nodes[300];

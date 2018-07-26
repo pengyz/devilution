@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 float sound_cpp_init_value;
 IDirectSoundBuffer *DSBs[8];
@@ -298,8 +298,8 @@ void __fastcall snd_init(HWND hWnd)
         sglpDS = 0;
     if (sglpDS && !sglpDS->SetCooperativeLevel(hWnd, DSSCL_EXCLUSIVE))
         sound_create_primary_buffer(0);
-    SVidInitialize(sglpDS);
-    SFileDdaInitialize(sglpDS);
+    //SVidInitialize(sglpDS);
+    //SFileDdaInitialize(sglpDS);
     gbSndInited = sglpDS != 0;
 }
 // 4A22D4: using guessed type char gbMusicOn;
@@ -315,9 +315,9 @@ void __fastcall sound_load_volume(char *value_name, int *value)
     v2 = value;
     valuea = *value;
     //_LOBYTE(v3) = SRegLoadValue("Diablo", value_name, 0, &valuea);
-    if (SRegLoadValue("Diablo", value_name, 0, &valuea))
+    /*if (SRegLoadValue("Diablo", value_name, 0, &valuea))
         v4 = valuea;
-    else
+    else*/
         v4 = 0;
     *v2 = v4;
     if (v4 >= -1600)
@@ -404,8 +404,8 @@ int __fastcall sound_DirectSoundCreate(GUID *guid, IDirectSound **DS, int always
 void __cdecl sound_cleanup()
 {
     snd_update(1);
-    SVidDestroy();
-    SFileDdaDestroy();
+    //SVidDestroy();
+    //SFileDdaDestroy();
     if (sglpDS)
     {
         sglpDS->Release();
@@ -421,14 +421,14 @@ void __cdecl sound_cleanup()
 
 void __fastcall sound_store_volume(char *key, int value)
 {
-    SRegSaveValue("Diablo", key, 0, value);
+    //SRegSaveValue("Diablo", key, 0, value);
 }
 
 void __cdecl music_stop()
 {
     if (sgpMusicTrack)
     {
-        SFileDdaEnd(sgpMusicTrack);
+        //SFileDdaEnd(sgpMusicTrack);
         SFileCloseFile(sgpMusicTrack);
         sgpMusicTrack = 0;
         sgnMusicTrack = 6;
@@ -448,12 +448,12 @@ void __fastcall music_start(int nTrack)
         //_LOBYTE(v2) = SFileOpenFile(sgszMusicTracks[v1], &sgpMusicTrack);
         //v3 = v2;
         sound_create_primary_buffer((int)sgpMusicTrack);
-        if (SFileOpenFile(sgszMusicTracks[nTrack], &sgpMusicTrack))
+        /*if (SFileOpenFile(sgszMusicTracks[nTrack], &sgpMusicTrack))
         {
             SFileDdaBeginEx(sgpMusicTrack, 0x40000, 0x40000, 0, sglMusicVolume, 0, 0);
             sgnMusicTrack = nTrack;
         }
-        else
+        else*/
         {
             sgpMusicTrack = 0;
         }
@@ -478,8 +478,8 @@ int __fastcall sound_get_or_set_music_volume(int volume)
     if (volume != 1)
     {
         sglMusicVolume = volume;
-        if (sgpMusicTrack)
-            SFileDdaSetVolume(sgpMusicTrack, volume, 0);
+        /*if (sgpMusicTrack)
+            SFileDdaSetVolume(sgpMusicTrack, volume, 0);*/
     }
     return sglMusicVolume;
 }

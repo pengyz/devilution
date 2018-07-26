@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int engine_cpp_init_value; // weak
 char byte_52B96C; // automap pixel color 8-bit (palette entry)
@@ -1880,7 +1880,8 @@ void *__fastcall DiabloAllocPtr(int dwBytes)
 
     v1 = dwBytes;
     EnterCriticalSection(&sgMemCrit);
-    v2 = SMemAlloc(v1, "C:\\Src\\Diablo\\Source\\ENGINE.CPP", 2236, 0);
+    //v2 = SMemAlloc(v1, "C:\\Src\\Diablo\\Source\\ENGINE.CPP", 2236, 0);
+    v2 = (void*)new char[dwBytes];
     LeaveCriticalSection(&sgMemCrit);
     if (!v2)
     {
@@ -1898,7 +1899,8 @@ void __fastcall mem_free_dbg(void *ptr)
     if (ptr)
     {
         EnterCriticalSection(&sgMemCrit);
-        SMemFree(v1, "C:\\Src\\Diablo\\Source\\ENGINE.CPP", 2317, 0);
+        //SMemFree(v1, "C:\\Src\\Diablo\\Source\\ENGINE.CPP", 2317, 0);
+        delete[] v1;
         LeaveCriticalSection(&sgMemCrit);
     }
 }
