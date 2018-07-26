@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 bool sgbIsScrolling; // weak
 int track_cpp_init_value; // weak

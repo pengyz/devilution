@@ -13,8 +13,6 @@
 #ifndef __fastcall
 #define __fastcall      __attribute__((__fastcall__))
 #endif
-#endif
-
 
 using DWORD = unsigned int;
 using WORD = unsigned short;
@@ -29,5 +27,6 @@ using HANDLE = void*;
 using BYTE = unsigned char;
 using SOCKADDR = void*;
 
+#endif
 
 

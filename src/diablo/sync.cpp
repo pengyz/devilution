@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 short sync_word_6AA708[MAXMONSTERS];
 int syncmonsters; // weak

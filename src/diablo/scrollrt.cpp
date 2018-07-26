@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int light_table_index; // weak
 int screen_y_times_768[1024];

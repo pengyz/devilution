@@ -1,6 +1,8 @@
 //HEADER_GOES_HERE
 #ifndef __DX_H__
 #define __DX_H__
+#include <mutex>
+#include <ddraw.h>
 
 extern void *sgpBackBuf;
 extern int dx_cpp_init_value; // weak

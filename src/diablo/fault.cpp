@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 LPTOP_LEVEL_EXCEPTION_FILTER lpTopLevelExceptionFilter; // idb
 

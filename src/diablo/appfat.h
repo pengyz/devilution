@@ -4,7 +4,7 @@
 
 #include "platform_defs.h"
 #include "enums.h"
-#include <argp.h>
+#include <varargs.h>
 
 extern char sz_error_buf[256];
 extern int terminating; // weak

@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int missileactive[MAXMISSILES];
 int missileavail[MAXMISSILES];

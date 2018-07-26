@@ -1,5 +1,6 @@
 ﻿// some global definitions, found in debug release
 #include "types.h"
+#include <stdint.h>
 
 #define DMAXX					40
 #define DMAXY					40

@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 void __fastcall town_clear_upper_buf(unsigned char *a1)
 {
