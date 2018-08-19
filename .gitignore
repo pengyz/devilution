@@ -357,3 +357,5 @@ ASALocalRun/
 *.pubxml.user
 
 # End of https://www.gitignore.io/api/visualstudio
+/imgui.ini
+/.vscode/launch.json

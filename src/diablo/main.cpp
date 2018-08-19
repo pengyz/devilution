@@ -18,12 +18,9 @@ int main(int argc, char** argv)
     auto mainWindow = engine.initGameWindow(u8"你好中国", 100, 100, 1024, 768);
     mainWindow->setResizable(true);
     assert(engine.initOpenGLFunctions());
-    assert(engine.initWindowGUI());
-    assert(engine.initFont("F:/workspace/devilution/extern/DroidSansFallback.ttf", 18));
 #if 1
-    GLint nrAttribs;
-    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttribs);
-    std::cout << "nrAttribs is: " << nrAttribs << std::endl;
+    assert(engine.initWindowGUI());
+    assert(engine.initFont("D:/workspace/devilution/extern/DroidSansFallback.ttf", 18));
 #endif
     return engine.exec();
 }

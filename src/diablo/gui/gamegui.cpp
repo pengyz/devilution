@@ -56,10 +56,10 @@ void GameGui::redererRoutine()
     IMGUI_CHECKVERSION();
 
     if (bOpen) {
-        ImGui::Begin(u8"世界你好!", &bOpen);                          // Create a window called "Hello, world!" and append into it.
+        ImGui::Begin("浣犲ソ涓浗!", &bOpen);                          // Create a window called "Hello, world!" and append into it.
 
         ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-        ImGui::Checkbox(u8"示例窗口", &show_demo_window);      // Edit bools storing our window open/close state
+        ImGui::Checkbox("鍏抽棴", &show_demo_window);      // Edit bools storing our window open/close state
         ImGui::Checkbox("Another Window", &show_another_window);
 
         ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f    
@@ -82,7 +82,7 @@ void GameGui::redererRoutine()
     ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0);
     ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(1, 1, 1, 0));
     ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(1, 1, 1, 0));
-    ImGui::Begin(u8"背包", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoCollapse);
+    ImGui::Begin("鑳屽寘", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoCollapse);
     ImGui::Text("This is user bag");
     ImGui::End();
     ImGui::PopStyleVar(2);
@@ -100,7 +100,7 @@ void GameGui::present()
     // Rendering
     ImGui::Render();
     glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(1.0, 0.0, 0.8, 1);
+    glClearColor(1.0f, 0.0f, 0.8f, 1.f);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 

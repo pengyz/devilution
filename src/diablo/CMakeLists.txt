@@ -84,13 +84,14 @@ set_target_properties(DiabloEngine PROPERTIES COMPILE_FLAGS "${FA_COMPILER_FLAGS
 add_library(Renderer STATIC
     renderer/shader.cpp
     renderer/shader.h
+    renderer/stb_image.cpp
+    renderer/stb_image.h
 )
 target_link_libraries(Renderer ${HUNTER_LIBS})
 set_target_properties(Renderer PROPERTIES COMPILE_FLAGS "${FA_COMPILER_FLAGS}")
 
 # DiabloUI
 add_library(DiabloUI STATIC
-    # gui/main.cpp
     gui/imgui.cpp
     gui/imgui_demo.cpp
     gui/imgui_draw.cpp

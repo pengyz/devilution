@@ -93,35 +93,68 @@ bool Shader::attachShaderFile(GLenum shaderType, const std::string& shaderFilePa
     return attachShaderSource(shaderType, strShader.c_str(), log);
 }
 
+bool Shader::setUniform(int location, glm::vec3 vec)
+{
+	if (-1 == location) {
+		return false;
+	}
+	glUniform3f(location, vec.x, vec.y, vec.z);
+	return true;
+}
+
+
 bool Shader::setUniform(const std::string& name, glm::vec3 vec)
 {
     auto location = glGetUniformLocation(m_program, name.c_str());
-    if (-1 == location) {
-        return false;
-    }
-    glUniform3f(location, vec.x, vec.y, vec.z);
-    return true;
+	return setUniform(location, vec);
 }
+
+bool Shader::setUniform(int location, glm::vec4 vec)
+{
+	if (-1 == location) {
+		return false;
+	}
+	glUniform4f(location, vec.x, vec.y, vec.z, vec.w);
+	return true;
+}
+
 
 bool Shader::setUniform(const std::string& name, glm::vec4 vec)
 {
     auto location = glGetUniformLocation(m_program, name.c_str());
-    if (-1 == location) {
-        return false;
-    }
-    glUniform4f(location, vec.x, vec.y, vec.z, vec.w);
-    return true;
+	return setUniform(location, vec);
+}
+
+bool Shader::setUniform(int location, glm::vec2 vec) 
+{
+	if (-1 == location) {
+		return false;
+	}
+	glUniform2f(location, vec.x, vec.y);
+	return true;
 }
 
 bool Shader::setUniform(const std::string& name, glm::vec2 vec)
 {
     auto location = glGetUniformLocation(m_program, name.c_str());
-    if (-1 == location) {
-        return false;
-    }
-    glUniform2f(location, vec.x, vec.y);
-    return true;
+	return setUniform(location, vec);
 }
+
+bool Shader::setUniform(int location, GLint value)
+{
+	if (-1 == location) {
+		return false;
+	}
+	glUniform1i(location, value);
+	return true;
+}
+
+bool Shader::setUniform(const std::string& name, GLint value)
+{
+	auto location = glGetUniformLocation(m_program, name.c_str());
+	return setUniform(location, value);
+}
+
 
 void Shader::use()
 {
