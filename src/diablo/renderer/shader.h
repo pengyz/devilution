@@ -3,6 +3,9 @@
 #include <glm/common.hpp>
 #include <string>
 #include <map>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class Shader {
 public:
@@ -50,6 +53,8 @@ public:
 	bool setUniform(const std::string& name, glm::vec3 vec);
 	bool setUniform(int location, glm::vec4 vec);
 	bool setUniform(const std::string& name, glm::vec4 vec);
+	bool setUniform(int location, glm::mat4 mat4, bool bNormalize = false);
+	bool setUniform(const std::string& name, glm::mat4 mat4, bool bNormalize = false);
 
 	bool setUniform(int location, GLint value);
 	bool setUniform(const std::string& name, GLint value);

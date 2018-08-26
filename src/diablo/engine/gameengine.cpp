@@ -88,20 +88,128 @@ int GameEngine::exec()
 {
 	assert(m_window);
 
-	Shader* g_shader = nullptr;
-	GLuint g_vao = 0;
-	GLuint g_vbo = 0;
-	GLuint g_ibo = 0;
-	GLuint g_texture[2] = { 0 };
+	Shader* shader = nullptr;
+	GLuint vao = 0;
+	GLuint vbo = 0;
+	GLuint ibo = 0;
+	GLuint textures[2] = { 0 };
 
 	auto freeGLResources = [&]() {
 		glBindVertexArray(0);
 		glUseProgram(0);
-		glDeleteVertexArrays(1, &g_vao);
-		glDeleteBuffers(1, &g_vbo);
-		if (g_shader)
-			g_shader->unuse();
+		glDeleteVertexArrays(1, &vao);
+		glDeleteBuffers(1, &vbo);
+		if (shader)
+			shader->unuse();
 	};
+
+	//prebuild
+	{
+		//create shader
+		const char* vertSharderSource = R"(
+                    #version 330 core
+                    layout (location = 0) in vec3 aPos;
+					layout (location = 1) in vec2 aTexCoord;
+                    
+					out vec2 TexCoord;
+
+					uniform mat4 transform;
+
+                    void main()
+                    {
+                        gl_Position = vec4(aPos, 1.0) * transform;
+						TexCoord = aTexCoord;
+                    }
+                )";
+		const char* fragShaderSource = R"(
+                    #version 330 core
+                    out vec4 FragColor;
+
+					in vec2 TexCoord;
+
+					uniform sampler2D texture1;
+					uniform sampler2D texture2;
+
+                    void main()
+                    {
+						FragColor = mix(texture(texture1, TexCoord),texture(texture2, TexCoord), 0.2);
+						//FragColor = texture(texture2, TexCoord);
+					}
+                )";
+		shader = new Shader(vertSharderSource, fragShaderSource);
+
+
+		float vertices[] = {
+			//     ---- 位置 ----     - 纹理坐标 -
+				 0.5f,  0.5f, 0.0f,   1.0f, 1.0f,   // 右上
+				 0.5f, -0.5f, 0.0f,   1.0f, 0.0f,   // 右下
+				-0.5f, -0.5f, 0.0f,   0.0f, 0.0f,   // 左下
+				-0.5f,  0.5f, 0.0f,   0.0f, 1.0f    // 左上
+		};
+
+		unsigned int indices[] = { // 注意索引从0开始! 
+			0, 1, 3, // 第一个三角形
+			1, 2, 3  // 第二个三角形
+		};
+
+		glGenVertexArrays(1, &vao);
+		glBindVertexArray(vao);
+
+		glGenBuffers(1, &vbo);
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+		glGenBuffers(1, &ibo);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), nullptr);
+		glEnableVertexAttribArray(0);
+
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (const void*)(3 * sizeof(float)));
+		glEnableVertexAttribArray(1);
+
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+		glBindVertexArray(vao);
+		glGenTextures(2, textures);
+		glBindTexture(GL_TEXTURE_2D, textures[0]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+
+		//load and generate texture
+		int width, height, nrChannel;
+		auto pData = stbi_load("D:\\workspace\\devilution\\extern\\container.jpg", &width, &height, &nrChannel, 0);
+		if (pData) {
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, pData);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		} else {
+			std::cout << "Failed to load texture" << std::endl;
+		}
+		stbi_image_free(pData);
+
+		glBindTexture(GL_TEXTURE_2D, textures[1]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		auto pData2 = stbi_load("D:\\workspace\\devilution\\extern\\awesomeface.png", &width, &height, &nrChannel, 0);
+		if (pData2) {
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pData2);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		} else {
+			std::cout << "Failed to load texture" << std::endl;
+		}
+		stbi_image_free(pData2);
+
+		shader->use();
+		shader->setUniform("texture1", 0);
+		shader->setUniform("texture2", 1);
+	}
 
 	while (!m_window->aboutToClose()) {
 		glfwPollEvents();
@@ -110,142 +218,20 @@ int GameEngine::exec()
 		glfwMakeContextCurrent(m_window->getNativeWindow());
 		//this is the test code for OpenGL draw trangle
 		{
-			if (!g_shader) {
-				const char* vertSharderSource = R"(
-                    #version 330 core
-                    layout (location = 0) in vec3 aPos;
-                    layout (location = 1) in vec3 aColor;
-					layout (location = 2) in vec2 aTexCoord;
-                    
-					out vec3 ourColor;
-					out vec2 TexCoord;
-
-                    void main()
-                    {
-                        gl_Position = vec4(aPos, 1.0);
-                        ourColor = aColor;
-						TexCoord = aTexCoord;
-                    }
-                )";
-				const char* fragShaderSource = R"(
-                    #version 330 core
-                    out vec4 FragColor;
-
-                    in vec3 ourColor;
-					in vec2 TexCoord;
-
-					uniform sampler2D texture1;
-					uniform sampler2D texture2;
-
-                    void main()
-                    {
-                        //FragColor = vec4(ourColor,1.0);
-						FragColor = mix(texture(texture1, TexCoord),texture(texture2, TexCoord), 0.4);
-                    }
-                )";
-				g_shader = new Shader(vertSharderSource, fragShaderSource);
-			}
-			if (!g_vao) {
-
-				float vertices[] = {
-					//     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
-						 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // 右上
-						 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // 右下
-						-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // 左下
-						-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // 左上
-				};
-
-				unsigned int indices[] = { // 注意索引从0开始! 
-					0, 1, 3, // 第一个三角形
-					1, 2, 3  // 第二个三角形
-				};
-
-				glGenVertexArrays(1, &g_vao);
-				glBindVertexArray(g_vao);
-
-				glGenBuffers(1, &g_vbo);
-				glBindBuffer(GL_ARRAY_BUFFER, g_vbo);
-				glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-				glGenBuffers(1, &g_ibo);
-				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, g_ibo);
-				glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-				glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), nullptr);
-				glEnableVertexAttribArray(0);
-
-				glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void*)(3 * sizeof(float)));
-				glEnableVertexAttribArray(1);
-
-				glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (const void*)(6 * sizeof(float)));
-				glEnableVertexAttribArray(2);
-
-				//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-			}
-
-			if (!g_texture[0] || !g_texture[1]) {
-				glBindVertexArray(g_vao);
-				glGenTextures(2, g_texture);
-				glBindTexture(GL_TEXTURE_2D, g_texture[0]);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-				stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-
-				//load and generate texture
-				int width, height, nrChannel;
-				auto pData = stbi_load("D:\\workspace\\devilution\\extern\\container.jpg", &width, &height, &nrChannel, 0);
-				if (pData)
-				{
-					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, pData);
-					glGenerateMipmap(GL_TEXTURE_2D);
-				}
-				else
-				{
-					std::cout << "Failed to load texture" << std::endl;
-				}
-				stbi_image_free(pData);
-
-				glBindTexture(GL_TEXTURE_2D, g_texture[1]);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-				auto pData2 = stbi_load("D:\\workspace\\devilution\\extern\\awesomeface.png", &width, &height, &nrChannel, 0);
-				if (pData2)
-				{
-					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pData2);
-					glGenerateMipmap(GL_TEXTURE_2D);
-				}
-				else
-				{
-					std::cout << "Failed to load texture" << std::endl;
-				}
-				stbi_image_free(pData2);
-
-				g_shader->use();
-				g_shader->setUniform("texture1", 0);
-				g_shader->setUniform("texture2", 1);
-			}
-
-
-			////set uniform color value
-			//float timeValue = glfwGetTime();
-			//float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
-			//int vertexColorLocation = glGetUniformLocation(g_programId, "ourColor");
-			//draw call
-			//glUseProgram(g_programId);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, g_texture[0]);
+			glBindTexture(GL_TEXTURE_2D, textures[0]);
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, g_texture[1]);
-			g_shader->use();
-			glBindVertexArray(g_vao);
-			//glUniform4f(vertexColorLocation, 0.4f, greenValue, 0.1f, 1.0f);
+			glBindTexture(GL_TEXTURE_2D, textures[1]);
+			shader->use();
+			//rotate 
+			{
+				glm::mat4 trans = glm::mat4(1.0f);
+				trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+				trans = glm::scale(trans, glm::vec3(0.5f, 0.5f, 0.5f));
+				shader->setUniform("transform", trans);
+			}
 
-			//glDrawArrays(GL_TRIANGLES, 0, 3);
+			glBindVertexArray(vao);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
 		glfwSwapBuffers(m_window->getNativeWindow());
