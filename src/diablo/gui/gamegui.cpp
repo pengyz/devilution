@@ -1,4 +1,4 @@
-#include "gamegui.h"
+﻿#include "gamegui.h"
 #include "../engine/window.h"
 
 using namespace Engine;
@@ -99,8 +99,6 @@ void GameGui::present()
     redererRoutine();
     // Rendering
     ImGui::Render();
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(1.0f, 0.0f, 0.8f, 1.f);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
