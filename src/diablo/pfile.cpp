@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int pfile_cpp_init_value;
 char hero_names[MAX_CHARACTERS][PLR_NAME_LEN];

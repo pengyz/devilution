@@ -1,22 +1,23 @@
-﻿// temporary file
+// temporary file
 
 #ifndef _TYPES_H
 #define _TYPES_H
 
+#define WIN32_LEAN_AND_MEAN
+
 #include "resource.h"
 
-#include <stdio.h>
-#ifdef WIN32
 #include <windows.h>
+#include <mmsystem.h>
+#include <stdio.h>
 #include <ddraw.h>
 #include <dsound.h>
 #include <io.h>
-#include <process.h>
-#include <shlobj.h>
-#endif
 #include <math.h>
 #include <time.h>
-
+#include <process.h>
+#include <shlobj.h>
+#include <shellapi.h>
 
 #ifdef __GNUC__
 #include <ctype.h>
@@ -35,16 +36,14 @@
 #pragma warning (disable : 4146) // negative unsigned
 #endif
 
+#include "defs.h"
 #include "enums.h"
 #include "structs.h"
 
-#include "StormLib.h"
-#include "defs.h"
+#include "../../3rdParty/Storm/Source/storm.h"
+#include "../../3rdParty/DiabloUI/diabloui.h"
+#include "../../3rdParty/PKWare/pkware.h"
 
-// temporarily enable debug features for all builds
-#ifndef _DEBUG
-#define _DEBUG
-#endif
 // If defined, use copy protection [Default -> Defined]
 //#define COPYPROT
 // If defined, don't reload for debuggers [Default -> Undefined]
@@ -54,6 +53,10 @@
 #endif
 // If defined, don't fry the CPU [Default -> Undefined]
 #define SLEEP
+// If defined, use standard memcpy() in place of qmemcpy() [Default -> Undefined]
+// Will be replaced with [rep movsd] if optimization is used
+#define FAST_MEMCPY
+
 
 /* temp macro for asm XLAT */
 #define ASM_XLAT(eax,ebx) eax = (eax & 0xFFFFFF00) + LOBYTE(ebx[LOBYTE(eax)])
@@ -126,6 +129,6 @@
 #include "track.h"
 #include "trigs.h"
 #include "wave.h"
-#include "world.h"
+#include "render.h" // linked last, likely .s/.asm
 
 #endif

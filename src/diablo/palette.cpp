@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 PALETTEENTRY logical_palette[256];
 int palette_cpp_init_value; // weak

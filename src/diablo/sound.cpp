@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 float sound_cpp_init_value;
 IDirectSoundBuffer *DSBs[8];

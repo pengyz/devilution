@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 char gbSomebodyWonGameKludge; // weak
 char pkdata_6761C0[4100];

@@ -12,10 +12,10 @@
 #pragma warning (disable : 4018) // signed/unsigned mismatch
 #endif
 
-#include "..\defs.h"
-#include "..\enums.h"
-#include "..\structs.h"
-#include "..\3rdParty\Storm\Source\storm.h"
+#include "..\..\src\diablo\defs.h"
+#include "..\..\src\diablo\enums.h"
+#include "..\..\src\diablo\structs.h"
+#include "..\Storm\Source\storm.h"
 #include "diabloui.h"
 
 #define UNKCALL     __fastcall

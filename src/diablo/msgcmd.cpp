@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 /* TODO: decompile and fix, commands are NOT deleted properly */
 

@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int mpqapi_cpp_init_value; // weak
 int sgdwMpqOffset; // idb

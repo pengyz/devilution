@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int nthread_cpp_init_value; // weak
 char byte_679704; // weak

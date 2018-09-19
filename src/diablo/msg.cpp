@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int sgdwOwnerWait; // weak
 int msg_cpp_init_value; // weak

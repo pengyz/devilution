@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int mainmenu_cpp_init_value; // weak
 char chr_name_str[16];

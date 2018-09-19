@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int engine_cpp_init_value; // weak
 char gbPixelCol; // automap pixel color 8-bit (palette entry)

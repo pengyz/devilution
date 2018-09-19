@@ -1,8 +1,6 @@
-﻿//HEADER_GOES_HERE
+//HEADER_GOES_HERE
 #ifndef __CAPTURE_H__
 #define __CAPTURE_H__
-
-#include "platform_defs.h"
 
 void __cdecl CaptureScreen();
 bool __fastcall CaptureHdr(HANDLE hFile, short width, short height);

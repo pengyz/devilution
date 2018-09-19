@@ -1,8 +1,7 @@
-﻿//HEADER_GOES_HERE
+//HEADER_GOES_HERE
 #ifndef __APPFAT_H__
 #define __APPFAT_H__
 
-#include "platform_defs.h"
 #include "enums.h"
 #include <varargs.h>
 

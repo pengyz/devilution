@@ -1,7 +1,8 @@
 //////////////////////////////////////////////////
 // items
 //////////////////////////////////////////////////
-
+#ifndef __STRUCTS_H__
+#define __STRUCTS_H__
 struct PLStruct
 {
 	const char *PLName;
@@ -1685,3 +1686,5 @@ struct ChatCmd
 	struct ChatCmd *next;
 	ServerCommand *extern_msgs[2];
 };
+
+#endif

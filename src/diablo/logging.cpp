@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 int log_cpp_init_value; // weak
 static CRITICAL_SECTION sgMemCrit;

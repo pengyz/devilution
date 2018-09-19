@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 _SNETVERSIONDATA fileinfo;
 int init_cpp_init_value; // weak

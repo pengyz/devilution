@@ -1,6 +1,6 @@
 //HEADER_GOES_HERE
 
-#include "../types.h"
+#include "types.h"
 
 // Tracks which missile files are already loaded
 int MissileFileFlag;
