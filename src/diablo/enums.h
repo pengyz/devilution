@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 enum unique_base_item
 {

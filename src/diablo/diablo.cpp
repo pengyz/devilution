@@ -109,30 +109,33 @@ void __cdecl FreeGameMem()
 	FreeTownerGFX();
 }
 
-int __fastcall diablo_init_menu(int a1, int bSinglePlayer)
+int __fastcall diablo_init_menu(int isNewGame, int bSinglePlayer)
 {
-	int v2; // esi
-	int v3; // edi
-	int v4; // ecx
+	int gameStartMode; // ecx
 	int pfExitProgram; // [esp+Ch] [ebp-4h]
 
-	v2 = bSinglePlayer;
-	v3 = a1;
 	byte_678640 = 1;
 	while ( 1 )
 	{
 		pfExitProgram = 0;
 		dword_5256E8 = 0;
-		if ( !NetInit(v2, &pfExitProgram) )
+		if ( !NetInit(bSinglePlayer, &pfExitProgram) )
 			break;
 		byte_678640 = 0;
-		if ( (v3 || !*(_DWORD *)&gbValidSaveFile)
-		  && (InitLevels(), InitQuests(), InitPortals(), InitDungMsgs(myplr), !*(_DWORD *)&gbValidSaveFile)
-		  || (v4 = WM_DIABLOADGAME, !dword_5256E8) )
+
+		//initialize
+		InitLevels();
+		InitQuests();
+		InitPortals();
+		InitDungMsgs(myplr);
+
+		if ( (isNewGame || !*(_DWORD *)&gbValidSaveFile)
+		  && (!*(_DWORD *)&gbValidSaveFile)
+		  || (gameStartMode = WM_DIABLOADGAME, !dword_5256E8) )
 		{
-			v4 = WM_DIABNEWGAME;
+			gameStartMode = WM_DIABNEWGAME;
 		}
-		run_game_loop(v4);
+		run_game_loop(gameStartMode);
 		NetClose();
 		pfile_create_player_description(0, 0);
 		if ( !gbRunGameResult )

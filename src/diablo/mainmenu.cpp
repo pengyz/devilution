@@ -108,45 +108,36 @@ LABEL_6:
 
 void __cdecl mainmenu_loop()
 {
-	int v1; // eax
-	int a2; // [esp+0h] [ebp-4h]
+	int iActionResult = true; // eax
+	int iSelectionAction; // [esp+0h] [ebp-4h]
 
 	mainmenu_refresh_music();
 	do
 	{
-		while ( 1 )
-		{
-			a2 = 0;
-			if ( !UiMainMenuDialog("Diablo v1.09", &a2, effects_play_sound, 30) )
-				TermMsg("Unable to display mainmenu");
-			if ( a2 == 1 )
-				break;
-			switch ( a2 )
-			{
-				case MAINMENU_MULTIPLAYER:
-					v1 = mainmenu_multi_player();
-					goto LABEL_15;
-				case MAINMENU_REPLAY_INTRO:
-					goto LABEL_10;
-				case MAINMENU_SHOW_CREDITS:
-					UiCreditsDialog(16);
-					break;
-				case MAINMENU_EXIT_DIABLO:
-					goto LABEL_16;
-				case MAINMENU_ATTRACT_MODE:
-LABEL_10:
-					if ( gbActive )
-						mainmenu_play_intro();
-					break;
-			}
+		iSelectionAction = 0;
+		if (!UiMainMenuDialog("Diablo v1.09", &iSelectionAction, effects_play_sound, 30))
+			TermMsg("Unable to display mainmenu");
+		switch (iSelectionAction) {
+		case MAINMENU_SINGLE_PLAYER:
+			iActionResult = mainmenu_single_player();
+			break;
+		case MAINMENU_MULTIPLAYER:
+			iActionResult = mainmenu_multi_player();
+			break;
+		case MAINMENU_SHOW_CREDITS:
+			UiCreditsDialog(16);
+			break;
+		case MAINMENU_EXIT_DIABLO:
+			music_stop();
+			return;
+		case MAINMENU_ATTRACT_MODE:
+		case MAINMENU_REPLAY_INTRO:
+			if (gbActive)
+				mainmenu_play_intro();
+			break;
 		}
-		v1 = mainmenu_single_player();
-LABEL_15:
-		;
 	}
-	while ( v1 );
-LABEL_16:
-	music_stop();
+	while ( iActionResult );
 }
 // 634980: using guessed type int gbActive;
 
