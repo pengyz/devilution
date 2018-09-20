@@ -1,4 +1,37 @@
+
+# DiabloEngine
+add_library(DiabloEngine STATIC
+    engine/window.cpp
+    engine/window.h
+    engine/gameengine.cpp
+    engine/gameengine.h
+)
+target_link_libraries(DiabloEngine ${HUNTER_LIBS})
+set_target_properties(DiabloEngine PROPERTIES COMPILE_FLAGS "${FA_COMPILER_FLAGS}")
+
+# Renderer
+add_library(Renderer STATIC
+    renderer/shader.cpp
+    renderer/shader.h
+)
+target_link_libraries(Renderer ${HUNTER_LIBS})
+set_target_properties(Renderer PROPERTIES COMPILE_FLAGS "${FA_COMPILER_FLAGS}")
+
+# DiabloUI
+add_library(GameGUI STATIC
+    # gui/main.cpp
+    gui/imgui.cpp
+    gui/imgui_demo.cpp
+    gui/imgui_draw.cpp
+    gui/imgui_impl_glfw.cpp
+    gui/imgui_impl_opengl3.cpp
+    gui/gamegui.cpp
+    )
+
+target_link_libraries(GameGUI ${HUNTER_LIBS})
+
 add_executable(Diablo
+	main.cpp
     appfat.h
     appfat.cpp
     automap.h
@@ -137,31 +170,14 @@ add_executable(Diablo
     render.cpp
 	Diablo.rc
 )
-target_link_libraries(Diablo Storm DiabloUI PKWare version)
+target_link_libraries(Diablo PUBLIC Storm DiabloUI PKWare version ${HUNTER_LIBS} DiabloEngine Renderer GameGUI)
 SET(EXECUTABLE_OUTPUT_PATH "D:/Diablo")
 if(MSVC)
 	if(WIN32)
 		set_target_properties(Diablo PROPERTIES
-			LINK_FLAGS "/SUBSYSTEM:WINDOWS /ENTRY:WinMainCRTStartup /NXCOMPAT:NO"
+			LINK_FLAGS "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup /NXCOMPAT:NO"
 			RUNTIME_OUTPUT_DIRECTORY "D:/Diablo"
 		)
 	endif()
 endif()
 
-# DiabloEngine
-add_library(DiabloEngine STATIC
-    engine/window.cpp
-    engine/window.h
-    engine/gameengine.cpp
-    engine/gameengine.h
-)
-target_link_libraries(DiabloEngine ${HUNTER_LIBS})
-set_target_properties(DiabloEngine PROPERTIES COMPILE_FLAGS "${FA_COMPILER_FLAGS}")
-
-# Renderer
-add_library(Renderer STATIC
-    renderer/shader.cpp
-    renderer/shader.h
-)
-target_link_libraries(Renderer ${HUNTER_LIBS})
-set_target_properties(Renderer PROPERTIES COMPILE_FLAGS "${FA_COMPILER_FLAGS}")

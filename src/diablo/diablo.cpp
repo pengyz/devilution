@@ -281,69 +281,69 @@ bool __cdecl diablo_get_not_running()
 	return GetLastError() != ERROR_ALREADY_EXISTS;
 }
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
-{
-	HINSTANCE v4; // esi
-	char Filename[260]; // [esp+8h] [ebp-10Ch]
-	char value_name[8]; // [esp+10Ch] [ebp-8h]
-
-	v4 = hInstance;
-#ifndef DEBUGGER
-	diablo_reload_process(hInstance);
-#endif
-	ghInst = v4;
-	if ( RestrictedTest() )
-		ErrOkDlg(IDD_DIALOG10, 0, "C:\\Src\\Diablo\\Source\\DIABLO.CPP", 877);
-	if ( ReadOnlyTest() )
-	{
-		if ( !GetModuleFileName(ghInst, Filename, 0x104u) )
-			*Filename = '\0';
-		DirErrorDlg(Filename);
-	}
-	ShowCursor(FALSE);
-	srand(GetTickCount());
-	encrypt_init_lookup_table();
-	exception_get_filter();
-	if ( !diablo_find_window("DIABLO") && diablo_get_not_running() )
-	{
-		diablo_init_screen();
-		diablo_parse_flags(lpCmdLine);
-		init_create_window(nCmdShow);
-		sound_init();
-		UiInitialize();
-#ifdef _DEBUG
-		if ( showintrodebug )
-			play_movie("gendata\\logo.smk", 1);
-#else
-		play_movie("gendata\\logo.smk", 1);
-#endif
-		strcpy(value_name, "Intro");
-		if ( !SRegLoadValue("Diablo", value_name, 0, (int *)&hInstance) )
-			hInstance = (HINSTANCE)1;
-		if ( hInstance )
-			play_movie("gendata\\diablo1.smk", 1);
-		SRegSaveValue("Diablo", value_name, 0, 0);
-#ifdef _DEBUG
-		if ( showintrodebug )
-		{
-			UiTitleDialog(7);
-			BlackPalette();
-		}
-#else
-		UiTitleDialog(7);
-		BlackPalette();
-#endif
-		mainmenu_loop();
-		UiDestroy();
-		SaveGamma();
-		if ( ghMainWnd )
-		{
-			Sleep(300);
-			DestroyWindow(ghMainWnd);
-		}
-	}
-	return 0;
-}
+//int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+//{
+//	HINSTANCE v4; // esi
+//	char Filename[260]; // [esp+8h] [ebp-10Ch]
+//	char value_name[8]; // [esp+10Ch] [ebp-8h]
+//
+//	v4 = hInstance;
+//#ifndef DEBUGGER
+//	diablo_reload_process(hInstance);
+//#endif
+//	ghInst = v4;
+//	if ( RestrictedTest() )
+//		ErrOkDlg(IDD_DIALOG10, 0, "C:\\Src\\Diablo\\Source\\DIABLO.CPP", 877);
+//	if ( ReadOnlyTest() )
+//	{
+//		if ( !GetModuleFileName(ghInst, Filename, 0x104u) )
+//			*Filename = '\0';
+//		DirErrorDlg(Filename);
+//	}
+//	ShowCursor(FALSE);
+//	srand(GetTickCount());
+//	encrypt_init_lookup_table();
+//	exception_get_filter();
+//	if ( !diablo_find_window("DIABLO") && diablo_get_not_running() )
+//	{
+//		diablo_init_screen();
+//		diablo_parse_flags(lpCmdLine);
+//		init_create_window(nCmdShow);
+//		sound_init();
+//		UiInitialize();
+//#ifdef _DEBUG
+//		if ( showintrodebug )
+//			play_movie("gendata\\logo.smk", 1);
+//#else
+//		play_movie("gendata\\logo.smk", 1);
+//#endif
+//		strcpy(value_name, "Intro");
+//		if ( !SRegLoadValue("Diablo", value_name, 0, (int *)&hInstance) )
+//			hInstance = (HINSTANCE)1;
+//		if ( hInstance )
+//			play_movie("gendata\\diablo1.smk", 1);
+//		SRegSaveValue("Diablo", value_name, 0, 0);
+//#ifdef _DEBUG
+//		if ( showintrodebug )
+//		{
+//			UiTitleDialog(7);
+//			BlackPalette();
+//		}
+//#else
+//		UiTitleDialog(7);
+//		BlackPalette();
+//#endif
+//		mainmenu_loop();
+//		UiDestroy();
+//		SaveGamma();
+//		if ( ghMainWnd )
+//		{
+//			Sleep(300);
+//			DestroyWindow(ghMainWnd);
+//		}
+//	}
+//	return 0;
+//}
 
 void __fastcall diablo_parse_flags(char *args)
 {
